@@ -1,0 +1,1 @@
+import{d as e,r as s,o as l,c as i,h as a}from"./app-ffab9f92.js";const _=e({__name:"IconRenderer",props:["params"],setup(o){const{params:n}=o,r=n.color==null?"primary":n.color,c=n.variant==null?"flat":n.variant;return(m,p)=>{const t=s("v-btn");return l(),i(t,{color:a(r),icon:o.params.icon,variant:a(c),size:"x-small"},null,8,["color","icon","variant"])}}});export{_};

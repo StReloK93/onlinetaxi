@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.hidden .v-input__control{
+    @apply tw-opacity-0
+}
+
+.ag-center-cols-viewport{
+    @apply tw-px-0.5;
+}
+.ag-cell{
+    @apply tw-flex tw-items-center;
+}
+
+.add-button{
+    @apply tw-absolute  tw-bottom-1 tw-right-1 md:tw-bottom-0 md:tw-right-0 tw-z-50;
+}
+
+
+.car-ride-height{
+    @apply tw-max-h-72 sm:tw-max-h-48;
+}
+
+.v-timeline-item__body{
+    @apply !tw-pt-1 !tw-pl-0 !tw-pr-0 !tw-self-auto sm:!tw-pt-0 sm:!tw-pl-4;
+}
+
+::-webkit-scrollbar  {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+}
+
+.ag-theme-ruzzifer {
+    /* customise with CSS variables */
+    --ag-border-color: transparent;
+    --ag-header-height: 30px;
+    --ag-header-cell-hover-background-color: rgb(230, 230, 230);
+    --ag-header-cell-moving-background-color: rgb(207, 207, 207);
+    /* --ag-alpine-active-color: transparent; */
+    --ag-background-color: transparent;
+    --ag-selected-row-background-color: rgb(245, 245, 245);
+
+    /* text color */
+    --ag-foreground-color: rgb(19, 19, 19);
+    /* header text color */
+    --ag-header-foreground-color: rgb(48, 48, 48);
+    /* header back */
+    --ag-header-background-color: transparent;
+
+    /* --ag-odd-row-background-color: orange; */
+    --ag-row-hover-color: none;
+    --ag-header-column-resize-handle-color: rgb(214, 214, 214);
+    --ag-row-border-width: 0px;
+    --ag-range-selection-border-color: transparent;
+}
+
+.ag-cell{
+    border: none!important;
+}
+
+.operator .v-expansion-panel-text__wrapper{
+	padding: 0px!important;
+}
+
+
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.75s ease-out;
+}
+
+.slide-enter-to {
+  position: absolute;
+  right: 0;
+}
+
+.slide-enter-from {
+  position: absolute;
+  right: -100%;
+}
+
+.slide-leave-to {
+  position: absolute;
+  left: -100%;
+}
+
+.slide-leave-from {
+  position: absolute;
+  left: 0;
+}
+
+.v-timeline .v-timeline-divider__dot {
+    background: none;
+}
+
+.v-timeline--horizontal.v-timeline {
+    grid-column-gap: 10px;
+}
+
+.v-timeline--horizontal {
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+.v-timeline--horizontal::-webkit-scrollbar {
+    display: block;
+    width: 5px;
+}
+
+.v-timeline--horizontal::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.v-timeline--horizontal::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-right: none;
+    border-left: none;
+}
+
+.v-expansion-panel-title--active{
+	@apply tw-bg-gray-100
+}
+
+.login-page {
+	background-image: url('/images/back1.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
