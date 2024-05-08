@@ -5,7 +5,7 @@
             <v-app-bar-nav-icon color="white" @click="mainStore.menu = !mainStore.menu"></v-app-bar-nav-icon>
         </template>
         <v-app-bar-title>
-            Shaharlararo online taxi
+            <span> <v-icon>mdi-chess-knight</v-icon> </span> {{ Auth.user.role.name }}
         </v-app-bar-title>
         <v-btn icon="mdi-logout" density="comfortable" @click="logout" color="white"></v-btn>
     </v-app-bar>
@@ -15,13 +15,13 @@
 import Navigator from './Navigator.vue'
 import { useMainStore, useAuthStore } from '@/store'
 const mainStore = useMainStore()
-const authStore = useAuthStore()
+const Auth = useAuthStore()
 
 
 function logout() {
     mainStore.dialog.open(() => {
         mainStore.dialog.title = "Dasturdan chiqmoqchimisiz ?"
-        mainStore.dialog.submit = () => authStore.logout()
+        mainStore.dialog.submit = () => Auth.logout()
     })
 }
 </script>

@@ -16,7 +16,7 @@ const CardWidth = {
    lg: 196,
    md: 196,
    sm: 196,
-   xs: 292,
+   xs: 160,
 }
 
-export { Add, Edit, Filters ,Sorting,getColDefs, ICarRide, useDisplay, iCurrent, CardWidth }
+export { Add, Edit, Filters, Sorting, getColDefs, ICarRide, useDisplay, iCurrent, CardWidth }
