@@ -56,7 +56,7 @@ const routes: any[] = [
   {
     path: '/welcome',
     name: 'welcome',
-    component: () => import('@/pages/Welcome.vue'),
+    component: () => import('@/pages/login/Welcome.vue'),
     meta: {
       guard: 'auth',
     }

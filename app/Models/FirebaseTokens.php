@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FuelType extends Model
+class FirebaseTokens extends Model
 {
     use HasFactory;
-
     public $timestamps = false;
-    
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'user_id', 
+        'device',
+        'token',
+    ];
 }

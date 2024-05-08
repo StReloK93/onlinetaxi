@@ -1,6 +1,8 @@
-import { getAnalytics } from "firebase/analytics";
-import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from "firebase/app"
 import { getMessaging, getToken } from "firebase/messaging"
+import axios from "axios"
+import { useAuthStore } from "@/store"
 
 const firebaseConfig = {
     apiKey: "AIzaSyACb7ABfs-jY6GdnwxKaGv2wObCdh0h-K8",
@@ -10,25 +12,26 @@ const firebaseConfig = {
     messagingSenderId: "190163892674",
     appId: "1:190163892674:web:e5e1ddd4499c7e6a9e7e5b",
     measurementId: "G-XJ1F3GVPR9",
+};
+export default function () {
+    if ("serviceWorker" in navigator) {
+        const store = useAuthStore()
+        navigator.serviceWorker.register("/sw.js").then(async (sw) => {
+            const app = initializeApp(firebaseConfig);
+            // const analytics = getAnalytics(app);
+            
+            const messaging = getMessaging(app);
+            const token = await getToken(messaging, {
+                serviceWorkerRegistration: sw,
+            });
+            //@ts-ignore
+            messaging.onMessageHandler = function (event) {
+                console.log(event);
+            }
+            axios.post('firebase-token', {user_id: store.user?.id, token, device: null })
+        });
+    }
 }
-
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/sw.js").then(async (sw)=> {
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        
-        const messaging = getMessaging(app);
-        const token = await getToken(messaging, {serviceWorkerRegistration: sw})
-        //@ts-ignore
-        messaging.onMessageHandler = function(event){
-            console.log(event);
-        }
-        console.log(token)
-    })
-}
-
-
-
 
 // Получаем список подписок на push-уведомления
 // navigator.serviceWorker.ready.then(function (registration) {

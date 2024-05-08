@@ -36,6 +36,7 @@ function getData(id) {
 		const formData: IPassenger = inputComponent.value.formData
 		formData.name = data.name
 		formData.phone = data.phone
+		formData.address = data.address
 		formData.start_region = data.start.region_id
 		formData.end_region = data.end.region_id
 		formData.ride_time = data.ride_time

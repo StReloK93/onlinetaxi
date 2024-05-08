@@ -1,15 +1,16 @@
 <template>
 	<v-form @submit.prevent="signin">
-		<div class="text-center pb-4">
+		<div class="text-center py-4 mb-2 -tw-m-3 tw-rounded tw-bg-pink-200/40">
 			<img src="/iconos/map.svg"  width="100" class="d-inline">
+			<!-- <h3 class="tw-text-xl mt-2 tw-font-semibold tw-uppercase">Shaharlararo online taxi</h3> -->
 		</div>
-		<v-col class="py-0">
-			<v-label class="mb-2">
+		<v-col class="pa-0">
+			<v-label>
 				Telefon raqamingizni kiriting
 			</v-label>
 		</v-col>
 		<main class="d-flex w-100">
-			<v-col cols="auto" class="pr-0">
+			<v-col cols="4" class="px-0 py-2">
 				<v-text-field class="pr-2 flex-0-0" readonly variant="filled" density="compact" value="+998">
 					<template v-slot:prepend-inner>
 						<v-icon>
@@ -18,7 +19,7 @@
 					</template>
 				</v-text-field>
 			</v-col>
-			<v-col cols="12" class="pl-0">
+			<v-col cols="8" class="px-0 py-2">
 				<v-text-field v-maska:[options] variant="filled" density="compact" :rules="rules" />
 			</v-col>
 		</main>

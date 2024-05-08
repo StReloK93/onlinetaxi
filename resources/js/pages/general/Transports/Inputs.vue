@@ -1,10 +1,6 @@
 <template>
 	<v-row>
 		<v-col sm="6" cols="12">
-			<v-autocomplete :items="pageData.users" v-model="formData.user_id" label="Foydalanuvchi" item-title="phone"
-				:item-value="(item) => item.id" :rules="rules" />
-		</v-col>
-		<v-col sm="6" cols="12">
 			<v-text-field v-model="formData.type" :step="900" label="Transport turi" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
@@ -18,7 +14,7 @@
 				item-title="name" :item-value="(item) => item.id" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
-			<v-switch v-model="formData.trunk" label="Bagaj"></v-switch>
+			<v-switch v-model="formData.trunk" label="Bagaj" class="px-2"></v-switch>
 		</v-col>
 	</v-row>
 </template>
@@ -26,8 +22,10 @@
 <script setup lang="ts">
 import { rules } from '@/modules/constants'
 import { reactive } from 'vue'
+import { useAuthStore } from '@/store'
+const auth = useAuthStore()
 const formData = reactive({
-	user_id: null,
+	user_id: auth.user.id,
 	type: null,
 	number: null,
 	color: null,

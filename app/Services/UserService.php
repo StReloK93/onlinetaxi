@@ -77,7 +77,7 @@ class UserService
     public function setUserData($request){
         $user = $request->user();
         $user->name = $request->name;
-        $user->role = $request->role;
+        $user->role_id = $request->role;
         $user->save();
 
         return $user;

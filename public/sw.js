@@ -2,8 +2,6 @@
 importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js");
 
-
-
 self.addEventListener('notificationclick', function (event) {
     const clickedNotification = event.notification.data.FCM_MSG
     event.waitUntil(clients.openWindow(clickedNotification.data.url))

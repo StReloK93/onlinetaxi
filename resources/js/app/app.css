@@ -137,3 +137,11 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
+
+.v-dialog > .v-overlay__content {
+    max-height: calc(100% - 15px);
+    width: calc(100% - 48px);
+    max-width: calc(100% - 15px);
+    margin: 12.5px;
+}

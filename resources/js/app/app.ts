@@ -4,9 +4,6 @@ import { useAuthStore } from '@/store'
 import { createPinia } from 'pinia'
 import router from '@/routes'
 import { vMaska } from "maska"
-import './swInit'
-
-
 
 async function init() {
 	const pinia = createPinia()
@@ -19,9 +16,9 @@ async function init() {
 		.use(VCalendar, {})
 		.use(money)
 
-	await useAuthStore().getUser()
-	app.use(router)
-	app.mount("#app")
+		await useAuthStore().getUser()
+		app.use(router)
+		app.mount("#app")
 	// axios.defaults.headers.common['X-Socket-Id'] = echo.socketId();
 }
 init()

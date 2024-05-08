@@ -49,7 +49,7 @@
 		</v-col>
 		<v-col sm="6" cols="12">
 			<v-autocomplete class="mb-3" @update:model-value="setPhone" :items="pageData.cars" v-model="formData.car_id"
-				label="Avtomobil" :item-title="(item) => item.type + ' ' + item.number" :item-value="(item) => item.id"
+				label="Transport" :item-title="(item) => `${item.type} ( ${item.number} )`" :item-value="(item) => item.id"
 				:rules="rules" />
 			<main class="d-flex w-100 mb-3">
 				<v-text-field class="pr-2 flex-0-0" readonly density="compact" value="+998" disabled>

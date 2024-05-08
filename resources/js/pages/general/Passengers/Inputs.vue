@@ -1,10 +1,19 @@
 <template>
 	<v-row>
 		<v-col sm="6" cols="12">
-			<v-text-field v-model="formData.name" :step="900" label="F.I.SH" :rules="rules" />
+			<main class="d-flex w-100 mb-3">
+				<v-text-field class="pr-2 flex-0-0" readonly density="compact" value="+998" disabled>
+					<template v-slot:prepend-inner>
+						<v-icon>
+							<img src="/iconos/uz.png">
+						</v-icon>
+					</template>
+				</v-text-field>
+				<v-text-field v-maska:[phoneMask] v-model="formData.phone" density="compact" :rules="rules" />
+			</main>
 		</v-col>
 		<v-col sm="6" cols="12">
-			<v-text-field v-model="formData.phone" :step="900" label="Telefon raqami" :rules="rules" />
+			<v-text-field v-model="formData.name" :step="900" label="F.I.SH" :rules="rules" />
 		</v-col>
 		<v-col cols="12" class="py-0 text-center">
 			<v-label class="text-caption">
@@ -42,21 +51,21 @@
 			<v-text-field v-model="formData.address" :step="900" label="Manzil" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
-			<v-switch v-model="formData.with_trunk" label="Bagaj"></v-switch>
+			<v-text-field v-model="formData.count" label="Necha kishi" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
 			<v-text-field v-model="formData.ride_time" type="datetime-local" :step="900" label="Qatnov vaqti"
 				:rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
-			<v-text-field v-model="formData.count" label="Necha kishi" :rules="rules" />
+			<v-switch v-model="formData.with_trunk" label="Bagaj"></v-switch>
 		</v-col>
 	</v-row>
 </template>
 
 <script setup lang="ts">
 import { IPassenger } from '@/app/interfaces'
-import { rules } from '@/modules/constants'
+import { rules , phoneMask} from '@/modules/constants'
 import { reactive } from 'vue'
 
 const formData: IPassenger = reactive({

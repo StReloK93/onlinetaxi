@@ -1,9 +1,9 @@
 <template>
-	<v-app class="bg-grey-lighten-5">
+	<v-app class="bg-grey-lighten-4">
 		<Alert />
 		<MyHeader />
 		<v-main>
-			<v-container class="h-100 py-1">
+			<v-container class="h-100 md:tw-p-4 tw-p-2">
 				<router-view class="h-100 tw-relative"></router-view>
 			</v-container>
 		</v-main>

@@ -9,7 +9,7 @@ use Kreait\Firebase\Messaging\TopicSubscription;
 use Kreait\Messaging\Message;
 use Kreait\Firebase\Messaging\FcmOptions;
 
-class FirebaseAuth
+class Firebase
 {
 	private $messaging;
 	public function __construct()
@@ -32,7 +32,7 @@ class FirebaseAuth
 		$message = CloudMessage::new()
 			->withNotification(Notification::create(...$notification))->withData(['url' => $url]);
 
-		return $this->messaging->sendMulticast($message, $tokens);
+		$this->messaging->sendMulticast($message, $tokens);
 	}
 
 
