@@ -10,7 +10,7 @@ export const useCarRide = defineStore('useCarRide', () => {
 	const agRowHeight = ref(null)
 	const rides = ref([])
 	const districts = ref([])
-	const rowClass = ref(['car-ride-height', 'tw-shadow-md', 'bg-white', 'rounded', 'overflow-hidden'])
+	const rowClass = ref(['car-ride-height', 'tw-shadow', 'tw-border-l-2', 'tw-border-pink-500' ,'bg-white', 'tw-rounded-r', 'overflow-hidden'])
 
 	function index() {
 		axios.get<ICarRide[]>('car-ride').then(({ data }) => rides.value = data)

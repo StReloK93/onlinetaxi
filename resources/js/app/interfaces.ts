@@ -11,7 +11,7 @@ export interface Dialog {
 }
 
 
-export interface Car{
+export interface ITransport{
     id: number,
     user_id: number,
     type: string,
@@ -51,7 +51,7 @@ export interface ICarRide{
     id: number,
     car_id: number,
     user_id: number,
-    car: Car,
+    car: ITransport,
     phone: string,
     cities: CarRideCity[],
     start_city: number,

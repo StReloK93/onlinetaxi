@@ -1,22 +1,30 @@
 import Add from './Add.vue'
 import Edit from './Edit.vue'
-import { getColDefs } from './GridColumns'
-import type { ICarRide } from '@/app/interfaces'
-import { useDisplay } from 'vuetify'
 import Filters from './Filter.vue'
 import Sorting from './Sorting.vue'
-interface iCurrent {
-   car_rides: ICarRide[] | null,
-   rowClass: any[],
-   rowHeight: number,
-}
+import { ColDef } from 'ag-grid-community'
+import type { ICarRide } from '@/app/interfaces'
+import CarRideRenderer from '@/components/AgGrid/CarRideRenderer.vue'
+import { useCarRide } from '@/repository/CarRide'
+const columnDefs: ColDef<ICarRide>[] = [
+   {
+      cellRenderer: CarRideRenderer,
+      flex: 1,
+      valueFormatter: null,
+      cellClass: ['px-0', 'align-stretch']
+   },
+   { field: 'ride_time', hide: true },
+   { field: 'price', hide: true },
+   { field: 'free_seat', hide: true },
+]
+
 
 const CardWidth = {
-   xl: 196,
-   lg: 196,
-   md: 196,
-   sm: 196,
-   xs: 160,
+   xl: 170,
+   lg: 170,
+   md: 170,
+   sm: 170,
+   xs: 170,
 }
 
-export { Add, Edit, Filters, Sorting, getColDefs, ICarRide, useDisplay, iCurrent, CardWidth }
+export { Add, Edit, Filters, Sorting, columnDefs, ICarRide, CardWidth, useCarRide }

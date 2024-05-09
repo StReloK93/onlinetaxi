@@ -1,25 +1,20 @@
 <template>
-	<div class="tw-leading-3 d-flex align-center">
-		<main>
-			<v-label class="text-caption">
-				{{ params.data.car.number }}
-				<span class="ml-3">
-					{{ params.data.phone}}
-				</span>
-			</v-label>
-			<p class="">{{ params.data.car.type }}</p>
-		</main>
-		<main v-if="params.data.car.trunk" class="ml-4">
-			<v-btn density="compact" variant="text" icon="">
-				<v-tooltip activator="parent" location="bottom">
-					Bagaj bor
-				</v-tooltip>
-				<v-icon>mdi-bag-suitcase</v-icon>
-			</v-btn>
-		</main>
-	</div>
-</template>
+    <section class="pa-2 w-100">
+        <div>
+            <aside class="d-flex justify-space-between tw-text-2xl">
+                <h3 class="tw-uppercase">
+                    {{ Transport.type }}
+                </h3>
+                <h3 class="text-primary">{{ Transport.number }}</h3>
+            </aside>
 
+        </div>
+    </section>
+</template>
 <script setup lang="ts">
-const { params } = defineProps(['params'])
+import { ITransport } from '@/app/interfaces'
+const props = defineProps(['params'])
+const Transport = props.params.data as ITransport
+console.log(Transport)
+
 </script>

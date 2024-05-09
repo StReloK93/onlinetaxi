@@ -20,7 +20,7 @@
 
 
 .car-ride-height{
-    @apply tw-max-h-72 sm:tw-max-h-48;
+    @apply tw-max-h-40;
 }
 
 .v-timeline-item__body{
