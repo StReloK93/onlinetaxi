@@ -1,30 +1,24 @@
 {
-  "_CarRide-06485fab.js": {
-    "file": "assets/CarRide-06485fab.js",
+  "_Add.vue_vue_type_script_setup_true_lang-4a6c6994.js": {
+    "file": "assets/Add.vue_vue_type_script_setup_true_lang-4a6c6994.js",
     "imports": [
       "resources/js/app/app.ts",
-      "_constants-68fdd4d6.js"
-    ]
-  },
-  "_Edit.vue_vue_type_script_setup_true_lang-3d1ad870.js": {
-    "file": "assets/Edit.vue_vue_type_script_setup_true_lang-3d1ad870.js",
-    "imports": [
-      "resources/js/app/app.ts",
-      "_constants-68fdd4d6.js"
-    ]
-  },
-  "_Edit.vue_vue_type_script_setup_true_lang-81690f9e.js": {
-    "file": "assets/Edit.vue_vue_type_script_setup_true_lang-81690f9e.js",
-    "imports": [
       "_constants-68fdd4d6.js",
-      "resources/js/app/app.ts",
-      "_CarRide-06485fab.js"
+      "_CarRide-c91fac1d.js"
     ]
   },
-  "_IconRenderer.vue_vue_type_script_setup_true_lang-434d1039.js": {
-    "file": "assets/IconRenderer.vue_vue_type_script_setup_true_lang-434d1039.js",
+  "_CarRide-c91fac1d.js": {
+    "file": "assets/CarRide-c91fac1d.js",
     "imports": [
-      "resources/js/app/app.ts"
+      "resources/js/app/app.ts",
+      "_constants-68fdd4d6.js"
+    ]
+  },
+  "_Edit.vue_vue_type_script_setup_true_lang-541b53bb.js": {
+    "file": "assets/Edit.vue_vue_type_script_setup_true_lang-541b53bb.js",
+    "imports": [
+      "resources/js/app/app.ts",
+      "_constants-68fdd4d6.js"
     ]
   },
   "__plugin-vue_export-helper-c27b6911.js": {
@@ -50,7 +44,7 @@
     "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2"
   },
   "resources/js/app/app.css": {
-    "file": "assets/app-0e0996b2.css",
+    "file": "assets/app-8524112f.css",
     "src": "resources/js/app/app.css"
   },
   "resources/js/app/app.ts": {
@@ -61,7 +55,7 @@
       "assets/materialdesignicons-webfont-be825c12.ttf"
     ],
     "css": [
-      "assets/app-0e0996b2.css"
+      "assets/app-8524112f.css"
     ],
     "dynamicImports": [
       "resources/js/pages/general/Index.vue",
@@ -75,23 +69,23 @@
       "resources/js/pages/login/PhonePage.vue",
       "resources/js/pages/login/SecretCode.vue"
     ],
-    "file": "assets/app-1c89fd55.js",
+    "file": "assets/app-f25a100e.js",
     "isEntry": true,
     "src": "resources/js/app/app.ts"
   },
   "resources/js/pages/general/CarRides.vue": {
-    "file": "assets/CarRides-8cffd6f4.js",
+    "file": "assets/CarRides-d9e1d409.js",
     "imports": [
-      "_CarRide-06485fab.js",
+      "_CarRide-c91fac1d.js",
       "resources/js/app/app.ts",
-      "_Edit.vue_vue_type_script_setup_true_lang-81690f9e.js",
-      "_constants-68fdd4d6.js"
+      "_constants-68fdd4d6.js",
+      "_Add.vue_vue_type_script_setup_true_lang-4a6c6994.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/general/CarRides.vue"
   },
   "resources/js/pages/general/Index.vue": {
-    "file": "assets/Index-6ee31fcc.js",
+    "file": "assets/Index-a5895bae.js",
     "imports": [
       "resources/js/app/app.ts",
       "__plugin-vue_export-helper-c27b6911.js"
@@ -100,51 +94,49 @@
     "src": "resources/js/pages/general/Index.vue"
   },
   "resources/js/pages/general/Operator.vue": {
-    "file": "assets/Operator-af48aa96.js",
+    "file": "assets/Operator-ad7f2f78.js",
     "imports": [
       "resources/js/app/app.ts",
       "_constants-68fdd4d6.js",
-      "_CarRide-06485fab.js",
-      "_Edit.vue_vue_type_script_setup_true_lang-81690f9e.js"
+      "_CarRide-c91fac1d.js",
+      "_Add.vue_vue_type_script_setup_true_lang-4a6c6994.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/general/Operator.vue"
   },
   "resources/js/pages/general/Passengers.vue": {
-    "file": "assets/Passengers-3ab031ac.js",
+    "file": "assets/Passengers-5b58df1b.js",
     "imports": [
-      "_CarRide-06485fab.js",
       "resources/js/app/app.ts",
-      "_IconRenderer.vue_vue_type_script_setup_true_lang-434d1039.js",
-      "_Edit.vue_vue_type_script_setup_true_lang-3d1ad870.js",
+      "_CarRide-c91fac1d.js",
+      "_Edit.vue_vue_type_script_setup_true_lang-541b53bb.js",
       "_constants-68fdd4d6.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/general/Passengers.vue"
   },
   "resources/js/pages/general/SendRoads.vue": {
-    "file": "assets/SendRoads-b228a2d6.js",
+    "file": "assets/SendRoads-50edbb8a.js",
     "imports": [
-      "_CarRide-06485fab.js",
       "resources/js/app/app.ts",
-      "_Edit.vue_vue_type_script_setup_true_lang-3d1ad870.js",
+      "_CarRide-c91fac1d.js",
+      "_Edit.vue_vue_type_script_setup_true_lang-541b53bb.js",
       "_constants-68fdd4d6.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/general/SendRoads.vue"
   },
   "resources/js/pages/general/Transports.vue": {
-    "file": "assets/Transports-084bb800.js",
+    "file": "assets/Transports-e512af8d.js",
     "imports": [
       "resources/js/app/app.ts",
-      "_IconRenderer.vue_vue_type_script_setup_true_lang-434d1039.js",
       "_constants-68fdd4d6.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/general/Transports.vue"
   },
   "resources/js/pages/login/Login.vue": {
-    "file": "assets/Login-43cb3287.js",
+    "file": "assets/Login-58c0491b.js",
     "imports": [
       "__plugin-vue_export-helper-c27b6911.js",
       "resources/js/app/app.ts"
@@ -153,7 +145,7 @@
     "src": "resources/js/pages/login/Login.vue"
   },
   "resources/js/pages/login/PhonePage.vue": {
-    "file": "assets/PhonePage-7137c646.js",
+    "file": "assets/PhonePage-607161b0.js",
     "imports": [
       "resources/js/app/app.ts",
       "_constants-68fdd4d6.js"
@@ -162,7 +154,7 @@
     "src": "resources/js/pages/login/PhonePage.vue"
   },
   "resources/js/pages/login/SecretCode.vue": {
-    "file": "assets/SecretCode-f9f9460f.js",
+    "file": "assets/SecretCode-4688ea95.js",
     "imports": [
       "resources/js/app/app.ts"
     ],
@@ -170,7 +162,7 @@
     "src": "resources/js/pages/login/SecretCode.vue"
   },
   "resources/js/pages/login/Welcome.vue": {
-    "file": "assets/Welcome-92fcd8ec.js",
+    "file": "assets/Welcome-26837c6e.js",
     "imports": [
       "resources/js/app/app.ts",
       "_constants-68fdd4d6.js"
