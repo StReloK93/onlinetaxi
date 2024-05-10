@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->string('type');
             $table->string('number');
-            $table->string('color');
+            $table->integer('car_list_id');
             $table->integer('fuel_type');
             $table->boolean('trunk');
             $table->timestamps();

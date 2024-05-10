@@ -1,5 +1,5 @@
 <template>
-	<v-row>
+	<section>
 		<v-col sm="6" cols="12">
 			<v-text-field v-model="formData.type" :step="900" label="Transport turi" :rules="rules" />
 		</v-col>
@@ -16,7 +16,7 @@
 		<v-col sm="6" cols="12">
 			<v-switch v-model="formData.trunk" label="Bagaj" class="px-2"></v-switch>
 		</v-col>
-	</v-row>
+	</section>
 </template>
 
 <script setup lang="ts">

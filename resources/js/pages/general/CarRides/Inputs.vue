@@ -1,27 +1,27 @@
 <template>
-	<v-row>
+	<section>
 		<v-overlay v-if="edit" v-model="pageData.overlay" contained persistent class="align-center justify-center">
 			<v-progress-circular color="primary" indeterminate :size="68"></v-progress-circular>
 		</v-overlay>
 		<template v-for="(city, index) in formData.ends">
-			<v-col v-if="index == 0" cols="12" class="py-2 text-center">
-				<v-label class="text-caption  mr-3">
+			<v-col v-if="index == 0" cols="12" class="py-1">
+				<v-label class="text-subtitle-1 mr-1">
 					Boshlang'ich manzil (Qaerdan?)
 				</v-label>
-				<v-btn size="x-small" @click="addCity" :disabled="formData.ends.length == 4" icon="mdi-plus"
-					variant="plain"></v-btn>
+				<!-- <v-btn size="x-small" @click="addCity" :disabled="formData.ends.length == 4" icon="mdi-plus"
+						variant="plain"></v-btn> -->
 			</v-col>
-			<v-col v-if="[1].includes(index) && index != formData.ends.length - 1" cols="12" class="py-0 text-center">
-				<v-label class="text-caption ">
+			<v-col v-if="[1].includes(index) && index != formData.ends.length - 1" cols="12" class="py-0">
+				<v-label class="text-subtitle-1 mr-1">
 					Oraliq manzillar
 				</v-label>
 			</v-col>
-			<v-col v-if="formData.ends.length == index + 1" cols="12" class="py-0 text-center">
-				<v-label class="text-caption">
+			<v-col v-if="formData.ends.length == index + 1" cols="12" class="py-1">
+				<v-label class="text-subtitle-1 mr-1">
 					Boriladigan manzil (Qaerga?)
 				</v-label>
 			</v-col>
-			<div class="w-100 d-flex flex-wrap"
+			<div class="w-100 d-flex flex-wrap bg-blue-grey-lighten-5"
 				:class="{ 'px-0': [1, 2].includes(index) && index != formData.ends.length - 1 }">
 				<v-col sm="6" cols="12">
 					<v-autocomplete v-model="city.region" @update:model-value="(id) => regionChanged(id, index)"
@@ -62,13 +62,12 @@
 				<v-text-field v-maska:[phoneMask] v-model="formData.phone" density="compact" :rules="rules" />
 			</main>
 			<v-text-field label="Narxi" :rules="rules" v-model.lazy="formData.price" class="mb-3" />
-			<v-text-field v-model="formData.free_seat" type="number" label="Bosh o'rindiqlar" class="mb-3"
-				:rules="rules" />
+			<v-text-field v-model="formData.free_seat" type="number" label="Bosh o'rindiqlar" class="mb-3" :rules="rules" />
 			<input v-money3="moneyConfig" v-model.lazy="formData.price" type="text" hidden>
-			<v-switch v-model="formData.strictly_on_time" label="Qat'iy shu vaqtda"></v-switch>
-			<v-switch v-model="formData.address_to_address" label="Manzilgacha"></v-switch>
+			<v-switch v-model="formData.strictly_on_time" label="Qat'iy shu vaqtda" class="px-2"></v-switch>
+			<v-switch v-model="formData.address_to_address" label="Manzilgacha" class="px-2"></v-switch>
 		</v-col>
-	</v-row>
+	</section>
 </template>
 
 <script setup lang="ts">

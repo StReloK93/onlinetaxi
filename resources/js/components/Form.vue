@@ -3,10 +3,8 @@
 		<v-card>
 			<v-card-title>{{ title }}</v-card-title>
 			<v-divider class="border-opacity-50"></v-divider>
-			<v-card-text style="max-height: 700px;" class="pa-0 tw-relative">
-				<v-container>
-					<slot></slot>
-				</v-container>
+			<v-card-text style="max-height: 700px;" class="pa-2 tw-relative">
+				<slot></slot>
 			</v-card-text>
 			<v-divider class="border-opacity-50"></v-divider>
 			<v-card-actions>

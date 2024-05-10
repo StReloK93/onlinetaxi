@@ -1,5 +1,5 @@
 <template>
-	<v-row>
+	<section>
 		<v-col sm="6" cols="12">
 			<main class="d-flex w-100 mb-3">
 				<v-text-field class="pr-2 flex-0-0" readonly density="compact" value="+998" disabled>
@@ -32,7 +32,7 @@
 		</v-col>
 		<v-divider class="border-opacity-75"></v-divider>
 		<v-col cols="12" class="py-0 text-center">
-			<v-label class="text-caption ">
+			<v-label class="text-caption">
 				Boriladigan manzil (Qaerga?)
 			</v-label>
 		</v-col>
@@ -48,7 +48,7 @@
 		</v-col>
 		<v-divider class="border-opacity-75"></v-divider>
 		<v-col sm="6" cols="12">
-			<v-text-field v-model="formData.address" :step="900" label="Manzil" :rules="rules" />
+			<v-text-field v-model="formData.address" :step="900" label="Yo'lovchining manzili" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
 			<v-text-field v-model="formData.count" label="Necha kishi" :rules="rules" />
@@ -60,7 +60,7 @@
 		<v-col sm="6" cols="12">
 			<v-switch v-model="formData.with_trunk" label="Bagaj"></v-switch>
 		</v-col>
-	</v-row>
+	</section>
 </template>
 
 <script setup lang="ts">

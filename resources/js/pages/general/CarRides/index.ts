@@ -4,7 +4,7 @@ import Filters from './Filter.vue'
 import Sorting from './Sorting.vue'
 import { ColDef } from 'ag-grid-community'
 import type { ICarRide } from '@/app/interfaces'
-import CarRideRenderer from '@/components/AgGrid/CarRideRenderer.vue'
+import { CarRideRenderer } from '@/components/AgGrid'
 import { useCarRide } from '@/repository/CarRide'
 const columnDefs: ColDef<ICarRide>[] = [
    {

@@ -14,9 +14,9 @@
     </v-dialog>
 </template>
 <script setup lang="ts">
+import { useTransport } from '@/repository/Transports'
 import { reactive, ref } from 'vue'
 import Inputs from './Inputs.vue'
-import { useTransport } from '@/pages/general/Transports'
 const transport = useTransport()
 const inputComponent = ref()
 const propsParent = defineProps(['smButton', 'id'])
