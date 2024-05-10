@@ -3,7 +3,7 @@ import Edit from './Edit.vue'
 import type { ITransport } from '@/app/interfaces'
 import { ColDef } from 'ag-grid-community'
 import TransportRenderer from '@/components/AgGrid/TransportRenderer.vue'
-
+import { useTransport } from '@/repository'
 const columnDefs: ColDef<ITransport>[] = [
 	{
 		cellRenderer: TransportRenderer,
@@ -21,4 +21,4 @@ const CardWidth = {
 	xs: 170,
 }
 
-export { Add, Edit, columnDefs, ITransport, CardWidth }
+export { Add, Edit, columnDefs, ITransport, CardWidth, useTransport }

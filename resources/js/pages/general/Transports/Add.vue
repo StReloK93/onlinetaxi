@@ -21,6 +21,7 @@ async function submitFunction() {
 
     await axios.post('car', formData).then(({data}) => {
         emit('create', data)
+        pageData.dialog = false
     })
 }
 </script>
