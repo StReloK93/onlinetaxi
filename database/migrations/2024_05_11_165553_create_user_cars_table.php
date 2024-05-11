@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cars', function (Blueprint $table) {
+        Schema::create('user_cars', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('car_company_id');
-            $table->string('name');
+            $table->integer('user_id');
+            $table->string('number');
+            $table->integer('car_id');
+            $table->integer('fuel_type');
+            $table->boolean('trunk');
+            $table->timestamps();
         });
     }
 
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cars');
+        Schema::dropIfExists('user_cars');
     }
 };

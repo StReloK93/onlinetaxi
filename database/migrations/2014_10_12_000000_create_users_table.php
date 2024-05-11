@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('phone')->unique();
             $table->integer('role_id')->nullable();
+            $table->integer('active_car_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

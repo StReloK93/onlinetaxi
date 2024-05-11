@@ -14,7 +14,7 @@ export const useTransport = defineStore('useTransport', () => {
 	}
 
 	function getTransports() {
-		axios.get('cars/get_only_my').then(({ data }) => transports.value = data)
+		axios.get('user-cars/get-only-my').then(({ data }) => transports.value = data)
 	}
 
 	function destroy(transport) {

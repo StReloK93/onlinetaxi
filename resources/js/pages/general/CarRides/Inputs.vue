@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<v-row>
 		<v-overlay v-if="edit" v-model="pageData.overlay" contained persistent class="align-center justify-center">
 			<v-progress-circular color="primary" indeterminate :size="68"></v-progress-circular>
 		</v-overlay>
@@ -67,7 +67,7 @@
 			<v-switch v-model="formData.strictly_on_time" label="Qat'iy shu vaqtda" class="px-2"></v-switch>
 			<v-switch v-model="formData.address_to_address" label="Manzilgacha" class="px-2"></v-switch>
 		</v-col>
-	</section>
+	</v-row>
 </template>
 
 <script setup lang="ts">
@@ -95,10 +95,7 @@ const pageData = reactive({
 	regions: [],
 })
 
-function addCity() {
-	if (formData.ends.length == 4) return
-	formData.ends.splice(1, 0, { region: null, city: null, loading: false, districts: [] });
-}
+
 
 function removeCity(index) {
 	formData.ends.splice(index, 1);
@@ -125,11 +122,16 @@ function clearOverlay() {
 	pageData.overlay = false
 }
 
-axios.all([axios.get('cars/get_only_my'), axios.get('region')])
+axios.all([axios.get('cars/get-only-my'), axios.get('region')])
 	.then(axios.spread(({ data: cars }, { data: regions }) => {
 		pageData.cars = cars
 		pageData.regions = regions
 	}))
 
 defineExpose({ regionChanged, formData, clearOverlay })
+
+// function addCity() {
+// 	if (formData.ends.length == 4) return
+// 	formData.ends.splice(1, 0, { region: null, city: null, loading: false, districts: [] });
+// }
 </script>

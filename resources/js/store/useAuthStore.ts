@@ -4,7 +4,7 @@ import { ref } from "vue"
 import router from "@/routes"
 
 export const useAuthStore = defineStore('Auth', () => {
-	const user = ref(null)
+	const user:any = ref(null)
 
 	async function login(data) {
 		try {
@@ -20,8 +20,7 @@ export const useAuthStore = defineStore('Auth', () => {
 
 
 	async function sendUserData(formData) {
-		const { data } = await axios.post('set_user_data', formData)
-
+		const { data } = await axios.post('set-user-data', formData)
 		user.value = data
 		router.push({ name: 'main' })
 	}

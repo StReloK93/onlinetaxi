@@ -80,7 +80,7 @@ class UserService
         $user->role_id = $request->role;
         $user->save();
 
-        return $user;
+        return $user->fresh();
     }
 
 }

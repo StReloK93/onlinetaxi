@@ -5,7 +5,7 @@
             <v-app-bar-nav-icon color="white" @click="mainStore.menu = !mainStore.menu"></v-app-bar-nav-icon>
         </template>
         <v-app-bar-title>
-            <span> <v-icon>mdi-chess-knight</v-icon> </span> {{ Auth.user.role.name }}
+            <span> <v-icon>mdi-chess-knight</v-icon> </span> {{ Auth.user?.role?.name }}
         </v-app-bar-title>
         <v-btn icon="mdi-logout" density="comfortable" @click="logout" color="white"></v-btn>
     </v-app-bar>

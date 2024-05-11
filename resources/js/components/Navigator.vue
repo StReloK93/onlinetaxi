@@ -13,7 +13,7 @@
 		</main>
 		<v-divider></v-divider>
 		<div>
-			<v-list v-if="[3,4].includes(auth.user.role_id)" density="compact">
+			<v-list v-if="[1,2].includes(auth.user?.role_id)" density="compact">
 				<v-list-item
 					prepend-icon="mdi-phone-classic"
 					title="Operatorlarga"

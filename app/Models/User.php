@@ -13,10 +13,11 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasApiTokens, HasFactory, Notifiable;
 
 
-    protected $with = ['role'];
+    protected $with = ['role', 'cars'];
     protected $fillable = [
+        'name',
         'phone',
-        'email',
+        'active_car_id',
         'role_id',
     ];
 
@@ -42,5 +43,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function role()
     {
         return $this->belongsTo(UserRole::class);
+    }
+
+    public function cars()
+    {
+        return $this->hasMany(UserCar::class);
     }
 }

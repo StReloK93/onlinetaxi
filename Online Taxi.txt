@@ -1,0 +1,15 @@
+1 - Qatiy shu vaqtda bosilganda soat tanlansin
+2 - Agar foydalanuvchi haydovchi bo'lsa va  transporti bo'lmasa Dasturga kirgandan transport kiritishi uchun ogohlantirish
+3 - Transportlarni kiritish jarayonida Avto markasi va turini select orqali tanlash
+4 - Transport kiritish jarayonida Avtomobil raqamini ikki xil usulda tartib bilan kiritish
+5 - Qatnov kiritishda agar transporti uzi 1 dona bo'lsa avtomatik formada usha transportni qoyish va tanlashni disabled qilish
+6 - Qatnovlarda soat bo'yicha filter qoyish
+7 - Agar active qatnovi bo'lsa qayta qatnov kirita olmaslik
+8 - Logotipni rangini o'zgartirish
+9 - Operator yoki admin Yulovchilar bo'yicha haydovchilarga bildirgi(Uvedomleniya) junatish
+
+10 - Har bir Role bo'yicha kiritishlarni to'girlab chiqish( o'z roliga tegishli narsalar qolsin)
+11 - To'lov sistemasiga bog'lash
+
+12 - Rolni o'zgartirish (Haydovchi yoki yo'lovchi)
+13 - Yo'lovchi sahifasida Card korinishida tayyorlash va narxni kiritadigan qilish

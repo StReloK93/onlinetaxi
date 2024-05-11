@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<v-row>
 		<v-col sm="6" cols="12">
 			<main class="d-flex w-100 mb-3">
 				<v-text-field class="pr-2 flex-0-0" readonly density="compact" value="+998" disabled>
@@ -60,7 +60,7 @@
 		<v-col sm="6" cols="12">
 			<v-switch v-model="formData.with_trunk" label="Bagaj"></v-switch>
 		</v-col>
-	</section>
+	</v-row>
 </template>
 
 <script setup lang="ts">
