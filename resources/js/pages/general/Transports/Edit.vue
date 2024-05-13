@@ -27,21 +27,25 @@ const pageData = reactive({
 
 async function submitFunction() {
     const formData = inputComponent.value.formData
-    await axios.put(`car/${propsParent.id}`, formData)
+    await axios.put(`user-car/${propsParent.id}`, formData)
         .then(({ data }) => transport.update(data))
 }
 
 
 
 function getTransport(id) {
-    axios.get(`car/${id}`).then(({ data }) => {
+    axios.get(`user-car/${id}`).then(({ data }) => {
         const formData = inputComponent.value.formData
-        formData.user_id = data.user_id
-        formData.type = data.type
         formData.number = data.number
-        formData.color = data.color
         formData.fuel_type = data.fuel_type
+        formData.car_company_id = data.car.car_company_id
+        
         formData.trunk = Boolean(data.trunk)
+        
+        inputComponent.value.carMarkChanged(formData.car_company_id).then(() => {
+            formData.car_id = data.car_id
+        })
+        
     })
 }
 </script>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('count')->default(1);
             $table->boolean('with_trunk')->nullable();
             $table->dateTime('ride_time')->nullable();
+            $table->integer('price')->nullable();
             $table->boolean('state')->default(true);
             $table->timestamps();
         });

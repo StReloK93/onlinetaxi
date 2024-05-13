@@ -11,9 +11,9 @@ class CarRide extends Model
 
     protected $fillable = [
         'user_id',
-        'car_id',
+        'user_car_id',
         'phone',
-        'ride_time',
+        'day',
         'strictly_on_time',
         'price',
         'address_to_address',
@@ -30,14 +30,14 @@ class CarRide extends Model
 
 
     protected $with = [
-        'car',
+        'user_car',
         'cities',
         'passengers'
     ];
 
-    public function car()
+    public function user_car()
     {
-        return $this->belongsTo(Car::class)->with('fuel');
+        return $this->belongsTo(UserCar::class)->with('fuel');
     }
 
     public function cities()

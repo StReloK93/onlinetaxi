@@ -48,9 +48,9 @@ function getCarRide(id) {
 		pageData.car_ride = data
 
 		const formData = inputComponent.value.formData
-		formData.car_id = data.car_id
+		formData.user_car_id = data.user_car_id
 		formData.phone = data.phone
-		formData.ride_time = data.ride_time
+		formData.day = data.day
 		formData.strictly_on_time = data.strictly_on_time
 		formData.price = data.price
 		formData.address_to_address = data.address_to_address

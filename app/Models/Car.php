@@ -11,10 +11,18 @@ class Car extends Model
 
     public $timestamps = false;
 
+    protected $with = [
+        'car_company'
+    ];
 
     protected $fillable = [
         'car_company_id',
         'name',
     ];
 
+
+    public function car_company()
+    {
+        return $this->belongsTo(CarCompany::class);
+    }
 }

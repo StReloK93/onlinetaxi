@@ -1,7 +1,7 @@
 <template>
 	<main class="d-flex flex-column">
 		<main class="d-flex align-center justify-space-between w-100">
-			<Add :date="true"></Add>
+			<Add v-if="[1,2,4].includes(Auth.user.role_id)" :date="true"></Add>
 			<Filters ref="filterComponent" />
 			<Sorting />
 		</main>
@@ -17,6 +17,8 @@
 <script setup lang="ts">
 import { Add, Filters, Sorting, columnDefs, useCarRide } from './CarRides'
 import { ref, onUnmounted } from 'vue'
+import { useAuthStore } from '@/store'
+const Auth = useAuthStore()
 const filterComponent = ref()
 
 const CarRide = useCarRide()

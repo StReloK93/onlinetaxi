@@ -11,14 +11,20 @@
 			</p>
 		</v-col>
 		<v-col sm="6" cols="12">
-			<v-autocomplete :items="pageData.car_company" v-model="pageData.car_company_id" label="Transport markasi"
-				item-title="name" :item-value="(item) => item.id" :rules="rules" />
+			<v-select @update:model-value="(id) => carMarkChanged(id)" :items="pageData.car_company"
+				v-model="formData.car_company_id" label="Transport markasi" item-title="name"
+				:item-value="(item) => item.id" :rules="rules" />
+		</v-col>
+		<v-col sm="6" cols="12">
+			<v-select :disabled="formData.car_company_id == null"
+				:items="pageData.cars" v-model="formData.car_id" label="Transport turi" item-title="name"
+				:item-value="(item) => item.id" :rules="rules" :loading="pageData.car_input_loading" />
 		</v-col>
 		<v-col sm="6" cols="12">
 			<v-text-field v-model="formData.number" :step="900" label="Transport raqami" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
-			<v-autocomplete :items="pageData.fuel_types" v-model="formData.fuel_type" label="Yoqilg'i turi"
+			<v-select :items="pageData.fuel_types" v-model="formData.fuel_type" label="Yoqilg'i turi"
 				item-title="name" :item-value="(item) => item.id" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
@@ -30,31 +36,39 @@
 <script setup lang="ts">
 import { rules } from '@/modules/constants'
 import { reactive } from 'vue'
-import { useAuthStore } from '@/store'
-const auth = useAuthStore()
+
+
 const formData = reactive({
-	user_id: auth.user.id,
-	type: null,
+	car_company_id: null,
+	car_id: null,
 	number: null,
 	fuel_type: null,
 	trunk: false,
 })
 
 const pageData = reactive({
-	car_company_id: null,
-	fuel_types: [],
-	users: [],
 	car_company: [],
+	fuel_types: [],
+	cars: [],
+	car_input_loading: false
 })
 
-axios.all([axios.get('fuel_type'), axios.get('users'),  axios.get('car-company')])
-	.then(axios.spread(({ data: fuel_types }, { data: users }, {data: car_company}) => {
+
+async function carMarkChanged(company_id) {
+	pageData.car_input_loading = true
+	formData.car_id = null
+	await axios.get(`car/${company_id}`).then(({ data:cars }) => {
+		pageData.cars = cars
+	})
+
+	pageData.car_input_loading = false
+}
+
+axios.all([axios.get('fuel_type'), axios.get('car-company')])
+	.then(axios.spread(({ data: fuel_types }, { data: car_company }) => {
 		pageData.fuel_types = fuel_types
-		pageData.users = users
 		pageData.car_company = car_company
 	}))
 
-
-	
-defineExpose({ formData })
+defineExpose({ formData, carMarkChanged })
 </script>

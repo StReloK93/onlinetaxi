@@ -11,11 +11,11 @@
 				<!-- <v-btn size="x-small" @click="addCity" :disabled="formData.ends.length == 4" icon="mdi-plus"
 						variant="plain"></v-btn> -->
 			</v-col>
-			<v-col v-if="[1].includes(index) && index != formData.ends.length - 1" cols="12" class="py-0">
+			<!-- <v-col v-if="[1].includes(index) && index != formData.ends.length - 1" cols="12" class="py-0">
 				<v-label class="text-subtitle-1 mr-1">
 					Oraliq manzillar
 				</v-label>
-			</v-col>
+			</v-col> -->
 			<v-col v-if="formData.ends.length == index + 1" cols="12" class="py-1">
 				<v-label class="text-subtitle-1 mr-1">
 					Boriladigan manzil (Qaerga?)
@@ -39,17 +39,14 @@
 		</template>
 		<v-divider class="border-opacity-75"></v-divider>
 		<v-col v-if="date" sm="6" cols="12">
-			<VDatePicker color="pink" :min-date="new Date()" v-model.string="formData.ride_time"
-				:masks="{ modelValue: 'YYYY-MM-DD HH:mm' }" mode="datetime" transparent borderless expanded is24hr
+			<VDatePicker :trim-weeks="true" color="pink" :min-date="new Date()" v-model.string="formData.day"
+				:masks="{ modelValue: 'YYYY-MM-DD' }" mode="dateTime" is24hr transparent borderless expanded
 				hide-time-header is-required />
-			<v-text-field class="hidden tw-relative -tw-top-20" v-model="formData.ride_time" :rules="rules" readonly />
-			<div v-if="dateIsset" class="v-messages text-error font-weight-regular pb-2 !tw-opacity-100">
-				<div class="v-messages__message">To'ldiring</div>
-			</div>
+			<v-text-field class="hidden tw-relative -tw-top-2" hidden v-model="formData.day" :rules="rules" readonly />
 		</v-col>
 		<v-col sm="6" cols="12">
-			<v-autocomplete class="mb-3" @update:model-value="setPhone" :items="pageData.cars" v-model="formData.car_id"
-				label="Transport" :item-title="(item) => `${item.type} ( ${item.number} )`" :item-value="(item) => item.id"
+			<v-autocomplete class="mb-3" @update:model-value="setPhone" :items="pageData.cars" v-model="formData.user_car_id"
+				label="Transport" :item-title="(item) => `${item.car.name} ( ${item.number} )`" :item-value="(item) => item.id"
 				:rules="rules" />
 			<main class="d-flex w-100 mb-3">
 				<v-text-field class="pr-2 flex-0-0" readonly density="compact" value="+998" disabled>
@@ -74,9 +71,8 @@
 import { moneyConfig, rules, phoneMask } from '@/modules/constants'
 import { reactive, ref } from 'vue'
 const { edit, date } = defineProps(['edit', 'date'])
-const dateIsset = ref(false)
 const formData = reactive({
-	car_id: null,
+	user_car_id: null,
 	phone: null,
 	strictly_on_time: false,
 	address_to_address: false,
@@ -84,7 +80,7 @@ const formData = reactive({
 		{ region: null, city: null, loading: false, districts: [] },
 		{ region: null, city: null, loading: false, districts: [] },
 	],
-	ride_time: null,
+	day: null,
 	price: "",
 	free_seat: null,
 })
@@ -122,7 +118,7 @@ function clearOverlay() {
 	pageData.overlay = false
 }
 
-axios.all([axios.get('cars/get-only-my'), axios.get('region')])
+axios.all([axios.get('user-cars/get-only-my'), axios.get('region')])
 	.then(axios.spread(({ data: cars }, { data: regions }) => {
 		pageData.cars = cars
 		pageData.regions = regions

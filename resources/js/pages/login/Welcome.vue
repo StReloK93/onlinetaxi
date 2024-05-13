@@ -39,7 +39,6 @@
 								<v-radio id="passengerRadio" label="Option One" :value="3"></v-radio>
 								<v-radio id="TaxiRadio" label="Option 2 (string)" :value="4"></v-radio>
 							</v-radio-group>
-
 							<v-col cols="12">
 								<v-btn class="w-100" type="submit">
 									<span>Dasturga kirish</span>
@@ -60,7 +59,6 @@
 import { rules } from '@/modules/constants'
 import { reactive } from 'vue'
 import { useAuthStore } from '@/store'
-
 const authStore = useAuthStore()
 const formData = reactive({
 	role: 3,

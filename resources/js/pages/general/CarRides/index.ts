@@ -4,7 +4,7 @@ import Filters from './Filter.vue'
 import Sorting from './Sorting.vue'
 import { ColDef } from 'ag-grid-community'
 import type { ICarRide } from '@/app/interfaces'
-import { CarRideRenderer } from '@/components/AgGrid'
+import CarRideRenderer from '@/components/AgGrid/CarRideRenderer.vue'
 import { useCarRide } from '@/repository/CarRide'
 const columnDefs: ColDef<ICarRide>[] = [
    {
@@ -13,7 +13,7 @@ const columnDefs: ColDef<ICarRide>[] = [
       valueFormatter: null,
       cellClass: ['px-0', 'align-stretch']
    },
-   { field: 'ride_time', hide: true },
+   { field: 'day', hide: true },
    { field: 'price', hide: true },
    { field: 'free_seat', hide: true },
 ]

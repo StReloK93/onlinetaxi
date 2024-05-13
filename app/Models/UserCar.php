@@ -11,6 +11,10 @@ class UserCar extends Model
 {
     use HasFactory;
 
+    protected $with = [
+        'car'
+    ];
+
     protected $fillable = [
         'user_id',
         'car_id',
@@ -29,12 +33,17 @@ class UserCar extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->without(['cars', 'role']);
     }
 
     public function fuel()
     {
         return $this->belongsTo(FuelType::class, 'fuel_type' , 'id');
+    }
+
+    public function car()
+    {
+        return $this->belongsTo(Car::class);
     }
 
 }

@@ -4,14 +4,9 @@
             <aside class="d-flex justify-space-between">
                 <main>
                     <h3 class="tw-uppercase tw-text-2xl">
-                        {{ selected.type }}
+                        {{ selected.car.name }}
                     </h3>
                     <div class="tw-text-sm">
-                        <span class="tw-text-gray-500">
-                            Rangi
-                        </span>
-                        <br>
-                        {{ selected.color }}
                     </div>
                 </main>
                 <h3 class="text-primary tw-text-base">{{ selected.number }}</h3>
@@ -38,8 +33,8 @@ const store = useMainStore()
 
 function deleteTransport() {
     store.dialog.open(() => {
-		store.dialog.title = "Qatnovni o'chirmoqchimisiz ?"
-		store.dialog.subTitle = "O'chirilgan qatnovlar savatchada 1 oy muddat saqlanadi."
+		store.dialog.title = "Transportni o'chirmoqchimisiz ?"
+		store.dialog.subTitle = "Ushbu transportga tegishli barcha qatnovlar ham o'chib ketadi."
 		store.dialog.submit = () => tranportStore.destroy(selected)
 	})
 }

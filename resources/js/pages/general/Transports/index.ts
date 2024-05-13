@@ -2,7 +2,7 @@ import Add from './Add.vue'
 import Edit from './Edit.vue'
 import type { ITransport } from '@/app/interfaces'
 import { ColDef } from 'ag-grid-community'
-import { TransportRenderer } from '@/components/AgGrid'
+import TransportRenderer from '@/components/AgGrid/TransportRenderer.vue'
 const columnDefs: ColDef<ITransport>[] = [
 	{
 		cellRenderer: TransportRenderer,

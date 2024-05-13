@@ -2,7 +2,7 @@
 	<main class="d-flex tw-flex-col">
 		<Edit @update="onEdit" ref="editComponent"></Edit>
 		<main class="d-flex align-center justify-space-between mb-2 px-1">
-			<Add @create="onCreate"></Add>
+			<Add v-if="[1,2,3].includes(Auth.user.role_id)" @create="onCreate"></Add>
 		</main>
 		<v-spacer>
 			<AgGridVue
@@ -27,7 +27,8 @@ import { ColDef, GridApi } from 'ag-grid-community'
 import { IPassenger } from '@/app/interfaces'
 import { reactive, ref } from 'vue'
 const editComponent = ref()
-
+import { useAuthStore } from '@/store'
+const Auth = useAuthStore()
 interface PageData {
 	passengers: IPassenger[],
 	gridApi: GridApi<IPassenger>,

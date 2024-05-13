@@ -19,7 +19,7 @@ const pageData = reactive({dialog: false})
 async function submitFunction() {
     const formData = inputComponent.value.formData
 
-    await axios.post('car', formData).then(({data}) => {
+    await axios.post('user-car', formData).then(({data}) => {
         emit('create', data)
         pageData.dialog = false
     })

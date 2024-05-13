@@ -22,8 +22,7 @@ Route::apiResource('post', PostController::class);
 
 
 Route::post('passenger-operator', [PassengerController::class, 'storeOperator']);
-Route::get('cars/{car_company_id}', [CarController::class, 'index']);
-
+Route::apiResource('car', CarController::class)->only(['show']);
 
 Route::delete('passenger-delete/{passenger}', [PassengerController::class, 'delete']);
 Route::apiResource('passenger', PassengerController::class)->only(['index', 'show']);

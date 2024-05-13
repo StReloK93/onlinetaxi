@@ -17,6 +17,7 @@ export default createVuetify({
 	directives,
 
 	defaults: {
+		VSelect: { ...defaultInputParams, chips: true },
 		VList: { color: color },
 		VTextarea: { ...defaultInputParams, rows: 3 },
 		VTextField: defaultInputParams,

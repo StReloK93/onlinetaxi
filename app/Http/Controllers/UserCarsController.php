@@ -8,12 +8,9 @@ use App\Models\CarRide;
 use Auth;
 class UserCarsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return UserCar::with(['user', 'fuel'])->get();
+        return UserCar::with(['fuel', 'user'])->get();
     }
 
     public function getOnlyMy()
@@ -21,17 +18,16 @@ class UserCarsController extends Controller
         if (Auth::user()->role_id == 2 || Auth::user()->role_id == 1) {
             return $this->index();
         } else {
-            return UserCar::with(['user', 'fuel'])->onlyMyCars()->get();
+            return UserCar::with(['fuel', 'user'])->onlyMyCars()->get();
         }
     }
 
     public function store(Request $request)
     {
         $userCar = UserCar::create([
-            'user_id' => $request->user_id,
-            'type' => $request->type,
+            'user_id' => Auth::user()->id,
+            'car_id' => $request->car_id,
             'number' => $request->number,
-            'color' => $request->color,
             'fuel_type' => $request->fuel_type,
             'trunk' => $request->trunk,
         ]);
@@ -49,10 +45,8 @@ class UserCarsController extends Controller
 
     public function update(Request $request, UserCar $userCar)
     {
-        $userCar->user_id = $request->user_id;
-        $userCar->type = $request->type;
+        $userCar->car_id = $request->car_id;
         $userCar->number = $request->number;
-        $userCar->color = $request->color;
         $userCar->fuel_type = $request->fuel_type;
         $userCar->trunk = $request->trunk;
 
@@ -67,7 +61,7 @@ class UserCarsController extends Controller
      */
     public function destroy(UserCar $userCar)
     {
-        CarRide::where('car_id', $userCar->id)->delete();
+        CarRide::where('car_id', $userCar->car_id)->delete();
         return $userCar->delete();
     }
 }

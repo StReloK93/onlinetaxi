@@ -13,10 +13,10 @@ export interface Dialog {
 
 export interface ITransport{
     id: number,
-    user_id: number,
-    type: string,
+    user_id?: number,
+    car_id: string,
+    car: any,
     number: string,
-    color: string,
     fuel_type: number,
     fuel: Fuel,
     trunk: boolean,
@@ -49,13 +49,14 @@ export interface Districts{
 
 export interface ICarRide{
     id: number,
-    car_id: number,
+    user_car: ITransport,
+    user_car_id: number,
     user_id: number,
     car: ITransport,
     phone: string,
     cities: CarRideCity[],
     start_city: number,
-    ride_time: Date,
+    day: Date,
     passengers: IPassenger[],
     strictly_on_time: boolean,
     price: number,

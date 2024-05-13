@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('car_rides', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('car_id');
+            $table->integer('user_car_id');
             $table->string('phone');
-            $table->dateTime('ride_time')->nullable();
+            $table->dateTime('day')->nullable();
             $table->boolean('strictly_on_time');
             $table->integer('price');
             $table->boolean('address_to_address');

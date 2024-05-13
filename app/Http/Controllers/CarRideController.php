@@ -24,9 +24,9 @@ class CarRideController extends Controller
     {
         $carRide = CarRide::create([
             'user_id' => Auth::user()->id,
-            'car_id' => $request->car_id,
+            'user_car_id' => $request->user_car_id,
             'phone' => $request->phone,
-            'ride_time' => $request->ride_time,
+            'day' => $request->day,
             'strictly_on_time' => $request->strictly_on_time,
             'price' => $request->price,
             'free_seat' => $request->free_seat,
@@ -34,7 +34,7 @@ class CarRideController extends Controller
             'state' => true,
         ]);
 
-        foreach ($request->ends as $key => $item) {
+        foreach ($request->ends as $item) {
             CarRideCity::create([
                 'car_ride_id' => $carRide->id,
                 'district_id' => $item['city']
@@ -53,9 +53,9 @@ class CarRideController extends Controller
 
     public function update(Request $request, CarRide $carRide)
     {
-        $carRide->car_id = $request->car_id;
+        $carRide->user_car_id = $request->user_car_id;
         $carRide->phone = $request->phone;
-        $carRide->ride_time = $request->ride_time;
+        $carRide->day = $request->day;
         $carRide->strictly_on_time = $request->strictly_on_time;
         $carRide->price = $request->price;
         $carRide->free_seat = $request->free_seat;
@@ -63,7 +63,7 @@ class CarRideController extends Controller
         $carRide->save();
         CarRideCity::where('car_ride_id', $carRide->id)->delete();
 
-        foreach ($request->ends as $key => $carRideCity) {
+        foreach ($request->ends as $carRideCity) {
             CarRideCity::create([
                 'car_ride_id' => $carRide->id,
                 'district_id' => $carRideCity['city']
