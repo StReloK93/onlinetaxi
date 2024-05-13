@@ -62,12 +62,12 @@
 					</span>
 				</div>
 				<div class="d-flex align-center">
-					<div class="-tw-translate-x-28" v-if="Auth.user.role == 3 || Auth.user.id == carRide.user_id">
+					<div :class="{'-tw-translate-x-28': [1,2].includes(Auth.user.role_id)}" v-if="Auth.user.role == 3 || Auth.user.id == carRide.user_id">
 						<v-btn v-if="[1,2].includes(Auth.user.role_id)" tag="a" :href="`tel:+998${carRide.phone}`" size="small" variant="plain" color="teal" icon="mdi-phone"></v-btn>
 						<Edit :date="true" :id="carRide.id"></Edit>
 						<v-btn size="x-small" @click="carRideDelete" variant="plain" icon="mdi-delete" class="ml-1" />
 					</div>
-					<v-chip size="large" variant="tonal" color="primary" class="tw-font-semibold tw-absolute -tw-right-8 pr-10">
+					<v-chip v-if="[1,2].includes(Auth.user.role_id)" size="large" variant="tonal" color="primary" class="tw-font-semibold tw-absolute -tw-right-8 pr-10">
 						{{ format(carRide.price, moneyConfig) }} so'm
 					</v-chip>
 				</div>
