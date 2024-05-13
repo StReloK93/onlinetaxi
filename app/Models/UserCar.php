@@ -19,6 +19,7 @@ class UserCar extends Model
         'user_id',
         'car_id',
         'number',
+        'number_variant',
         'fuel_type',
         'trunk',
     ];

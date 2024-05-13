@@ -19,7 +19,7 @@
 	</main>
 </template>
 <script setup lang="ts">
-import { PassengerRenderer } from '@/components/AgGrid'
+// import { PassengerRenderer } from '@/components/AgGrid'
 import Add from '@/pages/general/Passengers/Add.vue'
 import Edit from '@/pages/general/Passengers/Edit.vue'
 import { ColDef, GridApi } from 'ag-grid-community'
@@ -43,7 +43,7 @@ const columnDefs: ColDef[] = [
 	{ field: 'car.number', headerName: "Transport raqami", width: 150 },
 	{ field: 'phone', headerName: "Telefon", width: 150 },
    { field: 'price', headerName: "Narxi", width: 150 },
-   { field: 'free_seat', headerName: "Yo'lovchilar soni", cellRenderer: PassengerRenderer, valueFormatter: null },
+//    { field: 'free_seat', headerName: "Yo'lovchilar soni", cellRenderer: PassengerRenderer, valueFormatter: null },
 ]
 
 function onCreate(Transport) {

@@ -1,20 +1,22 @@
 <template>
-    <section class="px-2 w-100">
-        <div>
-            <aside class="d-flex justify-space-between">
-                <main>
-                    <h3 class="tw-uppercase tw-text-2xl">
-                        {{ selected.car.name }}
-                    </h3>
-                    <div class="tw-text-sm">
-                    </div>
-                </main>
-                <h3 class="text-primary tw-text-base">{{ selected.number }}</h3>
-            </aside>
-            <div class="d-flex justify-end">
+    <section class="px-2 w-100 d-flex flex-column">
+        <aside class="d-flex justify-space-between flex-grow-1">
+            <main>
+                <h3 class="tw-uppercase tw-text-3xl text-primary">
+                    {{ selected.car.name }}
+                </h3>
+                <div class="tw-text-sm tw-text-gray-600">
+                    {{ selected.car.company.name }}
+                </div>
+            </main>
+            
+        </aside>
+        <div class="d-flex justify-space-between  align-center">
+            <h3 class="tw-text-base tw-font-semibold tw-text-gray-600">{{ selected.number }}</h3>
+            <span>
                 <Edit :id="selected.id"></Edit>
                 <v-btn size="small" @click="deleteTransport" variant="plain" icon="mdi-delete" />
-            </div>
+            </span>
         </div>
     </section>
 </template>

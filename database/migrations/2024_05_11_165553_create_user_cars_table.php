@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('number');
+            $table->boolean('number_variant');
             $table->integer('car_id');
             $table->integer('fuel_type');
             $table->boolean('trunk');

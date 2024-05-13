@@ -1,12 +1,15 @@
 <template>
 	<section class="w-100 d-flex flex-column">
 		<main class="pa-2 tw-h-16 d-flex flex-column justify-space-between tw-relative">
+			<v-btn icon="mdi-chevron-down" variant="text" class="tw-absolute tw-top-[26px] -tw-left-[10px]" >
+
+			</v-btn>
 			<div
 				class="tw-absolute tw-h-3/5 tw-border-l-2 tw-border-pink-500 tw-border-dotted tw-top-[10.5px] tw-left-[13px]">
 			</div>
 			<template v-for="(item, index) in carRide.cities">
 				<aside v-if="firstOrLast(index)" class="tw-leading-none d-flex align-center">
-					<v-icon class="mr-2 tw-text-xs bg-white" color="pink">
+					<v-icon class="mr-2 tw-text-xs bg-white" :class="{'tw-opacity-0': index == carRide.cities.length - 1 }" color="pink">
 						mdi-circle-outline
 					</v-icon>
 					<span class="tw-font-bold">
@@ -29,7 +32,7 @@
 								{{ carRide.user_car.number }}
 							</span>
 						</div>
-						<div v-if="authStore.user.role == 3" class="tw-text-gray-500">
+						<div v-if="Auth.user.role == 3" class="tw-text-gray-500">
 							<a :href="`tel:${carRide.phone}`">{{ carRide.phone }}</a>
 						</div>
 					</main>
@@ -39,7 +42,6 @@
 								mdi-account-settings
 							</v-icon>
 						</div>
-
 					</main>
 				</div>
 			</section>
@@ -53,17 +55,19 @@
 						{{ moment(carRide.day).format('D-MMMM') }}
 						<v-btn v-if="carRide.strictly_on_time" icon="" size="x-small" variant="text">
 							<v-icon>mdi-book-clock</v-icon>
-							<v-tooltip activator="parent" :open-on-click="true" location="bottom">Qat'iy shu
-								vaqtda</v-tooltip>
+							<v-tooltip activator="parent" :open-on-click="true" location="bottom">
+								Qat'iy shu vaqtda
+							</v-tooltip>
 						</v-btn>
 					</span>
 				</div>
 				<div class="d-flex align-center">
-					<div class="tw-translate-x-8" v-if="authStore.user.role == 3 || authStore.user.id == carRide.user_id">
+					<div class="-tw-translate-x-28" v-if="Auth.user.role == 3 || Auth.user.id == carRide.user_id">
+						<v-btn v-if="[1,2].includes(Auth.user.role_id)" tag="a" :href="`tel:+998${carRide.phone}`" size="small" variant="plain" color="teal" icon="mdi-phone"></v-btn>
 						<Edit :date="true" :id="carRide.id"></Edit>
-						<v-btn size="small" @click="carRideDelete" variant="plain" icon="mdi-delete" class="ml-3" />
+						<v-btn size="x-small" @click="carRideDelete" variant="plain" icon="mdi-delete" class="ml-1" />
 					</div>
-					<v-chip size="large" variant="tonal" color="primary" class=" tw-font-semibold tw-translate-x-10 pr-10">
+					<v-chip size="large" variant="tonal" color="primary" class="tw-font-semibold tw-absolute -tw-right-8 pr-10">
 						{{ format(carRide.price, moneyConfig) }} so'm
 					</v-chip>
 				</div>
@@ -85,7 +89,7 @@ const props = defineProps(['params'])
 const carRide = props.params.data as ICarRide
 
 const store = useMainStore()
-const authStore = useAuthStore()
+const Auth = useAuthStore()
 
 const firstOrLast = (index) => {
 	return [0, carRide.cities.length - 1].includes(index) == true

@@ -18,7 +18,7 @@ export const useTransport = defineStore('useTransport', () => {
 	}
 
 	function destroy(transport) {
-		axios.delete(`car/${transport.id}`).then(() => {
+		axios.delete(`user-car/${transport.id}`).then(() => {
 			transports.value = transports.value.filter((car) => car.id != transport.id)
 			if (agGrid.value == null) return
 			agGrid.value.applyTransaction({ remove: [transport] })

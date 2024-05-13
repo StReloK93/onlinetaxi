@@ -5,7 +5,7 @@
 				color="white">
 				O'zgaritirish
 			</v-btn>
-			<v-btn v-else size="small" v-bind="props" variant="plain" icon="mdi-pencil" />
+			<v-btn v-else size="x-small" v-bind="props" variant="plain" icon="mdi-pencil" />
 		</template>
 		<CustomForm :submit="submitFunction" @vue:mounted="getCarRide(propsParent.id)" title="Qatnovni tahrirlash"
 			@close="pageData.dialog = false">

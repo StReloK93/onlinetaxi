@@ -12,7 +12,7 @@ class Car extends Model
     public $timestamps = false;
 
     protected $with = [
-        'car_company'
+        'company'
     ];
 
     protected $fillable = [
@@ -21,8 +21,8 @@ class Car extends Model
     ];
 
 
-    public function car_company()
+    public function company()
     {
-        return $this->belongsTo(CarCompany::class);
+        return $this->belongsTo(CarCompany::class, 'car_company_id', 'id');
     }
 }

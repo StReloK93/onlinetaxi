@@ -266,8 +266,6 @@ class DatabaseSeeder extends Seeder
 
         CarCompany::insert([
             ['name' => 'Chevrolet'],
-            ['name' => 'Daewoo'],
-            ['name' => 'Ravon'],
             ['name' => 'Cherry'],
             ['name' => 'KIA'],
             ['name' => 'BYD'],

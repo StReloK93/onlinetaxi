@@ -28,11 +28,13 @@ class UserCarsController extends Controller
             'user_id' => Auth::user()->id,
             'car_id' => $request->car_id,
             'number' => $request->number,
+            'number_variant' => $request->number_variant,
             'fuel_type' => $request->fuel_type,
             'trunk' => $request->trunk,
         ]);
         $userCar->fuel;
         $userCar->user;
+        $userCar->car;
         return $userCar;
     }
 
@@ -47,6 +49,7 @@ class UserCarsController extends Controller
     {
         $userCar->car_id = $request->car_id;
         $userCar->number = $request->number;
+        $userCar->number_variant = $request->number_variant;
         $userCar->fuel_type = $request->fuel_type;
         $userCar->trunk = $request->trunk;
 
@@ -61,7 +64,7 @@ class UserCarsController extends Controller
      */
     public function destroy(UserCar $userCar)
     {
-        CarRide::where('car_id', $userCar->car_id)->delete();
+        CarRide::where('user_car_id', $userCar->car_id)->delete();
         return $userCar->delete();
     }
 }

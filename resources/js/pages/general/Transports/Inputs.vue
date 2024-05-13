@@ -16,16 +16,34 @@
 				:item-value="(item) => item.id" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
-			<v-select :disabled="formData.car_company_id == null"
-				:items="pageData.cars" v-model="formData.car_id" label="Transport turi" item-title="name"
-				:item-value="(item) => item.id" :rules="rules" :loading="pageData.car_input_loading" />
+			<v-select :disabled="formData.car_company_id == null" :items="pageData.cars" v-model="formData.car_id"
+				label="Transport turi" item-title="name" :item-value="(item) => item.id" :rules="rules"
+				:loading="pageData.car_input_loading" />
 		</v-col>
 		<v-col sm="6" cols="12">
-			<v-text-field v-model="formData.number" :step="900" label="Transport raqami" :rules="rules" />
+			<div class="d-flex justify-space-between mb-2">
+				<v-sheet @click="formData.number_variant = true" :class="{'tw-bg-pink-50 tw-border-pink-600': formData.number_variant }" :height="26" v-ripple class="tw-border rounded tw-border-gray-700 d-flex">
+					<div :class="{'tw-border-pink-600': formData.number_variant }" class="d-flex justify-space-between align-center px-2 tw-border tw-border-gray-700">
+						00
+					</div>
+					<div :class="{'tw-border-pink-600': formData.number_variant }" class="d-flex justify-space-between align-center px-2 tw-border tw-border-gray-700 flex-grow-1">
+						A 000 AA 
+					</div>
+				</v-sheet>
+				<v-sheet @click="formData.number_variant = false" :class="{'tw-bg-pink-50 tw-border-pink-600': !formData.number_variant }"  :height="26" v-ripple class="tw-border rounded tw-border-gray-700 d-flex">
+					<div :class="{'tw-border-pink-600': !formData.number_variant }" class="d-flex justify-space-between align-center px-2 tw-border tw-border-gray-700">
+						00
+					</div>
+					<div :class="{'tw-border-pink-600': !formData.number_variant }" class="d-flex justify-space-between align-center px-2 tw-border tw-border-gray-700 flex-grow-1">
+						000 AAA 
+					</div>
+				</v-sheet>
+			</div>
+			<v-text-field v-model="formData.number" v-maska:[mask] label="Transport raqami" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
-			<v-select :items="pageData.fuel_types" v-model="formData.fuel_type" label="Yoqilg'i turi"
-				item-title="name" :item-value="(item) => item.id" :rules="rules" />
+			<v-select :items="pageData.fuel_types" v-model="formData.fuel_type" label="Yoqilg'i turi" item-title="name"
+				:item-value="(item) => item.id" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
 			<v-switch v-model="formData.trunk" label="Bagaj" class="px-2"></v-switch>
@@ -35,7 +53,26 @@
 
 <script setup lang="ts">
 import { rules } from '@/modules/constants'
-import { reactive } from 'vue'
+import { computed, reactive, ref } from 'vue'
+
+
+
+const mask = computed(() => {
+	const a = {
+		mask: '## A ### AA',
+		tokens: {
+			A: { pattern: /[A-Z]/, transform: (chr: string) => chr.toUpperCase() }
+		}
+	}
+	const b = {
+		mask: '## ### AAA',
+		tokens: {
+			A: { pattern: /[A-Z]/, transform: (chr: string) => chr.toUpperCase() }
+		}
+	}
+
+	return formData.number_variant ? a : b
+})
 
 
 const formData = reactive({
@@ -44,6 +81,7 @@ const formData = reactive({
 	number: null,
 	fuel_type: null,
 	trunk: false,
+	number_variant: true,
 })
 
 const pageData = reactive({
@@ -57,7 +95,7 @@ const pageData = reactive({
 async function carMarkChanged(company_id) {
 	pageData.car_input_loading = true
 	formData.car_id = null
-	await axios.get(`car/${company_id}`).then(({ data:cars }) => {
+	await axios.get(`car/${company_id}`).then(({ data: cars }) => {
 		pageData.cars = cars
 	})
 

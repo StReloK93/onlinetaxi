@@ -6,7 +6,7 @@
 		<template v-for="(city, index) in formData.ends">
 			<v-col v-if="index == 0" cols="12" class="py-1">
 				<v-label class="text-subtitle-1 mr-1">
-					Boshlang'ich manzil (Qaerdan?)
+					Qaerdan?
 				</v-label>
 				<!-- <v-btn size="x-small" @click="addCity" :disabled="formData.ends.length == 4" icon="mdi-plus"
 						variant="plain"></v-btn> -->
@@ -18,7 +18,7 @@
 			</v-col> -->
 			<v-col v-if="formData.ends.length == index + 1" cols="12" class="py-1">
 				<v-label class="text-subtitle-1 mr-1">
-					Boriladigan manzil (Qaerga?)
+					Qaerga?
 				</v-label>
 			</v-col>
 			<div class="w-100 d-flex flex-wrap bg-blue-grey-lighten-5"
@@ -40,7 +40,7 @@
 		<v-divider class="border-opacity-75"></v-divider>
 		<v-col v-if="date" sm="6" cols="12">
 			<VDatePicker :trim-weeks="true" color="pink" :min-date="new Date()" v-model.string="formData.day"
-				:masks="{ modelValue: 'YYYY-MM-DD' }" mode="dateTime" is24hr transparent borderless expanded
+				:masks="{ modelValue: 'YYYY-MM-DD HH:mm' }" mode="dateTime" is24hr transparent borderless expanded
 				hide-time-header is-required />
 			<v-text-field class="hidden tw-relative -tw-top-2" hidden v-model="formData.day" :rules="rules" readonly />
 		</v-col>
