@@ -5,7 +5,16 @@
             <v-app-bar-nav-icon color="white" @click="mainStore.menu = !mainStore.menu"></v-app-bar-nav-icon>
         </template>
         <v-app-bar-title>
-            <span> <v-icon>mdi-chess-knight</v-icon> </span> {{ Auth.user?.role?.name }}
+            <div class="d-flex align-center">
+                <v-icon v-if="Auth.isDriver">mdi-chess-knight</v-icon>
+                <v-icon v-if="Auth.isPassenger">mdi-chess-pawn</v-icon>
+                <v-icon v-if="Auth.isAdmin">mdi-chess-rook</v-icon>
+                <v-icon v-if="Auth.isSuperAdmin">mdi-chess-king</v-icon>
+    
+                <span>
+                    {{ Auth.user?.role?.name }}
+                </span>
+            </div>
         </v-app-bar-title>
         <v-btn icon="mdi-logout" density="comfortable" @click="logout" color="white"></v-btn>
     </v-app-bar>

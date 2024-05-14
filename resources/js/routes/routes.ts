@@ -19,6 +19,14 @@ const routes: any[] = [
         },
       },
       {
+        path: '/car-rides/auth-user',
+        component: () => import('@/pages/general/CarRidesAuthUser.vue'),
+        name: 'car-rides-auth-user',
+        meta: {
+          title: "Qatnovlar",
+        },
+      },
+      {
         path: '/car-rides',
         component: () => import('@/pages/general/CarRides.vue'),
         name: 'car-rides',

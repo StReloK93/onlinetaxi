@@ -28,9 +28,11 @@ Route::delete('passenger-delete/{passenger}', [PassengerController::class, 'dele
 Route::apiResource('passenger', PassengerController::class)->only(['index', 'show']);
 
 Route::apiResource('car-ride', CarRideController::class)->only(['index', 'show']);
+
 Route::get('car-rides/start-region/{region_id}', [CarRideController::class, 'startRegion']);
 Route::delete('car-rides/send-road/{car_ride}', [CarRideController::class, 'sendRoad']);
 Route::get('car-rides/only-success', [CarRideController::class, 'onlySuccess']);
+
 
 Route::apiResource('region', RegionController::class);
 Route::apiResource('district', DistrictController::class);
@@ -47,7 +49,6 @@ Route::apiResource('firebase-token', FirebaseTokensController::class)->only(['st
 Route::apiResource('car-company', CarCompanyController::class)->only(['index']);
 
 Route::middleware('auth:sanctum')->group(function () {
-
     Route::apiResource('user-car', UserCarsController::class);
     Route::get('user-cars/get-only-my', [UserCarsController::class, 'getOnlyMy']);
 

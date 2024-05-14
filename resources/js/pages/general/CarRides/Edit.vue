@@ -1,5 +1,5 @@
 <template>
-	<v-dialog v-model="pageData.dialog" scrollable persistent width="600px">
+	<v-dialog v-model="pageData.dialog" scrollable width="600px">
 		<template v-slot:activator="{ props }">
 			<v-btn v-if="propsParent.smButton" v-bind="props" prepend-icon="mdi-pencil" size="x-small" variant="tonal"
 				color="white">

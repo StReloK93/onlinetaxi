@@ -4,16 +4,16 @@
 			<v-icon color="primary" size="40">mdi-vuetify</v-icon>
 			<aside>
 				<div class="font-weight-bold text-h6 tw-leading-3 mt-2 mb-1">
-					{{ auth.user?.name }}
+					{{ Auth.user?.name }}
 				</div>
 				<div class="text-caption text-blue-grey-lighten-1">
-					{{ auth.user?.phone }}
+					{{ Auth.user?.phone }}
 				</div>
 			</aside>
 		</main>
 		<v-divider></v-divider>
 		<div>
-			<v-list v-if="[1,2].includes(auth.user?.role_id)" density="compact">
+			<v-list v-if="Auth.isAnyAdmins" density="compact">
 				<v-list-item
 					prepend-icon="mdi-phone-classic"
 					title="Operatorlarga"
@@ -34,7 +34,7 @@ import { useMainStore, useAuthStore } from '@/store'
 import { useDisplay } from 'vuetify'
 const { name } = useDisplay()
 const main = useMainStore()
-const auth = useAuthStore()
+const Auth = useAuthStore()
 
 
 </script>

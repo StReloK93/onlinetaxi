@@ -54,9 +54,10 @@ class UserCarsController extends Controller
         $userCar->trunk = $request->trunk;
 
         $userCar->save();
-        $userCar->fuel;
-        $userCar->user;
-        return $userCar;
+        $car = $userCar->fresh();
+        $car->fuel;
+        $car->user;
+        return $car;
     }
 
     /**

@@ -20,26 +20,35 @@
 				label="Transport turi" item-title="name" :item-value="(item) => item.id" :rules="rules"
 				:loading="pageData.car_input_loading" />
 		</v-col>
-		<v-col sm="6" cols="12">
+		<v-col sm="6" cols="12" class="py-0">
+			<v-label class="tw-text-xs">
+				Transport raqami turini tanlang
+			</v-label>
 			<div class="d-flex justify-space-between mb-2">
-				<v-sheet @click="formData.number_variant = true" :class="{'tw-bg-pink-50 tw-border-pink-600': formData.number_variant }" :height="26" v-ripple class="tw-border rounded tw-border-gray-700 d-flex">
-					<div :class="{'tw-border-pink-600': formData.number_variant }" class="d-flex justify-space-between align-center px-2 tw-border tw-border-gray-700">
-						00
+				<v-sheet @click="formData.number_variant = true" :class="{'tw-bg-pink-50 !tw-border-pink-600': formData.number_variant }" :height="26" v-ripple class="tw-border rounded tw-border-gray-600 d-flex tw-relative">
+					<div :class="{'!tw-border-pink-600': formData.number_variant }" class="d-flex justify-center align-center tw-w-7 tw-border tw-border-gray-600">
+						<v-icon v-if="formData.number_variant" color="primary" size="small">
+							mdi-check
+						</v-icon>
 					</div>
-					<div :class="{'tw-border-pink-600': formData.number_variant }" class="d-flex justify-space-between align-center px-2 tw-border tw-border-gray-700 flex-grow-1">
-						A 000 AA 
+					<div :class="{'!tw-border-pink-600': formData.number_variant }" class="d-flex justify-space-between align-center pl-1 pr-4 tw-border tw-border-gray-600 flex-grow-1">
+						A 000 AA <img src="/iconos/uz.png" class="tw-w-3 tw-absolute tw-right-0.5 tw-top-0.5">
 					</div>
 				</v-sheet>
-				<v-sheet @click="formData.number_variant = false" :class="{'tw-bg-pink-50 tw-border-pink-600': !formData.number_variant }"  :height="26" v-ripple class="tw-border rounded tw-border-gray-700 d-flex">
-					<div :class="{'tw-border-pink-600': !formData.number_variant }" class="d-flex justify-space-between align-center px-2 tw-border tw-border-gray-700">
-						00
+				<v-sheet @click="formData.number_variant = false" :class="{'tw-bg-pink-50 !tw-border-pink-600': !formData.number_variant }"  :height="26" v-ripple class="tw-border rounded tw-border-gray-600 d-flex tw-relative">
+					<div :class="{'!tw-border-pink-600': !formData.number_variant }" class="d-flex justify-center align-center tw-w-7 tw-border tw-border-gray-600">
+						<v-icon v-if="!formData.number_variant" color="primary" size="small">
+							mdi-check
+						</v-icon>
 					</div>
-					<div :class="{'tw-border-pink-600': !formData.number_variant }" class="d-flex justify-space-between align-center px-2 tw-border tw-border-gray-700 flex-grow-1">
-						000 AAA 
+					<div :class="{'!tw-border-pink-600': !formData.number_variant }" class="d-flex justify-space-between align-center pl-1 pr-4 tw-border tw-border-gray-600 flex-grow-1">
+						000 AAA <img src="/iconos/uz.png" class="tw-w-3 tw-absolute tw-right-0.5 tw-top-0.5">
 					</div>
 				</v-sheet>
 			</div>
-			<v-text-field v-model="formData.number" v-maska:[mask] label="Transport raqami" :rules="rules" />
+		</v-col>
+		<v-col sm="6" cols="12">
+			<v-text-field v-model="formData.number" v-maska:[mask] label="Transport raqamini kiriting" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
 			<v-select :items="pageData.fuel_types" v-model="formData.fuel_type" label="Yoqilg'i turi" item-title="name"

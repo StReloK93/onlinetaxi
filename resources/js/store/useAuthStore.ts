@@ -1,10 +1,30 @@
 
 import { defineStore } from "pinia"
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import router from "@/routes"
 
 export const useAuthStore = defineStore('Auth', () => {
-	const user:any = ref(null)
+	const user: any = ref(null)
+
+	const isAnyAdmins = computed(() => {
+		return [1,2].includes(user.value?.role_id)
+	})
+
+	const isSuperAdmin = computed(() => {
+		return user.value?.role_id == 1
+	})
+
+	const isAdmin = computed(() => {
+		return user.value?.role_id == 2
+	})
+
+	const isPassenger = computed(() => {
+		return user.value?.role_id == 3
+	})
+
+	const isDriver = computed(() => {
+		return user.value?.role_id == 4
+	})
 
 	async function login(data) {
 		try {
@@ -54,5 +74,5 @@ export const useAuthStore = defineStore('Auth', () => {
 		}
 	}
 
-	return { user, getUser, login, sendSecretCode, logout, sendUserData }
+	return { user, getUser, login, sendSecretCode, logout, sendUserData, isAnyAdmins, isAdmin, isSuperAdmin, isDriver, isPassenger }
 })

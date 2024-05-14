@@ -2,7 +2,7 @@
 	<main class="d-flex tw-flex-col">
 		<Edit @update="onEdit" ref="editComponent"></Edit>
 		<main class="d-flex align-center justify-space-between mb-2 px-1">
-			<Add v-if="[1,2,3].includes(Auth.user.role_id)" @create="onCreate"></Add>
+			<Add v-if="Auth.isAnyAdmins || Auth.isPassenger" @create="onCreate"></Add>
 		</main>
 		<v-spacer>
 			<AgGridVue

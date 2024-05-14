@@ -1,5 +1,5 @@
 <template>
-	<v-dialog v-model="pageData.dialog" scrollable persistent width="600px">
+	<v-dialog v-model="pageData.dialog" scrollable width="600px">
 		<CustomForm :submit="submitFunction" title="Yo'lovchini tahrirlash" @close="pageData.dialog = false">
 			<Inputs ref="inputComponent" :freeSeat="ride.free_seat - aviable" :familyCount="pageData.passenger.count" />
 		</CustomForm>

@@ -23,6 +23,9 @@
 					<VDatePicker :trim-weeks="true" :min-date="new Date()" v-model="filter.day" mode="date" transparent borderless
 						expanded />
 				</v-col>
+				<v-col cols="12">
+					<v-switch v-model="filter.strictly_on_time" label="Qat'iy shu vaqtda" class="px-2"></v-switch>
+				</v-col>
 			</v-row>
 		</v-card>
 	</v-menu>
@@ -33,7 +36,7 @@ import moment from '@/modules/moment'
 import { reactive, computed, watch } from 'vue'
 import { useCarRide } from '@/repository/CarRide'
 const CarRide = useCarRide()
-const filter = reactive({ start_city: null, end_city: null, day: null })
+const filter = reactive({ start_city: null, end_city: null, day: null, strictly_on_time: false })
 
 const start_cities = computed(() => {
 	if (CarRide.rides == null) return []
@@ -61,6 +64,10 @@ const end_cities = computed(() => {
 })
 
 function filters(node) {
+	// console.log(node.data.strictly_on_time);
+	const strickyTime = filter.strictly_on_time ? node.data.strictly_on_time == true : true
+
+	
 	const selectedDate = filter.day == null ? null : moment(filter.day).format("YYYY-MM-DD")
 	// Start City
 	const start = [null, node.data.cities[0]?.district_id].includes(filter.start_city)
@@ -73,17 +80,18 @@ function filters(node) {
 	// Selected Date
 	const date = [moment(node.data.day).format("YYYY-MM-DD"), null].includes(selectedDate)
 
-	return start && end && date
+	return start && end && date && strickyTime
 }
 
 const filtered = computed(() => {
 	const array = Object.values(filter)
-	return array.every((item) => [null, ""].includes(item))
+	return array.every((item) => [null, "", false].includes(item))
 })
 function resetFilter() {
 	filter.start_city = null
 	filter.end_city = null
 	filter.day = null
+	filter.strictly_on_time = false
 }
 defineExpose({ filters, resetFilter, filtered })
 watch(() => filter, () => CarRide.agGrid.onFilterChanged(), { deep: true })

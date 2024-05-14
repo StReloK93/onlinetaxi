@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="pageData.dialog" scrollable persistent width="600px">
+    <v-dialog v-model="pageData.dialog" scrollable width="600px">
         <template v-slot:activator="{ props }">
             <v-btn density="compact" v-bind="props" :disabled="parentProps.disabled">
                 <v-icon>mdi-account-plus</v-icon>

@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="pageData.dialog" scrollable persistent width="600px">
+    <v-dialog v-model="pageData.dialog" scrollable width="600px">
         <template v-slot:activator="{ props }">
             <v-btn v-if="propsParent.smButton" v-bind="props" prepend-icon="mdi-pencil" size="x-small" variant="tonal"
                 color="white">
@@ -38,6 +38,7 @@ function getTransport(id) {
         const formData = inputComponent.value.formData
         formData.number = data.number
         formData.fuel_type = data.fuel_type
+        formData.number_variant = data.number_variant
         formData.car_company_id = data.car.car_company_id
         
         formData.trunk = Boolean(data.trunk)

@@ -8,7 +8,7 @@
 		<v-spacer>
 			<AgGridVue class="ag-theme-ruzzifer ag-theme-alpine h-100" :animateRows="true"
 				:defaultColDef="{ sortable: true }" :rowHeight="170" :rowClass="CarRide.rowClass"
-				:headerHeight="0" :columnDefs="columnDefs" :rowData="CarRide.rides" @grid-ready="gridReady"
+				:headerHeight="0" :columnDefs="columnDefs" :rowData="authUserCarRides" @grid-ready="gridReady"
 				:getRowId="({ data }) => data.id" :doesExternalFilterPass="(node) => filterComponent.filters(node)"
 				:isExternalFilterPresent="() => true" />
 		</v-spacer>
@@ -16,7 +16,7 @@
 </template>
 <script setup lang="ts">
 import { Add, Filters, Sorting, columnDefs, useCarRide } from './CarRides'
-import { ref, onUnmounted } from 'vue'
+import { ref, onUnmounted, computed } from 'vue'
 import { useAuthStore } from '@/store'
 const Auth = useAuthStore()
 const filterComponent = ref()
@@ -24,6 +24,7 @@ const filterComponent = ref()
 const CarRide = useCarRide()
 CarRide.index()
 
+const authUserCarRides = computed(() => CarRide.rides.filter((ride) => ride.user_id == Auth.user?.id))
 
 function gridReady(params) {
 	CarRide.agGrid = params.api

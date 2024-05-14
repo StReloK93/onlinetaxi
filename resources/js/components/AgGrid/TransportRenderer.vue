@@ -1,11 +1,11 @@
 <template>
     <section class="px-2 w-100 d-flex flex-column">
-        <aside class="d-flex justify-space-between flex-grow-1">
+        <aside class="d-flex justify-space-between flex-grow-1 pt-1">
             <main>
-                <h3 class="tw-uppercase tw-text-3xl text-primary">
+                <h3 class="tw-uppercase tw-text-3xl text-primary tw-leading-none">
                     {{ selected.car.name }}
                 </h3>
-                <div class="tw-text-sm tw-text-gray-600">
+                <div class="tw-text-sm tw-text-gray-600 tw-leading-none">
                     {{ selected.car.company.name }}
                 </div>
             </main>
