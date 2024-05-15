@@ -65,7 +65,7 @@ class UserCarsController extends Controller
      */
     public function destroy(UserCar $userCar)
     {
-        CarRide::where('user_car_id', $userCar->car_id)->delete();
+        CarRide::where('user_car_id', $userCar->id)->delete();
         return $userCar->delete();
     }
 }
