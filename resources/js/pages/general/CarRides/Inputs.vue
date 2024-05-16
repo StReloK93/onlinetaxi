@@ -56,7 +56,7 @@
 						</v-icon>
 					</template>
 				</v-text-field>
-				<v-text-field v-maska:[phoneMask] v-model="formData.phone" density="compact" :rules="rules" />
+				<v-text-field v-maska:[phoneMask] inputmode="tel" v-model="formData.phone" density="compact" :rules="rules" />
 			</main>
 			<v-text-field label="Narxi" :rules="rules" v-model.lazy="formData.price" class="mb-3" />
 			<v-text-field v-model="formData.free_seat" type="number" label="Bosh o'rindiqlar" class="mb-3" :rules="rules" />

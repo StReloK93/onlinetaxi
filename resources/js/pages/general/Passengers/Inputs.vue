@@ -9,7 +9,7 @@
 						</v-icon>
 					</template>
 				</v-text-field>
-				<v-text-field v-maska:[phoneMask] v-model="formData.phone" density="compact" :rules="rules" />
+				<v-text-field v-maska:[phoneMask] inputmode="tel" v-model="formData.phone" density="compact" :rules="rules" />
 			</main>
 		</v-col>
 		<v-col sm="6" cols="12">

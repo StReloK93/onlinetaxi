@@ -20,7 +20,7 @@
 				</v-text-field>
 			</v-col>
 			<v-col cols="8" class="px-0 py-2">
-				<v-text-field v-maska:[options] variant="filled" density="compact" :rules="rules" />
+				<v-text-field v-maska:[options] variant="filled" inputmode="tel" density="compact" :rules="rules" />
 			</v-col>
 		</main>
 		<div class="text-end mt-5">
