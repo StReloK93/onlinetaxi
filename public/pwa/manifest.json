@@ -2,7 +2,7 @@
     "start_url": "/",
     "scope": "/",
     "theme_color": "#d81b60",
-    "background_color": "#d81b60",
+    "background_color": "#ffc100",
     "display": "standalone",
     "name": "Shaharlararo online taxi",
     "short_name": "Shaharlararo online taxi",
