@@ -52,9 +52,20 @@ class Firebase
 	}
 
 
-	public function subscribeToTopic($token, $topic)
+	public function subscribeToTopic($topic , $token)
 	{
 		$this->messaging->subscribeToTopic($topic, $token);
+	}
+
+	public function unSubscribeToTopic($topic, $token)
+	{
+		$this->messaging->unsubscribeFromTopic($topic, $token);
+	}
+
+
+	public function clearAllTopics($token)
+	{
+		$this->messaging->unsubscribeFromAllTopics($token);
 	}
 }
 

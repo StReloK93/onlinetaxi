@@ -16,7 +16,7 @@
                 </span>
             </div>
         </v-app-bar-title>
-        <v-btn icon="mdi-logout" density="comfortable" @click="logout" color="white"></v-btn>
+        <!-- <v-btn icon="mdi-logout" density="comfortable" @click="logout" color="white"></v-btn> -->
     </v-app-bar>
 </template>
 
@@ -25,12 +25,4 @@ import Navigator from './Navigator.vue'
 import { useMainStore, useAuthStore } from '@/store'
 const mainStore = useMainStore()
 const Auth = useAuthStore()
-
-
-function logout() {
-    mainStore.dialog.open(() => {
-        mainStore.dialog.title = "Dasturdan chiqmoqchimisiz ?"
-        mainStore.dialog.submit = () => Auth.logout()
-    })
-}
 </script>

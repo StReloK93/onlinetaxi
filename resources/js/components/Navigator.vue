@@ -26,6 +26,14 @@
 			</v-list>
 			<v-divider class="border-opacity-50"></v-divider>
 		</div>
+
+		<template v-slot:append>
+          <div class="pa-2">
+            <v-btn @click="Auth.alertLogout" block append-icon="mdi-logout">
+              Chiqish
+            </v-btn>
+          </div>
+        </template>
 	</v-navigation-drawer>
 </template>
 
