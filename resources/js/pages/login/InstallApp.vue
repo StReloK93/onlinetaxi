@@ -11,7 +11,7 @@
                   Ilovani o'rnatish
                </v-btn>
                <v-btn v-else block append-icon="mdi-check" color="black" variant="tonal" disabled>
-                  Ilovani o'rnatilgan
+                  Ilova o'rnatilgan
                </v-btn>
             </div>
          </v-card>

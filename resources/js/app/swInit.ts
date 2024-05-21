@@ -17,8 +17,6 @@ export default async function () {
    if ("serviceWorker" in navigator) {
       const store = useAuthStore();
       await navigator.serviceWorker.register("/sw.js").then(async (sw) => {
-         console.log('good', sw);
-         
          const app = initializeApp(firebaseConfig);
          // const analytics = getAnalytics(app);
 

@@ -22,7 +22,7 @@
     <meta itemprop="url" content="https://onlinetaxi.ruzzifer.uz/install-app">
 
     <title>Shaharlararo online taxi</title>
-    <link rel="manifest" href="/pwa/manifest.json?v=1" />
+    <link rel="manifest" href="/manifest.json?v=1" />
     <link rel="shortcut icon" href="/iconos/favicon.png" type="image/x-icon">
 
     @vite(['resources/js/app/app.ts'])

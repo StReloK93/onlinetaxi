@@ -3,20 +3,7 @@
 </template>
 <script lang="ts" setup>
 import initFirebase from './swInit'
-import { onMounted, provide, ref } from 'vue'
+import { onMounted } from 'vue'
 
-const deferredPrompt = ref(null)
-provide('deferredPrompt', deferredPrompt)
-
-onMounted(async () => {
-    await initFirebase()
-
-
-    window.addEventListener('beforeinstallprompt', event => {
-    console.log('I am happy', event);
-    
-    event.preventDefault()
-    deferredPrompt.value = event
-})
-})
+onMounted(() => initFirebase())
 </script>

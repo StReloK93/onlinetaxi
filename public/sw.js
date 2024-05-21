@@ -25,7 +25,9 @@ self.addEventListener("error", function (event) {
     console.error("Ошибка сервисного работника:", event.error);
 });
 
-
+self.addEventListener('fetch', function (event) {
+    event.respondWith(fetch(event.request));
+});
 
 
 // messaging.onBackgroundMessage(function (payload) {
