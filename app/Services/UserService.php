@@ -41,9 +41,9 @@ class UserService
     public static function sendSecretCode($request)
     {
         $number = random_int(10000, 99999);
-        $message = "'Shaharlararo online taxi' Maxfiy kodni kiriting $number";
-        // $data = EskizSmsService::sendSecretCode($request->phone, $message);
-        // if ($data->status == "error") return response()->json(['message' => $data], 403);
+        $message = "'Shaharlararo online taxi' Maxfiy kodni kiriting $number https://onlinetaxi.ruzzifer.uz";
+        $data = EskizSmsService::sendSecretCode($request->phone, $message);
+        if ($data->status == "error") return response()->json(['message' => $data], 403);
 
         SMSList::create([
             'type' => 1,

@@ -14,15 +14,15 @@
     <meta property="og:title" content="Shaharlararo online taxi">
     <meta property="og:description" content="Shaharlararo online taxi dasturini yuklab oling">
     <meta property="og:image" content="https://onlinetaxi.ruzzifer.uz/images/back1.jpg">
-    <meta property="og:url" content="https://onlinetaxi.ruzzifer.uz/download">
+    <meta property="og:url" content="https://onlinetaxi.ruzzifer.uz/install-app">
 
     <meta itemprop="name" content="Shaharlararo online taxi">
     <meta itemprop="description" content="Shaharlararo online taxi dasturini yuklab oling">
     <meta itemprop="image" content="https://onlinetaxi.ruzzifer.uz/images/back1.jpg">
-    <meta itemprop="url" content="https://onlinetaxi.ruzzifer.uz/download">
+    <meta itemprop="url" content="https://onlinetaxi.ruzzifer.uz/install-app">
 
     <title>Shaharlararo online taxi</title>
-    <link rel="manifest" href="/pwa/manifest.json" />
+    <link rel="manifest" href="/pwa/manifest.json?v=1" />
     <link rel="shortcut icon" href="/iconos/favicon.png" type="image/x-icon">
 
     @vite(['resources/js/app/app.ts'])

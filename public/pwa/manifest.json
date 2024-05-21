@@ -2,46 +2,43 @@
     "start_url": "/",
     "scope": "/",
     "theme_color": "#d81b60",
-    "background_color": "#ffffff",
+    "background_color": "#dfdfdf",
     "display": "standalone",
-    "name": "Shaharlararo online taxi",
-    "short_name": "Shaharlararo  taxi",
+    "name": "Shaharlararo Online taxi",
+    "short_name": "Online taxi",
     "description": "Shaharlar bo'yicha qulaylashtirilgan online taxi xizmati",
     "icons": [
         {
-            "src": "./icon-72x72.png",
+            "src": "./maskable_icon_x48.png",
+            "sizes": "48x48",
+            "type": "image/png"
+        },
+        {
+            "src": "./maskable_icon_x72.png",
             "sizes": "72x72",
             "type": "image/png"
         },
         {
-            "src": "./icon-96x96.png",
+            "src": "./maskable_icon_x96.png",
             "sizes": "96x96",
             "type": "image/png"
         },
         {
-            "src": "./icon-128x128.png",
+            "src": "./maskable_icon_x128.png",
             "sizes": "128x128",
             "type": "image/png"
         },
         {
-            "src": "./icon-144x144.png",
-            "sizes": "144x144",
-            "type": "image/png"
-        },
-        {
-            "src": "./icon-192x192.png",
+            "src": "./maskable_icon_x192.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
-            "src": "./icon-256x256.png",
-            "sizes": "256x256",
-            "type": "image/png"
-        },
-        {
-            "src": "./icon-512x512.png",
+            "src": "./maskable_icon_x512.png",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "maskable"
         }
     ]
 }
