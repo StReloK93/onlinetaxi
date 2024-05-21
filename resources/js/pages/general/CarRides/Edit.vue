@@ -9,7 +9,12 @@
 		</template>
 		<CustomForm :submit="submitFunction" @vue:mounted="getCarRide(propsParent.id)" title="Qatnovni tahrirlash"
 			@close="pageData.dialog = false">
-			<Inputs ref="inputComponent" :edit="true" :date="propsParent.date" />
+
+			<v-overlay v-model="pageData.overlay" contained persistent class="align-center justify-center">
+				<v-progress-circular color="primary" indeterminate :size="68"></v-progress-circular>
+			</v-overlay>
+			
+			<Inputs ref="inputComponent" />
 		</CustomForm>
 	</v-dialog>
 </template>
@@ -21,13 +26,16 @@ import { moneyConfig } from '@/modules/constants'
 import { ICarRide } from '@/app/interfaces'
 import { useCarRide } from '@/repository/CarRide'
 const CarRide = useCarRide()
-
 const inputComponent = ref()
-const propsParent = defineProps(['date', 'id', 'smButton'])
+const propsParent = defineProps(['id', 'smButton'])
+
+
+
 
 const pageData = reactive({
 	dialog: false,
-	car_ride: null
+	car_ride: null,
+	overlay: true
 })
 
 async function submitFunction() {
@@ -38,12 +46,12 @@ async function submitFunction() {
 			CarRide.update(data)
 			pageData.dialog = false
 		}
-	)
-
+		)
 }
 
 
 function getCarRide(id) {
+	pageData.overlay = true
 	axios.get<ICarRide>(`car-ride/${id}`).then(async ({ data }) => {
 		pageData.car_ride = data
 
@@ -56,13 +64,13 @@ function getCarRide(id) {
 		formData.address_to_address = data.address_to_address
 		formData.free_seat = data.free_seat
 		formData.ends = []
-		
+
 		await Promise.all(data.cities.map(async (city, index) => {
 			formData.ends.push({ region: null, city: null, loading: false, districts: [] })
 			await inputComponent.value.regionChanged(city.district.region_id, index)
 			formData.ends[index].region = city.district.region_id
 			formData.ends[index].city = city.district_id
-			inputComponent.value.clearOverlay()
+			pageData.overlay = false
 		}));
 	})
 }

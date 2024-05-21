@@ -42,8 +42,8 @@ class UserService
     {
         $number = random_int(10000, 99999);
         $message = "'Shaharlararo online taxi' Maxfiy kodni kiriting $number";
-        $data = EskizSmsService::sendSecretCode($request->phone, $message);
-        if ($data->status == "error") return response()->json(['message' => $data], 403);
+        // $data = EskizSmsService::sendSecretCode($request->phone, $message);
+        // if ($data->status == "error") return response()->json(['message' => $data], 403);
 
         SMSList::create([
             'type' => 1,

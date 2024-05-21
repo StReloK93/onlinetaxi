@@ -1,6 +1,6 @@
 <template>
 	<main class="d-flex tw-flex-col">
-		<Add v-if="[1,2,4].includes(Auth.user.role_id)" @create="(Transport) => transport.agGrid.applyTransaction({ add: [Transport], addIndex: 0 })"></Add>
+		<Add v-if="Auth.isAnyAdmins || Auth.isDriver" @create="(Transport) => transport.agGrid.applyTransaction({ add: [Transport], addIndex: 0 })"></Add>
 		<v-spacer>
 			<AgGridVue class="ag-theme-ruzzifer ag-theme-alpine h-100"
 				:rowHeight="125" :rowClass="rowClass"
@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { useTransport } from '@/repository/Transports'
 import { Add, columnDefs } from './Transports'
-import { useAuthStore } from '@/store'
+import { useAuthStore } from '@/store/useAuthStore'
 import { ref } from 'vue'
 const Auth = useAuthStore()
 const transport = useTransport()

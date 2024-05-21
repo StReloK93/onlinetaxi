@@ -1,6 +1,6 @@
 import { vuetify, App, CustomForm, AgGridVue, VCalendar, money } from '@/modules'
 import { createApp } from 'vue'
-import { useAuthStore } from '@/store'
+import { useAuthStore } from '@/store/useAuthStore'
 import { createPinia } from 'pinia'
 import router from '@/routes'
 import { vMaska } from "maska"

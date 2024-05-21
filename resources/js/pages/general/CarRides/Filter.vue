@@ -94,5 +94,5 @@ function resetFilter() {
 	filter.strictly_on_time = false
 }
 defineExpose({ filters, resetFilter, filtered })
-watch(() => filter, () => CarRide.agGrid.onFilterChanged(), { deep: true })
+watch(() => filter, () => CarRide.agGrid?.onFilterChanged(), { deep: true })
 </script>

@@ -22,7 +22,8 @@
 
 <script setup lang="ts">
 import Navigator from './Navigator.vue'
-import { useMainStore, useAuthStore } from '@/store'
+import { useAuthStore } from '@/store/useAuthStore'
+import { useMainStore } from '@/store/useMainStore'
 const mainStore = useMainStore()
 const Auth = useAuthStore()
 </script>

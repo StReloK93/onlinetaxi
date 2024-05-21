@@ -70,6 +70,11 @@ const routes: any[] = [
     }
   },
   {
+    path: '/install-app',
+    name: 'install-app',
+    component: () => import('@/pages/login/InstallApp.vue'),
+  },
+  {
     path: '/login',
     name: 'login',
     redirect: {

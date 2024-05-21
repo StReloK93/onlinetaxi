@@ -1,7 +1,7 @@
 <template>
    <v-dialog v-model="props.dialog" scrollable persistent width="850px">
       <v-card @vue:unmounted="ride = null" class="tw-relative">
-         <v-card-title>{{ ride?.car.type }} - {{ ride?.car.number }}</v-card-title>
+         <v-card-title>{{ ride?.car.number }}</v-card-title>
          <v-card-text class="px-4 py-3 d-flex flex-column" style="height: 400px">
             <main class="d-flex justify-space-between tw-relative">
                <div class="tw-border-b tw-absolute tw-w-full tw-z-0 tw-bottom-[9px] tw-border-dashed tw-border-gray-400">
@@ -119,7 +119,7 @@
 <script setup lang="ts">
 import { reactive, ref, Ref, computed } from 'vue'
 import { ICarRide } from '@/app/interfaces'
-import { useMainStore } from '@/store'
+import { useMainStore } from '@/store/useMainStore'
 import { moment } from '@/modules'
 import AddPassenger from './Passenger/Add.vue'
 import EditPassenger from './Passenger/Edit.vue'

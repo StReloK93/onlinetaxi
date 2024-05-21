@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { Add, Filters, Sorting, columnDefs, useCarRide } from './CarRides'
 import { ref, onUnmounted } from 'vue'
-import { useAuthStore } from '@/store'
+import { useAuthStore } from '@/store/useAuthStore'
 const Auth = useAuthStore()
 const filterComponent = ref()
 

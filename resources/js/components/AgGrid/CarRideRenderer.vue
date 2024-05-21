@@ -1,16 +1,14 @@
 <template>
 	<section class="w-100 d-flex flex-column">
 		<main class="pa-2 tw-h-16 d-flex flex-column justify-space-between tw-relative">
-			<v-btn icon="mdi-chevron-down" variant="text" class="tw-absolute tw-top-[26px] -tw-left-[10px]" >
-
-			</v-btn>
+			<v-icon class="tw-absolute tw-top-[38px] tw-left-[3.5px]" color="primary" >mdi-chevron-down</v-icon>
 			<div
-				class="tw-absolute tw-h-3/5 tw-border-l-2 tw-border-pink-500 tw-border-dotted tw-top-[10.5px] tw-left-[13px]">
+				class="tw-absolute tw-h-2/4 tw-border-l-2 border-primary tw-border-dotted tw-top-[15px] tw-left-[13px]">
 			</div>
 			<template v-for="(item, index) in carRide.cities">
 				<aside v-if="firstOrLast(index)" class="tw-leading-none d-flex align-center">
-					<v-icon class="mr-2 tw-text-xs bg-white" :class="{'tw-opacity-0': index == carRide.cities.length - 1 }" color="pink">
-						mdi-circle-outline
+					<v-icon class="mr-2 tw-text-xs" :class="{'tw-opacity-0': index == carRide.cities.length - 1 }" color="primary">
+						mdi-circle-medium
 					</v-icon>
 					<span class="tw-font-bold">
 						{{ item.district.name }}
@@ -32,13 +30,13 @@
 								{{ carRide.user_car.number }}
 							</span>
 						</div>
-						<div v-if="Auth.user.role == 3" class="tw-text-gray-500">
+						<div v-if="Auth.isPassenger" class="tw-text-gray-500">
 							<a :href="`tel:${carRide.phone}`">{{ carRide.phone }}</a>
 						</div>
 					</main>
 					<main class="d-flex flex-column align-end">
 						<div class="text-right tw-leading-none">
-							<v-icon v-for="n in carRide.free_seat" color="pink">
+							<v-icon v-for="n in carRide.free_seat" color="primary">
 								mdi-account-settings
 							</v-icon>
 						</div>
@@ -64,7 +62,7 @@
 				<div class="d-flex align-end">
 					<div :class="{'-tw-translate-x-24': Auth.isAnyAdmins}"
 						class="tw-leading-none"
-						v-if="Auth.isAnyAdmins || Auth.user.id == carRide.user_id"
+						v-if="Auth.isAnyAdmins || Auth.user?.id == carRide.user_id"
 						>
 						<v-btn v-if="Auth.isAnyAdmins" tag="a" :href="`tel:+998${carRide.phone}`" size="x-small" variant="plain" color="teal" icon="mdi-phone"></v-btn>
 						<Edit :date="true" :id="carRide.id"></Edit>
@@ -81,7 +79,8 @@
 
 <script setup lang="ts">
 import { Edit } from '@/pages/general/CarRides'
-import { useMainStore, useAuthStore } from '@/store'
+import { useAuthStore } from '@/store/useAuthStore'
+import { useMainStore } from '@/store/useMainStore'
 import { format } from 'v-money3'
 import { moneyConfig } from '@/modules/constants'
 import moment from '@/modules/moment'

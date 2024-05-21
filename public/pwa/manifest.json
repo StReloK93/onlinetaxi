@@ -2,10 +2,10 @@
     "start_url": "/",
     "scope": "/",
     "theme_color": "#d81b60",
-    "background_color": "#ffc100",
+    "background_color": "#ffffff",
     "display": "standalone",
     "name": "Shaharlararo online taxi",
-    "short_name": "Shaharlararo online taxi",
+    "short_name": "Shaharlararo  taxi",
     "description": "Shaharlar bo'yicha qulaylashtirilgan online taxi xizmati",
     "icons": [
         {

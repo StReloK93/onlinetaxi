@@ -27,7 +27,7 @@ import { ColDef, GridApi } from 'ag-grid-community'
 import { IPassenger } from '@/app/interfaces'
 import { reactive, ref } from 'vue'
 const editComponent = ref()
-import { useAuthStore } from '@/store'
+import { useAuthStore } from '@/store/useAuthStore'
 const Auth = useAuthStore()
 interface PageData {
 	passengers: IPassenger[],

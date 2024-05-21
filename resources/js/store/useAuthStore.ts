@@ -1,29 +1,49 @@
 import { defineStore } from "pinia"
-import { ref, computed } from "vue"
+import { ref, computed, Ref } from "vue"
 import router from "@/routes"
-import { useMainStore } from "./useMainStore"
 export const useAuthStore = defineStore("Auth", () => {
-   const user: any = ref(null);
+   const user: Ref = ref(null);
 
    // getters
    const isAnyAdmins = computed(() => {
-      return [1, 2].includes(user.value?.role_id);
+      if (user.value == null) return false
+      
+      return [1, 2].includes(user.value.role_id);
    });
 
    const isSuperAdmin = computed(() => {
-      return user.value?.role_id == 1;
+      if (user.value == null) return false
+
+      return [1].includes(user.value.role_id);
    });
 
    const isAdmin = computed(() => {
-      return user.value?.role_id == 2;
+      if (user.value == null) return false
+
+      return [2].includes(user.value.role_id);
    });
 
    const isPassenger = computed(() => {
-      return user.value?.role_id == 3;
+      if (user.value == null) return false
+
+      return [3].includes(user.value.role_id);
    });
 
+   const isPassengerAdmins = computed(() => {
+      if (user.value == null) return false
+
+      return [1,2,3].includes(user.value.role_id);
+   });
    const isDriver = computed(() => {
-      return user.value?.role_id == 4;
+      if (user.value == null) return false
+
+      return [4].includes(user.value.role_id);
+   });
+
+   const isDriverAdmins = computed(() => {
+      if (user.value == null) return false
+
+      return [1,2,4].includes(user.value.role_id);
    });
 
    // Actions
@@ -31,28 +51,21 @@ export const useAuthStore = defineStore("Auth", () => {
    async function login(data) {
       try {
          const result = await axios.post("login", data);
-         localStorage.setItem(
-            "token",
-            `${result.data.type} ${result.data.token}`
-         ); // local
+         localStorage.setItem("token",`${result.data.type} ${result.data.token}`)
          await getUser();
          router.push({ name: "main" });
-      } catch (error) {
-         return error;
-      }
+      } catch (error) { return error }
    }
 
    async function sendUserData(formData) {
       const { data } = await axios.post("set-user-data", formData);
       user.value = data;
-      router.push({ name: "main" });
+      router.push({ name: "main" })
    }
 
    async function getUser() {
-      axios.defaults.headers.common["Authorization"] =
-         localStorage.getItem("token");
-      await axios
-         .get("user")
+      axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
+      await axios.get("user")
          .then(({ data }) => (user.value = data))
          .catch(() => console.clear());
    }
@@ -73,21 +86,14 @@ export const useAuthStore = defineStore("Auth", () => {
       const data = await axios.get("logout");
 
       if (data.status == 200) {
-         axios.defaults.headers.common["Authorization"] = null;
-         localStorage.removeItem("token");
-         user.value = null;
-         router.push({ name: "login" });
+         axios.defaults.headers.common["Authorization"] = null
+         localStorage.removeItem("token")
+         user.value = null
+         router.push({ name: "login" })
       }
    }
 
-	function alertLogout() {
-   	const main = useMainStore()
-		
-      main.dialog.open(() => {
-         main.dialog.title = "Dasturdan chiqmoqchimisiz ?"
-         main.dialog.submit = () => logout()
-      })
-   }
+
 
    return {
       user,
@@ -96,10 +102,11 @@ export const useAuthStore = defineStore("Auth", () => {
       sendSecretCode,
       logout,
 		sendUserData,
-		alertLogout,
       isAnyAdmins,
       isAdmin,
       isSuperAdmin,
+      isPassengerAdmins,
+      isDriverAdmins,
       isDriver,
       isPassenger,
    };

@@ -63,7 +63,8 @@
 <script setup lang="ts">
 import { rules } from '@/modules/constants'
 import { computed, reactive, ref } from 'vue'
-
+const emit = defineEmits(['onReady', 'onStart'])
+emit('onStart')
 
 
 const mask = computed(() => {
@@ -115,6 +116,7 @@ axios.all([axios.get('fuel_type'), axios.get('car-company')])
 	.then(axios.spread(({ data: fuel_types }, { data: car_company }) => {
 		pageData.fuel_types = fuel_types
 		pageData.car_company = car_company
+		emit('onReady')
 	}))
 
 defineExpose({ formData, carMarkChanged })

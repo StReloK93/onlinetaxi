@@ -1,7 +1,7 @@
 <template>
 	<v-form @submit.prevent="signin">
-		<div class="text-center py-4 mb-2 -tw-m-3 tw-rounded tw-bg-pink-200/40">
-			<img src="/iconos/map.svg"  width="100" class="d-inline">
+		<div class="text-center py-4 mb-2 -tw-m-3 tw-rounded tw-bg-yellow-200/40">
+			<img src="/iconos/logo.png"  width="100" class="d-inline">
 			<!-- <h3 class="tw-text-xl mt-2 tw-font-semibold tw-uppercase">Shaharlararo online taxi</h3> -->
 		</div>
 		<v-col class="pa-0">

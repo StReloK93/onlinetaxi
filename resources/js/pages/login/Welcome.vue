@@ -3,7 +3,7 @@
 		<v-container class="tw-flex tw-h-full tw-justify-center tw-items-center">
 			<v-card width="500">
 				<div class="text-center py-4">
-					<img src="/iconos/map.svg" width="100" class="d-inline">
+					<img src="/iconos/logo.png" width="100" class="d-inline">
 				</div>
 				<h3 class="text-h4 text-center">
 					Xush kelibsiz
@@ -18,20 +18,20 @@
 								<v-text-field v-model="formData.name" label="F.I.SH" variant="filled" :rules="rules" />
 							</v-col>
 							<v-col cols="6" class="py-0 pr-1">
-								<v-btn tag="label" :color="formData.role == 4 ? 'default' : 'primary'" for="passengerRadio"
-									variant="tonal" class="w-100">
-									<span>Yo'lovchi</span>
-									<v-icon end>
-										mdi-account
-									</v-icon>
-								</v-btn>
-							</v-col>
-							<v-col cols="6" class="py-0 pl-1">
 								<v-btn tag="label" :color="formData.role == 3 ? 'default' : 'primary'" for="TaxiRadio"
 									variant="tonal" class="w-100">
 									<span>Haydovchi</span>
 									<v-icon end>
 										mdi-taxi
+									</v-icon>
+								</v-btn>
+							</v-col>
+							<v-col cols="6" class="py-0 pl-1">
+								<v-btn tag="label" :color="formData.role == 4 ? 'default' : 'primary'" for="passengerRadio"
+									variant="tonal" class="w-100">
+									<span>Yo'lovchi</span>
+									<v-icon end>
+										mdi-account
 									</v-icon>
 								</v-btn>
 							</v-col>
@@ -58,19 +58,19 @@
 <script setup lang="ts">
 import { rules } from '@/modules/constants'
 import { reactive } from 'vue'
-import { useAuthStore } from '@/store'
+import { useAuthStore } from '@/store/useAuthStore'
 const authStore = useAuthStore()
 const formData = reactive({
-	role: 3,
+	role: 4,
 	name: null,
 })
 
 async function submit(event) {
 	const form = await event.then()
-	
-	if (form.valid) {
-		authStore.sendUserData(formData)
-	}
+	if (form.valid == false) return 
 
+
+
+	authStore.sendUserData(formData)
 }
 </script>

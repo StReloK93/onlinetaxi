@@ -14,35 +14,63 @@
 		<v-divider></v-divider>
 		<div>
 			<v-list v-if="Auth.isAnyAdmins" density="compact">
-				<v-list-item
-					prepend-icon="mdi-phone-classic"
-					title="Operatorlarga"
-					:class="{ 'text-primary v-list-item--active': $route.name == 'operator' }"
-					color="primary"
-					:to="{ name: 'operator', params: { id: 1 } }"
-				/>
+				<v-list-item prepend-icon="mdi-phone-classic" title="Operatorlarga"
+					:class="{ 'text-primary v-list-item--active': $route.name == 'operator' }" color="primary"
+					:to="{ name: 'operator', params: { id: 1 } }" />
 				<v-list-item prepend-icon="mdi-car-settings" title="Junatilgan transportlar" color="primary"
 					:to="{ name: 'send-roads' }" />
 			</v-list>
 			<v-divider class="border-opacity-50"></v-divider>
+			<div class="pa-2">
+				<v-btn v-if="deferredPrompt" @click="installApp" block append-icon="mdi-download" variant="tonal">
+					Ilovani o'rnatish
+				</v-btn>
+			</div>
 		</div>
 
 		<template v-slot:append>
-          <div class="pa-2">
-            <v-btn @click="Auth.alertLogout" block append-icon="mdi-logout">
-              Chiqish
-            </v-btn>
-          </div>
-        </template>
+			<div class="pa-2">
+				<v-btn @click="alertLogout" block append-icon="mdi-logout">
+					Chiqish
+				</v-btn>
+			</div>
+		</template>
 	</v-navigation-drawer>
 </template>
 
 <script setup lang="ts">
-import { useMainStore, useAuthStore } from '@/store'
+import { useAuthStore } from '@/store/useAuthStore'
+import { useMainStore } from '@/store/useMainStore'
 import { useDisplay } from 'vuetify'
+import { onMounted, ref , inject } from 'vue'
 const { name } = useDisplay()
 const main = useMainStore()
 const Auth = useAuthStore()
 
+const deferredPrompt:any = inject('deferredPrompt')
+
+function alertLogout() {
+	const main = useMainStore()
+
+	main.dialog.open(() => {
+		main.dialog.title = "Dasturdan chiqmoqchimisiz ?"
+		main.dialog.submit = () => Auth.logout()
+	})
+}
+
+function installApp() {
+	if (deferredPrompt) {
+		deferredPrompt.value.prompt()
+		deferredPrompt.value.userChoice
+			.then(choiceResult => {
+				if (choiceResult.outcome === 'accepted') {
+					console.log('user accepted A2HS prompt')
+				} else {
+					console.log('user dismissed A2HS prompt')
+				}
+				deferredPrompt.value = null
+			})
+	}
+}
 
 </script>

@@ -36,7 +36,7 @@
 import Timer from '@/modules/timer'
 import { ref } from 'vue'
 import { vMaska } from "maska"
-import { useAuthStore } from '@/store'
+import { useAuthStore } from '@/store/useAuthStore'
 const authStore = useAuthStore()
 const errors = ref(null)
 const timer = new Timer(300)

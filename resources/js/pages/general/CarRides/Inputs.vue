@@ -1,8 +1,5 @@
 <template>
 	<v-row>
-		<v-overlay v-if="edit" v-model="pageData.overlay" contained persistent class="align-center justify-center">
-			<v-progress-circular color="primary" indeterminate :size="68"></v-progress-circular>
-		</v-overlay>
 		<template v-for="(city, index) in formData.ends">
 			<v-col v-if="index == 0" cols="12" class="py-1">
 				<v-label class="text-subtitle-1 mr-1">
@@ -38,7 +35,7 @@
 			</div>
 		</template>
 		<v-divider class="border-opacity-75"></v-divider>
-		<v-col v-if="date" sm="6" cols="12">
+		<v-col sm="6" cols="12">
 			<VDatePicker :trim-weeks="true" color="pink" :min-date="new Date()" v-model.string="formData.day"
 				:masks="{ modelValue: 'YYYY-MM-DD HH:mm' }" mode="dateTime" is24hr transparent borderless expanded
 				hide-time-header is-required />
@@ -69,8 +66,9 @@
 
 <script setup lang="ts">
 import { moneyConfig, rules, phoneMask } from '@/modules/constants'
-import { reactive, ref } from 'vue'
-const { edit, date } = defineProps(['edit', 'date'])
+import { reactive } from 'vue'
+const emit = defineEmits(['onReady', 'onStart'])
+emit('onStart')
 const formData = reactive({
 	user_car_id: null,
 	phone: null,
@@ -91,8 +89,6 @@ const pageData = reactive({
 	regions: [],
 })
 
-
-
 function removeCity(index) {
 	formData.ends.splice(index, 1);
 }
@@ -112,19 +108,14 @@ async function regionChanged(id, index) {
 	})
 }
 
-
-
-function clearOverlay() {
-	pageData.overlay = false
-}
-
 axios.all([axios.get('user-cars/get-only-my'), axios.get('region')])
 	.then(axios.spread(({ data: cars }, { data: regions }) => {
 		pageData.cars = cars
 		pageData.regions = regions
+		emit('onReady')
 	}))
 
-defineExpose({ regionChanged, formData, clearOverlay })
+defineExpose({ regionChanged, formData })
 
 // function addCity() {
 // 	if (formData.ends.length == 4) return

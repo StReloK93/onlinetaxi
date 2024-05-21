@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 import axios from "axios";
-import { useAuthStore } from "@/store";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const firebaseConfig = {
    apiKey: "AIzaSyACb7ABfs-jY6GdnwxKaGv2wObCdh0h-K8",
@@ -34,9 +34,7 @@ export default function () {
             device: null,
          });
       });
-
-      let deferredPrompt;
-
+      
    }
 }
 

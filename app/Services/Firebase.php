@@ -36,7 +36,7 @@ class Firebase
 	}
 
 
-	public function sendTopic($topic, $notification, $url)
+	public function sendToTopic($topic, $notification, $url)
 	{
 		$message = CloudMessage::withTarget('topic', $topic)
 			->withNotification(Notification::create(...$notification))->withData(['url' => $url]);

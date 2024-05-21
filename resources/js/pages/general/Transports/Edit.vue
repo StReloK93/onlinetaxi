@@ -9,6 +9,9 @@
         </template>
         <CustomForm :submit="submitFunction" title="Transportni tahrirlash" @vue:mounted="getTransport(propsParent.id)"
             @close="pageData.dialog = false">
+            <v-overlay v-model="pageData.overlay" contained persistent class="align-center justify-center">
+                <v-progress-circular color="primary" indeterminate :size="68"></v-progress-circular>
+            </v-overlay>
             <Inputs ref="inputComponent" />
         </CustomForm>
     </v-dialog>
@@ -23,6 +26,7 @@ const propsParent = defineProps(['smButton', 'id'])
 const emit = defineEmits(['update'])
 const pageData = reactive({
     dialog: false,
+    overlay: false,
 })
 
 async function submitFunction() {
@@ -34,6 +38,7 @@ async function submitFunction() {
 
 
 function getTransport(id) {
+    pageData.overlay = true
     axios.get(`user-car/${id}`).then(({ data }) => {
         const formData = inputComponent.value.formData
         formData.number = data.number
@@ -45,6 +50,7 @@ function getTransport(id) {
         
         inputComponent.value.carMarkChanged(formData.car_company_id).then(() => {
             formData.car_id = data.car_id
+            pageData.overlay = false
         })
         
     })

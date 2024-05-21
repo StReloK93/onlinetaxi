@@ -42,7 +42,7 @@ Route::apiResource('fuel_type', FuelTypeController::class)->only(['index']);
 Route::apiResource('users', UserController::class)->only(['index']);
 
 
-Route::get('sendNotification', [NotificationController::class, 'sendNotification']);
+Route::get('sendToTopic', [NotificationController::class, 'sendToTopic']);
 
 Route::apiResource('firebase-token', FirebaseTokensController::class)->only(['store']);
 
