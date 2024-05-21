@@ -8,10 +8,12 @@ import { onMounted, provide, ref } from 'vue'
 const deferredPrompt = ref(null)
 provide('deferredPrompt', deferredPrompt)
 window.addEventListener('beforeinstallprompt', event => {
-    console.log('I am happy');
+    console.log('I am happy', event);
     
     event.preventDefault()
     deferredPrompt.value = event
 })
-onMounted(() => initFirebase())
+onMounted(async () => {
+    await initFirebase()
+})
 </script>

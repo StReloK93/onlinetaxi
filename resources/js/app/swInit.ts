@@ -13,10 +13,12 @@ const firebaseConfig = {
    appId: "1:190163892674:web:e5e1ddd4499c7e6a9e7e5b",
    measurementId: "G-XJ1F3GVPR9",
 };
-export default function () {
+export default async function () {
    if ("serviceWorker" in navigator) {
       const store = useAuthStore();
-      navigator.serviceWorker.register("/sw.js").then(async (sw) => {
+      await navigator.serviceWorker.register("/sw.js").then(async (sw) => {
+         console.log('good', sw);
+         
          const app = initializeApp(firebaseConfig);
          // const analytics = getAnalytics(app);
 
