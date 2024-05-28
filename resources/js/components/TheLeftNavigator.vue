@@ -42,7 +42,7 @@
 import { useAuthStore } from '@/store/useAuthStore'
 import { useMainStore } from '@/store/useMainStore'
 import { useDisplay } from 'vuetify'
-import { onMounted, ref , inject } from 'vue'
+import { inject } from 'vue'
 const { name } = useDisplay()
 const main = useMainStore()
 const Auth = useAuthStore()

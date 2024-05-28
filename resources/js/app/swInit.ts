@@ -21,20 +21,25 @@ export default async function () {
          // const analytics = getAnalytics(app);
 
          const messaging = getMessaging(app);
-         const token = await getToken(messaging, {
+         store.user.token = await getToken(messaging, {
             serviceWorkerRegistration: sw,
          });
          //@ts-ignore
          messaging.onMessageHandler = function (event) {
-            console.log(event);
+            var options = {
+               body: "In brauzer",
+               // icon: icon,
+            };
+            new Notification('Hello web developer', options);
          };
+
+
          axios.post("firebase-token", {
             user_id: store.user?.id,
-            token,
+            token: store.user.token,
             device: null,
          });
       });
-      
    }
 }
 

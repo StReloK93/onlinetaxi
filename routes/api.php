@@ -59,5 +59,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'getUser']);
     Route::get('/logout', [AuthController::class, 'logoutUser']);
 
+
+    Route::post('firebase/get-city-topic', [FirebaseTokensController::class, 'getCityTopic']);
+    Route::post('firebase/set-city-topic', [FirebaseTokensController::class, 'setCityTopic']);
+    
 });
 

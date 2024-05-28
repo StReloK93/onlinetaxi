@@ -10,6 +10,7 @@
             Bizning dastur orqali boshqa shaharga yo'lga chiqayotgan transportlarni tezda topsangiz bo'ladi">
     <meta name="keywords" content="Online taxi, shaharlararo taxi, Shaxarlararo taxi, Yo'l yo'lakay taxi xizmat">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#f1c800">
 
     <meta property="og:title" content="Shaharlararo online taxi">
     <meta property="og:description" content="Shaharlararo online taxi dasturini yuklab oling">
@@ -22,8 +23,8 @@
     <meta itemprop="url" content="https://onlinetaxi.ruzzifer.uz/install-app">
 
     <title>Shaharlararo online taxi</title>
-    <link rel="manifest" href="/manifest.json?v=1" />
-    <link rel="shortcut icon" href="/iconos/favicon.png" type="image/x-icon">
+    <link rel="manifest" href="/manifest.json?v=2" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     @vite(['resources/js/app/app.ts'])
 </head>
