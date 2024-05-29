@@ -4,7 +4,7 @@
          <v-btn @click="bottomSheet = true" :text="city?.name" append-icon="mdi-map-marker" :loading="pageData.loading"></v-btn>
       </div>
       <v-bottom-sheet v-model="bottomSheet" inset>
-         <CustomForm :submit="updateTopic" title="Manzilni o'zgartirish" @close="bottomSheet = false" @vue:mounted="formMounted">
+         <BaseForm :loading="pageData.overlay" :submit="updateTopic" title="Manzilni o'zgartirish" @close="bottomSheet = false" @vue:mounted="formMounted">
             <p>
                Quyida ko'rsatgan manzilingizga qarab yo'lovchilar haqida sizga habarnoma junatamiz.
             </p>
@@ -18,7 +18,7 @@
                   v-model="formData.city_id" label="Shahar (Tuman)" item-title="name" :loading="pageData.city_loading"
                   :item-value="(item: any) => item.id" :rules="rules" />
             </v-col>
-         </CustomForm>
+         </BaseForm>
       </v-bottom-sheet>
    </v-app-bar>
 </template>
@@ -34,6 +34,7 @@ const bottomSheet = ref(false)
 
 
 const pageData = reactive({
+   overlay: false,
    loading: true,
    city_loading: false,
    regions: [],
@@ -60,6 +61,7 @@ async function regionChanged(id) {
 }
 
 async function formMounted() {
+   pageData.overlay = true
    formData.city_id = null
    pageData.region_id = null
    const { data: regions } = await axios.get('region')
@@ -67,6 +69,7 @@ async function formMounted() {
 
    regionChanged(city.value.region_id)
    formData.city_id = city.value.id
+   pageData.overlay = false
 }
 
 async function updateTopic() {

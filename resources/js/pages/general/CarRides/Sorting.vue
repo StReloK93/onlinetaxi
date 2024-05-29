@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { useCarRide } from '@/repository/CarRide'
+import { useCarRide } from '@/store/CarRide'
 const CarRide = useCarRide()
 
 let index = 0

@@ -18,7 +18,7 @@
 					:class="{ 'text-primary v-list-item--active': $route.name == 'operator' }" color="primary"
 					:to="{ name: 'operator', params: { id: 1 } }" />
 				<v-list-item prepend-icon="mdi-car-settings" title="Junatilgan transportlar" color="primary"
-					:to="{ name: 'send-roads' }" />
+					:to="{ name: 'car-ride-inactive' }" />
 			</v-list>
 			<v-divider class="border-opacity-50"></v-divider>
 			<div class="pa-2">

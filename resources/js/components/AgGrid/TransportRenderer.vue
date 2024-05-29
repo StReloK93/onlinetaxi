@@ -24,7 +24,7 @@
 import { ITransport } from '@/app/interfaces'
 import { useMainStore } from '@/store/useMainStore'
 import Edit from '@/pages/general/Transports/Edit.vue'
-import { useTransport } from '@/repository/Transports'
+import { useTransport } from '@/store/Transports'
 
 const tranportStore = useTransport()
 const props = defineProps(['params'])

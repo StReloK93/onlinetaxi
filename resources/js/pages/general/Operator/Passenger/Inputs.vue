@@ -1,20 +1,5 @@
 <template>
 	<v-row>
-		<v-col sm="6" cols="12">
-			<v-text-field v-model="formData.name" :step="900" label="F.I.SH" :rules="rules" />
-		</v-col>
-		<v-col sm="6" cols="12">
-			<main class="d-flex w-100">
-				<v-text-field class="pr-2 flex-0-0" readonly density="compact" value="+998" disabled>
-					<template v-slot:prepend-inner>
-						<v-icon>
-							<img src="/iconos/uz.png">
-						</v-icon>
-					</template>
-				</v-text-field>
-				<v-text-field v-maska:[phoneMask] v-model="formData.phone" density="compact" :rules="rules" />
-			</main>
-		</v-col>
 		<v-col cols="12" class="py-0 text-center">
 			<v-label class="text-caption ">
 				Boriladigan manzil (Qaerga?)
@@ -29,6 +14,18 @@
 			<v-autocomplete :disabled="formData.end_region == null" :items="pageData.end_districts"
 				v-model="formData.end_city" label="Shahar (Tuman)" item-title="name" :item-value="(item) => item.id"
 				:loading="pageData.end_loading" :rules="rules" />
+		</v-col>
+		<v-col sm="6" cols="12">
+			<main class="d-flex w-100">
+				<v-text-field class="pr-2 flex-0-0" readonly density="compact" value="+998" disabled>
+					<template v-slot:prepend-inner>
+						<v-icon>
+							<img src="/iconos/uz.png">
+						</v-icon>
+					</template>
+				</v-text-field>
+				<v-text-field v-maska:[phoneMask] v-model="formData.phone" density="compact" :rules="rules" />
+			</main>
 		</v-col>
 		<v-col sm="6" cols="12">
 			<v-text-field v-model="formData.address" :step="900" label="Manzil" :rules="rules" />
@@ -57,7 +54,6 @@ const propsParent = defineProps({
 })
 const formData: IPassenger = reactive({
 	car_ride_id: null,
-	name: null,
 	phone: null,
 	loading: null,
 	address: null,

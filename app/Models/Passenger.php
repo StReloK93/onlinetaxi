@@ -16,7 +16,6 @@ class Passenger extends Model
 
 
     protected $fillable = [
-        'name',
         'user_id',
         'car_ride_id',
         'address',

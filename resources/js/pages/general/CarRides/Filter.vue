@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import moment from '@/modules/moment'
 import { reactive, computed, watch } from 'vue'
-import { useCarRide } from '@/repository/CarRide'
+import { useCarRide } from '@/store/CarRide'
 const CarRide = useCarRide()
 const filter = reactive({ start_city: null, end_city: null, day: null, strictly_on_time: false })
 

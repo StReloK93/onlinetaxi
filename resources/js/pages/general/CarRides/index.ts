@@ -5,7 +5,7 @@ import Sorting from './Sorting.vue'
 import { ColDef } from 'ag-grid-community'
 import type { ICarRide } from '@/app/interfaces'
 import CarRideRenderer from '@/components/AgGrid/CarRideRenderer.vue'
-import { useCarRide } from '@/repository/CarRide'
+import { useCarRide } from '@/store/CarRide'
 const columnDefs: ColDef<ICarRide>[] = [
    {
       cellRenderer: CarRideRenderer,

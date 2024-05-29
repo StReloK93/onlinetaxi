@@ -112,7 +112,7 @@ async function carMarkChanged(company_id) {
 	pageData.car_input_loading = false
 }
 
-axios.all([axios.get('fuel_type'), axios.get('car-company')])
+axios.all([axios.get('fuel-type'), axios.get('car-company')])
 	.then(axios.spread(({ data: fuel_types }, { data: car_company }) => {
 		pageData.fuel_types = fuel_types
 		pageData.car_company = car_company

@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTransport } from '@/repository/Transports'
+import { useTransport } from '@/store/Transports'
 import { Add, columnDefs } from './Transports'
 import { useAuthStore } from '@/store/useAuthStore'
 import { ref } from 'vue'

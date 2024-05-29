@@ -79,7 +79,6 @@ export interface CarRideCity{
 export interface IPassenger{
     id?: number,
     car_ride_id: number | null,
-    name: string,
     loading: boolean,
     phone: string,
     address: string,

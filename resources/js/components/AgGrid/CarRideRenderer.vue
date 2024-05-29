@@ -85,7 +85,7 @@ import { format } from 'v-money3'
 import { moneyConfig } from '@/modules/constants'
 import moment from '@/modules/moment'
 import { ICarRide } from '@/app/interfaces'
-import { useCarRide } from '@/repository/CarRide'
+import { useCarRide } from '@/store/CarRide'
 const CarRide = useCarRide()
 const props = defineProps(['params'])
 const carRide = props.params.data as ICarRide

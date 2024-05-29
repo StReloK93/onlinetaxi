@@ -12,10 +12,14 @@ class CarRideController extends Controller
 {
     public function index()
     {
+        return CarRide::all();
+    }
+
+    public function onlyActive(){
         return CarRide::whereState(1)->get();
     }
 
-    public function onlySuccess()
+    public function onlyPassive()
     {
         return CarRide::whereState(2)->get();
     }
@@ -98,7 +102,7 @@ class CarRideController extends Controller
         return $carRide->fresh();
     }
 
-    public function sendRoad(CarRide $carRide)
+    public function setInactive(CarRide $carRide)
     {
         $carRide->state = 2;
         $carRide->save();

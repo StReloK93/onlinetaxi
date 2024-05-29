@@ -7,15 +7,10 @@
 			</v-btn>
 			<v-btn v-else size="x-small" v-bind="props" variant="plain" icon="mdi-pencil" />
 		</template>
-		<CustomForm :submit="submitFunction" @vue:mounted="getCarRide(propsParent.id)" title="Qatnovni tahrirlash"
-			@close="pageData.dialog = false">
-
-			<v-overlay v-model="pageData.overlay" contained persistent class="align-center justify-center">
-				<v-progress-circular color="primary" indeterminate :size="68"></v-progress-circular>
-			</v-overlay>
-			
+		<BaseForm :loading="pageData.overlay" :submit="submitFunction" @vue:mounted="getCarRide(propsParent.id)"
+			title="Qatnovni tahrirlash" @close="pageData.dialog = false">
 			<Inputs ref="inputComponent" />
-		</CustomForm>
+		</BaseForm>
 	</v-dialog>
 </template>
 <script setup lang="ts">
@@ -23,8 +18,8 @@ import { reactive, ref } from 'vue'
 import Inputs from './Inputs.vue'
 import { unformat } from 'v-money3'
 import { moneyConfig } from '@/modules/constants'
-import { ICarRide } from '@/app/interfaces'
-import { useCarRide } from '@/repository/CarRide'
+import { useCarRide } from '@/store/CarRide'
+import { CarRideRepository } from '@/repository'
 const CarRide = useCarRide()
 const inputComponent = ref()
 const propsParent = defineProps(['id', 'smButton'])
@@ -41,37 +36,36 @@ const pageData = reactive({
 async function submitFunction() {
 	const formData = inputComponent.value.formData
 	formData.price = unformat(formData.price, moneyConfig)
-	await axios.put(`car-ride/${pageData.car_ride.id}`, formData)
-		.then(async ({ data }) => {
-			CarRide.update(data)
-			pageData.dialog = false
-		}
-		)
+
+	await CarRide.update(pageData.car_ride.id, formData)
+	pageData.dialog = false
 }
 
 
-function getCarRide(id) {
+async function getCarRide(id) {
 	pageData.overlay = true
-	axios.get<ICarRide>(`car-ride/${id}`).then(async ({ data }) => {
-		pageData.car_ride = data
+	const ride = await CarRideRepository.show(id)
 
-		const formData = inputComponent.value.formData
-		formData.user_car_id = data.user_car_id
-		formData.phone = data.phone
-		formData.day = data.day
-		formData.strictly_on_time = data.strictly_on_time
-		formData.price = data.price
-		formData.address_to_address = data.address_to_address
-		formData.free_seat = data.free_seat
-		formData.ends = []
 
-		await Promise.all(data.cities.map(async (city, index) => {
-			formData.ends.push({ region: null, city: null, loading: false, districts: [] })
-			await inputComponent.value.regionChanged(city.district.region_id, index)
-			formData.ends[index].region = city.district.region_id
-			formData.ends[index].city = city.district_id
-			pageData.overlay = false
-		}));
-	})
+	pageData.car_ride = ride
+
+	const formData = inputComponent.value.formData
+	formData.user_car_id = ride.user_car_id
+	formData.phone = ride.phone
+	formData.day = ride.day
+	formData.strictly_on_time = ride.strictly_on_time
+	formData.price = ride.price
+	formData.address_to_address = ride.address_to_address
+	formData.free_seat = ride.free_seat
+	formData.ends = []
+
+	await Promise.all(ride.cities.map(async (city, index) => {
+		formData.ends.push({ region: null, city: null, loading: false, districts: [] })
+		await inputComponent.value.regionChanged(city.district.region_id, index)
+		formData.ends[index].region = city.district.region_id
+		formData.ends[index].city = city.district_id
+		pageData.overlay = false
+	}));
+
 }
 </script>

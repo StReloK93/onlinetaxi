@@ -5,9 +5,9 @@
                 <v-icon>mdi-account-plus</v-icon>
             </v-btn>
         </template>
-        <CustomForm :submit="submitFunction" title="Yo'lovchi kiritish" @close="pageData.dialog = false" >
+        <BaseForm :submit="submitFunction" title="Yo'lovchi kiritish" @close="pageData.dialog = false" >
             <Inputs ref="inputComponent" :freeSeat="free_seat" />
-        </CustomForm>
+        </BaseForm>
     </v-dialog>
 </template>
 
@@ -29,7 +29,7 @@ async function submitFunction() {
     formData.start_city = parentProps.ride.cities[0].district_id
     formData.car_ride_id = parentProps.ride.id
 
-    await axios.post<IPassenger>('passenger-operator', formData).then(({ data }) => {
+    await axios.post<IPassenger>('passenger/operator', formData).then(({ data }) => {
         emit('create', data)
     })
 }

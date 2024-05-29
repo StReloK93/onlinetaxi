@@ -14,50 +14,32 @@ const routes: any[] = [
         path: '/passengers',
         component: () => import('@/pages/general/Passengers.vue'),
         name: 'passengers',
-        meta: {
-          title: "Yo'lovchilar",
-        },
       },
       {
-        path: '/car-rides/auth-user',
+        path: '/car-ride/auth-user',
         component: () => import('@/pages/general/CarRidesAuthUser.vue'),
         name: 'car-rides-auth-user',
-        meta: {
-          title: "Qatnovlar",
-        },
       },
       {
-        path: '/car-rides',
+        path: '/car-ride',
         component: () => import('@/pages/general/CarRides.vue'),
         name: 'car-rides',
-        meta: {
-          title: "Qatnovlar",
-        },
       },
       {
-        path: '/send-roads',
-        component: () => import('@/pages/general/SendRoads.vue'),
-        name: 'send-roads',
-        meta: {
-          title: "Junatilgan transportlar",
-        },
+        path: '/car-ride/inactive',
+        component: () => import('@/pages/general/CarRidesInactive.vue'),
+        name: 'car-ride-inactive',
       },
       {
         path: '/transports',
         component: () => import('@/pages/general/Transports.vue'),
         name: 'transports',
-        meta: {
-          title: "Transportlar",
-        },
       },
       {
         path: '/operator/:id',
         component: () => import('@/pages/general/Operator.vue'),
         name: 'operator',
         props: true,
-        meta: {
-          title: "Operatorlarga",
-        },
       },
     ],
   },

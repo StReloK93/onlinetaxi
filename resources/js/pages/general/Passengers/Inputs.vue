@@ -1,20 +1,6 @@
 <template>
 	<v-row>
-		<v-col sm="6" cols="12">
-			<main class="d-flex w-100 mb-3">
-				<v-text-field class="pr-2 flex-0-0" readonly density="compact" value="+998" disabled>
-					<template v-slot:prepend-inner>
-						<v-icon>
-							<img src="/iconos/uz.png">
-						</v-icon>
-					</template>
-				</v-text-field>
-				<v-text-field v-maska:[phoneMask] inputmode="tel" v-model="formData.phone" density="compact" :rules="rules" />
-			</main>
-		</v-col>
-		<v-col sm="6" cols="12">
-			<v-text-field v-model="formData.name" :step="900" label="F.I.SH" :rules="rules" />
-		</v-col>
+
 		<v-col cols="12" class="py-0 text-center">
 			<v-label class="text-caption">
 				Boshlangich manzil (Qaerdan?)
@@ -47,6 +33,19 @@
 				:loading="pageData.end_loading" :rules="rules" />
 		</v-col>
 		<v-divider class="border-opacity-75"></v-divider>
+
+		<v-col sm="6" cols="12">
+			<main class="d-flex w-100 mb-3">
+				<v-text-field class="pr-2 flex-0-0" readonly density="compact" value="+998" disabled>
+					<template v-slot:prepend-inner>
+						<v-icon>
+							<img src="/iconos/uz.png">
+						</v-icon>
+					</template>
+				</v-text-field>
+				<v-text-field v-maska:[phoneMask] inputmode="tel" v-model="formData.phone" density="compact" :rules="rules" />
+			</main>
+		</v-col>
 		<v-col sm="6" cols="12">
 			<v-text-field v-model="formData.address" :step="900" label="Yo'lovchining manzili" :rules="rules" />
 		</v-col>
@@ -67,10 +66,12 @@
 import { IPassenger } from '@/app/interfaces'
 import { rules , phoneMask} from '@/modules/constants'
 import { reactive } from 'vue'
+const emit = defineEmits(['onReady', 'onStart'])
+emit('onStart')
+
 
 const formData: IPassenger = reactive({
 	car_ride_id: null,
-	name: null,
 	loading: null,
 	phone: null,
 	address: null,
@@ -101,6 +102,9 @@ async function regionChanged(id, way) {
 	})
 }
 
-axios.get('region').then(({ data: regions }) => pageData.regions = regions)
+axios.get('region').then(({ data: regions }) => {
+	pageData.regions = regions
+	emit('onReady')
+})
 defineExpose({ regionChanged, formData })
 </script>

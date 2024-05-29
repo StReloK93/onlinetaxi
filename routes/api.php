@@ -21,25 +21,36 @@ Route::post('/sendSecretCode', [AuthController::class, 'sendSecretCode']);
 Route::apiResource('post', PostController::class);
 
 
-Route::post('passenger-operator', [PassengerController::class, 'storeOperator']);
-Route::apiResource('car', CarController::class)->only(['show']);
 
-Route::delete('passenger-delete/{passenger}', [PassengerController::class, 'delete']);
+
+
+
+
+
+
+
 Route::apiResource('passenger', PassengerController::class)->only(['index', 'show']);
+
+
+Route::prefix('car-ride')->group(function () {
+    Route::get('only-passive', [CarRideController::class, 'onlyPassive']);
+    Route::get('only-active', [CarRideController::class, 'onlyActive']);
+    Route::get('start-region/{region_id}', [CarRideController::class, 'startRegion']);
+    Route::delete('set-inactive/{car_ride}', [CarRideController::class, 'setInactive']);
+});
 
 Route::apiResource('car-ride', CarRideController::class)->only(['index', 'show']);
 
-Route::get('car-rides/start-region/{region_id}', [CarRideController::class, 'startRegion']);
-Route::delete('car-rides/send-road/{car_ride}', [CarRideController::class, 'sendRoad']);
-Route::get('car-rides/only-success', [CarRideController::class, 'onlySuccess']);
 
 
+
+Route::apiResource('car', CarController::class)->only(['show']);
 Route::apiResource('region', RegionController::class);
 Route::apiResource('district', DistrictController::class);
-
-Route::apiResource('fuel_type', FuelTypeController::class)->only(['index']);
-
+Route::apiResource('fuel-type', FuelTypeController::class)->only(['index']);
 Route::apiResource('users', UserController::class)->only(['index']);
+
+
 
 
 Route::get('sendToTopic', [NotificationController::class, 'sendToTopic']);
@@ -48,12 +59,28 @@ Route::apiResource('firebase-token', FirebaseTokensController::class)->only(['st
 
 Route::apiResource('car-company', CarCompanyController::class)->only(['index']);
 
+
+
+
+
+
+
+
+
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('user-car', UserCarsController::class);
     Route::get('user-cars/get-only-my', [UserCarsController::class, 'getOnlyMy']);
 
     Route::apiResource('car-ride', CarRideController::class)->except(['index', 'show']);
+
+
+    Route::prefix('passenger')->group(function () {
+        Route::post('operator', [PassengerController::class, 'storeOperator']);
+        Route::delete('{passenger}/delete', [PassengerController::class, 'delete']);
+    });
     Route::apiResource('passenger', PassengerController::class)->except(['index', 'show']);
+
 
     Route::post('/set-user-data', [AuthController::class, 'setUserData']);
     Route::get('/user', [AuthController::class, 'getUser']);

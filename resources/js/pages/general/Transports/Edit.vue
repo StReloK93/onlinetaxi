@@ -7,17 +7,14 @@
             </v-btn>
             <v-btn v-else size="small" v-bind="props" variant="plain" icon="mdi-pencil" />
         </template>
-        <CustomForm :submit="submitFunction" title="Transportni tahrirlash" @vue:mounted="getTransport(propsParent.id)"
+        <BaseForm :loading="pageData.overlay" :submit="submitFunction" title="Transportni tahrirlash" @vue:mounted="getTransport(propsParent.id)"
             @close="pageData.dialog = false">
-            <v-overlay v-model="pageData.overlay" contained persistent class="align-center justify-center">
-                <v-progress-circular color="primary" indeterminate :size="68"></v-progress-circular>
-            </v-overlay>
             <Inputs ref="inputComponent" />
-        </CustomForm>
+        </BaseForm>
     </v-dialog>
 </template>
 <script setup lang="ts">
-import { useTransport } from '@/repository/Transports'
+import { useTransport } from '@/store/Transports'
 import { reactive, ref } from 'vue'
 import Inputs from './Inputs.vue'
 const transport = useTransport()

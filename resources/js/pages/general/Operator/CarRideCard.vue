@@ -2,7 +2,7 @@
    <v-sheet tag="button" elevation="1" color="pink"
       class="d-flex w-100 justify-space-between tw-flex-wrap px-2 tw-py-1 rounded mb-1 tw-cursor-pointer" v-ripple>
       <aside class="w-50 tw-text-left">
-         {{ props.ride.car.type }}
+         {{ props.ride.user_car?.car.name }}
       </aside>
       <div class="w-50 tw-text-right tw-font-bold text-pink-lighten-5">
          {{ props.ride.price }} so'm
@@ -23,6 +23,5 @@
 import { computed } from 'vue'
 import Edit from '@/pages/general/CarRides/Edit.vue'
 const props = defineProps(['ride'])
-
 const aviablePassengersCount = computed(() => props.ride.passengers.reduce((acc, pass) => acc += pass.count, 0))
 </script>

@@ -3,9 +3,9 @@
 		<template v-slot:activator="{ props }">
 			<v-btn color="primary" v-bind="props" icon="mdi-plus" class="add-button" />
 		</template>
-		<CustomForm :submit="submitFunction" title="Yo'lovchi kiritish" @close="pageData.dialog = false">
-			<Inputs ref="inputComponent" />
-		</CustomForm>
+		<BaseForm :loading="pageData.loading" :submit="submitFunction" title="Yo'lovchi kiritish" @close="pageData.dialog = false">
+			<Inputs @on-start="pageData.loading = true" @on-ready="pageData.loading = false" ref="inputComponent" />
+		</BaseForm>
 	</v-dialog>
 </template>
 
@@ -15,7 +15,7 @@ import Inputs from './Inputs.vue'
 import { IPassenger } from '@/app/interfaces'
 const emit = defineEmits(['create'])
 const inputComponent = ref()
-const pageData = reactive({ dialog: false })
+const pageData = reactive({ dialog: false, loading: false })
 async function submitFunction() {
 	const formData: IPassenger = inputComponent.value.formData
 

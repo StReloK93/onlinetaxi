@@ -58,7 +58,7 @@ import { replace } from '@/modules/constants'
 import CarRideModal from '@/pages/general/Operator/CarRideModal.vue'
 import CarRideCard from '@/pages/general/Operator/CarRideCard.vue'
 import Add from '@/pages/general/CarRides/Add.vue'
-import { useCarRide } from '@/repository/CarRide'
+import { useCarRide } from '@/store/CarRide'
 const CarRide = useCarRide()
 
 const rideModal = ref()

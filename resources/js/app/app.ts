@@ -1,4 +1,4 @@
-import { vuetify, App, CustomForm, AgGridVue, VCalendar, money } from '@/modules'
+import { vuetify, App, BaseForm, AgGridVue, VCalendar, money } from '@/modules'
 import { createApp, ref } from 'vue'
 import { useAuthStore } from '@/store/useAuthStore'
 import { createPinia } from 'pinia'
@@ -18,7 +18,7 @@ async function init() {
 		.provide('deferredPrompt', deferredPrompt)
 		.directive('Maska', vMaska)
 		.component('AgGridVue', AgGridVue)
-		.component('CustomForm', CustomForm)
+		.component('BaseForm', BaseForm)
 		.use(vuetify)
 		.use(pinia)
 		.use(VCalendar, {})

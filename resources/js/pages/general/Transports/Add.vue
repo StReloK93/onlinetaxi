@@ -3,12 +3,9 @@
         <template v-slot:activator="{ props }">
             <v-btn color="primary" v-bind="props" icon="mdi-plus" class="add-button" />
         </template>
-        <CustomForm :submit="submitFunction" title="Transport kiritish" @close="pageData.dialog = false">
-            <v-overlay v-model="pageData.overlay" contained persistent class="align-center justify-center">
-                <v-progress-circular color="primary" indeterminate :size="68"></v-progress-circular>
-            </v-overlay>
+        <BaseForm :loading="pageData.overlay" :submit="submitFunction" title="Transport kiritish" @close="pageData.dialog = false">
             <Inputs @onStart="pageData.overlay = true" @onReady="pageData.overlay = false" ref="inputComponent" />
-        </CustomForm>
+        </BaseForm>
     </v-dialog>
 </template>
 

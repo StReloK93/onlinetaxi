@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('car_ride_id')->nullable();
-            $table->string('name');
             $table->string('phone');
             $table->string('address')->nullable();
             $table->integer('start_city');

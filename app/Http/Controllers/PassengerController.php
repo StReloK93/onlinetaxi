@@ -16,7 +16,6 @@ class PassengerController extends Controller
     {
         $passenger = new Passenger();
         $passenger->user_id = Auth::user()->id;
-        $passenger->name = $request->name;
         $passenger->phone = $request->phone;
         $passenger->count = $request->count;
         $passenger->address = $request->address;
@@ -33,7 +32,7 @@ class PassengerController extends Controller
     public function storeOperator(Request $request)
     {
         $passenger = new Passenger();
-        $passenger->name = $request->name;
+        $passenger->user_id = Auth::user()->id;
         $passenger->phone = $request->phone;
         $passenger->count = $request->count;
         $passenger->address = $request->address;
@@ -45,9 +44,7 @@ class PassengerController extends Controller
         $passenger->save();
         return $passenger->fresh();
     }
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Passenger $passenger)
     {
         return $passenger;
@@ -68,9 +65,6 @@ class PassengerController extends Controller
         return $passenger->fresh();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Passenger $passenger)
     {
         $passenger->state = 0;

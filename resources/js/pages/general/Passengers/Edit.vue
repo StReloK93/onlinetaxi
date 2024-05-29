@@ -1,8 +1,8 @@
 <template>
 	<v-dialog v-model="pageData.dialog" scrollable persistent width="600px">
-		<CustomForm :submit="submitFunction" title="Yo'lovchini tahrirlash" @close="pageData.dialog = false">
+		<BaseForm :loading="pageData.loading" :submit="submitFunction" title="Yo'lovchini tahrirlash" @close="pageData.dialog = false">
 			<Inputs ref="inputComponent" />
-		</CustomForm>
+		</BaseForm>
 	</v-dialog>
 </template>
 <script setup lang="ts">
@@ -16,10 +16,12 @@ const emit = defineEmits(['update'])
 interface PageData {
 	dialog: boolean,
 	passenger: IPassenger,
+	loading: Boolean,
 }
 const pageData: PageData = reactive({
 	dialog: false,
-	passenger: null
+	passenger: null,
+	loading: false,
 })
 
 async function submitFunction() {
@@ -32,9 +34,9 @@ async function submitFunction() {
 
 
 function getData(id) {
-	axios.get<IPassenger>(`passenger/${id}`).then(({ data }) => {
+	pageData.loading = true
+	axios.get<IPassenger>(`passenger/${id}`).then(async ({ data }) => {
 		const formData: IPassenger = inputComponent.value.formData
-		formData.name = data.name
 		formData.phone = data.phone
 		formData.address = data.address
 		formData.start_region = data.start.region_id
@@ -42,10 +44,12 @@ function getData(id) {
 		formData.ride_time = data.ride_time
 		formData.with_trunk = Boolean(data.with_trunk)
 
-		inputComponent.value.regionChanged(formData.start_region, 'start')
+		await inputComponent.value.regionChanged(formData.start_region, 'start')
 			.then(() => formData.start_city = data.start_city)
-		inputComponent.value.regionChanged(formData.end_region, 'end')
+		await inputComponent.value.regionChanged(formData.end_region, 'end')
 			.then(() => formData.end_city = data.end_city)
+
+			pageData.loading = false
 	})
 }
 

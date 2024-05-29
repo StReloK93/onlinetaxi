@@ -1,8 +1,8 @@
 <template>
 	<v-dialog v-model="pageData.dialog" scrollable width="600px">
-		<CustomForm :submit="submitFunction" title="Yo'lovchini tahrirlash" @close="pageData.dialog = false">
+		<BaseForm :submit="submitFunction" title="Yo'lovchini tahrirlash" @close="pageData.dialog = false">
 			<Inputs ref="inputComponent" :freeSeat="ride.free_seat - aviable" :familyCount="pageData.passenger.count" />
-		</CustomForm>
+		</BaseForm>
 	</v-dialog>
 </template>
 <script setup lang="ts">
@@ -38,7 +38,6 @@ async function submitFunction() {
 function getData(id) {
 	axios.get<IPassenger>(`passenger/${id}`).then(({ data }) => {
 		const formData: IPassenger = inputComponent.value.formData
-		formData.name = data.name
 		formData.phone = data.phone
 		formData.address = data.address
 		formData.count = data.count

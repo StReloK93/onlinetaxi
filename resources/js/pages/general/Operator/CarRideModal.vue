@@ -1,7 +1,7 @@
 <template>
    <v-dialog v-model="props.dialog" scrollable persistent width="850px">
       <v-card @vue:unmounted="ride = null" class="tw-relative">
-         <v-card-title>{{ ride?.car.number }}</v-card-title>
+         <v-card-title>{{ ride?.user_car.number }}</v-card-title>
          <v-card-text class="px-4 py-3 d-flex flex-column" style="height: 400px">
             <main class="d-flex justify-space-between tw-relative">
                <div class="tw-border-b tw-absolute tw-w-full tw-z-0 tw-bottom-[9px] tw-border-dashed tw-border-gray-400">
@@ -25,9 +25,6 @@
                <table class="w-100 tw-border-collapse tw-text-sm">
                   <tr>
                      <td class="tw-border tw-p-1 tw-bg-gray-100">
-                        F.I.SH
-                     </td>
-                     <td class="tw-border tw-p-1 tw-bg-gray-100">
                         Telefon
                      </td>
                      <td class="tw-border tw-p-1 tw-bg-gray-100">
@@ -44,9 +41,6 @@
                      </td>
                   </tr>
                   <tr v-for="passenger in ride.passengers">
-                     <td class="tw-border px-1" :style="`height: ${passenger.count * 42}px;`">
-                        {{ passenger.name }}
-                     </td>
                      <td class="tw-border px-1" >
                         {{ passenger.phone }}
                         <input v-maska:[phoneMask] v-model="passenger.phone" hidden>
@@ -82,7 +76,6 @@
                      <td class="tw-border"></td>
                      <td class="tw-border"></td>
                      <td class="tw-border"></td>
-                     <td class="tw-border"></td>
                   </tr>
                   <tr v-else>
                      <td class="tw-border tw-h-[42px]" colspan="6">
@@ -104,7 +97,7 @@
                <input type="text" class="tw-w-[144px]" v-maska:[phoneMask] v-model="ride.phone" disabled hidden> {{
                   ride.phone }}
             </v-btn>
-            <v-btn @click="SendRoad" :loading="loading" prepend-icon="mdi-car-arrow-right" color="primary" type="submit" class="ml-4" variant="tonal">
+            <v-btn @click="setInactive" :loading="loading" prepend-icon="mdi-car-arrow-right" color="primary" type="submit" class="ml-4" variant="tonal">
                Junatish
             </v-btn>
             <v-spacer></v-spacer>
@@ -124,7 +117,8 @@ import { moment } from '@/modules'
 import AddPassenger from './Passenger/Add.vue'
 import EditPassenger from './Passenger/Edit.vue'
 import { phoneMask } from '@/modules/constants'
-import { useCarRide } from '@/repository/CarRide'
+import { useCarRide } from '@/store/CarRide'
+
 
 
 const loading = ref(false)
@@ -162,7 +156,7 @@ async function deletePassenger(id) {
 
          const selected = ride.value.passengers.find((passenger) => passenger.id == id)
          selected.loading = true
-         await axios.delete(`passenger-delete/${id}`).then(() => {
+         await axios.delete(`passenger/${id}/delete`).then(() => {
             ride.value.passengers = ride.value.passengers.filter((passenger) => passenger.id != id)
             CarRide.deletedPassenger(selected)
          }).catch(() => selected.loading = false)
@@ -172,12 +166,12 @@ async function deletePassenger(id) {
 
 }
 
-function SendRoad() {
+function setInactive() {
    mainStore.dialog.open(() => {
       mainStore.dialog.title = "Haydovchi qatnovga junatildimi ?"
       mainStore.dialog.submit = async () => {
          loading.value = true
-         await CarRide.sendRoad(ride.value)
+         await CarRide.setInactive(ride.value)
          loading.value = false
          props.dialog = false
       }

@@ -2,7 +2,7 @@ import vuetify from '@/modules/vuetify'
 import Echo from '@/modules/echo'
 import axios from '@/modules/axios'
 import App from '@/app/app.vue'
-import CustomForm from '@/components/Form.vue'
+import BaseForm from '@/components/BaseForm.vue'
 import { AgGridVue } from "ag-grid-vue3"
 import VCalendar from 'v-calendar'
 import money from 'v-money3'
@@ -18,4 +18,4 @@ window.moment = moment
 window.axios = axios
 
 
-export { vuetify, Echo, axios, App, CustomForm, AgGridVue, VCalendar, money, moment, timer }
+export { vuetify, Echo, axios, App, BaseForm, AgGridVue, VCalendar, money, moment, timer }

@@ -24,7 +24,8 @@ import Add from '@/pages/general/Passengers/Add.vue'
 import Edit from '@/pages/general/Passengers/Edit.vue'
 import { ColDef, GridApi } from 'ag-grid-community'
 import { ICarRide } from '@/app/interfaces'
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted } from 'vue'
+import { CarRideRepository } from '@/repository'
 const editComponent = ref()
 
 interface PageData {
@@ -56,6 +57,7 @@ function onEdit(Transport) {
 	rowNode.setData(Transport)
 }
 
-axios.get<ICarRide[]>('car-rides/only-success')
-	.then(({ data }) => pageData.car_rides = data)
+onMounted(async () => {
+	pageData.car_rides = await CarRideRepository.getOnlyInActive()
+})
 </script>
