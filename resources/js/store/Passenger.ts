@@ -4,6 +4,8 @@ import { IPassenger } from "@/app/interfaces"
 export const usePassenger = defineStore('usePassenger', () => {
 
 
+	
+
 
 	return {  }
 })

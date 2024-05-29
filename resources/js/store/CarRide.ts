@@ -8,7 +8,6 @@ import { CarRideRepository } from "@/repository";
 export const useCarRide = defineStore("useCarRide", () => {
    const agGrid: Ref<GridApi<ICarRide>> = ref(null);
    const agColumnApi: Ref<ColumnApi> = ref(null);
-   const agRowHeight = ref(null);
    const rides = ref([]);
    const districts = ref([]);
    const rowClass = ref([
@@ -121,7 +120,6 @@ export const useCarRide = defineStore("useCarRide", () => {
    function clear() {
       agGrid.value = null;
       agColumnApi.value = null;
-      agRowHeight.value = null;
       rides.value = [];
       districts.value = [];
       rowClass.value = [];
@@ -131,7 +129,6 @@ export const useCarRide = defineStore("useCarRide", () => {
       agGrid,
       agColumnApi,
       rides,
-      agRowHeight,
       rowClass,
       districts,
       groupRides,

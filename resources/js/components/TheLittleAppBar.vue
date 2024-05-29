@@ -1,11 +1,14 @@
 <template>
    <v-app-bar density="compact" :elevation="0" :border="1">
       <div class="text-right w-100 px-2">
-         <v-btn @click="bottomSheet = true" :text="city?.name" append-icon="mdi-map-marker" :loading="pageData.loading"></v-btn>
+         <v-btn @click="bottomSheet = true" :text="stringButton" append-icon="mdi-map-marker"
+            :loading="pageData.loading"></v-btn>
       </div>
       <v-bottom-sheet v-model="bottomSheet" inset>
-         <BaseForm :loading="pageData.overlay" :submit="updateTopic" title="Manzilni o'zgartirish" @close="bottomSheet = false" @vue:mounted="formMounted">
-            <p>
+         <BaseForm :loading="pageData.overlay" :submit="updateTopic" title="Manzilni o'zgartirish"
+            @close="bottomSheet = false" @vue:mounted="formMounted">
+            <p class="text-caption">
+               <v-icon color="primary">mdi-bell-outline</v-icon>
                Quyida ko'rsatgan manzilingizga qarab yo'lovchilar haqida sizga habarnoma junatamiz.
             </p>
             <v-col cols="12" class="px-0">
@@ -14,7 +17,7 @@
                   :rules="rules" />
             </v-col>
             <v-col cols="12" class="px-0">
-               <v-autocomplete :disabled="city?.region_id == null" :items="pageData.region_districts"
+               <v-autocomplete :disabled="pageData.region_id == null" :items="pageData.region_districts"
                   v-model="formData.city_id" label="Shahar (Tuman)" item-title="name" :loading="pageData.city_loading"
                   :item-value="(item: any) => item.id" :rules="rules" />
             </v-col>
@@ -24,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive, computed } from 'vue'
 import { rules } from '@/modules/constants';
 import { useAuthStore } from '@/store/useAuthStore'
 const Auth = useAuthStore()
@@ -32,6 +35,7 @@ const Auth = useAuthStore()
 const city = ref(null)
 const bottomSheet = ref(false)
 
+const stringButton = computed(() => city.value?.name ? city.value?.name : 'Tanlang')
 
 const pageData = reactive({
    overlay: false,
@@ -53,7 +57,7 @@ async function regionChanged(id) {
    pageData.region_id = id
    pageData.region_districts = []
    pageData.city_loading = true
-   formData.city_id= null
+   formData.city_id = null
    await axios.get(`district/${id}`).then(({ data }) => {
       pageData.region_districts = data
       pageData.city_loading = false

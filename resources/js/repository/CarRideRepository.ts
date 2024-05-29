@@ -1,6 +1,6 @@
 import Client from "./Clients/AxiosClient";
-const resource = "car-ride";
 import { ICarRide } from '@/app/interfaces'
+const resource = "car-ride";
 
 
 export async function getOnlyActive() {

@@ -36,9 +36,10 @@
 					</main>
 					<main class="d-flex flex-column align-end">
 						<div class="text-right tw-leading-none">
-							<v-icon v-for="n in carRide.free_seat" color="primary">
-								mdi-account-settings
-							</v-icon>
+							<span v-for="(n,index) in carRide.free_seat">
+								<v-icon v-if="index < aviablePassengersCount" size="small" color="primary">mdi-account</v-icon>
+								<v-icon v-else size="small" color="grey-lighten-1">mdi-account</v-icon>
+							</span>
 						</div>
 					</main>
 				</div>
@@ -86,6 +87,7 @@ import { moneyConfig } from '@/modules/constants'
 import moment from '@/modules/moment'
 import { ICarRide } from '@/app/interfaces'
 import { useCarRide } from '@/store/CarRide'
+import { computed } from 'vue'
 const CarRide = useCarRide()
 const props = defineProps(['params'])
 const carRide = props.params.data as ICarRide
@@ -93,6 +95,7 @@ const carRide = props.params.data as ICarRide
 const store = useMainStore()
 const Auth = useAuthStore()
 
+const aviablePassengersCount = computed(() => carRide.passengers.reduce((acc, pass) => acc += pass.count, 0))
 const firstOrLast = (index) => {
 	return [0, carRide.cities.length - 1].includes(index) == true
 }
