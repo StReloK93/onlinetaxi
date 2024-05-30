@@ -10,21 +10,17 @@ export const useCarRide = defineStore("useCarRide", () => {
    const agColumnApi: Ref<ColumnApi> = ref(null);
    const rides = ref([]);
    const districts = ref([]);
-   const rowClass = ref([
-      "car-ride-height",
-      "tw-shadow",
-      "tw-border-l-2",
-      "tw-border-pink-500",
-      "bg-white",
-      "tw-rounded-r",
-      "overflow-hidden",
-   ]);
+   
 
-   async function index() {
+   async function getOnlyActive() {
       rides.value = await CarRideRepository.getOnlyActive();
+	}
+	
+	async function getOnlyInactive() {
+      rides.value = await CarRideRepository.getOnlyInactive();
    }
 
-   async function indexCity(region_id) {
+   async function getRidesByRegion(region_id) {
       const result = await CarRideRepository.getRidesByRegion(region_id);
       rides.value = result.rides;
       districts.value = result.districts;
@@ -122,22 +118,21 @@ export const useCarRide = defineStore("useCarRide", () => {
       agColumnApi.value = null;
       rides.value = [];
       districts.value = [];
-      rowClass.value = [];
    }
 
    return {
       agGrid,
       agColumnApi,
       rides,
-      rowClass,
       districts,
       groupRides,
       setInactive,
       store,
       update,
       destroy,
-      index,
-      indexCity,
+		getOnlyActive,
+		getOnlyInactive,
+      getRidesByRegion,
       createPassenger,
       updatePassenger,
       deletedPassenger,

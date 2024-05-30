@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { ITransport } from '@/app/interfaces'
 import { useMainStore } from '@/store/useMainStore'
-import Edit from '@/pages/general/Transports/Edit.vue'
+import Edit from '@/features/Transports/Edit.vue'
 import { useTransport } from '@/store/Transports'
 
 const tranportStore = useTransport()

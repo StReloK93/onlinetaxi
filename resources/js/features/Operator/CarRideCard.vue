@@ -4,7 +4,7 @@
       <aside class="w-50 tw-text-left">
          {{ props.ride.user_car?.car.name }}
       </aside>
-      <div class="w-50 tw-text-right tw-font-bold text-pink-lighten-5">
+      <div class="w-50 tw-text-right font-weight-bold text-pink-lighten-5">
          {{ props.ride.price }} so'm
       </div>
       <main class="w-100 d-flex justify-space-between align-end">
@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import Edit from '@/pages/general/CarRides/Edit.vue'
+import Edit from '@/features/CarRides/Edit.vue'
 const props = defineProps(['ride'])
 const aviablePassengersCount = computed(() => props.ride.passengers.reduce((acc, pass) => acc += pass.count, 0))
 </script>

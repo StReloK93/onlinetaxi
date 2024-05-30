@@ -27,6 +27,7 @@
 </template>
 
 <script setup lang="ts">
+import axios from "@/repository/Clients/AxiosClient";
 import { ref, onMounted, reactive, computed } from 'vue'
 import { rules } from '@/modules/constants';
 import { useAuthStore } from '@/store/useAuthStore'

@@ -1,12 +1,9 @@
 <template>
 	<v-row>
-
-		<v-col cols="12" class="py-0 text-center">
+		<v-col sm="6" cols="12">
 			<v-label class="text-caption">
 				Boshlangich manzil (Qaerdan?)
 			</v-label>
-		</v-col>
-		<v-col sm="6" cols="12">
 			<v-autocomplete @update:model-value="(id) => regionChanged(id, 'start')" :items="pageData.regions"
 				v-model="formData.start_region" label="Viloyat" item-title="name" :item-value="(item) => item.id"
 				:rules="rules" />
@@ -17,12 +14,10 @@
 				:item-value="(item) => item.id" :rules="rules" />
 		</v-col>
 		<v-divider class="border-opacity-75"></v-divider>
-		<v-col cols="12" class="py-0 text-center">
+		<v-col sm="6" cols="12">
 			<v-label class="text-caption">
 				Boriladigan manzil (Qaerga?)
 			</v-label>
-		</v-col>
-		<v-col sm="6" cols="12">
 			<v-autocomplete @update:model-value="(id) => regionChanged(id, 'end')" :items="pageData.regions"
 				v-model="formData.end_region" label="Viloyat" item-title="name" :item-value="(item) => item.id"
 				:rules="rules" />
@@ -32,8 +27,12 @@
 				v-model="formData.end_city" label="Shahar (Tuman)" item-title="name" :item-value="(item) => item.id"
 				:loading="pageData.end_loading" :rules="rules" />
 		</v-col>
+		<v-col sm="6" cols="12">
+			<VDatePicker :trim-weeks="true" color="pink" :min-date="new Date()" v-model.string="formData.ride_time"
+				:masks="{ modelValue: 'YYYY-MM-DD HH:mm' }" mode="dateTime" is24hr transparent borderless expanded
+				hide-time-header is-required />
+		</v-col>
 		<v-divider class="border-opacity-75"></v-divider>
-
 		<v-col sm="6" cols="12">
 			<main class="d-flex w-100 mb-3">
 				<v-text-field class="pr-2 flex-0-0" readonly density="compact" value="+998" disabled>
@@ -53,9 +52,9 @@
 			<v-text-field v-model="formData.count" label="Necha kishi" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
-			<v-text-field v-model="formData.ride_time" type="datetime-local" :step="900" label="Qatnov vaqti"
-				:rules="rules" />
+			<v-text-field v-model="formData.price" label="Yo'lkira narxi" :rules="rules" />
 		</v-col>
+
 		<v-col sm="6" cols="12">
 			<v-switch v-model="formData.with_trunk" label="Bagaj"></v-switch>
 		</v-col>
@@ -63,6 +62,7 @@
 </template>
 
 <script setup lang="ts">
+import axios from '@/repository/Clients/AxiosClient'
 import { IPassenger } from '@/app/interfaces'
 import { rules , phoneMask} from '@/modules/constants'
 import { reactive } from 'vue'
@@ -81,6 +81,7 @@ const formData: IPassenger = reactive({
 	end_city: null,
 	with_trunk: false,
 	ride_time: null,
+	price: null,
 	count: 1,
 })
 

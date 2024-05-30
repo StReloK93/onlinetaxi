@@ -1,6 +1,7 @@
 import { defineStore } from "pinia"
 import { ref, computed, Ref } from "vue"
 import router from "@/routes"
+import AxiosClient from "@/repository/Clients/AxiosClient"
 export const useAuthStore = defineStore("Auth", () => {
    const user: Ref = ref(null);
 
@@ -50,7 +51,7 @@ export const useAuthStore = defineStore("Auth", () => {
 
    async function login(data) {
       try {
-         const result = await axios.post("login", data);
+         const result = await AxiosClient.post("login", data);
          localStorage.setItem("token",`${result.data.type} ${result.data.token}`)
          await getUser();
          router.push({ name: "main" });
@@ -58,21 +59,21 @@ export const useAuthStore = defineStore("Auth", () => {
    }
 
    async function sendUserData(formData) {
-      const { data } = await axios.post("set-user-data", formData);
+      const { data } = await AxiosClient.post("set-user-data", formData);
       user.value = data;
       router.push({ name: "main" })
    }
 
    async function getUser() {
-      axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
-      await axios.get("user")
+      AxiosClient.defaults.headers.common["Authorization"] = localStorage.getItem("token");
+      await AxiosClient.get("user")
          .then(({ data }) => (user.value = data))
          .catch(() => console.clear());
    }
 
    async function sendSecretCode(props) {
       try {
-         const result = await axios.post("sendSecretCode", props);
+         const result = await AxiosClient.post("sendSecretCode", props);
          if (result.status == 200)
             router.push({ name: "secret_code", state: { props } });
          else return result.data;
@@ -83,10 +84,10 @@ export const useAuthStore = defineStore("Auth", () => {
 
 	async function logout() {
 		
-      const data = await axios.get("logout");
+      const data = await AxiosClient.get("logout");
 
       if (data.status == 200) {
-         axios.defaults.headers.common["Authorization"] = null
+         AxiosClient.defaults.headers.common["Authorization"] = null
          localStorage.removeItem("token")
          user.value = null
          router.push({ name: "login" })

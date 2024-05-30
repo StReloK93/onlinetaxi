@@ -24,6 +24,26 @@ class CarRideController extends Controller
         return CarRide::whereState(2)->get();
     }
 
+    public function onlyAuthUser()
+    {
+        return CarRide::whereUserId(Auth::user()->id)->whereState(1)->get();
+    }
+
+    public function onlyByRegion($region)
+    {
+        $dist = District::where('region_id', $region)->with('region')->get();
+        $districts = $dist->pluck('id');
+        $rides = CarRide::whereState(1)->whereHas('cities', function ($query) use($districts) {
+            $query->whereIn('district_id', $districts->all());
+        })->get();
+
+        $car_rides = $rides->filter(function ($rides) use ($districts) {
+            $firstComment = $rides->cities()->first();
+            return in_array($firstComment->district_id, $districts->all());
+        });
+        return ['districts' => $dist, 'car_rides' => array_values($car_rides->all())];
+    }
+
     public function store(Request $request)
     {
         $carRide = CarRide::create([
@@ -77,20 +97,7 @@ class CarRideController extends Controller
     }
 
 
-    public function startRegion($region)
-    {
-        $dist = District::where('region_id', $region)->with('region')->get();
-        $districts = $dist->pluck('id');
-        $rides = CarRide::whereState(1)->whereHas('cities', function ($query) use($districts) {
-            $query->whereIn('district_id', $districts->all());
-        })->get();
 
-        $car_rides = $rides->filter(function ($rides) use ($districts) {
-            $firstComment = $rides->cities()->first();
-            return in_array($firstComment->district_id, $districts->all());
-        });
-        return ['districts' => $dist, 'car_rides' => array_values($car_rides->all())];
-    }
 
 
 

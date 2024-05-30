@@ -110,6 +110,7 @@
 </template>
 
 <script setup lang="ts">
+import axios from '@/repository/Clients/AxiosClient'
 import { reactive, ref, Ref, computed } from 'vue'
 import { ICarRide } from '@/app/interfaces'
 import { useMainStore } from '@/store/useMainStore'

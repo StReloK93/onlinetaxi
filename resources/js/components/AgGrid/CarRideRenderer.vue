@@ -1,36 +1,38 @@
 <template>
 	<section class="w-100 d-flex flex-column">
-		<main class="pa-2 tw-h-16 d-flex flex-column justify-space-between tw-relative">
-			<v-icon class="tw-absolute tw-top-[38px] tw-left-[3.5px]" color="primary" >mdi-chevron-down</v-icon>
+		<main class="pa-2 tw-h-16 d-flex flex-column justify-space-between position-relative">
+			<v-icon class="position-absolute tw-top-[38px] tw-left-[3.5px]" color="primary" >mdi-chevron-down</v-icon>
 			<div
-				class="tw-absolute tw-h-2/4 tw-border-l-2 border-primary tw-border-dotted tw-top-[15px] tw-left-[13px]">
+				class="position-absolute h-50 tw-border-l-2 border-primary tw-border-dotted tw-top-[15px] tw-left-[13px]">
 			</div>
 			<template v-for="(item, index) in carRide.cities">
 				<aside v-if="firstOrLast(index)" class="tw-leading-none d-flex align-center">
-					<v-icon class="mr-2 tw-text-xs" :class="{'tw-opacity-0': index == carRide.cities.length - 1 }" color="primary">
+					<v-icon class="mr-2 text-caption" :class="{'tw-opacity-0': index == carRide.cities.length - 1 }" color="primary">
 						mdi-circle-medium
 					</v-icon>
-					<span class="tw-font-bold">
+					<span class="font-weight-bold">
 						{{ item.district.name }}
 					</span>
-					<span class="tw-text-xs ml-2 tw-text-gray-400">
+					<span class="text-caption ml-2 text-grey-lighten-1">
 						{{ item.district.region.name.replace('viloyati', 'V.') }}
 					</span>
 				</aside>
 			</template>
 		</main>
 
-		<main class="px-2 pb-1 pt-4 d-flex flex-column justify-space-between tw-flex-grow">
+		<main class="px-2 pb-1 pt-4 d-flex flex-column justify-space-between flex-grow-1">
 			<section class="flex-grow-1">
 				<div class="d-flex justify-space-between">
 					<main class="tw-leading-none">
-						<div class="tw-text-xl tw-leading-[3px]">
-							{{ carRide.user_car.car.name }}
+						<div class="tw-leading-[3px]">
+							<span class="text-h5 mr-2">
+								{{ carRide.user_car.car.name }}
+							</span>
 							<span class="text-grey-darken-1 tw-text-base">
 								{{ carRide.user_car.number }}
 							</span>
 						</div>
-						<div v-if="Auth.isPassenger" class="tw-text-gray-500">
+						<div v-if="Auth.isPassenger" class="text-grey-darken-1">
 							<a :href="`tel:${carRide.phone}`">{{ carRide.phone }}</a>
 						</div>
 					</main>
@@ -46,11 +48,11 @@
 			</section>
 			<section class="d-flex justify-space-between align-center">
 				<div class="tw-leading-none">
-					<p class="tw-text-gray-500 tw-translate-y-1">
+					<p class="text-grey-darken-1 tw-translate-y-1">
 						{{ moment(carRide.day).format('HH:mm') }}
 					</p>
 					<span
-						class="tw-uppercase tw-text-2xl tw-font-semibold tw-text-gray-600 tw-inline-flex tw-items-center">
+						class="tw-uppercase tw-text-2xl tw-font-semibold text-grey-darken-2 tw-inline-flex tw-items-center">
 						{{ moment(carRide.day).format('D-MMMM') }}
 						<v-btn v-if="carRide.strictly_on_time" icon="" size="x-small" variant="text">
 							<v-icon>mdi-book-clock</v-icon>
@@ -79,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import { Edit } from '@/pages/general/CarRides'
+import { Edit } from '@/features/CarRides'
 import { useAuthStore } from '@/store/useAuthStore'
 import { useMainStore } from '@/store/useMainStore'
 import { format } from 'v-money3'

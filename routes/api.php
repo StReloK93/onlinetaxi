@@ -33,9 +33,9 @@ Route::apiResource('passenger', PassengerController::class)->only(['index', 'sho
 
 
 Route::prefix('car-ride')->group(function () {
-    Route::get('only-passive', [CarRideController::class, 'onlyPassive']);
-    Route::get('only-active', [CarRideController::class, 'onlyActive']);
-    Route::get('start-region/{region_id}', [CarRideController::class, 'startRegion']);
+    Route::get('only/passive', [CarRideController::class, 'onlyPassive']);
+    Route::get('only/active', [CarRideController::class, 'onlyActive']);
+    Route::get('only/by-region/{region_id}', [CarRideController::class, 'onlyByRegion']);
     Route::delete('set-inactive/{car_ride}', [CarRideController::class, 'setInactive']);
 });
 
@@ -63,18 +63,16 @@ Route::apiResource('car-company', CarCompanyController::class)->only(['index']);
 
 
 
-
-
-
-
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('user-car', UserCarsController::class);
     Route::get('user-cars/get-only-my', [UserCarsController::class, 'getOnlyMy']);
 
+    
     Route::apiResource('car-ride', CarRideController::class)->except(['index', 'show']);
-
-
+    Route::prefix('car-ride')->group(function () {
+        Route::get('only/auth-user', [CarRideController::class, 'onlyAuthUser']);
+    });
+    
     Route::prefix('passenger')->group(function () {
         Route::post('operator', [PassengerController::class, 'storeOperator']);
         Route::delete('{passenger}/delete', [PassengerController::class, 'delete']);

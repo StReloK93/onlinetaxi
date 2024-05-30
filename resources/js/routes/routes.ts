@@ -1,7 +1,13 @@
-const routes: any[] = [
+import { RouteRecordRaw } from 'vue-router'
+import CarRidePage from '@/pages/general/CarRidesPage.vue'
+import TransportsPage from '@/pages/general/TransportsPage.vue'
+import PassengersPage from '@/pages/general/PassengersPage.vue'
+
+
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    component: () => import('@/pages/general/Index.vue'),
+    component: () => import('@/layouts/General.vue'),
     name: 'main',
     redirect: {
       name: 'car-rides',
@@ -12,49 +18,45 @@ const routes: any[] = [
     children: [
       {
         path: '/passengers',
-        component: () => import('@/pages/general/Passengers.vue'),
+        component: PassengersPage,
         name: 'passengers',
       },
       {
-        path: '/car-ride/auth-user',
-        component: () => import('@/pages/general/CarRidesAuthUser.vue'),
-        name: 'car-rides-auth-user',
+        path: '/car-ride',
+        component: CarRidePage,
+        name: 'car-rides',
+        meta: {
+          method: 'getOnlyActive'
+        }
       },
       {
-        path: '/car-ride',
-        component: () => import('@/pages/general/CarRides.vue'),
-        name: 'car-rides',
+        path: '/car-ride/auth-user',
+        component: CarRidePage,
+        name: 'car-rides-auth-user',
+        meta: {
+          method: 'getOnlyAuthUser'
+        }
       },
       {
         path: '/car-ride/inactive',
-        component: () => import('@/pages/general/CarRidesInactive.vue'),
+        component: CarRidePage,
         name: 'car-ride-inactive',
+        meta: {
+          method: 'getOnlyInactive'
+        }
       },
       {
         path: '/transports',
-        component: () => import('@/pages/general/Transports.vue'),
+        component: TransportsPage,
         name: 'transports',
       },
       {
         path: '/operator/:id',
-        component: () => import('@/pages/general/Operator.vue'),
+        component: () => import('@/pages/general/OperatorPage.vue'),
         name: 'operator',
         props: true,
       },
     ],
-  },
-  {
-    path: '/welcome',
-    name: 'welcome',
-    component: () => import('@/pages/login/Welcome.vue'),
-    meta: {
-      guard: 'auth',
-    }
-  },
-  {
-    path: '/install-app',
-    name: 'install-app',
-    component: () => import('@/pages/login/InstallApp.vue'),
   },
   {
     path: '/login',
@@ -63,7 +65,7 @@ const routes: any[] = [
       name: 'login_page',
     },
     props: true,
-    component: () => import('@/pages/login/Login.vue'),
+    component: () => import('@/layouts/Login.vue'),
     meta: {
       guard: 'guest',
     },
@@ -71,15 +73,28 @@ const routes: any[] = [
       {
         name: 'login_page',
         path: '',
-        component: () => import('@/pages/login/PhonePage.vue'),
+        component: () => import('@/pages/login/LoginPhonePage.vue'),
       },
       {
         name: 'secret_code',
         path: '/secret-code',
-        component: () => import('@/pages/login/SecretCode.vue'),
+        component: () => import('@/pages/login/LoginSendSmsPage.vue'),
         props: true
       },
     ]
+  },
+  {
+    path: '/welcome',
+    name: 'welcome',
+    component: () => import('@/pages/login/WelcomePage.vue'),
+    meta: {
+      guard: 'auth',
+    }
+  },
+  {
+    path: '/install-app',
+    name: 'install-app',
+    component: () => import('@/pages/login/InstallAppPage.vue'),
   },
 ];
 

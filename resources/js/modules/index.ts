@@ -1,6 +1,5 @@
 import vuetify from '@/modules/vuetify'
 import Echo from '@/modules/echo'
-import axios from '@/modules/axios'
 import App from '@/app/app.vue'
 import BaseForm from '@/components/BaseForm.vue'
 import { AgGridVue } from "ag-grid-vue3"
@@ -15,7 +14,5 @@ import 'v-calendar/style.css';
 // @ts-ignore
 window.echo = Echo
 window.moment = moment
-window.axios = axios
-
 
 export { vuetify, Echo, axios, App, BaseForm, AgGridVue, VCalendar, money, moment, timer }

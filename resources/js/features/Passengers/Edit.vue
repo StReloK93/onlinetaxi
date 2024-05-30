@@ -1,14 +1,24 @@
 <template>
 	<v-dialog v-model="pageData.dialog" scrollable persistent width="600px">
-		<BaseForm :loading="pageData.loading" :submit="submitFunction" title="Yo'lovchini tahrirlash" @close="pageData.dialog = false">
+
+		<template v-slot:activator="{ props }">
+			<v-btn size="x-small" v-bind="props" variant="plain" icon="mdi-pencil" />
+		</template>
+
+		<BaseForm :loading="pageData.loading" :submit="submitFunction" title="Yo'lovchini tahrirlash"
+			@close="pageData.dialog = false" @vue:mounted="getData(parentProps.id)">
 			<Inputs ref="inputComponent" />
 		</BaseForm>
+		
 	</v-dialog>
 </template>
 <script setup lang="ts">
+import axios from '@/repository/Clients/AxiosClient'
 import { reactive, ref } from 'vue'
 import Inputs from './Inputs.vue'
 import { IPassenger } from '@/app/interfaces'
+
+const parentProps = defineProps(['id'])
 const inputComponent = ref()
 
 const emit = defineEmits(['update'])
@@ -41,6 +51,7 @@ function getData(id) {
 		formData.address = data.address
 		formData.start_region = data.start.region_id
 		formData.end_region = data.end.region_id
+		formData.price = data.price
 		formData.ride_time = data.ride_time
 		formData.with_trunk = Boolean(data.with_trunk)
 
@@ -49,14 +60,7 @@ function getData(id) {
 		await inputComponent.value.regionChanged(formData.end_region, 'end')
 			.then(() => formData.end_city = data.end_city)
 
-			pageData.loading = false
+		pageData.loading = false
 	})
 }
-
-const toggle = (current) => {
-	pageData.dialog = true
-	pageData.passenger = current
-	getData(current.id)
-}
-defineExpose({ toggle })
 </script>

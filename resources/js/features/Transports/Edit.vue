@@ -14,6 +14,7 @@
     </v-dialog>
 </template>
 <script setup lang="ts">
+import AxiosClient from '@/repository/Clients/AxiosClient'
 import { useTransport } from '@/store/Transports'
 import { reactive, ref } from 'vue'
 import Inputs from './Inputs.vue'
@@ -28,7 +29,7 @@ const pageData = reactive({
 
 async function submitFunction() {
     const formData = inputComponent.value.formData
-    await axios.put(`user-car/${propsParent.id}`, formData)
+    await AxiosClient.put(`user-car/${propsParent.id}`, formData)
         .then(({ data }) => transport.update(data))
 }
 
@@ -36,7 +37,7 @@ async function submitFunction() {
 
 function getTransport(id) {
     pageData.overlay = true
-    axios.get(`user-car/${id}`).then(({ data }) => {
+    AxiosClient.get(`user-car/${id}`).then(({ data }) => {
         const formData = inputComponent.value.formData
         formData.number = data.number
         formData.fuel_type = data.fuel_type

@@ -10,6 +10,7 @@
 </template>
 
 <script setup lang="ts">
+import AxiosClient from '@/repository/Clients/AxiosClient'
 import { reactive, ref } from 'vue'
 import Inputs from './Inputs.vue'
 const emit = defineEmits(['create'])
@@ -19,7 +20,7 @@ const pageData = reactive({ dialog: false, overlay: false })
 async function submitFunction() {
     const formData = inputComponent.value.formData
 
-    await axios.post('user-car', formData).then(({ data }) => {
+    await AxiosClient.post('user-car', formData).then(({ data }) => {
         emit('create', data)
         pageData.dialog = false
     })

@@ -4,7 +4,7 @@
 			<v-btn color="primary" v-bind="props" icon="mdi-plus" :class="parentProps.btnClass" class="add-button" />
 		</template>
 		<BaseForm :loading="pageData.overlay" :submit="submitFunction" title="Qatnov kiritish" @close="pageData.dialog = false">
-			<Inputs @onStart="pageData.overlay = true" @onReady="pageData.overlay = false" ref="inputComponent" :date="parentProps.date" />
+			<Inputs @vue:mounted="pageData.overlay = true" @onReady="pageData.overlay = false" ref="inputComponent" :date="parentProps.date" />
 		</BaseForm>
 	</v-dialog>
 </template>

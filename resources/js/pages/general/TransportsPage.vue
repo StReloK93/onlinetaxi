@@ -14,12 +14,12 @@
 
 <script setup lang="ts">
 import { useTransport } from '@/store/Transports'
-import { Add, columnDefs } from './Transports'
+import { Add, columnDefs } from '@/features/Transports'
 import { useAuthStore } from '@/store/useAuthStore'
 import { ref } from 'vue'
 const Auth = useAuthStore()
 const transport = useTransport()
 transport.getTransports()
-const rowClass = ref(['!tw-h-28', 'tw-shadow', 'tw-border-l-2', 'tw-border-pink-500' ,'bg-white', 'tw-rounded-r', 'overflow-hidden'])
+const rowClass = ref(['!tw-h-28', 'elevation-1', 'tw-border-l-2', 'tw-border-pink-500' ,'bg-white', 'overflow-hidden'])
 
 </script>

@@ -1,7 +1,7 @@
 // import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
-import axios from "axios";
+import axios from "@/repository/Clients/AxiosClient";
 import { useAuthStore } from "@/store/useAuthStore";
 
 const firebaseConfig = {
@@ -25,12 +25,17 @@ export default async function () {
             serviceWorkerRegistration: sw,
          });
          //@ts-ignore
+
+
+
          messaging.onMessageHandler = function (event) {
+            const message = event.notification
+            
             var options = {
-               body: "In brauzer",
-               // icon: icon,
+               body: message.body,
+               icon: "/pwa/maskable_icon_x128.png",
             };
-            new Notification('Hello web developer', options);
+            new Notification(message.title, options);
          };
 
 

@@ -12,8 +12,8 @@
 		</v-col>
 		<v-col sm="6" cols="12">
 			<v-select @update:model-value="(id) => carMarkChanged(id)" :items="pageData.car_company"
-				v-model="formData.car_company_id" label="Transport markasi" item-title="name"
-				:item-value="(item) => item.id" :rules="rules" />
+				v-model="formData.car_company_id" label="Transport markasi" item-title="name" :item-value="(item) => item.id"
+				:rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
 			<v-select :disabled="formData.car_company_id == null" :items="pageData.cars" v-model="formData.car_id"
@@ -25,23 +25,31 @@
 				Transport raqami turini tanlang
 			</v-label>
 			<div class="d-flex justify-space-between mb-2">
-				<v-sheet @click="formData.number_variant = true" :class="{'tw-bg-pink-50 !tw-border-pink-600': formData.number_variant }" :height="26" v-ripple class="tw-border rounded tw-border-gray-600 d-flex tw-relative">
-					<div :class="{'!tw-border-pink-600': formData.number_variant }" class="d-flex justify-center align-center tw-w-7 tw-border tw-border-gray-600">
+				<v-sheet @click="formData.number_variant = true"
+					:class="{ 'tw-bg-pink-50 !tw-border-pink-600': formData.number_variant }" :height="26" v-ripple
+					class="tw-border rounded tw-border-gray-600 d-flex tw-relative">
+					<div :class="{ '!tw-border-pink-600': formData.number_variant }"
+						class="d-flex justify-center align-center tw-w-7 tw-border tw-border-gray-600">
 						<v-icon v-if="formData.number_variant" color="primary" size="small">
 							mdi-check
 						</v-icon>
 					</div>
-					<div :class="{'!tw-border-pink-600': formData.number_variant }" class="d-flex justify-space-between align-center pl-1 pr-4 tw-border tw-border-gray-600 flex-grow-1">
+					<div :class="{ '!tw-border-pink-600': formData.number_variant }"
+						class="d-flex justify-space-between align-center pl-1 pr-4 tw-border tw-border-gray-600 flex-grow-1">
 						A 000 AA <img src="/iconos/uz.png" class="tw-w-3 tw-absolute tw-right-0.5 tw-top-0.5">
 					</div>
 				</v-sheet>
-				<v-sheet @click="formData.number_variant = false" :class="{'tw-bg-pink-50 !tw-border-pink-600': !formData.number_variant }"  :height="26" v-ripple class="tw-border rounded tw-border-gray-600 d-flex tw-relative">
-					<div :class="{'!tw-border-pink-600': !formData.number_variant }" class="d-flex justify-center align-center tw-w-7 tw-border tw-border-gray-600">
+				<v-sheet @click="formData.number_variant = false"
+					:class="{ 'tw-bg-pink-50 !tw-border-pink-600': !formData.number_variant }" :height="26" v-ripple
+					class="tw-border rounded tw-border-gray-600 d-flex tw-relative">
+					<div :class="{ '!tw-border-pink-600': !formData.number_variant }"
+						class="d-flex justify-center align-center tw-w-7 tw-border tw-border-gray-600">
 						<v-icon v-if="!formData.number_variant" color="primary" size="small">
 							mdi-check
 						</v-icon>
 					</div>
-					<div :class="{'!tw-border-pink-600': !formData.number_variant }" class="d-flex justify-space-between align-center pl-1 pr-4 tw-border tw-border-gray-600 flex-grow-1">
+					<div :class="{ '!tw-border-pink-600': !formData.number_variant }"
+						class="d-flex justify-space-between align-center pl-1 pr-4 tw-border tw-border-gray-600 flex-grow-1">
 						000 AAA <img src="/iconos/uz.png" class="tw-w-3 tw-absolute tw-right-0.5 tw-top-0.5">
 					</div>
 				</v-sheet>
@@ -61,8 +69,9 @@
 </template>
 
 <script setup lang="ts">
+import axios from '@/repository/Clients/AxiosClient'
 import { rules } from '@/modules/constants'
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, onMounted } from 'vue'
 const emit = defineEmits(['onReady', 'onStart'])
 emit('onStart')
 
@@ -112,12 +121,14 @@ async function carMarkChanged(company_id) {
 	pageData.car_input_loading = false
 }
 
-axios.all([axios.get('fuel-type'), axios.get('car-company')])
-	.then(axios.spread(({ data: fuel_types }, { data: car_company }) => {
-		pageData.fuel_types = fuel_types
-		pageData.car_company = car_company
-		emit('onReady')
-	}))
 
 defineExpose({ formData, carMarkChanged })
+
+onMounted(async () => {
+	const { data: fuel_types } = await axios.get('fuel-type')
+	pageData.fuel_types = fuel_types
+	const { data: car_company } = await axios.get('car-company')
+	pageData.car_company = car_company
+	emit('onReady')
+})
 </script>

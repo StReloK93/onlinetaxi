@@ -79,6 +79,7 @@ export interface CarRideCity{
 export interface IPassenger{
     id?: number,
     car_ride_id: number | null,
+    user_id?: number,
     loading: boolean,
     phone: string,
     address: string,
@@ -92,6 +93,7 @@ export interface IPassenger{
     ride_time: Date | null,
     state?: boolean,
     count: number,
+    price: number,
     updated_at?: Date | null,
     created_at?: Date | null,
 }

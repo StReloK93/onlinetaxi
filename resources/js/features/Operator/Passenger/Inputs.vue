@@ -45,6 +45,7 @@
 </template>
 
 <script setup lang="ts">
+import axios from '@/repository/Clients/AxiosClient'
 import { IPassenger } from '@/app/interfaces'
 import { rules, phoneMask } from '@/modules/constants'
 import { reactive } from 'vue'
@@ -61,6 +62,7 @@ const formData: IPassenger = reactive({
 	start_city: null,
 	end_region: null,
 	end_city: null,
+	price: null,
 	with_trunk: false,
 	ride_time: null,
 	count: 1,

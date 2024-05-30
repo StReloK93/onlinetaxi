@@ -55,16 +55,16 @@
 import { reactive, watch, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { replace } from '@/modules/constants'
-import CarRideModal from '@/pages/general/Operator/CarRideModal.vue'
-import CarRideCard from '@/pages/general/Operator/CarRideCard.vue'
-import Add from '@/pages/general/CarRides/Add.vue'
+import CarRideModal from '@/features/Operator/CarRideModal.vue'
+import CarRideCard from '@/features/Operator/CarRideCard.vue'
+import Add from '@/features/CarRides/Add.vue'
 import { useCarRide } from '@/store/CarRide'
 const CarRide = useCarRide()
 
 const rideModal = ref()
 
 const route = useRoute()
-CarRide.indexCity(route.params.id)
+CarRide.getRidesByRegion(route.params.id)
 const props = reactive({
 	tab: 1,
 	regions: null,
@@ -75,7 +75,7 @@ const props = reactive({
 
 axios.get('region').then(({ data }) => props.regions = data)
 watch(route, (current) => {
-	CarRide.indexCity(current.params.id)
+	CarRide.getRidesByRegion(current.params.id)
 	props.panel = null
 })
 </script>

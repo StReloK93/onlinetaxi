@@ -43,7 +43,7 @@
 		</v-col>
 		<v-col sm="6" cols="12">
 			<v-autocomplete class="mb-3" @update:model-value="setPhone" :items="pageData.cars" v-model="formData.user_car_id"
-				label="Transport" :item-title="(item) => `${item.car.name} ( ${item.number} )`" :item-value="(item) => item.id"
+				label="Transport" :item-title="(item) => `${item.car?.name} ( ${item.number} )`" :item-value="(item) => item.id"
 				:rules="rules" />
 			<main class="d-flex w-100 mb-3">
 				<v-text-field class="pr-2 flex-0-0" readonly density="compact" value="+998" disabled>
@@ -65,10 +65,11 @@
 </template>
 
 <script setup lang="ts">
+import axios from "@/repository/Clients/AxiosClient";
 import { moneyConfig, rules, phoneMask } from '@/modules/constants'
-import { reactive } from 'vue'
-const emit = defineEmits(['onReady', 'onStart'])
-emit('onStart')
+import { reactive, onMounted } from 'vue'
+const emit = defineEmits(['onReady'])
+
 const formData = reactive({
 	user_car_id: null,
 	phone: null,
@@ -108,12 +109,7 @@ async function regionChanged(id, index) {
 	})
 }
 
-axios.all([axios.get('user-cars/get-only-my'), axios.get('region')])
-	.then(axios.spread(({ data: cars }, { data: regions }) => {
-		pageData.cars = cars
-		pageData.regions = regions
-		emit('onReady')
-	}))
+
 
 defineExpose({ regionChanged, formData })
 
@@ -121,4 +117,14 @@ defineExpose({ regionChanged, formData })
 // 	if (formData.ends.length == 4) return
 // 	formData.ends.splice(1, 0, { region: null, city: null, loading: false, districts: [] });
 // }
+
+onMounted(async () => {
+	const { data: regions } = await axios.get('region')
+	pageData.regions = regions
+
+	const { data: cars } = await axios.get('user-cars/get-only-my')
+	pageData.cars = cars
+
+	emit('onReady')
+})
 </script>

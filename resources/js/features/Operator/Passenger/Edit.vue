@@ -1,15 +1,23 @@
 <template>
 	<v-dialog v-model="pageData.dialog" scrollable width="600px">
+		<template v-slot:activator="{ props }">
+			<v-btn v-if="parentProps.smButton" v-bind="props" prepend-icon="mdi-pencil" size="x-small" variant="tonal"
+				color="white">
+				O'zgaritirish
+			</v-btn>
+			<v-btn v-else size="x-small" v-bind="props" variant="plain" icon="mdi-pencil" />
+		</template>
 		<BaseForm :submit="submitFunction" title="Yo'lovchini tahrirlash" @close="pageData.dialog = false">
 			<Inputs ref="inputComponent" :freeSeat="ride.free_seat - aviable" :familyCount="pageData.passenger.count" />
 		</BaseForm>
 	</v-dialog>
 </template>
 <script setup lang="ts">
+import axios from '@/repository/Clients/AxiosClient'
 import { reactive, ref, computed } from 'vue'
 import Inputs from './Inputs.vue'
 import { IPassenger } from '@/app/interfaces'
-const parentProps = defineProps(['ride'])
+const parentProps = defineProps(['ride', 'smButton'])
 const inputComponent = ref()
 
 const emit = defineEmits(['update'])

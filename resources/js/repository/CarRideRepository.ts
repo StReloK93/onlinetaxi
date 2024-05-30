@@ -4,17 +4,22 @@ const resource = "car-ride";
 
 
 export async function getOnlyActive() {
-   const { data } = await Client.get<ICarRide[]>(`${resource}/only-active`);
+   const { data } = await Client.get<ICarRide[]>(`${resource}/only/active`);
    return data;
 }
 
-export async function getOnlyInActive() {
-   const { data } = await Client.get<ICarRide[]>(`${resource}/only-passive`);
+export async function getOnlyAuthUser() {
+   const { data } = await Client.get<ICarRide[]>(`${resource}/only/auth-user`);
+   return data;
+}
+
+export async function getOnlyInactive() {
+   const { data } = await Client.get<ICarRide[]>(`${resource}/only/passive`);
    return data;
 }
 
 export async function getRidesByRegion(region_id) {
-   const { data } = await Client.get(`${resource}/start-region/${region_id}`);
+   const { data } = await Client.get(`${resource}/only/by-region/${region_id}`);
    return { rides: data.car_rides, districts: data.districts };
 }
 

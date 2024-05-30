@@ -6,17 +6,22 @@
         </v-btn>
         <v-btn :to="{ name: 'car-rides' }">
             <v-icon>mdi-timeline-clock-outline</v-icon>
-            <span style="width: 88px;" class="tw-leading-none">Barcha Qatnovlar</span>
+            <span style="width: 88px;" class="tw-leading-none">Qatnovlar</span>
         </v-btn>
 
         <v-btn v-if="Auth.isPassengerAdmins"  :to="{ name: 'passengers' }" >
             <v-icon>mdi-human-greeting</v-icon>
-            <span style="width: 88px;" class="tw-leading-none">Barcha Yo'lovchilar</span>
+            <span style="width: 88px;" class="tw-leading-none">Yo'lovchilar</span>
         </v-btn>
 
         <v-btn v-if="Auth.isDriverAdmins" :to="{ name: 'transports' }">
             <v-icon>mdi-train-car</v-icon>
-            <span style="width: 88px;" class="tw-leading-none">Mening Transportim</span>
+            <span v-if="Auth.isDriverAdmins" style="width: 88px;" class="tw-leading-none">
+                Transportlar
+            </span>
+            <span v-else style="width: 88px;" class="tw-leading-none">
+                Mening transportim
+            </span>
         </v-btn>
     </v-bottom-navigation>
 </template>

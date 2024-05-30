@@ -7,7 +7,7 @@
 		</main>
 		<v-spacer>
 			<AgGridVue class="ag-theme-ruzzifer ag-theme-alpine h-100" :animateRows="true"
-				:defaultColDef="{ sortable: true }" :rowHeight="170" :rowClass="CarRide.rowClass"
+				:defaultColDef="{ sortable: true }" :rowHeight="170" :rowClass="rowClass"
 				:headerHeight="0" :columnDefs="columnDefs" :rowData="CarRide.rides" @grid-ready="gridReady"
 				:getRowId="({ data }) => data.id" :doesExternalFilterPass="(node) => filterComponent.filters(node)"
 				:isExternalFilterPresent="() => true" />
@@ -15,15 +15,23 @@
 	</main>
 </template>
 <script setup lang="ts">
-import { Add, Filters, Sorting, columnDefs, useCarRide } from './CarRides'
-import { ref, onUnmounted } from 'vue'
+import { Add, Filters, Sorting, columnDefs, useCarRide, rowClass } from '@/features/CarRides'
+import { ref, onUnmounted, watch, onMounted } from 'vue'
 import { useAuthStore } from '@/store/useAuthStore'
+import { useRoute } from 'vue-router';
+import { CarRideRepository } from '@/repository'
+const route = useRoute()
 const Auth = useAuthStore()
 const filterComponent = ref()
 
 const CarRide = useCarRide()
-CarRide.index()
+const methodName = route.meta.method as any
 
+
+watch(() => route.meta.method, async (current) => {
+	//@ts-ignore
+	CarRide.rides = await CarRideRepository[current]()
+})
 
 function gridReady(params) {
 	CarRide.agGrid = params.api
@@ -33,6 +41,10 @@ function gridReady(params) {
 onUnmounted(() => {
 	CarRide.agGrid = null
 	CarRide.agColumnApi = null
+})
+
+onMounted(async () => {
+	CarRide.rides = await CarRideRepository[methodName]()
 })
 </script>
 
