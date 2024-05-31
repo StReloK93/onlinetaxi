@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 import axios from "@/repository/Clients/AxiosClient";
-import { useAuthStore } from "@/store/useAuthStore";
+import { useAuthStore } from '@/store/useAuthStore'
 
 const firebaseConfig = {
    apiKey: "AIzaSyACb7ABfs-jY6GdnwxKaGv2wObCdh0h-K8",
@@ -21,7 +21,7 @@ export default async function () {
          // const analytics = getAnalytics(app);
 
          const messaging = getMessaging(app);
-         store.user.token = await getToken(messaging, {
+         store.token = await getToken(messaging, {
             serviceWorkerRegistration: sw,
          });
          //@ts-ignore
@@ -41,7 +41,7 @@ export default async function () {
 
          axios.post("firebase-token", {
             user_id: store.user?.id,
-            token: store.user.token,
+            token: store.token,
             device: null,
          });
       });

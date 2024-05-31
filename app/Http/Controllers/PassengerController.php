@@ -78,7 +78,6 @@ class PassengerController extends Controller
 
     public function update(Request $request, Passenger $passenger)
     {
-        $passenger->name = $request->name;
         $passenger->phone = $request->phone;
         $passenger->count = $request->count;
         $passenger->price = $request->price;

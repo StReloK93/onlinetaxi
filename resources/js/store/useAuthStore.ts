@@ -4,6 +4,7 @@ import router from "@/routes"
 import AxiosClient from "@/repository/Clients/AxiosClient"
 export const useAuthStore = defineStore("Auth", () => {
    const user: Ref = ref(null);
+   const token: Ref = ref(null);
 
    // getters
    const isAnyAdmins = computed(() => {
@@ -98,6 +99,7 @@ export const useAuthStore = defineStore("Auth", () => {
 
    return {
       user,
+      token,
       getUser,
       login,
       sendSecretCode,

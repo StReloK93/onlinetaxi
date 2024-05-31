@@ -84,8 +84,10 @@ async function updateTopic() {
 
 
 onMounted(async () => {
-   const { data: current_city } = await axios.post('firebase/get-city-topic', { token: Auth.user.token })
-   city.value = current_city
-   pageData.loading = false
+   axios.post('firebase/get-city-topic', { token: Auth.token }).then(({data: current_city}) => {
+      city.value = current_city
+      pageData.loading = false
+
+   })
 })
 </script>

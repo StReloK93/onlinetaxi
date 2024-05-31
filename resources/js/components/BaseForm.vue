@@ -2,14 +2,14 @@
 	<v-form ref="formTag" @submit.prevent="submitFunction" @vue:unmounted="pageData.loading = false">
 		<v-card>
 			<v-card-title>{{ props.title }}</v-card-title>
-			<v-divider class="border-opacity-50"></v-divider>
+			<v-divider></v-divider>
 			<v-card-text style="max-height: 700px;" class="pa-4 tw-relative">
 				<v-overlay v-model="props.loading" contained persistent class="align-center justify-center">
 					<v-progress-circular color="primary" indeterminate :size="68"></v-progress-circular>
 				</v-overlay>
 				<slot></slot>
 			</v-card-text>
-			<v-divider class="border-opacity-50"></v-divider>
+			<v-divider></v-divider>
 			<v-card-actions>
 				<v-spacer></v-spacer>
 				<v-btn color="primary" variant="text" @click="$emit('close')">

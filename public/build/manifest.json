@@ -1,36 +1,4 @@
 {
-  "_Edit.vue_vue_type_script_setup_true_lang-40f78cff.js": {
-    "file": "assets/Edit.vue_vue_type_script_setup_true_lang-40f78cff.js",
-    "imports": [
-      "_constants-68fdd4d6.js",
-      "resources/js/app/app.ts"
-    ]
-  },
-  "_Edit.vue_vue_type_script_setup_true_lang-e5ec21c2.js": {
-    "file": "assets/Edit.vue_vue_type_script_setup_true_lang-e5ec21c2.js",
-    "imports": [
-      "resources/js/app/app.ts",
-      "_constants-68fdd4d6.js"
-    ]
-  },
-  "_constants-68fdd4d6.js": {
-    "file": "assets/constants-68fdd4d6.js"
-  },
-  "_index-0a9fa187.js": {
-    "file": "assets/index-0a9fa187.js",
-    "imports": [
-      "resources/js/app/app.ts",
-      "_Edit.vue_vue_type_script_setup_true_lang-40f78cff.js",
-      "_constants-68fdd4d6.js",
-      "_useMainStore-7b8cd759.js"
-    ]
-  },
-  "_useMainStore-7b8cd759.js": {
-    "file": "assets/useMainStore-7b8cd759.js",
-    "imports": [
-      "resources/js/app/app.ts"
-    ]
-  },
   "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot": {
     "file": "assets/materialdesignicons-webfont-5159a347.eot",
     "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot"
@@ -48,7 +16,7 @@
     "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2"
   },
   "resources/js/app/app.css": {
-    "file": "assets/app-39703224.css",
+    "file": "assets/app-d6b66055.css",
     "src": "resources/js/app/app.css"
   },
   "resources/js/app/app.ts": {
@@ -59,140 +27,66 @@
       "assets/materialdesignicons-webfont-be825c12.ttf"
     ],
     "css": [
-      "assets/app-39703224.css"
+      "assets/app-d6b66055.css"
     ],
     "dynamicImports": [
-      "resources/js/pages/general/Index.vue",
-      "resources/js/pages/general/Passengers.vue",
-      "resources/js/pages/general/CarRidesAuthUser.vue",
-      "resources/js/pages/general/CarRides.vue",
-      "resources/js/pages/general/SendRoads.vue",
-      "resources/js/pages/general/Transports.vue",
-      "resources/js/pages/general/Operator.vue",
-      "resources/js/pages/login/Welcome.vue",
-      "resources/js/pages/login/InstallApp.vue",
-      "resources/js/pages/login/Login.vue",
-      "resources/js/pages/login/PhonePage.vue",
-      "resources/js/pages/login/SecretCode.vue"
+      "resources/js/layouts/General.vue",
+      "resources/js/layouts/Login.vue",
+      "resources/js/pages/login/LoginPhonePage.vue",
+      "resources/js/pages/login/LoginSendSmsPage.vue",
+      "resources/js/pages/login/WelcomePage.vue",
+      "resources/js/pages/login/InstallAppPage.vue"
     ],
-    "file": "assets/app-bfb27f04.js",
+    "file": "assets/app-9d059da3.js",
     "isEntry": true,
     "src": "resources/js/app/app.ts"
   },
-  "resources/js/pages/general/CarRides.vue": {
-    "file": "assets/CarRides-8b6fc3d9.js",
-    "imports": [
-      "_index-0a9fa187.js",
-      "resources/js/app/app.ts",
-      "_Edit.vue_vue_type_script_setup_true_lang-40f78cff.js",
-      "_constants-68fdd4d6.js",
-      "_useMainStore-7b8cd759.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/js/pages/general/CarRides.vue"
-  },
-  "resources/js/pages/general/CarRidesAuthUser.vue": {
-    "file": "assets/CarRidesAuthUser-ade622df.js",
-    "imports": [
-      "_index-0a9fa187.js",
-      "resources/js/app/app.ts",
-      "_Edit.vue_vue_type_script_setup_true_lang-40f78cff.js",
-      "_constants-68fdd4d6.js",
-      "_useMainStore-7b8cd759.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/js/pages/general/CarRidesAuthUser.vue"
-  },
-  "resources/js/pages/general/Index.vue": {
-    "file": "assets/Index-8e536741.js",
-    "imports": [
-      "resources/js/app/app.ts",
-      "_useMainStore-7b8cd759.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/js/pages/general/Index.vue"
-  },
-  "resources/js/pages/general/Operator.vue": {
-    "file": "assets/Operator-00a08756.js",
-    "imports": [
-      "resources/js/app/app.ts",
-      "_constants-68fdd4d6.js",
-      "_useMainStore-7b8cd759.js",
-      "_Edit.vue_vue_type_script_setup_true_lang-40f78cff.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/js/pages/general/Operator.vue"
-  },
-  "resources/js/pages/general/Passengers.vue": {
-    "file": "assets/Passengers-f3278106.js",
-    "imports": [
-      "resources/js/app/app.ts",
-      "_Edit.vue_vue_type_script_setup_true_lang-e5ec21c2.js",
-      "_constants-68fdd4d6.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/js/pages/general/Passengers.vue"
-  },
-  "resources/js/pages/general/SendRoads.vue": {
-    "file": "assets/SendRoads-6d072808.js",
-    "imports": [
-      "_Edit.vue_vue_type_script_setup_true_lang-e5ec21c2.js",
-      "resources/js/app/app.ts",
-      "_constants-68fdd4d6.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/js/pages/general/SendRoads.vue"
-  },
-  "resources/js/pages/general/Transports.vue": {
-    "file": "assets/Transports-a0519470.js",
-    "imports": [
-      "resources/js/app/app.ts",
-      "_useMainStore-7b8cd759.js",
-      "_constants-68fdd4d6.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/js/pages/general/Transports.vue"
-  },
-  "resources/js/pages/login/InstallApp.vue": {
-    "file": "assets/InstallApp-17bf1ebd.js",
+  "resources/js/layouts/General.vue": {
+    "file": "assets/General-778fcc7b.js",
     "imports": [
       "resources/js/app/app.ts"
     ],
     "isDynamicEntry": true,
-    "src": "resources/js/pages/login/InstallApp.vue"
+    "src": "resources/js/layouts/General.vue"
   },
-  "resources/js/pages/login/Login.vue": {
-    "file": "assets/Login-7ce94ad8.js",
+  "resources/js/layouts/Login.vue": {
+    "file": "assets/Login-c688cd2f.js",
     "imports": [
       "resources/js/app/app.ts"
     ],
     "isDynamicEntry": true,
-    "src": "resources/js/pages/login/Login.vue"
+    "src": "resources/js/layouts/Login.vue"
   },
-  "resources/js/pages/login/PhonePage.vue": {
-    "file": "assets/PhonePage-7d1d48ea.js",
-    "imports": [
-      "resources/js/app/app.ts",
-      "_constants-68fdd4d6.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/js/pages/login/PhonePage.vue"
-  },
-  "resources/js/pages/login/SecretCode.vue": {
-    "file": "assets/SecretCode-b42a3cfe.js",
+  "resources/js/pages/login/InstallAppPage.vue": {
+    "file": "assets/InstallAppPage-66bb2e3b.js",
     "imports": [
       "resources/js/app/app.ts"
     ],
     "isDynamicEntry": true,
-    "src": "resources/js/pages/login/SecretCode.vue"
+    "src": "resources/js/pages/login/InstallAppPage.vue"
   },
-  "resources/js/pages/login/Welcome.vue": {
-    "file": "assets/Welcome-f4ab235c.js",
+  "resources/js/pages/login/LoginPhonePage.vue": {
+    "file": "assets/LoginPhonePage-d4ba422c.js",
     "imports": [
-      "resources/js/app/app.ts",
-      "_constants-68fdd4d6.js"
+      "resources/js/app/app.ts"
     ],
     "isDynamicEntry": true,
-    "src": "resources/js/pages/login/Welcome.vue"
+    "src": "resources/js/pages/login/LoginPhonePage.vue"
+  },
+  "resources/js/pages/login/LoginSendSmsPage.vue": {
+    "file": "assets/LoginSendSmsPage-6a179378.js",
+    "imports": [
+      "resources/js/app/app.ts"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/pages/login/LoginSendSmsPage.vue"
+  },
+  "resources/js/pages/login/WelcomePage.vue": {
+    "file": "assets/WelcomePage-9377f804.js",
+    "imports": [
+      "resources/js/app/app.ts"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/pages/login/WelcomePage.vue"
   }
 }

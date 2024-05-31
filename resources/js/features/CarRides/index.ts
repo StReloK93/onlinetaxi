@@ -1,40 +1,19 @@
-import Add from "./Add.vue";
-import Edit from "./Edit.vue";
-import Filters from "./Filter.vue";
-import Sorting from "./Sorting.vue";
-import { ColDef } from "ag-grid-community";
 import type { ICarRide } from "@/app/interfaces";
-import CarRideRenderer from "@/components/AgGrid/CarRideRenderer.vue";
-import { useCarRide } from "@/store/CarRide";
-const columnDefs: ColDef<ICarRide>[] = [
-   {
-      cellRenderer: CarRideRenderer,
-      flex: 1,
-      valueFormatter: null,
-      cellClass: ["px-0", "align-stretch"],
-   },
-   { field: "day", hide: true },
-   { field: "price", hide: true },
-   { field: "free_seat", hide: true },
-];
-
-
-const rowClass = [
-   'overflow-hidden',
-   "car-ride-height",
-   "elevation-1",
-   "tw-border-l-2",
-   "tw-border-pink-500",
-   "bg-white",
-];
+import AddForm from "./components/AddForm-CarRide.vue";
+import EditForm from "./components/EditForm-CarRide.vue";
+import Filters from "./components/Filter-CarRide.vue";
+import FormInputs from "./components/FormInputs-CarRide.vue";
+import CardCarRide from "./components/Card-CarRide.vue";
+import { useCarRideStore } from "./CarRideStore";
+import CarRideRepository from '@/features/CarRides/CarRideRepository'
 
 export {
-   Add,
-   Edit,
+   FormInputs,
+   CarRideRepository,
+   CardCarRide,
+   AddForm,
+   EditForm,
    Filters,
-   Sorting,
    ICarRide,
-   columnDefs,
-   rowClass,
-   useCarRide,
+   useCarRideStore,
 };

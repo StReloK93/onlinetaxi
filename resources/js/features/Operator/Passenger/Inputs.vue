@@ -16,16 +16,7 @@
 				:loading="pageData.end_loading" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
-			<main class="d-flex w-100">
-				<v-text-field class="pr-2 flex-0-0" readonly density="compact" value="+998" disabled>
-					<template v-slot:prepend-inner>
-						<v-icon>
-							<img src="/iconos/uz.png">
-						</v-icon>
-					</template>
-				</v-text-field>
-				<v-text-field v-maska:[phoneMask] v-model="formData.phone" density="compact" :rules="rules" />
-			</main>
+			<BaseUzPhoneInput v-model="formData.phone" />
 		</v-col>
 		<v-col sm="6" cols="12">
 			<v-text-field v-model="formData.address" :step="900" label="Manzil" :rules="rules" />

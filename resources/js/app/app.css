@@ -1,30 +1,25 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+body{
+    font-family:  var(--ag-font-family);
+}
 
 .hidden .v-input__control{
-    @apply tw-opacity-0
+    opacity: 0;
 }
 
 .ag-center-cols-viewport{
-    @apply tw-px-0.5;
+    padding-left: 0.125rem/* 2px */;
+    padding-right: 0.125rem/* 2px */;
 }
 .ag-cell{
-    @apply tw-flex tw-items-center;
+    display: flex;
+    align-items: center;
 }
 
 .add-button{
-    @apply tw-absolute  tw-bottom-1 tw-right-1 md:tw-bottom-0 md:tw-right-0 tw-z-50;
-}
-
-
-.car-ride-height{
-    @apply tw-max-h-40;
-}
-
-.v-timeline-item__body{
-    @apply !tw-pt-1 !tw-pl-0 !tw-pr-0 !tw-self-auto sm:!tw-pt-0 sm:!tw-pl-4;
+    position: absolute!important;
+    bottom: 4px;
+    right: 4px;
+    z-index: 50;
 }
 
 ::-webkit-scrollbar  {
@@ -72,7 +67,9 @@
 	padding: 0px!important;
 }
 
-
+.leading-none{
+    line-height: 1;
+}
 
 .slide-enter-active,
 .slide-leave-active {
@@ -99,38 +96,6 @@
   left: 0;
 }
 
-.v-timeline .v-timeline-divider__dot {
-    background: none;
-}
-
-.v-timeline--horizontal.v-timeline {
-    grid-column-gap: 10px;
-}
-
-.v-timeline--horizontal {
-    overflow: hidden;
-    overflow-x: auto;
-}
-
-.v-timeline--horizontal::-webkit-scrollbar {
-    display: block;
-    width: 5px;
-}
-
-.v-timeline--horizontal::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.v-timeline--horizontal::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    border-right: none;
-    border-left: none;
-}
-
-.v-expansion-panel-title--active{
-	@apply tw-bg-gray-100
-}
-
 .login-page {
 	background-image: url('/images/back1.jpg');
 	background-position: center;
@@ -145,3 +110,21 @@
     max-width: calc(100% - 15px);
     margin: 12.5px;
 }
+
+.top-0{
+    top: 0px;
+}
+.left-0{
+    left: 0px;
+}
+.right-0{
+    right: 0px;
+}
+.bottom-0{
+    bottom: 0px;
+}
+
+.opacity-0{
+    opacity: 0;
+}
+

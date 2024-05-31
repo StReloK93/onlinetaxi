@@ -50,12 +50,12 @@ const routes: Array<RouteRecordRaw> = [
         component: TransportsPage,
         name: 'transports',
       },
-      {
-        path: '/operator/:id',
-        component: () => import('@/pages/general/OperatorPage.vue'),
-        name: 'operator',
-        props: true,
-      },
+      // {
+      //   path: '/operator/:id',
+      //   component: () => import('@/pages/general/OperatorPage.vue'),
+      //   name: 'operator',
+      //   props: true,
+      // },
     ],
   },
   {

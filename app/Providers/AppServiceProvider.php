@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
-use App\Models\CarRide;
 class AppServiceProvider extends ServiceProvider
 {
     /**
