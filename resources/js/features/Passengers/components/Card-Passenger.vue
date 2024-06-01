@@ -55,7 +55,7 @@
 						v-if="Auth.isAnyAdmins || Auth.user?.id == props.passenger.user_id">
 						<v-btn v-if="Auth.isAnyAdmins" tag="a" :href="`tel:+998${props.passenger.phone}`" size="x-small"
 							variant="plain" color="teal" icon="mdi-phone" />
-						<Edit :id="props.passenger.id"></Edit>
+						<EditForm :id="props.passenger.id"></EditForm>
 						<v-btn size="x-small" @click="passengerDelete" variant="plain" icon="mdi-delete" />
 					</div>
 					<v-chip v-if="Auth.isAnyAdmins" variant="tonal" color="primary"
@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { PassengerRepository, Edit, IPassenger } from '@/features/Passengers';
+import { PassengerRepository, EditForm, IPassenger } from '@/features/Passengers';
 
 import { format } from 'v-money3'
 import { moneyConfig } from '@/modules/constants'

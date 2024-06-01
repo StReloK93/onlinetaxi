@@ -1,16 +1,17 @@
-import Add from "@/features/Passengers/components/AddPassenger.vue";
-import Edit from "@/features/Passengers/components/EditPassenger.vue";
-import PassengerRenderer  from "@/features/Passengers/components/PassengerRenderer.vue";
+import AddForm from "@/features/Passengers/components/AddForm-Passenger.vue";
+import EditForm from "@/features/Passengers/components/EditForm-Passenger.vue";
+import Card  from "@/features/Passengers/components/Card-Passenger.vue";
+import FormInputs from '@/features/Passengers/components/FormInputs-Passenger.vue'
+
 import PassengerRepository from '@/features/Passengers/PassengerRepository'
 import { usePassengerStore } from '@/features/Passengers/PassengerStore';
-import Inputs from '@/features/Passengers/components/InputsPassenger.vue'
 import type { IPassenger } from '@/app/interfaces'
 export {
    IPassenger,
    usePassengerStore,
    PassengerRepository,
-   PassengerRenderer,
-   Add,
-   Inputs,
-   Edit,
+   Card,
+   AddForm,
+   FormInputs,
+   EditForm,
 };

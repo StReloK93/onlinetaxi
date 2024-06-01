@@ -7,17 +7,15 @@
 
 		<BaseForm :loading="pageData.loading" :submit="submitFunction" title="Yo'lovchini tahrirlash"
 			@close="pageData.dialog = false" @vue:mounted="getData(parentProps.id)">
-			<InputsPassenger ref="inputComponent" />
+			<FormInputs ref="inputComponent" />
 		</BaseForm>
 
 	</v-dialog>
 </template>
 <script setup lang="ts">
+import { FormInputs, IPassenger, PassengerRepository } from '..'
 import axios from '@/repository/Clients/AxiosClient'
 import { reactive, ref } from 'vue'
-import InputsPassenger from './InputsPassenger.vue'
-import { PassengerRepository } from '..'
-import { IPassenger } from '@/app/interfaces'
 
 const parentProps = defineProps(['id'])
 const inputComponent = ref()

@@ -21,36 +21,33 @@
 				:loading="pageData.car_input_loading" />
 		</v-col>
 		<v-col sm="6" cols="12" class="py-0">
-			<v-label class="tw-text-xs">
+			<v-label class="text-caption">
 				Transport raqami turini tanlang
 			</v-label>
 			<div class="d-flex justify-space-between mb-2">
 				<v-sheet @click="formData.number_variant = true"
-					:class="{ 'tw-bg-pink-50 !tw-border-pink-600': formData.number_variant }" :height="26" v-ripple
-					class="tw-border rounded tw-border-gray-600 d-flex tw-relative">
-					<div :class="{ '!tw-border-pink-600': formData.number_variant }"
-						class="d-flex justify-center align-center tw-w-7 tw-border tw-border-gray-600">
+					:class="{ 'border-primary border-opacity-100': formData.number_variant }" :height="26" v-ripple
+					class="border rounded d-flex position-relative">
+					<div :class="{ 'border-primary border-opacity-100': formData.number_variant }" class="d-flex justify-center align-center checked-type border">
 						<v-icon v-if="formData.number_variant" color="primary" size="small">
 							mdi-check
 						</v-icon>
 					</div>
-					<div :class="{ '!tw-border-pink-600': formData.number_variant }"
-						class="d-flex justify-space-between align-center pl-1 pr-4 tw-border tw-border-gray-600 flex-grow-1">
-						A 000 AA <img src="/iconos/uz.png" class="tw-w-3 tw-absolute tw-right-0.5 tw-top-0.5">
+					<div :class="{ 'border-primary border-opacity-100': formData.number_variant }"
+						class="d-flex justify-space-between align-center pl-1 pr-4 border flex-grow-1">
+						A 000 AA <img src="/iconos/uz.png" class="position-absolute uz-flag">
 					</div>
 				</v-sheet>
 				<v-sheet @click="formData.number_variant = false"
-					:class="{ 'tw-bg-pink-50 !tw-border-pink-600': !formData.number_variant }" :height="26" v-ripple
-					class="tw-border rounded tw-border-gray-600 d-flex tw-relative">
-					<div :class="{ '!tw-border-pink-600': !formData.number_variant }"
-						class="d-flex justify-center align-center tw-w-7 tw-border tw-border-gray-600">
+					:class="{ 'border-primary border-opacity-100': !formData.number_variant }" :height="26" v-ripple
+					class="border rounded d-flex position-relative">
+					<div :class="{ 'border-primary': !formData.number_variant }" class="d-flex justify-center align-center checked-type border">
 						<v-icon v-if="!formData.number_variant" color="primary" size="small">
 							mdi-check
 						</v-icon>
 					</div>
-					<div :class="{ '!tw-border-pink-600': !formData.number_variant }"
-						class="d-flex justify-space-between align-center pl-1 pr-4 tw-border tw-border-gray-600 flex-grow-1">
-						000 AAA <img src="/iconos/uz.png" class="tw-w-3 tw-absolute tw-right-0.5 tw-top-0.5">
+					<div :class="{ 'border-primary': !formData.number_variant }" class="d-flex justify-space-between align-center pl-1 pr-4 border flex-grow-1">
+						000 AAA <img src="/iconos/uz.png" class="position-absolute uz-flag">
 					</div>
 				</v-sheet>
 			</div>
@@ -132,3 +129,14 @@ onMounted(async () => {
 	emit('onReady')
 })
 </script>
+<style scoped>
+.uz-flag{
+	top: 2px;
+	right: 2px;
+	width: 12px;
+}
+.checked-type{
+	width: 28px;
+}
+ 
+</style>

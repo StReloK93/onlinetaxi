@@ -26,8 +26,7 @@ const methodName = route.meta.method as any
 
 
 watch(() => route.meta.method, async (current) => {
-	//@ts-ignore
-	CarRide.rides = await CarRideRepository[current]()
+	CarRide.rides = await CarRideRepository[methodName]()
 })
 
 onMounted(async () => {

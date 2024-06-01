@@ -1,6 +1,6 @@
 <template>
 	<v-navigation-drawer :temporary="name == 'sm'" v-model="main.menu">
-		<main class="d-flex align-center py-4 px-2 bg-deep-orange-lighten-5">
+		<main class="d-flex align-center py-4 px-2 bg-grey-lighten-3">
 			<v-icon color="primary" size="40">mdi-vuetify</v-icon>
 			<aside>
 				<div class="font-weight-bold text-h6 leading-none mt-2">
