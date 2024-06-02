@@ -9,16 +9,16 @@
         </template>
         <BaseForm :loading="pageData.overlay" :submit="submitFunction" title="Transportni tahrirlash" @vue:mounted="getTransport(propsParent.id)"
             @close="pageData.dialog = false">
-            <Inputs ref="inputComponent" />
+            <FormInputs ref="inputComponent" />
         </BaseForm>
     </v-dialog>
 </template>
 <script setup lang="ts">
 import AxiosClient from '@/repository/Clients/AxiosClient'
-import { useTransport } from '@/store/Transports'
 import { reactive, ref } from 'vue'
-import Inputs from './Inputs.vue'
-const transport = useTransport()
+import { FormInputs, ITransport, useTransport } from '@/features/Transports'
+
+const transportStore = useTransport()
 const inputComponent = ref()
 const propsParent = defineProps(['smButton', 'id'])
 const emit = defineEmits(['update'])
@@ -29,15 +29,15 @@ const pageData = reactive({
 
 async function submitFunction() {
     const formData = inputComponent.value.formData
-    await AxiosClient.put(`user-car/${propsParent.id}`, formData)
-        .then(({ data }) => transport.update(data))
+    await AxiosClient.put<ITransport>(`user-car/${propsParent.id}`, formData)
+        .then(({ data }) => transportStore.update(data))
 }
 
 
 
 function getTransport(id) {
     pageData.overlay = true
-    AxiosClient.get(`user-car/${id}`).then(({ data }) => {
+    AxiosClient.get<ITransport>(`user-car/${id}`).then(({ data }) => {
         const formData = inputComponent.value.formData
         formData.number = data.number
         formData.fuel_type = data.fuel_type

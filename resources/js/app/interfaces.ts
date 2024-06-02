@@ -18,6 +18,7 @@ export interface ITransport{
     car: any,
     number: string,
     fuel_type: number,
+    number_variant: number, 
     fuel: Fuel,
     trunk: boolean,
     updated_at: Date | null,

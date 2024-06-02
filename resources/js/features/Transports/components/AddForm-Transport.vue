@@ -4,7 +4,7 @@
             <v-btn color="primary" v-bind="props" icon="mdi-plus" class="add-button" />
         </template>
         <BaseForm :loading="pageData.overlay" :submit="submitFunction" title="Transport kiritish" @close="pageData.dialog = false">
-            <Inputs @onStart="pageData.overlay = true" @onReady="pageData.overlay = false" ref="inputComponent" />
+            <FormInputs @onStart="pageData.overlay = true" @onReady="pageData.overlay = false" ref="inputComponent" />
         </BaseForm>
     </v-dialog>
 </template>
@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import AxiosClient from '@/repository/Clients/AxiosClient'
 import { reactive, ref } from 'vue'
-import Inputs from './Inputs.vue'
+import { FormInputs, ITransport } from '@/features/Transports';
 const emit = defineEmits(['create'])
 const inputComponent = ref()
 const pageData = reactive({ dialog: false, overlay: false })
@@ -20,7 +20,7 @@ const pageData = reactive({ dialog: false, overlay: false })
 async function submitFunction() {
     const formData = inputComponent.value.formData
 
-    await AxiosClient.post('user-car', formData).then(({ data }) => {
+    await AxiosClient.post<ITransport>('user-car', formData).then(({ data }) => {
         emit('create', data)
         pageData.dialog = false
     })

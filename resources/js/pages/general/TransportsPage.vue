@@ -1,24 +1,19 @@
 <template>
 	<main class="d-flex tw-flex-col">
-		<Add v-if="Auth.isAnyAdmins || Auth.isDriver" @create="(Transport) => transport.agGrid.applyTransaction({ add: [Transport], addIndex: 0 })"></Add>
-		<v-spacer>
-			<!-- <AgGridVue class="ag-theme-ruzzifer ag-theme-alpine h-100"
-				:rowHeight="125" :rowClass="rowClass"
-				:headerHeight="0"
-				:columnDefs="columnDefs" :rowData="transport.transports"
-				@grid-ready="(params) => transport.agGrid = params.api" :getRowId="({ data }) => data.id"
-			/> -->
+		<AddForm v-if="Auth.isAnyAdmins || Auth.isDriver" />
+		<v-spacer class="overflow-hidden position-relative">
+			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-x-auto px-1">
+				<Card v-for="transport in transportStore.transports" :transport="transport" :key="transport.id" />
+			</main>
 		</v-spacer>
 	</main>
 </template>
 
 <script setup lang="ts">
-import { useTransport } from '@/store/Transports'
-import { Add } from '@/features/Transports'
+import { AddForm, Card, useTransport } from '@/features/Transports'
 import { useAuthStore } from '@/store/useAuthStore'
-import { ref } from 'vue'
 const Auth = useAuthStore()
-const transport = useTransport()
-transport.getTransports()
+const transportStore = useTransport()
+
 
 </script>
