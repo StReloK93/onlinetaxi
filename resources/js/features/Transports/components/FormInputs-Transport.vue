@@ -60,7 +60,7 @@
 				:item-value="(item) => item.id" :rules="rules" />
 		</v-col>
 		<v-col sm="6" cols="12">
-			<v-switch v-model="formData.trunk" label="Bagaj" class="px-2"></v-switch>
+			<v-switch v-model="formData.trunk" label="Ustki bagaj" class="px-2"></v-switch>
 		</v-col>
 	</v-row>
 </template>
@@ -69,8 +69,7 @@
 import axios from '@/repository/Clients/AxiosClient'
 import { rules } from '@/modules/constants'
 import { computed, reactive, onMounted } from 'vue'
-const emit = defineEmits(['onReady', 'onStart'])
-emit('onStart')
+const emit = defineEmits(['onReady'])
 
 
 const mask = computed(() => {

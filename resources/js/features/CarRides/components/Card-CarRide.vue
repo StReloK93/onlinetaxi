@@ -133,7 +133,7 @@ function carRideDelete() {
 .car-ride-card {
 	height: 170px;
 	border-left-style: solid;
-	border-left-color: rgb(var(--v-theme-primary))!important;
+	border-left-color: rgb(var(--v-theme-secondary))!important;
 	border-left-width: 2px!important;
 	overflow: hidden;
 }

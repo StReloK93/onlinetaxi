@@ -10,10 +10,13 @@
 </template>
 
 <script setup lang="ts">
-import { AddForm, Card, useTransport } from '@/features/Transports'
+import { AddForm, Card, useTransport, TransportRepository } from '@/features/Transports'
 import { useAuthStore } from '@/store/useAuthStore'
+import { onMounted } from 'vue';
 const Auth = useAuthStore()
 const transportStore = useTransport()
 
-
+onMounted(async () => {
+	await TransportRepository.index()
+})
 </script>

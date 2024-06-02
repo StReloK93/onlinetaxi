@@ -7,18 +7,16 @@
             </v-btn>
             <v-btn v-else size="small" v-bind="props" variant="plain" icon="mdi-pencil" />
         </template>
-        <BaseForm :loading="pageData.overlay" :submit="submitFunction" title="Transportni tahrirlash" @vue:mounted="getTransport(propsParent.id)"
-            @close="pageData.dialog = false">
+        <BaseForm :loading="pageData.overlay" :submit="submitFunction" title="Transportni tahrirlash"
+            @vue:mounted="getTransport(propsParent.id)" @close="pageData.dialog = false">
             <FormInputs ref="inputComponent" />
         </BaseForm>
     </v-dialog>
 </template>
 <script setup lang="ts">
-import AxiosClient from '@/repository/Clients/AxiosClient'
 import { reactive, ref } from 'vue'
-import { FormInputs, ITransport, useTransport } from '@/features/Transports'
+import { FormInputs, TransportRepository } from '@/features/Transports'
 
-const transportStore = useTransport()
 const inputComponent = ref()
 const propsParent = defineProps(['smButton', 'id'])
 const emit = defineEmits(['update'])
@@ -29,28 +27,28 @@ const pageData = reactive({
 
 async function submitFunction() {
     const formData = inputComponent.value.formData
-    await AxiosClient.put<ITransport>(`user-car/${propsParent.id}`, formData)
-        .then(({ data }) => transportStore.update(data))
+    await TransportRepository.update(propsParent.id, formData)
+    pageData.dialog = false
 }
 
 
 
-function getTransport(id) {
+async function getTransport(id) {
     pageData.overlay = true
-    AxiosClient.get<ITransport>(`user-car/${id}`).then(({ data }) => {
-        const formData = inputComponent.value.formData
-        formData.number = data.number
-        formData.fuel_type = data.fuel_type
-        formData.number_variant = data.number_variant
-        formData.car_company_id = data.car.car_company_id
-        
-        formData.trunk = Boolean(data.trunk)
-        
-        inputComponent.value.carMarkChanged(formData.car_company_id).then(() => {
-            formData.car_id = data.car_id
-            pageData.overlay = false
-        })
-        
+    const formData = inputComponent.value.formData
+    const transport = await TransportRepository.show(id)
+
+    formData.number = transport.number
+    formData.fuel_type = transport.fuel_type
+    formData.number_variant = transport.number_variant
+    formData.car_company_id = transport.car.car_company_id
+
+    formData.trunk = Boolean(transport.trunk)
+
+    inputComponent.value.carMarkChanged(formData.car_company_id).then(() => {
+        formData.car_id = transport.car_id
+        pageData.overlay = false
     })
+
 }
 </script>

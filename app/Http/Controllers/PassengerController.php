@@ -40,7 +40,7 @@ class PassengerController extends Controller
         $startCity = $freshedPassenger->start->name;
         $endCity = $freshedPassenger->end->name;
 
-        $date = Carbon::parse($passenger->ride_time)->format('d m');
+        $date = Carbon::parse($passenger->ride_time)->format('d-m-Y');
         $hour = Carbon::parse($passenger->ride_time)->format('H');
 
         $this->firebase->sendToTopic(

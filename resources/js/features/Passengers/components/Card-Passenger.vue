@@ -50,7 +50,8 @@
 						{{ moment(props.passenger.ride_time).format('D-MMMM') }}
 					</span>
 				</div>
-				<div class="d-flex align-end">
+				<div v-else style="height: 44px;"></div>
+				<div class="d-flex">
 					<div class="leading-none"
 						v-if="Auth.isAnyAdmins || Auth.user?.id == props.passenger.user_id">
 						<v-btn v-if="Auth.isAnyAdmins" tag="a" :href="`tel:+998${props.passenger.phone}`" size="x-small"

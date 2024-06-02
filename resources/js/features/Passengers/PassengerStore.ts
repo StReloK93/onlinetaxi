@@ -11,8 +11,8 @@ export const usePassengerStore = defineStore('usePassenger', () => {
 		passengers.value.push(passenger)
 	}
 
-	function update(passenger_id, passenger: IPassenger) {
-		const index = passengers.value.findIndex((passenger) => passenger.id == passenger_id)
+	function update(passenger: IPassenger) {
+		const index = passengers.value.findIndex((passen) => passen.id == passenger.id)
 		passengers.value[index] = passenger
 	}
 

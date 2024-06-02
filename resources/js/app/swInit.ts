@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 import axios from "@/repository/Clients/AxiosClient";
 import { useAuthStore } from '@/store/useAuthStore'
-
+import { useRouter } from "vue-router"
 const firebaseConfig = {
    apiKey: "AIzaSyACb7ABfs-jY6GdnwxKaGv2wObCdh0h-K8",
    authDomain: "online-taxi-a4ac3.firebaseapp.com",
@@ -14,6 +14,7 @@ const firebaseConfig = {
    measurementId: "G-XJ1F3GVPR9",
 };
 export default async function () {
+   const router = useRouter()
    if ("serviceWorker" in navigator) {
       const store = useAuthStore();
       await navigator.serviceWorker.register("/sw.js").then(async (sw) => {
@@ -30,12 +31,15 @@ export default async function () {
 
          messaging.onMessageHandler = function (event) {
             const message = event.notification
-            
+
             var options = {
                body: message.body,
                icon: "/pwa/maskable_icon_x128.png",
             };
-            new Notification(message.title, options);
+            const notification = new Notification(message.title, options)
+            notification.onclick = function(){
+               window.location.href = event.data.url
+            }
          };
 
 

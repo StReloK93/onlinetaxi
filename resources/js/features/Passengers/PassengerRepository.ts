@@ -21,7 +21,7 @@ class Passenger {
 		const { data:passenger } = await Client.put<IPassenger>(`${resource}/${passenger_id}`, formData);
 		
 		const store = usePassengerStore()
-		store.update(passenger_id, passenger)
+		store.update(passenger)
 	}
 	
 	async destroy(passenger_id) {

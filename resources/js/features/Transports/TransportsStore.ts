@@ -1,27 +1,25 @@
 import { defineStore } from "pinia"
 import { ref, Ref, computed } from "vue"
-import axios from "@/repository/Clients/AxiosClient";
 import { ITransport } from "@/app/interfaces"
 export const useTransport = defineStore('useTransport', () => {
 
 	const transports: Ref<ITransport[]> = ref([])
 
 
-	function update(transport) {
-
+	async function create(transport: ITransport) {
+		transports.value.push(transport)
 	}
 
-	function getTransports() {
-		axios.get('user-cars/get-only-my').then(({ data }) => transports.value = data)
+	async function update(transport) {
+		const index = transports.value.findIndex((car) => car.id == transport.id)
+		transports.value[index] = transport
 	}
 
-	function destroy(transport) {
-		axios.delete(`user-car/${transport.id}`).then(() => {
-			transports.value = transports.value.filter((car) => car.id != transport.id)
-		})
+	async function destroy(transport_id) {
+		transports.value = transports.value.filter((car) => car.id != transport_id)
 	}
 
 
 
-	return {  transports, update, getTransports, destroy }
+	return {  transports, create, update,  destroy }
 })
