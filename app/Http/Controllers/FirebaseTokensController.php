@@ -41,6 +41,7 @@ class FirebaseTokensController extends Controller
     }
 
     public function setCityTopic(Request $request){
+
         $this->firebase->clearAllTopics($request->token);
         $this->firebase->subscribeToTopic("city_$request->city_id", $request->token);
 

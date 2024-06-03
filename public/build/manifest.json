@@ -37,12 +37,12 @@
       "resources/js/pages/login/WelcomePage.vue",
       "resources/js/pages/login/InstallAppPage.vue"
     ],
-    "file": "assets/app-95cc3947.js",
+    "file": "assets/app-63a810d3.js",
     "isEntry": true,
     "src": "resources/js/app/app.ts"
   },
   "resources/js/layouts/General.vue": {
-    "file": "assets/General-84895aff.js",
+    "file": "assets/General-4b2c9019.js",
     "imports": [
       "resources/js/app/app.ts"
     ],
@@ -50,7 +50,7 @@
     "src": "resources/js/layouts/General.vue"
   },
   "resources/js/layouts/Login.vue": {
-    "file": "assets/Login-7aea06a9.js",
+    "file": "assets/Login-ba8a5d27.js",
     "imports": [
       "resources/js/app/app.ts"
     ],
@@ -58,7 +58,7 @@
     "src": "resources/js/layouts/Login.vue"
   },
   "resources/js/pages/login/InstallAppPage.vue": {
-    "file": "assets/InstallAppPage-a56ae540.js",
+    "file": "assets/InstallAppPage-3ad800d4.js",
     "imports": [
       "resources/js/app/app.ts"
     ],
@@ -66,7 +66,7 @@
     "src": "resources/js/pages/login/InstallAppPage.vue"
   },
   "resources/js/pages/login/LoginPhonePage.vue": {
-    "file": "assets/LoginPhonePage-836a7ca9.js",
+    "file": "assets/LoginPhonePage-7ab47840.js",
     "imports": [
       "resources/js/app/app.ts"
     ],
@@ -74,7 +74,7 @@
     "src": "resources/js/pages/login/LoginPhonePage.vue"
   },
   "resources/js/pages/login/LoginSendSmsPage.vue": {
-    "file": "assets/LoginSendSmsPage-d95f2321.js",
+    "file": "assets/LoginSendSmsPage-a3c1dcd1.js",
     "imports": [
       "resources/js/app/app.ts"
     ],
@@ -82,7 +82,7 @@
     "src": "resources/js/pages/login/LoginSendSmsPage.vue"
   },
   "resources/js/pages/login/WelcomePage.vue": {
-    "file": "assets/WelcomePage-d937d19b.js",
+    "file": "assets/WelcomePage-4f5ed601.js",
     "imports": [
       "resources/js/app/app.ts"
     ],

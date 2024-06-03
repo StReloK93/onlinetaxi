@@ -49,7 +49,7 @@ const pageData = reactive({
 
 const formData = reactive({
    city_id: null,
-   token: Auth.user.token,
+   token: Auth.token,
 })
 
 
