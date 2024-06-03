@@ -1,9 +1,8 @@
 // import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
-import axios from "@/repository/Clients/AxiosClient";
+import axios from "@/modules/AxiosClient";
 import { useAuthStore } from '@/store/useAuthStore'
-import { useRouter } from "vue-router"
 const firebaseConfig = {
    apiKey: "AIzaSyACb7ABfs-jY6GdnwxKaGv2wObCdh0h-K8",
    authDomain: "online-taxi-a4ac3.firebaseapp.com",
@@ -14,7 +13,6 @@ const firebaseConfig = {
    measurementId: "G-XJ1F3GVPR9",
 };
 export default async function () {
-   const router = useRouter()
    if ("serviceWorker" in navigator) {
       const store = useAuthStore();
       await navigator.serviceWorker.register("/sw.js").then(async (sw) => {

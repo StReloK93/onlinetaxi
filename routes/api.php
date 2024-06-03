@@ -13,6 +13,7 @@ use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\FirebaseTokensController;
 use App\Http\Controllers\CarCompanyController;
+use App\Http\Controllers\OffersPassengerController;
 
 
 
@@ -59,13 +60,17 @@ Route::apiResource('firebase-token', FirebaseTokensController::class)->only(['st
 
 Route::apiResource('car-company', CarCompanyController::class)->only(['index']);
 
-
-
-
-
 Route::middleware('auth:sanctum')->group(function () {
+
+    Route::apiResource('offers-passenger', OffersPassengerController::class)->except(['index']);
+
+
+
+
     Route::apiResource('user-car', UserCarsController::class);
     Route::get('user-cars/get-only-my', [UserCarsController::class, 'getOnlyMy']);
+
+    
 
     
     Route::apiResource('car-ride', CarRideController::class)->except(['index', 'show']);

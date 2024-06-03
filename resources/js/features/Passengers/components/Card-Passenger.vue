@@ -1,5 +1,14 @@
 <template>
 	<section class="passenger-card w-100 d-flex flex-column bg-white elevation-1 mb-2 position-relative rounded-e">
+		<v-btn :to="{ name: 'passenger-offers', params: { id: props.passenger.id } }" size="x-small" variant="plain"
+			class="position-absolute top-0 right-0 z-10" stacked>
+			<v-icon>
+				mdi-message-badge
+			</v-icon>
+			<!-- <span class="text-caption">
+				3
+			</span> -->
+		</v-btn>
 		<main class="pa-2 d-flex flex-column justify-space-between position-relative">
 			<v-icon class="city-direction position-absolute" color="primary">mdi-chevron-down</v-icon>
 			<div class="position-absolute city-line"></div>
@@ -52,8 +61,7 @@
 				</div>
 				<div v-else style="height: 44px;"></div>
 				<div class="d-flex">
-					<div class="leading-none"
-						v-if="Auth.isAnyAdmins || Auth.user?.id == props.passenger.user_id">
+					<div class="leading-none" v-if="Auth.isAnyAdmins || Auth.user?.id == props.passenger.user_id">
 						<v-btn v-if="Auth.isAnyAdmins" tag="a" :href="`tel:+998${props.passenger.phone}`" size="x-small"
 							variant="plain" color="teal" icon="mdi-phone" />
 						<EditForm :id="props.passenger.id"></EditForm>
@@ -101,8 +109,8 @@ function passengerDelete() {
 .passenger-card {
 	height: 140px;
 	border-left-style: solid;
-	border-left-color: rgb(var(--v-theme-primary))!important;
-	border-left-width: 2px!important;
+	border-left-color: rgb(var(--v-theme-primary)) !important;
+	border-left-width: 2px !important;
 	overflow: hidden;
 }
 
@@ -115,12 +123,16 @@ function passengerDelete() {
 	left: 13px;
 }
 
-.city-direction{
+.city-direction {
 	top: 34px;
 	left: 2px;
 }
 
-.point-top{
+.point-top {
 	position: relative;
+}
+
+.z-10 {
+	z-index: 10;
 }
 </style>

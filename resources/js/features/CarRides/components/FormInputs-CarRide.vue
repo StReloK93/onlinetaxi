@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import axios from "@/repository/Clients/AxiosClient";
+import axios from "@/modules/AxiosClient";
 import { moneyConfig, rules } from '@/modules/constants'
 import { reactive, onMounted } from 'vue'
 const emit = defineEmits(['onReady'])

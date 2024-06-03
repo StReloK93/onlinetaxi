@@ -6,7 +6,7 @@
 		</template>
 
 		<BaseForm :loading="pageData.loading" :submit="submitFunction" title="Yo'lovchini tahrirlash"
-			@close="pageData.dialog = false" @vue:mounted="getData(parentProps.id)">
+			@close="pageData.dialog = false" @vue:mounted="getPassenger()">
 			<FormInputs ref="inputComponent" />
 		</BaseForm>
 
@@ -14,13 +14,10 @@
 </template>
 <script setup lang="ts">
 import { FormInputs, IPassenger, PassengerRepository } from '..'
-import axios from '@/repository/Clients/AxiosClient'
 import { reactive, ref } from 'vue'
 
 const parentProps = defineProps(['id'])
 const inputComponent = ref()
-
-const emit = defineEmits(['update'])
 
 const pageData = reactive({
 	dialog: false,
@@ -35,25 +32,26 @@ async function submitFunction() {
 
 
 
-function getData(id) {
+async function getPassenger() {
 	pageData.loading = true
-	axios.get<IPassenger>(`passenger/${id}`).then(async ({ data }) => {
-		const formData: IPassenger = inputComponent.value.formData
-		formData.phone = data.phone
-		formData.address = data.address
-		formData.start_region = data.start.region_id
-		formData.end_region = data.end.region_id
-		formData.price = data.price
-		formData.count = data.count
-		formData.ride_time = data.ride_time
-		formData.with_trunk = Boolean(data.with_trunk)
+	
+	const passenger = await PassengerRepository.show(parentProps.id)
 
-		await inputComponent.value.regionChanged(formData.start_region, 'start')
-			.then(() => formData.start_city = data.start_city)
-		await inputComponent.value.regionChanged(formData.end_region, 'end')
-			.then(() => formData.end_city = data.end_city)
+	const formData: IPassenger = inputComponent.value.formData
+	formData.phone = passenger.phone
+	formData.address = passenger.address
+	formData.start_region = passenger.start.region_id
+	formData.end_region = passenger.end.region_id
+	formData.price = passenger.price
+	formData.count = passenger.count
+	formData.ride_time = passenger.ride_time
+	formData.with_trunk = Boolean(passenger.with_trunk)
 
-		pageData.loading = false
-	})
+	await inputComponent.value.regionChanged(formData.start_region, 'start')
+		.then(() => formData.start_city = passenger.start_city)
+	await inputComponent.value.regionChanged(formData.end_region, 'end')
+		.then(() => formData.end_city = passenger.end_city)
+
+	pageData.loading = false
 }
 </script>

@@ -1,4 +1,4 @@
-import Client from "@/repository/Clients/AxiosClient";
+import Client from "@/modules/AxiosClient";
 import { ICarRide } from '@/app/interfaces'
 const resource = "car-ride";
 

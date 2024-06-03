@@ -1,7 +1,7 @@
 import { defineStore } from "pinia"
 import { ref, computed, Ref } from "vue"
 import router from "@/routes"
-import AxiosClient from "@/repository/Clients/AxiosClient"
+import AxiosClient from "@/modules/AxiosClient"
 export const useAuthStore = defineStore("Auth", () => {
    const user: Ref = ref(null);
    const token: Ref = ref(null);

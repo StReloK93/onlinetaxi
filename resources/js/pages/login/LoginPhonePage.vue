@@ -1,10 +1,10 @@
 <template>
 	<v-form @submit.prevent="signin">
-		<div class="text-center py-4 mb-2 -tw-m-3 tw-rounded tw-bg-yellow-200/40">
+		<div class="text-center ma-n3 rounded bg-amber-lighten-4">
 			<img src="/iconos/logo.png"  width="100" class="d-inline">
 			<!-- <h3 class="tw-text-xl mt-2 tw-font-semibold tw-uppercase">Shaharlararo online taxi</h3> -->
 		</div>
-		<v-col class="pa-0">
+		<v-col class="pa-0 pt-5">
 			<v-label>
 				Telefon raqamingizni kiriting
 			</v-label>
@@ -14,7 +14,7 @@
 				<v-text-field class="pr-2 flex-0-0" readonly variant="filled" density="compact" value="+998">
 					<template v-slot:prepend-inner>
 						<v-icon>
-							<img src="/iconos/uz.png">
+							<img src="/iconos/uz.png" class="w-100">
 						</v-icon>
 					</template>
 				</v-text-field>

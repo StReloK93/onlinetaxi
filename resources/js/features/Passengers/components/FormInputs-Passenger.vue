@@ -1,9 +1,12 @@
 <template>
 	<v-row>
-		<v-col sm="6" cols="12">
-			<v-label class="text-caption">
-				Boshlangich manzil (Qaerdan?)
+
+		<v-col cols="12" class="py-0">
+			<v-label class="text-subtitle-1 mr-1">
+				Qaerdan?
 			</v-label>
+		</v-col>
+		<v-col sm="6" cols="12">
 			<v-autocomplete @update:model-value="(id) => regionChanged(id, 'start')" :items="pageData.regions"
 				v-model="formData.start_region" label="Viloyat" item-title="name" :item-value="(item) => item.id"
 				:rules="rules" />
@@ -13,11 +16,15 @@
 				v-model="formData.start_city" label="Shahar (Tuman)" item-title="name" :loading="pageData.start_loading"
 				:item-value="(item) => item.id" :rules="rules" />
 		</v-col>
+
 		<v-divider></v-divider>
-		<v-col sm="6" cols="12">
-			<v-label class="text-caption">
-				Boriladigan manzil (Qaerga?)
+
+		<v-col cols="12" class="py-0">
+			<v-label class="text-subtitle-1 mr-1">
+				Qaerga?
 			</v-label>
+		</v-col>
+		<v-col sm="6" cols="12">
 			<v-autocomplete @update:model-value="(id) => regionChanged(id, 'end')" :items="pageData.regions"
 				v-model="formData.end_region" label="Viloyat" item-title="name" :item-value="(item) => item.id"
 				:rules="rules" />
@@ -27,33 +34,25 @@
 				v-model="formData.end_city" label="Shahar (Tuman)" item-title="name" :item-value="(item) => item.id"
 				:loading="pageData.end_loading" :rules="rules" />
 		</v-col>
+
 		<v-col sm="6" cols="12">
 			<VDatePicker :trim-weeks="true" color="pink" :min-date="new Date()" v-model.string="formData.ride_time"
 				:masks="{ modelValue: 'YYYY-MM-DD HH:mm' }" mode="dateTime" is24hr transparent borderless expanded
 				hide-time-header is-required />
 		</v-col>
-		<v-divider></v-divider>
-		<v-col sm="6" cols="12">
-			<BaseUzPhoneInput v-model="formData.phone" />
-		</v-col>
-		<v-col sm="6" cols="12">
-			<v-text-field v-model="formData.address" :step="900" label="Yo'lovchining manzili" :rules="rules" />
-		</v-col>
-		<v-col sm="6" cols="12">
-			<v-text-field v-model="formData.count" label="Necha kishi" :rules="rules" />
-		</v-col>
-		<v-col sm="6" cols="12">
-			<v-text-field v-model="formData.price" label="Yo'lkira narxi" type="number" :rules="rules" />
-		</v-col>
 
 		<v-col sm="6" cols="12">
-			<v-switch v-model="formData.with_trunk" label="Bagaj"></v-switch>
+			<BaseUzPhoneInput v-model="formData.phone" class="mb-4" />
+			<v-text-field v-model="formData.count" label="Necha kishi" :rules="rules" class="mb-4" />
+			<v-text-field v-model="formData.price" label="Yo'lkira narxi" type="number" :rules="rules" class="mb-4" />
+			<v-text-field v-model="formData.address" :step="900" label="Yo'lovchining manzili" :rules="rules" class="mb-4" />
+			<v-switch v-model="formData.with_trunk" label="Ustki bagaj"></v-switch>
 		</v-col>
 	</v-row>
 </template>
 
 <script setup lang="ts">
-import axios from '@/repository/Clients/AxiosClient'
+import axios from '@/modules/AxiosClient'
 import { IPassenger } from '@/app/interfaces'
 import { rules } from '@/modules/constants'
 import { reactive } from 'vue'

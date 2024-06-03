@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import axios from '@/repository/Clients/AxiosClient'
+import axios from '@/modules/AxiosClient'
 import { IPassenger } from '@/app/interfaces'
 import { rules, phoneMask } from '@/modules/constants'
 import { reactive } from 'vue'

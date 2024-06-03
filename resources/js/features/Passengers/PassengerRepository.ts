@@ -1,4 +1,4 @@
-import Client from "@/repository/Clients/AxiosClient";
+import Client from "@/modules/AxiosClient";
 import { IPassenger } from "@/app/interfaces";
 import { usePassengerStore } from "@/features/Passengers/PassengerStore";
 const resource = "passenger"
@@ -7,6 +7,11 @@ const resource = "passenger"
 class Passenger {
    async index() {
       const { data } = await Client.get<IPassenger[]>(resource);
+      return data;
+   }
+
+   async show(passenger_id) {
+      const { data } = await Client.get<IPassenger>(`${resource}/${passenger_id}`);
       return data;
    }
 

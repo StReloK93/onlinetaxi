@@ -66,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import axios from '@/repository/Clients/AxiosClient'
+import axios from '@/modules/AxiosClient'
 import { rules } from '@/modules/constants'
 import { computed, reactive, onMounted } from 'vue'
 const emit = defineEmits(['onReady'])

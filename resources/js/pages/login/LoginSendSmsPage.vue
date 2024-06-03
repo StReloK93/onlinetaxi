@@ -1,18 +1,18 @@
 <template>
-   <v-form @submit.prevent="submit" class="text-center d-flex flex-column tw-items-center">
+   <v-form @submit.prevent="submit" class="text-center d-flex flex-column align-center">
       <div class="d-flex tw-justify-start w-100">
          <v-btn @click="$router.go(-1)" icon="mdi-arrow-left-thin" size="small" variant="tonal" />
       </div>
       <h3 class="text-h5 font-weight-bold">Telefon raqamni tasdiqlash</h3>
-      <p class="my-2 d-flex tw-items-center tw-justify-start">
-         <span class="tw-text-sm font-weight-bold text-grey-darken-3">
-            +998 <input type="text" class="tw-w-[90px]" v-maska:[options] v-model="statePhone" disabled>
+      <p class="my-2 d-flex align-center justify-between-start">
+         <span class="text-caption font-weight-bold text-grey-darken-3">
+            +998 <input type="text" style="width: 90px;" v-maska:[options] v-model="statePhone" disabled>
          </span>
       </p>
       <div class="text-red">
          {{ errors }}
       </div>
-      <p class="text-grey-darken-1 w-75 ">
+      <p class="text-grey-darken-1 w-75">
          Kiritgan raqamingizga tasdiqlovchi maxfiy kod junatildi.
       </p>
       <v-otp-input v-model="secredCode" length="5"></v-otp-input>

@@ -37,4 +37,10 @@ class Passenger extends Model
     {
         return $this->belongsTo(District::class, 'end_city' ,'id')->with('region');
     }
+
+
+    public function offers()
+    {
+        return $this->hasMany(OffersPassenger::class);
+    }
 }

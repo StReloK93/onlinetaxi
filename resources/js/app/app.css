@@ -1,18 +1,6 @@
-body{
-    font-family:  var(--ag-font-family);
-}
 
 .hidden .v-input__control{
     opacity: 0;
-}
-
-.ag-center-cols-viewport{
-    padding-left: 0.125rem/* 2px */;
-    padding-right: 0.125rem/* 2px */;
-}
-.ag-cell{
-    display: flex;
-    align-items: center;
 }
 
 .add-button{
@@ -33,34 +21,6 @@ body{
 
 ::-webkit-scrollbar-thumb {
     background-color: #ccc;
-}
-
-.ag-theme-ruzzifer {
-    /* customise with CSS variables */
-    --ag-border-color: transparent;
-    --ag-header-height: 30px;
-    --ag-header-cell-hover-background-color: rgb(230, 230, 230);
-    --ag-header-cell-moving-background-color: rgb(207, 207, 207);
-    /* --ag-alpine-active-color: transparent; */
-    --ag-background-color: transparent;
-    --ag-selected-row-background-color: rgb(245, 245, 245);
-
-    /* text color */
-    --ag-foreground-color: rgb(19, 19, 19);
-    /* header text color */
-    --ag-header-foreground-color: rgb(48, 48, 48);
-    /* header back */
-    --ag-header-background-color: transparent;
-
-    /* --ag-odd-row-background-color: orange; */
-    --ag-row-hover-color: none;
-    --ag-header-column-resize-handle-color: rgb(214, 214, 214);
-    --ag-row-border-width: 0px;
-    --ag-range-selection-border-color: transparent;
-}
-
-.ag-cell{
-    border: none!important;
 }
 
 .operator .v-expansion-panel-text__wrapper{

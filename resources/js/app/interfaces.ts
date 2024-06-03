@@ -32,6 +32,18 @@ export interface Fuel{
     created_at: Date | null,
 }
 
+export interface IOffersPassenger{
+    id?: number,
+    user_id?: number,
+    user_car_id?: number,
+    user_car: ITransport,
+    passenger_id: number,
+    ride_time: Date,
+    price: number,
+    updated_at?: Date | null,
+    created_at?: Date | null,
+}
+
 export interface Region{
     id: number,
     name: string,
@@ -84,6 +96,7 @@ export interface IPassenger{
     loading: boolean,
     phone: string,
     address: string,
+    offers?: IOffersPassenger[],
     start_city: number,
     start?: Districts,
     start_region?: number,

@@ -2,6 +2,7 @@ import { RouteRecordRaw } from 'vue-router'
 import CarRidePage from '@/pages/general/CarRidesPage.vue'
 import TransportsPage from '@/pages/general/TransportsPage.vue'
 import PassengersPage from '@/pages/general/PassengersPage.vue'
+import OffersPassengerPage from '@/pages/general/OffersPassengerPage.vue'
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -49,6 +50,15 @@ const routes: Array<RouteRecordRaw> = [
         path: '/transports',
         component: TransportsPage,
         name: 'transports',
+      },
+      {
+        path: '/passengers/:id/offers',
+        component: OffersPassengerPage,
+        name: 'passenger-offers',
+        props: true,
+        meta: {
+          clear: true
+        }
       },
       // {
       //   path: '/operator/:id',

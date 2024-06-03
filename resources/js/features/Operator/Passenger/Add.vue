@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import axios from '@/repository/Clients/AxiosClient'
+import axios from '@/modules/AxiosClient'
 import { reactive, ref, computed } from 'vue'
 import Inputs from './Inputs.vue'
 import { IPassenger } from '@/app/interfaces'

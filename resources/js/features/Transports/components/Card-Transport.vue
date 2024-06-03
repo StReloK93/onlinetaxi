@@ -1,5 +1,5 @@
 <template>
-	<section class="transport-card px-2 w-100 d-flex flex-column bg-white elevation-1 mb-2">
+	<section class="transport-card px-2 w-100 d-flex flex-column bg-white elevation-1 rounded-e mb-2">
 		<aside class="d-flex justify-space-between flex-grow-1 pt-1">
 			<main>
 				<h3 class="text-uppercase text-h5 text-primary leading-none">
@@ -50,7 +50,7 @@ function deleteTransport() {
 
 <style scoped>
 .transport-card {
-	height: 140px;
+	height: 110px;
 	border-left-style: solid;
 	border-left-color: rgb(var(--v-theme-primary)) !important;
 	border-left-width: 2px !important;

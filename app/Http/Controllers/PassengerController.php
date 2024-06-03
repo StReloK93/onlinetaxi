@@ -49,7 +49,7 @@ class PassengerController extends Controller
                 "$date kuni soat $hour da $startCity dan $endCity ga $freshedPassenger->count kishi bor",
                 "Iltimos ketadigan bo'lsalaring qanchaga va qachon olib ketishingizni yozib yuboring.",
             ],
-            url('/passengers')
+            url("/passengers/$passenger->id/offers")
         );
         return $freshedPassenger;
     }
@@ -73,6 +73,7 @@ class PassengerController extends Controller
 
     public function show(Passenger $passenger)
     {
+        $passenger->offers;
         return $passenger;
     }
 

@@ -2,7 +2,7 @@
 	<header>
 		<TheLeftNavigator />
 		<TheAppBar />
-		<TheLittleAppBar />
+		<TheLittleAppBar v-if="$route.meta.clear != true" />
 	</header>
 </template>
 
