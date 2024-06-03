@@ -37,7 +37,9 @@
          <AddForm />
       </div>
       <section>
-         <Card v-for="offer in offersStore.offers" :offer="offer" :key="offer.id"/>
+         <TransitionGroup name="list">
+            <Card v-for="offer in offersStore.offers" :offer="offer" :key="offer.id" />
+         </TransitionGroup>
       </section>
    </section>
 </template>

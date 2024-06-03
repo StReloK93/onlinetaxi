@@ -37,10 +37,10 @@ export const useCarRideStore = defineStore("useCarRide", () => {
       rides.value[index] = ride;
    }
 
-   async function destroy(ride) {
-      await CarRideRepository.destroy(ride.id);
+   async function destroy(ride_id) {
+      await CarRideRepository.destroy(ride_id);
 
-      rides.value = rides.value.filter((car_ride) => car_ride.id != ride.id);
+      rides.value = rides.value.filter((car_ride) => car_ride.id != ride_id);
    }
 
    async function setInactive(ride) {

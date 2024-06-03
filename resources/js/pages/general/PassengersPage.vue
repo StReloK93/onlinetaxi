@@ -3,7 +3,9 @@
 		<AddForm v-if="Auth.isAnyAdmins || Auth.isPassenger" @create="onCreate" />
 		<v-spacer class="overflow-hidden position-relative">
 			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-x-auto px-1">
-				<Card v-for="passenger in passengerStore.passengers" :passenger="passenger" />
+				<TransitionGroup name="list">
+					<Card v-for="passenger in passengerStore.passengers" :passenger="passenger" :key="passenger.id"/>
+				</TransitionGroup>
 			</main>
 		</v-spacer>
 	</main>

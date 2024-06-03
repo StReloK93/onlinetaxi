@@ -7,7 +7,9 @@
 		</main>
 		<v-spacer class="overflow-hidden position-relative">
 			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-x-auto px-1">
-				<CardCarRide v-for="ride in CarRide.rides" :ride="ride" :key="ride.id" />
+				<TransitionGroup name="list">
+					<CardCarRide v-for="ride in CarRide.rides" :ride="ride" :key="ride.id" />
+				</TransitionGroup>
 			</main>
 		</v-spacer>
 	</main>
@@ -54,7 +56,7 @@ CarRide.agGrid.redrawRows() -->
     //     onCreate(event.msg)
     // }) -->
 
-	<!-- function setrowHeight(height) {
+<!-- function setrowHeight(height) {
 		CarRide.agRowHeight = height;
 		setTimeout(() => CarRide.agGrid.resetRowHeights())
 	}

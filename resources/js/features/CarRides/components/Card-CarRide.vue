@@ -5,7 +5,7 @@
 			<div
 				class="position-absolute city-line">
 			</div>
-			<template v-for="(item, index) in carRide.cities">
+			<template v-for="(item, index) in props.ride.cities">
 				<aside v-if="latest(index) || first(index)" :class="[ {'mb-2': first(index)}]" class="leading-none d-flex align-center">
 					<v-icon class="mr-1 text-caption" :class="[{'opacity-0': latest(index)}]" color="primary">
 						mdi-circle-medium
@@ -26,19 +26,19 @@
 					<main>
 						<div>
 							<span class="text-h5 mr-2 leading-none">
-								{{ carRide.user_car.car.name }}
+								{{ props.ride.user_car.car.name }}
 							</span>
 							<br>
 							<span class="text-grey-lighten-1 text-caption mt-n1 d-block">
-								{{ carRide.user_car.number }}
+								{{ props.ride.user_car.number }}
 							</span>
 						</div>
 						<div v-if="Auth.isPassenger" class="text-grey-darken-1">
-							<a :href="`tel:${carRide.phone}`">{{ carRide.phone }}</a>
+							<a :href="`tel:${props.ride.phone}`">{{ props.ride.phone }}</a>
 						</div>
 					</main>
 					<main class="d-flex align-end">
-						<span v-for="(n,index) in carRide.free_seat">
+						<span v-for="(n,index) in props.ride.free_seat">
 							<v-icon v-if="index < aviablePassengersCount" size="small" color="primary">mdi-account</v-icon>
 							<v-icon v-else size="small" color="grey-lighten-1">mdi-account</v-icon>
 						</span>
@@ -48,12 +48,12 @@
 			<section class="d-flex justify-space-between align-center">
 				<div class="leading-none">
 					<p class="text-grey-darken-1 mb-n2 text-caption">
-						{{ moment(carRide.day).format('HH:mm') }}
+						{{ moment(props.ride.day).format('HH:mm') }}
 					</p>
 					<span
 						class="text-uppercase text-h6 font-weight-bold text-grey-darken-2 d-inline-flex items-center">
-						{{ moment(carRide.day).format('D-MMMM') }}
-						<v-btn v-if="carRide.strictly_on_time" icon="" size="x-small" variant="text">
+						{{ moment(props.ride.day).format('D-MMMM') }}
+						<v-btn v-if="props.ride.strictly_on_time" icon="" size="x-small" variant="text">
 							<v-icon>mdi-book-clock</v-icon>
 							<v-tooltip activator="parent" :open-on-click="true" location="bottom">
 								Qat'iy shu vaqtda
@@ -64,14 +64,14 @@
 				<div class="d-flex align-end">
 					<div :class="{'-tw-translate-x-24': Auth.isAnyAdmins}"
 						class="leading-none"
-						v-if="Auth.isAnyAdmins || Auth.user?.id == carRide.user_id"
+						v-if="Auth.isAnyAdmins || Auth.user?.id == props.ride.user_id"
 						>
-						<v-btn v-if="Auth.isAnyAdmins" tag="a" :href="`tel:+998${carRide.phone}`" size="x-small" variant="plain" color="teal" icon="mdi-phone"></v-btn>
-						<EditForm :date="true" :id="carRide.id"></EditForm>
+						<v-btn v-if="Auth.isAnyAdmins" tag="a" :href="`tel:+998${props.ride.phone}`" size="x-small" variant="plain" color="teal" icon="mdi-phone"></v-btn>
+						<EditForm :date="true" :id="props.ride.id"></EditForm>
 						<v-btn size="x-small" @click="carRideDelete" variant="plain" icon="mdi-delete" />
 					</div>
 					<v-chip v-if="Auth.isAnyAdmins" variant="tonal" color="primary" class="font-weight-medium rounded-e-0 me-n2">
-						{{ format(carRide.price, moneyConfig) }} so'm
+						{{ format(props.ride.price, moneyConfig) }} so'm
 					</v-chip>
 				</div>
 			</section>
@@ -88,18 +88,17 @@ import { moneyConfig } from '@/modules/constants'
 import moment from '@/modules/moment'
 import { ICarRide } from '@/app/interfaces'
 import { computed } from 'vue'
-const CarRide = useCarRideStore()
+const carRideStore = useCarRideStore()
 
 const props = defineProps(['ride'])
-const carRide = props.ride as ICarRide
 
 const store = useMainStore()
 const Auth = useAuthStore()
 
-const aviablePassengersCount = computed(() => carRide.passengers.reduce((acc, pass) => acc += pass.count, 0))
+const aviablePassengersCount = computed(() => props.ride.passengers.reduce((acc, pass) => acc += pass.count, 0))
 
 const latest = (index) => {
-	return carRide.cities.length - 1 == index
+	return props.ride.cities.length - 1 == index
 }
 const first = (index) => {
 	return index == 0
@@ -110,7 +109,7 @@ function carRideDelete() {
 	store.dialog.open(() => {
 		store.dialog.title = "Qatnovni o'chirmoqchimisiz ?"
 		store.dialog.subTitle = "O'chirilgan qatnovlarni qayta tiklashni imkoni yo'q"
-		store.dialog.submit = () => CarRide.destroy(carRide)
+		store.dialog.submit = () => carRideStore.destroy(props.ride.id)
 	})
 }
 </script>
