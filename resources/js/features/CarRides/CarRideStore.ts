@@ -4,7 +4,7 @@ import { ICarRide } from "@/app/interfaces";
 import { hasDuplicates } from "@/modules/constants";
 import { CarRideRepository } from "@/features/CarRides/index";
 
-export const useCarRideStore = defineStore("useCarRide", () => {
+export const useCarRide = defineStore("useCarRide", () => {
 
    const rides = ref([]);
    const districts = ref([]);

@@ -1,8 +1,9 @@
 <template>
    <v-app-bar density="compact" :elevation="0" :border="1">
       <div class="text-right w-100 px-2">
-         <v-btn @click="bottomSheet = true" :text="stringButton" append-icon="mdi-map-marker"
-            :loading="pageData.loading"></v-btn>
+         <v-btn v-if="pageData.notification" @click="bottomSheet = true" :text="stringButton"
+            append-icon="mdi-map-marker" :loading="pageData.loading"></v-btn>
+         <v-btn v-else disabled>Habarnoma o'chirilgan</v-btn>
       </div>
       <v-bottom-sheet v-model="bottomSheet" inset>
          <BaseForm :loading="pageData.overlay" :submit="updateTopic" title="Manzilni o'zgartirish"
@@ -27,18 +28,19 @@
 </template>
 
 <script setup lang="ts">
-import axios from "@/modules/AxiosClient";
+import axios from "@/modules/AxiosClient"
 import { ref, onMounted, reactive, computed } from 'vue'
-import { rules } from '@/modules/constants';
+import { rules } from '@/modules/constants'
 import { useAuthStore } from '@/store/useAuthStore'
 const Auth = useAuthStore()
 
 const city = ref(null)
 const bottomSheet = ref(false)
 
-const stringButton = computed(() => city.value?.name ? city.value?.name : 'Tanlang')
+const stringButton = computed(() => city.value?.name ? city.value?.name : 'Qayerdasiz')
 
 const pageData = reactive({
+   notification: true,
    overlay: false,
    loading: true,
    city_loading: false,
@@ -84,10 +86,13 @@ async function updateTopic() {
 
 
 onMounted(async () => {
-   axios.post('firebase/get-city-topic', { token: Auth.token }).then(({data: current_city}) => {
+   axios.post('firebase/get-city-topic', { token: Auth.token }).then(({ data: current_city }) => {
       city.value = current_city
       pageData.loading = false
-
+   }).catch(() => {
+      console.clear()
+      pageData.notification = false
+      pageData.loading = false
    })
 })
 </script>

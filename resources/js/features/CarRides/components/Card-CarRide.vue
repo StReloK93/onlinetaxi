@@ -80,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import { EditForm, useCarRideStore } from '@/features/CarRides'
+import { EditForm, useCarRide } from '@/features/CarRides'
 import { useAuthStore } from '@/store/useAuthStore'
 import { useMainStore } from '@/store/useMainStore'
 import { format } from 'v-money3'
@@ -88,7 +88,7 @@ import { moneyConfig } from '@/modules/constants'
 import moment from '@/modules/moment'
 import { ICarRide } from '@/app/interfaces'
 import { computed } from 'vue'
-const carRideStore = useCarRideStore()
+const rideStore = useCarRide()
 
 const props = defineProps(['ride'])
 
@@ -97,19 +97,15 @@ const Auth = useAuthStore()
 
 const aviablePassengersCount = computed(() => props.ride.passengers.reduce((acc, pass) => acc += pass.count, 0))
 
-const latest = (index) => {
-	return props.ride.cities.length - 1 == index
-}
-const first = (index) => {
-	return index == 0
-}
+const latest = index => props.ride.cities.length - 1 == index
+const first = index => index == 0
 
 
 function carRideDelete() {
 	store.dialog.open(() => {
 		store.dialog.title = "Qatnovni o'chirmoqchimisiz ?"
 		store.dialog.subTitle = "O'chirilgan qatnovlarni qayta tiklashni imkoni yo'q"
-		store.dialog.submit = () => carRideStore.destroy(props.ride.id)
+		store.dialog.submit = () => rideStore.destroy(props.ride.id)
 	})
 }
 </script>

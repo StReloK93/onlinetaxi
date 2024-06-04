@@ -34,15 +34,15 @@
 <script setup lang="ts">
 import moment from '@/modules/moment'
 import { reactive, computed, watch } from 'vue'
-import { useCarRideStore } from '@/features/CarRides/CarRideStore'
-const CarRide = useCarRideStore()
+import { useCarRide } from '@/features/CarRides/CarRideStore'
+const rideStore = useCarRide()
 
 
 const filter = reactive({ start_city: null, end_city: null, day: null, strictly_on_time: false })
 
 const start_cities = computed(() => {
-	if (CarRide.rides == null) return []
-	const array = CarRide.rides.map((ride) => ride.cities[0]?.district)
+	if (rideStore.rides == null) return []
+	const array = rideStore.rides.map((ride) => ride.cities[0]?.district)
 	return array.filter((value, index, self) =>
 		index === self.findIndex((t) => (
 			t.id === value.id
@@ -51,9 +51,9 @@ const start_cities = computed(() => {
 })
 
 const end_cities = computed(() => {
-	if (CarRide.rides == null) return []
+	if (rideStore.rides == null) return []
 	const array = []
-	CarRide.rides.forEach(element => {
+	rideStore.rides.forEach(element => {
 		element.cities.forEach((item, index) => {
 			if (index != 0) array.push(item.district)
 		});
