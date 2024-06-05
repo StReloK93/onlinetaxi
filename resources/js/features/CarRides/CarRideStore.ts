@@ -3,20 +3,20 @@ import { ref, Ref, computed } from "vue";
 import { ICarRide } from "@/app/interfaces";
 import { hasDuplicates } from "@/modules/constants";
 import { CarRideRepository } from "@/features/CarRides/index";
-
+import { useAuthStore } from "@/store/useAuthStore"
 export const useCarRide = defineStore("useCarRide", () => {
 
    const rides = ref([]);
    const districts = ref([]);
-   
-
+   const filters = ref(null)
+   const AuthStore = useAuthStore()
    async function getOnlyActive() {
       rides.value = await CarRideRepository.getOnlyActive();
-	}
-	
-	async function getOnlyInactive() {
-      rides.value = await CarRideRepository.getOnlyInactive();
    }
+
+   // async function getOnlyInactive() {
+   //    rides.value = await CarRideRepository.getOnlyInactive();
+   // }
 
    async function getRidesByRegion(region_id) {
       const result = await CarRideRepository.getRidesByRegion(region_id);
@@ -25,7 +25,7 @@ export const useCarRide = defineStore("useCarRide", () => {
    }
 
 
-// ------------------------
+   // ------------------------
 
 
    async function create(ride) {
@@ -41,20 +41,34 @@ export const useCarRide = defineStore("useCarRide", () => {
       rides.value = rides.value.filter((car_ride) => car_ride.id != ride_id);
    }
 
-   async function setInactive(ride) {
-      await CarRideRepository.setInActive(ride.id);
-
-      rides.value = rides.value.filter((car_ride) => car_ride.id != ride.id);
+   async function inactivate(ride_id) {
+      console.log(ride_id);
+      
+      const index = rides.value.findIndex((car_ride) => car_ride.id == ride_id);
+      rides.value[index].state = 2
    }
+
+   async function activate(ride_id) {
+      const index = rides.value.findIndex((car_ride) => car_ride.id == ride_id);
+      rides.value[index].state = 1;
+   }
+
+   const activeRides = computed(() => {
+      return rides.value.filter((ride) => {
+         if (filters.value == 'actives') return ride.state == 1
+         else if (filters.value == 'auth-user') return [1, 2].includes(ride.state) && ride.user_id == AuthStore.user.id
+         return true
+      })
+   }
+   )
 
    const groupRides: any = computed(() => {
       const dists = {};
       districts.value?.forEach((district) => {
          rides.value.forEach((ride) => {
             if (district.id == ride.cities[0].district_id) {
-               let group = `${ride.cities.at(-1).district.region.name} ${
-                  ride.cities.at(-1).district.name
-               }`;
+               let group = `${ride.cities.at(-1).district.region.name} ${ride.cities.at(-1).district.name
+                  }`;
                const array = group.split(" ");
                if (hasDuplicates(array))
                   group = ride.cities.at(-1).district.name;
@@ -105,15 +119,18 @@ export const useCarRide = defineStore("useCarRide", () => {
    }
 
    return {
+      activeRides,
       rides,
+      filters,
       districts,
       groupRides,
-      setInactive,
+      activate,
+      inactivate,
       create,
       update,
       destroy,
-		getOnlyActive,
-		getOnlyInactive,
+      getOnlyActive,
+      // getOnlyInactive,
       getRidesByRegion,
       createPassenger,
       updatePassenger,

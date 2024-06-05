@@ -1,6 +1,6 @@
 <template>
 	<v-navigation-drawer :temporary="name == 'sm'" v-model="main.menu">
-		<main class="d-flex align-center py-4 px-2 bg-grey-lighten-3">
+		<main class="d-flex align-center py-4 px-2 bg-grey-lighten-4">
 			<v-icon color="primary" size="40">mdi-vuetify</v-icon>
 			<aside>
 				<div class="font-weight-bold text-h6 leading-none mt-2">
@@ -17,8 +17,8 @@
 				<!-- <v-list-item prepend-icon="mdi-phone-classic" title="Operatorlarga"
 					:class="{ 'text-primary v-list-item--active': $route.name == 'operator' }" color="primary"
 					:to="{ name: 'operator', params: { id: 1 } }" /> -->
-				<v-list-item prepend-icon="mdi-car-settings" title="Junatilgan transportlar" color="primary"
-					:to="{ name: 'car-ride-inactive' }" />
+				<!-- <v-list-item prepend-icon="mdi-car-settings" title="Junatilgan transportlar" color="primary"
+					:to="{ name: 'car-ride-inactive' }" /> -->
 			</v-list>
 			<v-divider></v-divider>
 			<div class="pa-2">

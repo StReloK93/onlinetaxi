@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html translate="no">
 
 <head>
+    <meta name="google" content="notranslate">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,12 +15,12 @@
 
     <meta property="og:title" content="Shaharlararo online taxi">
     <meta property="og:description" content="Shaharlararo online taxi dasturini yuklab oling">
-    <meta property="og:image" content="https://onlinetaxi.ruzzifer.uz/images/back1.jpg">
+    <meta property="og:image" content="https://onlinetaxi.ruzzifer.uz/pwa/maskable_icon_x384.png">
     <meta property="og:url" content="https://onlinetaxi.ruzzifer.uz/install-app">
 
     <meta itemprop="name" content="Shaharlararo online taxi">
     <meta itemprop="description" content="Shaharlararo online taxi dasturini yuklab oling">
-    <meta itemprop="image" content="https://onlinetaxi.ruzzifer.uz/images/back1.jpg">
+    <meta itemprop="image" content="https://onlinetaxi.ruzzifer.uz/pwa/maskable_icon_x384.png">
     <meta itemprop="url" content="https://onlinetaxi.ruzzifer.uz/install-app">
 
     <title>Shaharlararo online taxi</title>

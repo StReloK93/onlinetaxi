@@ -27,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
         component: CarRidePage,
         name: 'car-rides',
         meta: {
-          method: 'getOnlyActive'
+          method: 'actives'
         }
       },
       {
@@ -35,17 +35,17 @@ const routes: Array<RouteRecordRaw> = [
         component: CarRidePage,
         name: 'car-rides-auth-user',
         meta: {
-          method: 'getOnlyAuthUser'
+          method: 'auth-user'
         }
       },
-      {
-        path: '/car-ride/inactive',
-        component: CarRidePage,
-        name: 'car-ride-inactive',
-        meta: {
-          method: 'getOnlyInactive'
-        }
-      },
+      // {
+      //   path: '/car-ride/inactive',
+      //   component: CarRidePage,
+      //   name: 'car-ride-inactive',
+      //   meta: {
+      //     method: 'getOnlyInactive'
+      //   }
+      // },
       {
         path: '/transports',
         component: TransportsPage,

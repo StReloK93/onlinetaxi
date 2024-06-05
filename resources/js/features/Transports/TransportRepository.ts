@@ -10,6 +10,12 @@ class Transport {
 		store.transports = data
 	}
 
+	async onlyAuthUser() {
+		const { data } = await Client.get<ITransport[]>(`${resource}/only/auth-user`);
+		const store = useTransport()
+		store.transports = data
+	}
+
 	async show(tranport_id) {
 		const { data } = await Client.get<ITransport>(`${resource}/${tranport_id}`);
 		return data

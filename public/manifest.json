@@ -1,8 +1,8 @@
 {
     "start_url": ".",
     "scope": "/",
-    "theme_color": "#d81b60",
-    "background_color": "#dfdfdf",
+    "theme_color": "#f1c800",
+    "background_color": "#f1c800",
     "display": "standalone",
     "name": "Shaharlararo Online taxi",
     "short_name": "Online taxi",

@@ -19,6 +19,6 @@ const Auth = useAuthStore()
 const transportStore = useTransport()
 
 onMounted(async () => {
-	await TransportRepository.index()
+	await TransportRepository.onlyAuthUser()
 })
 </script>

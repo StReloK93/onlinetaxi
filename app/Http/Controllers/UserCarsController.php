@@ -13,7 +13,7 @@ class UserCarsController extends Controller
         return UserCar::with(['fuel', 'user'])->get();
     }
 
-    public function getOnlyMy()
+    public function onlyAuthUser()
     {
         if (Auth::user()->role_id == 2 || Auth::user()->role_id == 1) {
             return $this->index();

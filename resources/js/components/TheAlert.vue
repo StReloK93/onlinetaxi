@@ -2,7 +2,7 @@
 	<v-dialog width="400" v-model="store.dialog.model">
 		<v-form @submit.prevent="cancel()" @vue:mounted="onFocus" @vue:unmounted="store.dialog.reset">
 			<v-card>
-				<main class="px-5 py-3 text-center tw-shadow-sm tw-relative">
+				<main class="px-5 py-3 text-center elevation-1 position-relative">
 					<div class="mb-1">
 						<v-icon color="primary" size="40">{{ store.dialog.icon }}</v-icon>
 					</div>
@@ -10,14 +10,15 @@
 						{{ store.dialog.title }}
 					</span>
 				</main>
-				<v-card-text class="tw-bg-slate-50">
+				<v-card-text class="bg-grey-lighten-4">
 					{{ store.dialog.subTitle }}
 				</v-card-text>
 
-				<v-card-actions class="tw-bg-slate-50">
+				<v-card-actions class="bg-grey-lighten-4">
 					<v-spacer></v-spacer>
+					<!-- focus:tw-outline-2 focus:tw-outline-red-300 focus:tw-outline -->
 					<v-btn text="Yoq" ref="btnCalcel" color="primary" variant="tonal" type="submit"
-						class="tw-bg-gray-50 focus:tw-outline-2 focus:tw-outline-red-300 focus:tw-outline"
+						class=""
 						@click="store.dialog.model = false">
 					</v-btn>
 					<v-btn text="Ha" type="button" color="gray" variant="tonal" @click="submit"></v-btn>

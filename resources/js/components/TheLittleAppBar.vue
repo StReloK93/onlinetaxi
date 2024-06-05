@@ -8,7 +8,7 @@
       <v-bottom-sheet v-model="bottomSheet" inset>
          <BaseForm :loading="pageData.overlay" :submit="updateTopic" title="Manzilni o'zgartirish"
             @close="bottomSheet = false" @vue:mounted="formMounted">
-            <p class="text-caption">
+            <p>
                <v-icon color="primary">mdi-bell-outline</v-icon>
                Quyida ko'rsatgan manzilingizga qarab yo'lovchilar haqida sizga habarnoma junatamiz.
             </p>
@@ -37,7 +37,7 @@ const Auth = useAuthStore()
 const city = ref(null)
 const bottomSheet = ref(false)
 
-const stringButton = computed(() => city.value?.name ? city.value?.name : 'Qayerdasiz')
+const stringButton = computed(() => city.value?.name ? city.value?.name : 'Qayerdasiz?')
 
 const pageData = reactive({
    notification: true,

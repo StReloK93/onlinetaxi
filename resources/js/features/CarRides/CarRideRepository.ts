@@ -8,23 +8,27 @@ class CarRide{
       return data;
    }
    
-   async getOnlyAuthUser() {
-      const { data } = await Client.get<ICarRide[]>(`${resource}/only/auth-user`);
-      return data;
-   }
+   // async getOnlyAuthUser() {
+   //    const { data } = await Client.get<ICarRide[]>(`${resource}/only/auth-user`);
+   //    return data;
+   // }
    
-   async getOnlyInactive() {
-      const { data } = await Client.get<ICarRide[]>(`${resource}/only/passive`);
-      return data;
-   }
+   // async getOnlyInactive() {
+   //    const { data } = await Client.get<ICarRide[]>(`${resource}/only/passive`);
+   //    return data;
+   // }
    
    async getRidesByRegion(region_id) {
       const { data } = await Client.get(`${resource}/start-region/${region_id}`);
       return { rides: data.car_rides, districts: data.districts };
    }
    
-   async setInActive(ride_id) {
-      await Client.delete(`${resource}/set-inactive/${ride_id}`);
+   async inactivate(ride_id) {
+      await Client.get(`${resource}/inactivate/${ride_id}`);
+   }
+
+   async activate(ride_id) {
+      await Client.get(`${resource}/activate/${ride_id}`);
    }
    
    async index() {

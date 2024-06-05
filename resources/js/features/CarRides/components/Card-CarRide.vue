@@ -33,9 +33,6 @@
 								{{ props.ride.user_car.number }}
 							</span>
 						</div>
-						<div v-if="Auth.isPassenger" class="text-grey-darken-1">
-							<a :href="`tel:${props.ride.phone}`">{{ props.ride.phone }}</a>
-						</div>
 					</main>
 					<main class="d-flex align-end">
 						<span v-for="(n,index) in props.ride.free_seat">
@@ -62,11 +59,9 @@
 					</span>
 				</div>
 				<div class="d-flex align-end">
-					<div :class="{'-tw-translate-x-24': Auth.isAnyAdmins}"
-						class="leading-none"
-						v-if="Auth.isAnyAdmins || Auth.user?.id == props.ride.user_id"
-						>
-						<v-btn v-if="Auth.isAnyAdmins" tag="a" :href="`tel:+998${props.ride.phone}`" size="x-small" variant="plain" color="teal" icon="mdi-phone"></v-btn>
+					<div  class="leading-none" v-if="Auth.isAnyAdmins || Auth.user?.id == props.ride.user_id">
+						<v-btn size="x-small" v-if="props.ride.state == 1" @click="inactivate" variant="plain" icon="mdi-eye" />
+						<v-btn size="x-small" v-if="props.ride.state == 2" @click="activate" variant="plain" icon="mdi-eye-off" />
 						<EditForm :date="true" :id="props.ride.id"></EditForm>
 						<v-btn size="x-small" @click="carRideDelete" variant="plain" icon="mdi-delete" />
 					</div>
@@ -107,6 +102,22 @@ function carRideDelete() {
 		store.dialog.title = "Qatnovni o'chirmoqchimisiz ?"
 		store.dialog.subTitle = "O'chirilgan qatnovlarni qayta tiklashni imkoni yo'q"
 		store.dialog.submit = () => CRUD.destroy(props.ride.id)
+	})
+}
+
+function inactivate() {
+	store.dialog.open(() => {
+		store.dialog.title = "Qatnovni yashirmoqchisiz?"
+		store.dialog.subTitle = "Yashirilgan qatnov 3 soat ichida faollashtirilmasa butunlay o'chib ketadi"
+		store.dialog.submit = () => CRUD.inactivate(props.ride.id)
+	})
+}
+
+function activate() {
+	store.dialog.open(() => {
+		store.dialog.title = "Qatnovni faollashtirmoqchimisiz?"
+		store.dialog.subTitle = "Qatnov faol holatda 3 soat turadi va avtomatik tarzda yashiriladi. Yashirilgandan so'ng 3 soat ichida faollashtirmasangiz qatnov butunlay o'chadi"
+		store.dialog.submit = () => CRUD.activate(props.ride.id)
 	})
 }
 </script>

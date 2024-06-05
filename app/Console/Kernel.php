@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Services\EskizSmsService;
+use App\Models\CarRide;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -12,9 +13,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
-        $eskizService = new EskizSmsService();
-        $eskizService->generateToken();
+
+        $schedule->call(function () {
+            $eskizService = new EskizSmsService();
+            $eskizService->generateToken();
+        })->twiceMonthly(1,15);
+
+        $schedule->call(function () {
+            dd('day');
+        })->hourly();
+
     }
 
     /**

@@ -15,8 +15,8 @@ class CarRideController extends Controller
         return CarRide::all();
     }
 
-    public function onlyActive(){
-        return CarRide::whereState(1)->get();
+    public function actives(){
+        return CarRide::whereNot('state', 0)->get();
     }
 
     public function onlyPassive()
@@ -109,7 +109,14 @@ class CarRideController extends Controller
         return $carRide->fresh();
     }
 
-    public function setInactive(CarRide $carRide)
+    public function activate(CarRide $carRide)
+    {
+        $carRide->state = 1;
+        $carRide->save();
+        return $carRide->fresh();
+    }
+
+    public function inactivate(CarRide $carRide)
     {
         $carRide->state = 2;
         $carRide->save();
