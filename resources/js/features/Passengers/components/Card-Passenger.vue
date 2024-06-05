@@ -1,15 +1,15 @@
 <template>
-	<section class="passenger-card w-100 d-flex flex-column bg-white elevation-1 mb-2 position-relative rounded-e">
-		<v-btn :to="{ name: 'passenger-offers', params: { id: props.passenger.id } }" size="x-small" variant="plain"
-			class="position-absolute top-0 right-0 z-10" stacked>
-			<v-icon>
-				mdi-message-badge
-			</v-icon>
-			<!-- <span class="text-caption">
-				3
-			</span> -->
-		</v-btn>
+	<section class="passenger-card w-100 d-flex flex-column bg-white elevation-1 mb-2 rounded-e">
 		<main class="pa-2 d-flex flex-column justify-space-between position-relative">
+			<v-btn :to="{ name: 'passenger-offers', params: { id: props.passenger.id } }" size="x-small" variant="plain"
+				class="position-absolute top-0 right-0 z-10" stacked>
+				<v-icon>
+					mdi-message-badge
+				</v-icon>
+				<!-- <span class="text-caption">
+					3
+				</span> -->
+			</v-btn>
 			<v-icon class="city-direction position-absolute" color="primary">mdi-chevron-down</v-icon>
 			<div class="position-absolute city-line"></div>
 			<aside class="leading-none d-flex align-center mb-2">

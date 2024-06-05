@@ -37,7 +37,7 @@ class CarRide{
       return data
    }
    
-   async store(formData) {
+   async create(formData) {
       const { data } = await Client.post<ICarRide>(`${resource}`, formData);
       return data
    }

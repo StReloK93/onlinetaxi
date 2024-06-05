@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="tw-overflow-hidden">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -30,7 +30,7 @@
 </head>
 
 <body>
-    <section id="app" class="h-screen"></section>
+    <section id="app" class="h-screen overflow-hidden"></section>
 </body>
 
 </html>

@@ -14,15 +14,14 @@
 	</v-dialog>
 </template>
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref, inject } from 'vue'
 import { unformat } from 'v-money3'
 import { moneyConfig } from '@/modules/constants'
-import { CarRideRepository, FormInputs, useCarRide } from '..'
-const rideStore = useCarRide()
+import { FormInputs } from '..'
 const inputComponent = ref()
 const propsParent = defineProps(['id', 'smButton'])
 
-
+const CRUD:any = inject('CRUD')
 
 
 const pageData = reactive({
@@ -34,15 +33,15 @@ const pageData = reactive({
 async function submitFunction() {
 	const formData = inputComponent.value.formData
 	formData.price = unformat(formData.price, moneyConfig)
+	await CRUD.update(pageData.car_ride.id, formData)
 
-	await rideStore.update(pageData.car_ride.id, formData)
 	pageData.dialog = false
 }
 
 
 async function getCarRide(id) {
 	pageData.overlay = true
-	const ride = await CarRideRepository.show(id)
+	const ride = await CRUD.show(id)
 
 
 	pageData.car_ride = ride

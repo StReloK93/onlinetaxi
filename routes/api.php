@@ -1,6 +1,5 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserCarsController;
@@ -19,15 +18,6 @@ use App\Http\Controllers\OffersPassengerController;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/sendSecretCode', [AuthController::class, 'sendSecretCode']);
-Route::apiResource('post', PostController::class);
-
-
-
-
-
-
-
-
 
 
 Route::apiResource('passenger', PassengerController::class)->only(['index', 'show']);

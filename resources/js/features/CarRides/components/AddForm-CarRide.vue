@@ -10,14 +10,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref, inject } from 'vue'
 import { moneyConfig } from '@/modules/constants'
 import { unformat } from 'v-money3'
-import { FormInputs , useCarRide } from '..'
+import { FormInputs } from '..'
 import { useAuthStore } from '@/store/useAuthStore'
 const Auth = useAuthStore()
-
-const rideStore = useCarRide()
+const CRUD:any = inject('CRUD')
 
 const parentProps = defineProps(['date', 'btnClass'])
 const inputComponent = ref()
@@ -27,6 +26,6 @@ const pageData = reactive({ dialog: false, overlay: true })
 async function submitFunction() {
 	const formData = inputComponent.value.formData
 	formData.price = unformat(formData.price, moneyConfig)
-	rideStore.store(formData)
+	await CRUD.create(formData)
 }
 </script>

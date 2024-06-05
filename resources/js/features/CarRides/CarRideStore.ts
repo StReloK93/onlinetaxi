@@ -24,22 +24,20 @@ export const useCarRide = defineStore("useCarRide", () => {
       districts.value = result.districts;
    }
 
-   async function store(formData) {
-      const ride = await CarRideRepository.store(formData);
 
+// ------------------------
+
+
+   async function create(ride) {
       rides.value.push(ride);
    }
 
-   async function update(ride_id, formData) {
-      const ride = await CarRideRepository.update(ride_id, formData);
-
+   async function update(ride) {
       const index = rides.value.findIndex((car_ride) => car_ride.id == ride.id);
       rides.value[index] = ride;
    }
 
    async function destroy(ride_id) {
-      await CarRideRepository.destroy(ride_id);
-
       rides.value = rides.value.filter((car_ride) => car_ride.id != ride_id);
    }
 
@@ -111,7 +109,7 @@ export const useCarRide = defineStore("useCarRide", () => {
       districts,
       groupRides,
       setInactive,
-      store,
+      create,
       update,
       destroy,
 		getOnlyActive,

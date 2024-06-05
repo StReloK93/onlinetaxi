@@ -1,5 +1,5 @@
 <template>
-	<section class="car-ride-card w-100 d-flex flex-column bg-white elevation-1 mb-2 position-relative rounded-e">
+	<section class="car-ride-card w-100 d-flex flex-column bg-white elevation-1 mb-2 rounded-e">
 		<main class="pa-2 d-flex flex-column justify-space-between position-relative">
 			<v-icon class="position-absolute city-direction" color="primary" >mdi-chevron-down</v-icon>
 			<div
@@ -80,16 +80,17 @@
 </template>
 
 <script setup lang="ts">
-import { EditForm, useCarRide } from '@/features/CarRides'
+import { EditForm } from '@/features/CarRides'
 import { useAuthStore } from '@/store/useAuthStore'
 import { useMainStore } from '@/store/useMainStore'
 import { format } from 'v-money3'
 import { moneyConfig } from '@/modules/constants'
 import moment from '@/modules/moment'
-import { ICarRide } from '@/app/interfaces'
-import { computed } from 'vue'
-const rideStore = useCarRide()
+import { computed, inject } from 'vue'
 
+const CRUD:any = inject('CRUD')
+
+const $emit = defineEmits(['destroy'])
 const props = defineProps(['ride'])
 
 const store = useMainStore()
@@ -105,7 +106,7 @@ function carRideDelete() {
 	store.dialog.open(() => {
 		store.dialog.title = "Qatnovni o'chirmoqchimisiz ?"
 		store.dialog.subTitle = "O'chirilgan qatnovlarni qayta tiklashni imkoni yo'q"
-		store.dialog.submit = () => rideStore.destroy(props.ride.id)
+		store.dialog.submit = () => CRUD.destroy(props.ride.id)
 	})
 }
 </script>
