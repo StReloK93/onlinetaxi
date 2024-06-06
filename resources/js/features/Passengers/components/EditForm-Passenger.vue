@@ -13,12 +13,12 @@
 	</v-dialog>
 </template>
 <script setup lang="ts">
-import { FormInputs, IPassenger, PassengerRepository } from '..'
+import { FormInputs, IPassenger, usePassengerStore, PassengerRepository } from '..'
 import { reactive, ref } from 'vue'
 
 const parentProps = defineProps(['id'])
 const inputComponent = ref()
-
+const passengerStore = usePassengerStore()
 const pageData = reactive({
 	dialog: false,
 	loading: false,
@@ -26,7 +26,7 @@ const pageData = reactive({
 
 async function submitFunction() {
 	const formData = inputComponent.value.formData
-	await PassengerRepository.update(parentProps.id, formData)
+	await passengerStore.update(parentProps.id, formData)
 }
 
 

@@ -14,10 +14,6 @@ export const useCarRide = defineStore("useCarRide", () => {
       rides.value = await CarRideRepository.getOnlyActive();
    }
 
-   // async function getOnlyInactive() {
-   //    rides.value = await CarRideRepository.getOnlyInactive();
-   // }
-
    async function getRidesByRegion(region_id) {
       const result = await CarRideRepository.getRidesByRegion(region_id);
       rides.value = result.rides;
@@ -28,33 +24,44 @@ export const useCarRide = defineStore("useCarRide", () => {
    // ------------------------
 
 
-   async function create(ride) {
+   async function create(formData) {
+      const ride = await CarRideRepository.create(formData)
       rides.value.push(ride);
    }
 
-   async function update(ride) {
+   async function update(ride_id, formData) {
+      const ride = await CarRideRepository.update(ride_id, formData)
+
       const index = rides.value.findIndex((car_ride) => car_ride.id == ride.id);
       rides.value[index] = ride;
    }
 
    async function destroy(ride_id) {
+      await CarRideRepository.destroy(ride_id)
+
       rides.value = rides.value.filter((car_ride) => car_ride.id != ride_id);
    }
+   
 
    async function inactivate(ride_id) {
-      console.log(ride_id);
-      
+      await CarRideRepository.inactivate(ride_id)
+
       const index = rides.value.findIndex((car_ride) => car_ride.id == ride_id);
       rides.value[index].state = 2
    }
 
    async function activate(ride_id) {
+      await CarRideRepository.activate(ride_id)
+
       const index = rides.value.findIndex((car_ride) => car_ride.id == ride_id);
       rides.value[index].state = 1;
    }
 
+   //  -------------
+
+
    const activeRides = computed(() => {
-      return rides.value.filter((ride) => {
+      return rides.value?.filter((ride) => {
          if (filters.value == 'actives') return ride.state == 1
          else if (filters.value == 'auth-user') return [1, 2].includes(ride.state) && ride.user_id == AuthStore.user.id
          return true

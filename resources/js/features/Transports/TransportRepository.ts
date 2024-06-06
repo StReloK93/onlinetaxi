@@ -1,46 +1,44 @@
 import Client from "@/modules/AxiosClient";
-import { ITransport } from '@/app/interfaces'
-const resource = "user-car"
-import { useTransport } from '@/features/Transports'
+import { ITransport } from "@/app/interfaces";
+const resource = "user-car";
 
-class Transport {
-	async index() {
-		const { data } = await Client.get<ITransport[]>(resource);
-		const store = useTransport()
-		store.transports = data
-	}
-
-	async onlyAuthUser() {
-		const { data } = await Client.get<ITransport[]>(`${resource}/only/auth-user`);
-		const store = useTransport()
-		store.transports = data
-	}
-
-	async show(tranport_id) {
-		const { data } = await Client.get<ITransport>(`${resource}/${tranport_id}`);
-		return data
-	}
-
-	async create(formData) {
-		const { data: transport } = await Client.post<ITransport>(resource, formData);
-
-		const store = useTransport()
-		store.create(transport)
-	}
-
-	async update(transport_id, formData: ITransport) {
-		const { data: transport } = await Client.put<ITransport>(`${resource}/${transport_id}`, formData);
-
-		const store = useTransport()
-		store.update(transport)
-	}
-
-	async destroy(transport_id) {
-		await Client.delete<ITransport>(`${resource}/${transport_id}`);
-
-		const store = useTransport()
-		store.destroy(transport_id)
-	}
+async function index() {
+   const { data } = await Client.get<ITransport[]>(resource);
+   return data;
 }
 
-export default new Transport()
+async function onlyAuthUser() {
+   const { data: transports } = await Client.get<ITransport[]>(
+      `${resource}/only/auth-user`
+   );
+   return transports;
+}
+
+async function show(tranport_id) {
+   const { data: transport } = await Client.get<ITransport>(
+      `${resource}/${tranport_id}`
+   );
+   return transport;
+}
+
+async function create(formData) {
+   const { data: transport } = await Client.post<ITransport>(
+      resource,
+      formData
+   );
+   return transport;
+}
+
+async function update(transport_id, formData: ITransport) {
+   const { data: transport } = await Client.put<ITransport>(
+      `${resource}/${transport_id}`,
+      formData
+   );
+   return transport;
+}
+
+async function destroy(transport_id) {
+   await Client.delete<ITransport>(`${resource}/${transport_id}`);
+}
+
+export default { index, onlyAuthUser, show, create, update, destroy };

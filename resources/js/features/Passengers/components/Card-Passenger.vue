@@ -78,17 +78,18 @@
 </template>
 
 <script setup lang="ts">
-import { PassengerRepository, EditForm, IPassenger } from '@/features/Passengers';
-
+import { usePassengerStore, EditForm, IPassenger } from '@/features/Passengers';
 import { format } from 'v-money3'
 import { moneyConfig } from '@/modules/constants'
 import moment from '@/modules/moment'
 import { PropType } from 'vue'
 import { useAuthStore } from '@/store/useAuthStore'
 import { useMainStore } from '@/store/useMainStore'
+
+
 const Auth = useAuthStore()
 const store = useMainStore()
-
+const passengerStore = usePassengerStore()
 const props = defineProps({
 	passenger: {
 		required: true,
@@ -101,7 +102,7 @@ function passengerDelete() {
 	store.dialog.open(() => {
 		store.dialog.title = "Qatnovni o'chirmoqchimisiz ?"
 		store.dialog.subTitle = "O'chirilgan qatnovlarni qayta tiklashni imkoni yo'q"
-		store.dialog.submit = () => PassengerRepository.destroy(props.passenger.id)
+		store.dialog.submit = () => passengerStore.destroy(props.passenger.id)
 	})
 }
 </script>

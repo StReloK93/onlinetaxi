@@ -11,9 +11,9 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { FormInputs, IPassenger, PassengerRepository } from '..'
+import { FormInputs, IPassenger, usePassengerStore } from '..'
 
-const emit = defineEmits(['create'])
+const passengerStore = usePassengerStore()
 const inputComponent = ref()
 const pageData = reactive({
 	dialog: false,
@@ -23,6 +23,6 @@ const pageData = reactive({
 
 async function submitFunction() {
 	const formData: IPassenger = inputComponent.value.formData
-	await PassengerRepository.create(formData)
+	await passengerStore.create(formData)
 }
 </script>

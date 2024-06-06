@@ -15,8 +15,9 @@
 </template>
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { FormInputs, TransportRepository } from '@/features/Transports'
+import { FormInputs, useTransport, TransportRepository } from '@/features/Transports'
 
+const transportStore = useTransport()
 const inputComponent = ref()
 const propsParent = defineProps(['smButton', 'id'])
 const emit = defineEmits(['update'])
@@ -27,7 +28,7 @@ const pageData = reactive({
 
 async function submitFunction() {
     const formData = inputComponent.value.formData
-    await TransportRepository.update(propsParent.id, formData)
+    await transportStore.update(propsParent.id, formData)
     pageData.dialog = false
 }
 

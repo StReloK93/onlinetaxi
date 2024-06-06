@@ -27,9 +27,9 @@
 </template>
 <script setup lang="ts">
 import { useMainStore } from '@/store/useMainStore'
-import { EditForm, TransportRepository, ITransport } from '@/features/Transports'
+import { EditForm, ITransport, useTransport } from '@/features/Transports'
 import { PropType } from 'vue'
-
+const transportStore = useTransport()
 const props = defineProps({
 	transport: {
 		required: true,
@@ -43,7 +43,7 @@ function deleteTransport() {
 	store.dialog.open(() => {
 		store.dialog.title = "Transportni o'chirmoqchimisiz ?"
 		store.dialog.subTitle = "Ushbu transportga tegishli barcha qatnovlar ham o'chib ketadi."
-		store.dialog.submit = () => TransportRepository.destroy(props.transport.id)
+		store.dialog.submit = () => transportStore.destroy(props.transport.id)
 	})
 }
 </script>

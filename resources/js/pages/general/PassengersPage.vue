@@ -1,6 +1,6 @@
 <template>
 	<main class="d-flex tw-flex-col">
-		<AddForm v-if="Auth.isAnyAdmins || Auth.isPassenger" @create="onCreate" />
+		<AddForm v-if="Auth.isAnyAdmins || Auth.isPassenger" />
 		<v-spacer class="position-relative">
 			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-x-auto px-1">
 				<TransitionGroup name="list">
@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { Card, AddForm, PassengerRepository, usePassengerStore } from '@/features/Passengers';
 import { useAuthStore } from '@/store/useAuthStore'
 
@@ -20,11 +20,10 @@ const Auth = useAuthStore()
 const passengerStore = usePassengerStore()
 
 
-function onCreate(Transport) {
-	passengerStore.passengers.push(Transport)
-}
-
 onMounted(async () => {
 	passengerStore.passengers = await PassengerRepository.index()
+})
+onUnmounted(() => {
+	passengerStore.passengers = null
 })
 </script>

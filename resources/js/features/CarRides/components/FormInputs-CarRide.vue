@@ -60,6 +60,7 @@
 import axios from "@/modules/AxiosClient";
 import { moneyConfig, rules } from '@/modules/constants'
 import { reactive, onMounted } from 'vue'
+import { TransportRepository } from "@/features/Transports";
 const emit = defineEmits(['onReady'])
 
 
@@ -120,8 +121,8 @@ onMounted(async () => {
 	const { data: regions } = await axios.get('region')
 	pageData.regions = regions
 
-	const { data: cars } = await axios.get('user-cars/get-only-my')
-	pageData.cars = cars
+	const transports = await TransportRepository.onlyAuthUser()
+	pageData.cars = transports
 
 	emit('onReady')
 })

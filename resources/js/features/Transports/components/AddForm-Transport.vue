@@ -15,15 +15,16 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { FormInputs, ITransport, TransportRepository } from '@/features/Transports';
+import { FormInputs, ITransport, useTransport } from '@/features/Transports';
 const emit = defineEmits(['create'])
 const inputComponent = ref()
 const pageData = reactive({ dialog: false, overlay: false })
 
+const transportStore = useTransport()
+
 async function submitFunction() {
     const formData = inputComponent.value.formData as ITransport
-    await TransportRepository.create(formData)
-
+    await transportStore.create(formData)
     pageData.dialog = false
 }
 </script>

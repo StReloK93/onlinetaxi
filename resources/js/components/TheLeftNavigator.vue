@@ -13,14 +13,14 @@
 		</main>
 		<v-divider></v-divider>
 		<div>
-			<v-list v-if="Auth.isAnyAdmins" density="compact">
-				<!-- <v-list-item prepend-icon="mdi-phone-classic" title="Operatorlarga"
+			<!-- <v-list v-if="Auth.isAnyAdmins" density="compact">
+				<v-list-item prepend-icon="mdi-phone-classic" title="Operatorlarga"
 					:class="{ 'text-primary v-list-item--active': $route.name == 'operator' }" color="primary"
-					:to="{ name: 'operator', params: { id: 1 } }" /> -->
-				<!-- <v-list-item prepend-icon="mdi-car-settings" title="Junatilgan transportlar" color="primary"
-					:to="{ name: 'car-ride-inactive' }" /> -->
-			</v-list>
-			<v-divider></v-divider>
+					:to="{ name: 'operator', params: { id: 1 } }" />
+				<v-list-item prepend-icon="mdi-car-settings" title="Junatilgan transportlar" color="primary"
+					:to="{ name: 'car-ride-inactive' }" />
+			</v-list> -->
+			<!-- <v-divider></v-divider> -->
 			<div class="pa-2">
 				<v-btn v-if="deferredPrompt" @click="installApp" block append-icon="mdi-download" variant="tonal">
 					Ilovani o'rnatish

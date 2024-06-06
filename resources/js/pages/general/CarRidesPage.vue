@@ -1,7 +1,7 @@
 <template>
 	<main class="d-flex flex-column">
 		<main class="d-flex align-center justify-space-between w-100">
-			<AddForm v-if="Auth.isAnyAdmins || Auth.isDriver" :date="true" />
+			<AddForm v-if="Auth.isAnyAdmins || Auth.isDriver"/>
 			<!-- <Filters ref="filterComponent" />
 			<Sorting /> -->
 		</main>
@@ -17,50 +17,13 @@
 </template>
 <script setup lang="ts">
 import { AddForm, Filters, useCarRide, CardCarRide, CarRideRepository } from '@/features/CarRides'
-import { watch, onMounted, reactive, provide } from 'vue'
+import { watch, onMounted, onUnmounted } from 'vue'
 import { useAuthStore } from '@/store/useAuthStore'
 const Auth = useAuthStore()
 import { useRoute } from 'vue-router'
 const route = useRoute()
 
 const rideStore = useCarRide()
-
-
-const CRUD = reactive({
-	inactivate: async function (ride_id) {
-		await CarRideRepository.inactivate(ride_id)
-		rideStore.inactivate(ride_id)
-	},
-	activate: async function (ride_id) {
-		await CarRideRepository.activate(ride_id)
-		rideStore.activate(ride_id)
-	},
-	show: async function (ride_id) {
-
-		return await CarRideRepository.show(ride_id)
-
-	},
-	create: async function (formData) {
-
-		const ride = await CarRideRepository.create(formData)
-		rideStore.create(ride)
-
-	},
-	update: async function (ride_id, formData) {
-
-		const ride = await CarRideRepository.update(ride_id, formData);
-		rideStore.update(ride)
-
-	},
-	destroy: async function (ride_id) {
-
-		await CarRideRepository.destroy(ride_id)
-		rideStore.destroy(ride_id)
-
-	}
-})
-
-provide('CRUD', CRUD)
 
 
 watch(() => route.meta.method, async (current: any) => {
@@ -70,5 +33,9 @@ watch(() => route.meta.method, async (current: any) => {
 onMounted(async () => {
 	rideStore.rides = await CarRideRepository.getOnlyActive()
 	rideStore.filters = route.meta.method
+})
+
+onUnmounted(() => {
+	rideStore.rides = null
 })
 </script>
