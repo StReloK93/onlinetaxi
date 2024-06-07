@@ -2,6 +2,7 @@ import { defineStore } from "pinia"
 import { ref, computed, Ref } from "vue"
 import router from "@/routes"
 import AxiosClient from "@/modules/AxiosClient"
+import UserRepository from "@/features/User/UserRepository"
 export const useAuthStore = defineStore("Auth", () => {
    const user: Ref = ref(null);
    const token: Ref = ref(null);
@@ -60,16 +61,19 @@ export const useAuthStore = defineStore("Auth", () => {
    }
 
    async function sendUserData(formData) {
-      const { data } = await AxiosClient.post("set-user-data", formData);
-      user.value = data;
+      user.value = await UserRepository.setUserData(formData);
       router.push({ name: "main" })
    }
 
+
+   async function changeRole(role_id) {
+      user.value = await UserRepository.changeRole(role_id);
+   }
+
+
    async function getUser() {
       AxiosClient.defaults.headers.common["Authorization"] = localStorage.getItem("token");
-      await AxiosClient.get("user")
-         .then(({ data }) => (user.value = data))
-         .catch(() => console.clear());
+      user.value = await UserRepository.getUser()
    }
 
    async function sendSecretCode(props) {
@@ -100,6 +104,7 @@ export const useAuthStore = defineStore("Auth", () => {
    return {
       user,
       token,
+      changeRole,
       getUser,
       login,
       sendSecretCode,

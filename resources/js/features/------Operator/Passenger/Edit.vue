@@ -16,7 +16,7 @@
 import axios from '@/modules/AxiosClient'
 import { reactive, ref, computed } from 'vue'
 import Inputs from './Inputs.vue'
-import { IPassenger } from '@/app/interfaces'
+import { IPassenger } from '@/interfaces'
 const parentProps = defineProps(['ride', 'smButton'])
 const inputComponent = ref()
 

@@ -1,5 +1,5 @@
 import Client from "@/modules/AxiosClient";
-import { ICarRide } from '@/app/interfaces'
+import { ICarRide } from '@/interfaces'
 const resource = "car-ride";
 
 class CarRide{

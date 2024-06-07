@@ -1,5 +1,5 @@
 import Client from "@/modules/AxiosClient";
-import { ITransport } from "@/app/interfaces";
+import { ITransport } from "@/interfaces";
 const resource = "user-car";
 
 async function index() {

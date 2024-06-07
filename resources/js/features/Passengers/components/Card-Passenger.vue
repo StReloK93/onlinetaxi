@@ -1,9 +1,9 @@
 <template>
 	<section class="passenger-card w-100 d-flex flex-column bg-white elevation-1 mb-2 rounded-e">
 		<main class="pa-2 d-flex flex-column justify-space-between position-relative">
-			<v-btn :to="{ name: 'passenger-offers', params: { id: props.passenger.id } }" size="x-small" variant="plain"
-				class="position-absolute top-0 right-0 z-10" stacked>
-				<v-icon>
+			<v-btn v-if="Auth.isDriverAdmins || Auth.user?.id == props.passenger.user_id" :to="{ name: 'passenger-offers', params: { id: props.passenger.id } }" :size="40"
+				variant="plain" class="position-absolute top-0 right-0 z-10 rounded-circle" stacked>
+				<v-icon size="x-small">
 					mdi-message-badge
 				</v-icon>
 				<!-- <span class="text-caption">

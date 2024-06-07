@@ -1,4 +1,4 @@
-import type { ICarRide } from "@/app/interfaces";
+import type { ICarRide } from "@/interfaces";
 import AddForm from "./components/AddForm-CarRide.vue";
 import EditForm from "./components/EditForm-CarRide.vue";
 import Filters from "./components/Filter-CarRide.vue";

@@ -2,7 +2,8 @@ import FormInputs from '@/features/OffersPassenger/components/FormInputs-Offer.v
 import AddForm from '@/features/OffersPassenger/components/AddForm-Offer.vue'
 import EditForm from '@/features/OffersPassenger/components/EditForm-Offer.vue'
 import Card from '@/features/OffersPassenger/components/Card-Offer.vue'
-import type { IOffersPassenger } from '@/app/interfaces'
+import PassengerInformation from '@/features/OffersPassenger/components/PassengerInformation.vue'
+import type { IOffersPassenger } from '@/interfaces'
 import OfferPassengerRepository from './OffersPassengerRepository';
 import { useOffersPassenger } from './OffersPassengerStore'
 
@@ -12,6 +13,7 @@ export {
    EditForm,
    IOffersPassenger,
    Card,
+   PassengerInformation,
    OfferPassengerRepository,
    useOffersPassenger
 };

@@ -27,12 +27,7 @@ class AuthController extends Controller
     
     }
 
-    public function setUserData(Request $request)
-    {
-        
-        return $this->service->setUserData($request);
 
-    }
 
     public function logout(Request $request)
     {
@@ -41,11 +36,7 @@ class AuthController extends Controller
 
     }
 
-    public function getUser(Request $request){
- 
-        return $this->service->getUser($request);
 
-    }
 
     public function logoutUser(Request $request){
         return $this->service->logout($request);

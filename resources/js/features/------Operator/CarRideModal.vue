@@ -112,7 +112,7 @@
 <script setup lang="ts">
 import axios from '@/modules/AxiosClient'
 import { reactive, ref, Ref, computed } from 'vue'
-import { ICarRide } from '@/app/interfaces'
+import { ICarRide } from '@/interfaces'
 import { useMainStore } from '@/store/useMainStore'
 import { moment } from '@/modules'
 import AddPassenger from './Passenger/Add.vue'

@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\Firebase;
 use App\Models\Passenger;
 use Auth;
-use Carbon\Carbon;
 class PassengerController extends Controller
 {
-    protected $firebase;
-    public function __construct()
-    {
-        $this->firebase = new Firebase();
-    }
+
     public function index()
     {
         return Passenger::whereState(1)->get();
+    }
+
+    public function getOffers(Passenger $passenger){
+        return $passenger->offers;
     }
 
     public function store(Request $request)
@@ -34,24 +32,7 @@ class PassengerController extends Controller
         $passenger->ride_time = $request->ride_time;
         $passenger->save();
 
-        $freshedPassenger = $passenger->fresh();
-
-
-        $startCity = $freshedPassenger->start->name;
-        $endCity = $freshedPassenger->end->name;
-
-        $date = Carbon::parse($passenger->ride_time)->format('d-m-Y');
-        $hour = Carbon::parse($passenger->ride_time)->format('H');
-
-        $this->firebase->sendToTopic(
-            "city_$request->start_city",
-            [
-                "$date kuni soat $hour da $startCity dan $endCity ga $freshedPassenger->count kishi bor",
-                "Iltimos ketadigan bo'lsalaring qanchaga va qachon olib ketishingizni yozib yuboring.",
-            ],
-            url("/passengers/$passenger->id/offers")
-        );
-        return $freshedPassenger;
+        return $passenger->fresh();
     }
 
 
@@ -73,7 +54,6 @@ class PassengerController extends Controller
 
     public function show(Passenger $passenger)
     {
-        $passenger->offers;
         return $passenger;
     }
 

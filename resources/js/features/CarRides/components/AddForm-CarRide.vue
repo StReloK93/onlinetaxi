@@ -13,11 +13,10 @@
 import { reactive, ref } from 'vue'
 import { moneyConfig } from '@/modules/constants'
 import { unformat } from 'v-money3'
-import { FormInputs, useCarRide } from '..'
+import { FormInputs } from '..'
 
 
-const rideStore = useCarRide()
-const parentProps = defineProps(['btnClass'])
+const parentProps = defineProps(['btnClass', 'submit'])
 const inputComponent = ref()
 const pageData = reactive({ dialog: false, overlay: true })
 
@@ -25,6 +24,6 @@ const pageData = reactive({ dialog: false, overlay: true })
 async function submitFunction() {
 	const formData = inputComponent.value.formData
 	formData.price = unformat(formData.price, moneyConfig)
-	await rideStore.create(formData)
+	await parentProps.submit(formData)
 }
 </script>

@@ -1,5 +1,5 @@
 import Client from "@/modules/AxiosClient";
-import { IPassenger } from "@/app/interfaces";
+import { IPassenger } from "@/interfaces";
 const resource = "passenger";
 
 async function index() {
@@ -9,6 +9,11 @@ async function index() {
 
 async function show(passenger_id) {
    const { data } = await Client.get<IPassenger>(`${resource}/${passenger_id}`);
+   return data;
+}
+
+async function getOffers(passenger_id) {
+   const { data } = await Client.get<IPassenger>(`${resource}/${passenger_id}/offers`);
    return data;
 }
 
@@ -33,4 +38,4 @@ async function destroy(passenger_id) {
    await Client.delete<IPassenger>(`${resource}/${passenger_id}`);
 }
 
-export default { index, show, create, update, destroy };
+export default { index, show, create, update, destroy, getOffers };

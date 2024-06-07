@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
 import { ref, Ref, reactive } from "vue"
-import { Dialog } from "@/app/interfaces"
+import { Dialog } from "@/interfaces"
 import { useDisplay } from "vuetify"
 
 export const useMainStore = defineStore('Main', () => {

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
 import { ref, Ref, computed } from "vue"
-import { ITransport } from "@/app/interfaces"
+import { ITransport } from "@/interfaces"
 import { TransportRepository } from "."
 export const useTransport = defineStore('useTransport', () => {
 

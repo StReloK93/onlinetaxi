@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, Ref, computed } from "vue";
-import { IPassenger } from "@/app/interfaces";
+import { IPassenger } from "@/interfaces";
 import { PassengerRepository } from ".";
 export const usePassengerStore = defineStore("usePassenger", () => {
    const passengers: Ref<IPassenger[]> = ref([]);

@@ -27,7 +27,7 @@
     <link rel="manifest" href="/manifest.json?v=2" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-    @vite(['resources/js/app/app.ts'])
+    @vite(['resources/js/app.ts'])
 </head>
 
 <body>

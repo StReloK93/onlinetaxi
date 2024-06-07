@@ -59,10 +59,6 @@ class UserService
         return $user->createToken('userToken', ['almighty'])->plainTextToken;
     }
 
-    public function getUser($request)
-    {
-        return $request->user();
-    }
 
 
     public function logout($request): void
@@ -81,6 +77,11 @@ class UserService
         $user->save();
 
         return $user->fresh();
+    }
+
+    public function getUser($request)
+    {
+        return $request->user();
     }
 
 }

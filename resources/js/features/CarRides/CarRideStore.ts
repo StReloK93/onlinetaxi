@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, Ref, computed } from "vue";
-import { ICarRide } from "@/app/interfaces";
+import { ICarRide } from "@/interfaces";
 import { hasDuplicates } from "@/modules/constants";
 import { CarRideRepository } from "@/features/CarRides/index";
 import { useAuthStore } from "@/store/useAuthStore"

@@ -13,7 +13,6 @@ class OffersPassengerController extends Controller
         return OffersPassenger::find($offer_id);
     }
 
-
     public function store(Request $request)
     {
 

@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
     plugins: [
         VitePWA({ registerType: 'autoUpdate' }),
-        laravel(['resources/js/app/app.ts']),
+        laravel(['resources/js/app.ts']),
         vue({
             template: {
                 transformAssetUrls: {

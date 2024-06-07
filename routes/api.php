@@ -72,15 +72,18 @@ Route::middleware('auth:sanctum')->group(function () {
     
 
 
+    Route::apiResource('passenger', PassengerController::class)->except(['index', 'show']);
     Route::prefix('passenger')->group(function () {
         Route::post('operator', [PassengerController::class, 'storeOperator']);
+        Route::get('{passenger}/offers', [PassengerController::class, 'getOffers']);
         Route::delete('{passenger}/delete', [PassengerController::class, 'delete']);
     });
-    Route::apiResource('passenger', PassengerController::class)->except(['index', 'show']);
 
 
-    Route::post('/set-user-data', [AuthController::class, 'setUserData']);
-    Route::get('/user', [AuthController::class, 'getUser']);
+    Route::post('auth-user/set-user-data', [UserController::class, 'setUserData']);
+    Route::get('auth-user/user', [UserController::class, 'getUser']);
+    Route::post('auth-user/change-role', [UserController::class, 'changeRole']);
+
     Route::get('/logout', [AuthController::class, 'logoutUser']);
 
 

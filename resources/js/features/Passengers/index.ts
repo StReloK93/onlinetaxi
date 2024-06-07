@@ -5,7 +5,7 @@ import FormInputs from '@/features/Passengers/components/FormInputs-Passenger.vu
 
 import PassengerRepository from '@/features/Passengers/PassengerRepository'
 import { usePassengerStore } from '@/features/Passengers/PassengerStore';
-import type { IPassenger } from '@/app/interfaces'
+import type { IPassenger } from '@/interfaces'
 export {
    IPassenger,
    usePassengerStore,

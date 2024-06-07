@@ -1,5 +1,5 @@
 import Client from "@/modules/AxiosClient";
-import { IOffersPassenger } from "@/app/interfaces";
+import { IOffersPassenger } from "@/interfaces";
 const resource = "offers-passenger"
 import { useOffersPassenger } from "./OffersPassengerStore"
 
