@@ -11,6 +11,7 @@ export const useTransport = defineStore('useTransport', () => {
 		const transport = await TransportRepository.create(formData)
 
 		transports.value.push(transport)
+		return transport
 	}
 
 	async function update(transport_id, formData) {

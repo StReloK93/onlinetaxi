@@ -56,4 +56,11 @@ function deleteTransport() {
 	border-left-width: 2px !important;
 	overflow: hidden;
 }
+
+.transport-card:last-child{
+	margin-bottom: 2px!important;
+}
+.transport-card:first-child{
+	margin-top: 2px!important;
+}
 </style>

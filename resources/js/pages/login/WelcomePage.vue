@@ -3,7 +3,7 @@
 		<v-container class="tw-flex tw-h-full tw-justify-center tw-items-center">
 			<v-card width="500">
 				<div class="text-center py-4">
-					<img src="/iconos/logo.png" width="100" class="d-inline">
+					<img src="/favicon.ico" width="100" class="d-inline">
 				</div>
 				<h3 class="text-h4 text-center">
 					Xush kelibsiz

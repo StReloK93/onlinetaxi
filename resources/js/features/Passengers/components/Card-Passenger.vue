@@ -67,7 +67,7 @@
 						<EditForm :id="props.passenger.id"></EditForm>
 						<v-btn size="x-small" @click="passengerDelete" variant="plain" icon="mdi-delete" />
 					</div>
-					<v-chip v-if="Auth.isAnyAdmins" variant="tonal" color="primary"
+					<v-chip variant="tonal" color="primary"
 						class="font-weight-medium rounded-e-0 me-n2">
 						{{ format(props.passenger.price, moneyConfig) }} so'm
 					</v-chip>
@@ -115,6 +115,12 @@ function passengerDelete() {
 	overflow: hidden;
 }
 
+.passenger-card:last-child{
+	margin-bottom: 2px!important;
+}
+.passenger-card:first-child{
+	margin-top: 2px!important;
+}
 .city-line {
 	height: 28px;
 	border-left-width: 2px;

@@ -11,6 +11,8 @@
 					<CardCarRide v-for="ride in rideStore.activeRides" :ride="ride" :key="ride.id">
 
 						<div class="leading-none" v-if="Auth.isAnyAdmins || Auth.user?.id == ride.user_id">
+							<v-btn v-if="Auth.isAnyAdmins" tag="a" :href="`tel:+998${ride.phone}`" size="x-small"
+							variant="plain" color="teal" icon="mdi-phone" />
 							<v-btn size="x-small" v-if="ride.state == 1" @click="inactivate(ride.id)" variant="plain"
 								icon="mdi-eye" />
 							<v-btn size="x-small" v-if="ride.state == 2" @click="activate(ride.id)" variant="plain"

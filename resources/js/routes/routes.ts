@@ -60,12 +60,6 @@ const routes: Array<RouteRecordRaw> = [
           clear: true
         }
       },
-      // {
-      //   path: '/operator/:id',
-      //   component: () => import('@/pages/general/OperatorPage.vue'),
-      //   name: 'operator',
-      //   props: true,
-      // },
     ],
   },
   {

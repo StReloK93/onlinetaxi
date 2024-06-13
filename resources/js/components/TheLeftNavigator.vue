@@ -20,9 +20,13 @@
 				<v-list-item prepend-icon="mdi-car-settings" title="Junatilgan transportlar" color="primary"
 					:to="{ name: 'car-ride-inactive' }" />
 			</v-list> -->
-			<!-- <v-divider></v-divider> -->
+
 			<div class="pa-2">
-				<v-row v-if="Auth.isPassenger || Auth.isDriver"  class="mb-3 mt-0">
+				<v-btn v-if="deferredPrompt" @click="installApp" block append-icon="mdi-download" variant="tonal" class="mb-2">
+					Ilovani o'rnatish
+				</v-btn>
+				<v-divider></v-divider>
+				<v-row v-if="Auth.isPassenger || Auth.isDriver" class="mb-2 mt-2">
 					<v-col cols="6" class="py-0 pr-1">
 						<v-btn @click="changeRole(4)" :loading="loadingRoleButton" :color="color(4)" variant="flat" block>
 							Haydovchi
@@ -34,9 +38,20 @@
 						</v-btn>
 					</v-col>
 				</v-row>
-				<v-btn v-if="deferredPrompt" @click="installApp" block append-icon="mdi-download" variant="tonal" class="mb-3">
-					Ilovani o'rnatish
-				</v-btn>
+				<v-divider></v-divider>
+				<v-list density="compact">
+					<v-list-item prepend-icon="mdi-car-settings" :to="{ name: 'transports' }">
+						<template v-slot:title>
+							<span v-if="Auth.isDriverAdmins">
+								Transportlar
+							</span>
+							<span v-else>
+								Mening transportlarim
+							</span>
+						</template>
+					</v-list-item>
+				</v-list>
+
 			</div>
 
 		</div>

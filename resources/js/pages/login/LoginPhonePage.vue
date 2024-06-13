@@ -1,8 +1,8 @@
 <template>
 	<v-form @submit.prevent="signin">
-		<div class="text-center ma-n3 rounded bg-amber-lighten-4">
-			<img src="/iconos/logo.png"  width="100" class="d-inline">
-			<!-- <h3 class="tw-text-xl mt-2 tw-font-semibold tw-uppercase">Shaharlararo online taxi</h3> -->
+		<div class="text-center ma-n3 rounded bg-amber-lighten-4 pt-3 pb-2">
+			<img src="/favicon.ico"  width="100" class="d-inline">
+			<h3 class="tw-text-xl mt-1 tw-font-semibold tw-uppercase">Shaharlararo online taxi</h3>
 		</div>
 		<v-col class="pa-0 pt-5">
 			<v-label>

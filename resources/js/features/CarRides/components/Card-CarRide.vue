@@ -60,7 +60,7 @@
 				</div>
 				<div class="d-flex align-end">
 					<slot></slot>
-					<v-chip v-if="Auth.isAnyAdmins" variant="tonal" color="primary" class="font-weight-medium rounded-e-0 me-n2">
+					<v-chip v-if="Auth.isAnyAdmins" variant="tonal" color="primary" class="font-weight-medium rounded-e-0 me-n2 pr-1">
 						{{ format(props.ride.price, moneyConfig) }} so'm
 					</v-chip>
 				</div>
@@ -78,7 +78,6 @@ import { computed } from 'vue'
 
 const props = defineProps(['ride'])
 const Auth = useAuthStore()
-
 const aviablePassengersCount = computed(() => props.ride.passengers.reduce((acc, pass) => acc += pass.count, 0))
 
 const latest = index => props.ride.cities.length - 1 == index

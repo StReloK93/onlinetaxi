@@ -2,8 +2,13 @@ import Client from "@/modules/AxiosClient";
 const resource = "auth-user";
 
 async function getUser() {
-   const { data } = await Client.get(`${resource}/user`);
-   return data;
+   try {
+      const { data } = await Client.get(`${resource}/user`);
+      return data;
+   }
+   catch (error) {
+      console.log(error);
+   }
 }
 
 async function changeRole(role_id) {
@@ -12,7 +17,7 @@ async function changeRole(role_id) {
 }
 
 async function setUserData(formData) {
-   const { data } = await Client.post("auth-user/set-user-data", formData);
+   const { data } = await Client.post(`${resource}/set-user-data`, formData);
    return data;
 }
 

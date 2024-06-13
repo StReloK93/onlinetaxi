@@ -3,7 +3,7 @@
       <v-container class="d-flex h-100 justify-center align-center px-2">
          <v-card width="360" class="pa-3 bg-white">
             <div class="text-center py-4 mb-2 ma-n3 rounded bg-amber-lighten-4">
-               <img src="/iconos/logo.png" width="100" class="d-inline">
+               <img src="/favicon.ico" width="100" class="d-inline">
                <h3 class="text-h6 mt-2 font-weight-medium text-uppercase">Shaharlararo online taxi</h3>
             </div>
             <div class="pa-2 pt-8">

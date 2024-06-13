@@ -32,12 +32,13 @@ import axios from "@/modules/AxiosClient"
 import { ref, onMounted, reactive, computed } from 'vue'
 import { rules } from '@/modules/constants'
 import { useAuthStore } from '@/store/useAuthStore'
+import { useMainStore } from '@/store/useMainStore'
 const Auth = useAuthStore()
+const AppStore = useMainStore()
 
-const city = ref(null)
 const bottomSheet = ref(false)
 
-const stringButton = computed(() => city.value?.name ? city.value?.name : 'Qayerdasiz?')
+const stringButton = computed(() => AppStore.city?.name ? AppStore.city?.name : 'Qayerdasiz?')
 
 const pageData = reactive({
    notification: true,
@@ -74,20 +75,20 @@ async function formMounted() {
    const { data: regions } = await axios.get('region')
    pageData.regions = regions
 
-   regionChanged(city.value.region_id)
-   formData.city_id = city.value.id
+   regionChanged(AppStore.city.region_id)
+   formData.city_id = AppStore.city.id
    pageData.overlay = false
 }
 
 async function updateTopic() {
    const { data: current_city } = await axios.post('firebase/set-city-topic', formData)
-   city.value = current_city
+   AppStore.city = current_city
 }
 
 
 onMounted(async () => {
    axios.post('firebase/get-city-topic', { token: Auth.token }).then(({ data: current_city }) => {
-      city.value = current_city
+      AppStore.city = current_city
       pageData.loading = false
    }).catch(() => {
       console.clear()
