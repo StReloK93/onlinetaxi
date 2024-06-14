@@ -38,7 +38,7 @@ export default createVuetify({
 				dark: false,
 				colors: {
 					primary: colors.pink.darken1, // #E53935
-					secondary: colors.grey.darken1, // #E53935
+					secondary: colors.grey.darken3, // #E53935
 				}
 			},
 		},

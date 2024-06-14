@@ -1,11 +1,7 @@
 <template>
-	<v-dialog v-model="pageData.dialog" scrollable width="600px">
+	<v-dialog :attach="false" v-model="pageData.dialog" scrollable width="600px">
 		<template v-slot:activator="{ props }">
-			<v-btn v-if="propsParent.smButton" v-bind="props" prepend-icon="mdi-pencil" size="x-small" variant="tonal"
-				color="white">
-				O'zgaritirish
-			</v-btn>
-			<v-btn v-else size="x-small" v-bind="props" variant="plain" icon="mdi-pencil" />
+			<v-btn size="x-small" v-bind="props" variant="plain" color="secondary" icon="mdi-pencil" />
 		</template>
 		<BaseForm :loading="pageData.overlay" :submit="submitFunction" @vue:mounted="getCarRide(propsParent.id)"
 			title="Qatnovni tahrirlash" @close="pageData.dialog = false">
@@ -19,7 +15,7 @@ import { unformat } from 'v-money3'
 import { moneyConfig } from '@/modules/constants'
 import { FormInputs, CarRideRepository } from '..'
 const inputComponent = ref()
-const propsParent = defineProps(['id', 'smButton', 'submit'])
+const propsParent = defineProps(['id', 'submit'])
 
 
 const pageData = reactive({

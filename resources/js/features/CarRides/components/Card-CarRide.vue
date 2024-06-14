@@ -1,13 +1,13 @@
 <template>
 	<section class="car-ride-card w-100 d-flex flex-column bg-white elevation-1 mb-2 rounded-e">
 		<main class="pa-2 d-flex flex-column justify-space-between position-relative">
-			<v-icon class="position-absolute city-direction" color="primary" >mdi-chevron-down</v-icon>
+			<v-icon class="position-absolute city-direction" color="secondary" >mdi-chevron-down</v-icon>
 			<div
 				class="position-absolute city-line">
 			</div>
 			<template v-for="(item, index) in props.ride.cities">
 				<aside v-if="latest(index) || first(index)" :class="[ {'mb-2': first(index)}]" class="leading-none d-flex align-center">
-					<v-icon class="mr-1 text-caption" :class="[{'opacity-0': latest(index)}]" color="primary">
+					<v-icon class="mr-1 text-caption" :class="[{'opacity-0': latest(index)}]" color="secondary">
 						mdi-circle-medium
 					</v-icon>
 					<span class="font-weight-medium">
@@ -37,7 +37,7 @@
 					<main class="d-flex align-end">
 						<span v-for="(n,index) in props.ride.free_seat">
 							<v-icon v-if="index < aviablePassengersCount" size="small" color="primary">mdi-account</v-icon>
-							<v-icon v-else size="small" color="grey-lighten-1">mdi-account</v-icon>
+							<v-icon v-else size="small" color="secondary">mdi-account</v-icon>
 						</span>
 					</main>
 				</div>
@@ -60,7 +60,7 @@
 				</div>
 				<div class="d-flex align-end">
 					<slot></slot>
-					<v-chip v-if="Auth.isAnyAdmins" variant="tonal" color="primary" class="font-weight-medium rounded-e-0 me-n2 pr-1">
+					<v-chip v-if="Auth.isAnyAdmins" variant="tonal" color="secondary" class="font-weight-medium rounded-e-0 me-n2 pr-1">
 						{{ format(props.ride.price, moneyConfig) }} so'm
 					</v-chip>
 				</div>

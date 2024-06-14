@@ -1,8 +1,10 @@
 <template>
    <v-app-bar density="compact" :elevation="0" :border="1">
       <div class="text-right w-100 px-2">
-         <v-btn v-if="pageData.notification" @click="bottomSheet = true" :text="stringButton"
-            append-icon="mdi-map-marker" :loading="pageData.loading"></v-btn>
+         <v-btn icon="mdi-close" v-if="AppStore.city" @click="clearTopic" size="x-small" :loading="pageData.clearButtonLoading" />
+
+         <v-btn v-if="pageData.notification" @click="bottomSheet = true" :text="stringButton" append-icon="mdi-map-marker"
+            :loading="pageData.loading"></v-btn>
          <v-btn v-else disabled>Habarnoma o'chirilgan</v-btn>
       </div>
       <v-bottom-sheet v-model="bottomSheet" inset>
@@ -48,6 +50,7 @@ const pageData = reactive({
    regions: [],
    region_districts: [],
    region_id: null,
+   clearButtonLoading: false,
 })
 
 const formData = reactive({
@@ -75,9 +78,20 @@ async function formMounted() {
    const { data: regions } = await axios.get('region')
    pageData.regions = regions
 
+   if(AppStore.city == null) return pageData.overlay = false
    regionChanged(AppStore.city.region_id)
    formData.city_id = AppStore.city.id
    pageData.overlay = false
+}
+
+async function clearTopic() {
+   pageData.clearButtonLoading = true
+   await axios.post('firebase/set-city-topic', {
+      city_id: null,
+      token: Auth.token,
+   })
+   AppStore.city = null
+   pageData.clearButtonLoading = false
 }
 
 async function updateTopic() {

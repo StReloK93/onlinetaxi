@@ -1,24 +1,26 @@
 <template>
 	<main class="d-flex flex-column">
 		<main class="d-flex align-center justify-space-between w-100">
-			<AddForm v-if="Auth.isAnyAdmins || Auth.isDriver" :submit="rideStore.create" />
+			<AddForm v-if="(Auth.isAnyAdmins || Auth.isDriver) && hideButton" :submit="rideStore.create" />
 			<!-- <Filters ref="filterComponent" />
 			<Sorting /> -->
 		</main>
 		<v-spacer class="position-relative">
-			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
+			<main @scroll="onScroll"
+				class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
 				<TransitionGroup name="list">
 					<CardCarRide v-for="ride in rideStore.activeRides" :ride="ride" :key="ride.id">
 
 						<div class="leading-none" v-if="Auth.isAnyAdmins || Auth.user?.id == ride.user_id">
-							<v-btn v-if="Auth.isAnyAdmins" tag="a" :href="`tel:+998${ride.phone}`" size="x-small"
-							variant="plain" color="teal" icon="mdi-phone" />
-							<v-btn size="x-small" v-if="ride.state == 1" @click="inactivate(ride.id)" variant="plain"
-								icon="mdi-eye" />
-							<v-btn size="x-small" v-if="ride.state == 2" @click="activate(ride.id)" variant="plain"
-								icon="mdi-eye-off" />
-							<EditForm :date="true" :id="ride.id"  :submit="rideStore.update" ></EditForm>
-							<v-btn size="x-small" @click="carRideDelete(ride.id)" variant="plain" icon="mdi-delete" />
+							<v-btn v-if="Auth.isAnyAdmins" tag="a" :href="`tel:+998${ride.phone}`" size="x-small" variant="plain"
+								color="teal" icon="mdi-phone" />
+							<v-btn size="x-small" color="secondary" v-if="ride.state == 1" @click="inactivate(ride.id)"
+								variant="plain" icon="mdi-eye" />
+							<v-btn size="x-small" color="secondary" v-if="ride.state == 2" @click="activate(ride.id)"
+								variant="plain" icon="mdi-eye-off" />
+							<EditForm :date="true" :id="ride.id" :submit="rideStore.update"></EditForm>
+							<v-btn size="x-small" color="secondary" @click="carRideDelete(ride.id)" variant="plain"
+								icon="mdi-delete" />
 						</div>
 
 					</CardCarRide>
@@ -29,7 +31,7 @@
 </template>
 <script setup lang="ts">
 import { AddForm, Filters, useCarRide, CardCarRide, CarRideRepository, EditForm } from '@/features/CarRides'
-import { watch, onMounted, onUnmounted } from 'vue'
+import { watch, onMounted, onUnmounted, ref } from 'vue'
 import { useMainStore } from '@/store/useMainStore'
 import { useAuthStore } from '@/store/useAuthStore'
 const Auth = useAuthStore()
@@ -37,11 +39,19 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const store = useMainStore()
 const rideStore = useCarRide()
+const hideButton = ref(true)
 
+function onScroll(event) {
+	// const element = event.target
 
-
-
-
+	// if (element.scrollTop + element.clientHeight >= element.scrollHeight) {
+	// 	// Element scrolled to bottom
+	// 	hideButton.value = false
+	// 	setTimeout(() => {
+	// 		hideButton.value = true
+	// 	}, 3000);
+	// }
+}
 
 
 

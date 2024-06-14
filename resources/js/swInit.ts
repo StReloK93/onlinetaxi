@@ -29,10 +29,11 @@ export default async function () {
 
          messaging.onMessageHandler = function (event) {
             const message = event.notification
-
+            
             var options = {
                body: message.body,
                icon: "/pwa/maskable_icon_x128.png",
+               badge: "/pwa/maskable_icon_x96.png",
             };
             const notification = new Notification(message.title, options)
             notification.onclick = function(){
