@@ -58,9 +58,9 @@
 						</v-btn>
 					</span>
 				</div>
-				<div class="d-flex align-end">
+				<div class="d-flex align-center">
 					<slot></slot>
-					<v-chip v-if="Auth.isAnyAdmins" variant="tonal" color="secondary" class="font-weight-medium rounded-e-0 me-n2 pr-1">
+					<v-chip v-if="Auth.isAnyAdmins" variant="tonal" color="secondary" size="small" class="font-weight-medium rounded-e-0 me-n2 pr-1">
 						{{ format(props.ride.price, moneyConfig) }} so'm
 					</v-chip>
 				</div>
