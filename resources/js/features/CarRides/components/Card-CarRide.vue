@@ -20,7 +20,7 @@
 			</template>
 		</main>
 
-		<main class="px-2 pt-1 d-flex flex-column justify-space-between flex-grow-1">
+		<main class="pl-2 pt-1 d-flex flex-column justify-space-between flex-grow-1">
 			<section>
 				<div class="d-flex justify-space-between">
 					<main>
@@ -60,7 +60,7 @@
 				</div>
 				<div class="d-flex align-center">
 					<slot></slot>
-					<v-chip v-if="Auth.isAnyAdmins" variant="tonal" color="secondary" size="small" class="font-weight-medium rounded-e-0 me-n2 pr-1">
+					<v-chip variant="tonal" color="secondary" size="small" class="font-weight-medium rounded-e-0 pr-1">
 						{{ format(props.ride.price, moneyConfig) }} so'm
 					</v-chip>
 				</div>
