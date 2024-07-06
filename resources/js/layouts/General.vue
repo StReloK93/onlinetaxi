@@ -4,7 +4,7 @@
 		<TheAlert />
 		<v-main>
 			<TheHeader />
-			<v-container class="h-100">
+			<v-container class="h-100 pb-3">
 				<router-view class="h-100 position-relative mx-n2"></router-view>
 			</v-container>
 		</v-main>
@@ -13,6 +13,7 @@
 </template>
 
 <script setup lang="ts">
+
 import TheHeader from '@/components/TheHeader.vue'
 import TheBottomNavigation from '@/components/TheBottomNavigation.vue'
 import TheAlert from '@/components/TheAlert.vue'

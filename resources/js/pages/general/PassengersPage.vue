@@ -1,19 +1,20 @@
 <template>
-	<main class="d-flex tw-flex-col">
-		<AddForm v-if="AuthStore.isAnyAdmins || AuthStore.isPassenger" />
+	<main class="d-flex flex-column">
 		<v-spacer class="position-relative">
 			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
 				<TransitionGroup name="list">
-					<Card v-for="passenger in filtered_passengers" :passenger="passenger" :key="passenger.id"/>
+					<PassengerInformation v-for="passenger in filtered_passengers" :passenger="passenger" :key="passenger.id" class="mb-2"/>
 				</TransitionGroup>
 			</main>
 		</v-spacer>
+		<AddForm v-if="AuthStore.isAnyAdmins || AuthStore.isPassenger" />
 	</main>
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, computed } from 'vue'
 import { Card, AddForm, PassengerRepository, usePassengerStore } from '@/features/Passengers';
+import PassengerInformation from '@/features/OffersPassenger/components/PassengerInformation.vue';
 import { useAuthStore } from '@/store/useAuthStore'
 import { useMainStore } from '@/store/useMainStore'
 

@@ -88,7 +88,9 @@
     opacity: 0;
 }
 
-
+.z-50{
+  z-index: 50;
+}
 
 .list-move, /* apply transition to moving elements */
 .list-enter-active,
@@ -107,4 +109,16 @@
    animations can be calculated correctly. */
 .list-leave-active {
   position: absolute;
+}
+
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.18s ease-in-out;
+}
+.slide-up-enter-from {
+  transform: translateX(100%);
+}
+.slide-up-leave-to {
+  transform: translateX(100%);
 }

@@ -1,7 +1,9 @@
 <template>
 	<v-dialog v-model="pageData.dialog" scrollable width="600px">
 		<template v-slot:activator="{ props }">
-			<v-btn color="primary" v-bind="props" icon="mdi-plus" :class="parentProps.btnClass" class="add-button" />
+			<v-btn color="primary" v-bind="props" class="mt-2 mb-n1" append-icon="mdi-taxi" block :class="parentProps.btnClass"  >
+				Elon kiritish
+			</v-btn>
 		</template>
 		<BaseForm :loading="pageData.overlay" :submit="submitFunction" title="Qatnov kiritish" @close="pageData.dialog = false">
 			<FormInputs @vue:mounted="pageData.overlay = true" @onReady="pageData.overlay = false" ref="inputComponent"  />

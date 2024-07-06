@@ -51,7 +51,7 @@ async function getCarRide(id) {
 	formData.ends = []
 
 	await Promise.all(ride.cities.map(async (city, index) => {
-		formData.ends.push({ region: null, city: null, loading: false, districts: [] })
+		formData.ends.push({ region: null, city: null, loading: false, districts: [], text: index == 0 ? "Qayerdan?" : "Qayerga?" })
 		await inputComponent.value.regionChanged(city.district.region_id, index)
 		formData.ends[index].region = city.district.region_id
 		formData.ends[index].city = city.district_id

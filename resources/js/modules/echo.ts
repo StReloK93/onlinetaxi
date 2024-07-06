@@ -6,19 +6,19 @@ window.Pusher = Pusher
 class Singleton {
 	private static instance: Singleton;
 	constructor() {
-		const echo = new Echo({
-			wsHost: '176.221.28.199',
-			wsPort: 6001,
-			wssPort: 6001,
-			broadcaster: 'pusher',
-			// @ts-ignore
-			key: import.meta.env.VITE_PUSHER_APP_KEY,
-			// @ts-ignore
-			cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
-			disableStats: true,
-			forceTLS: false,
-		})
-		return echo
+		// const echo = new Echo({
+		// 	wsHost: '176.221.28.199',
+		// 	wsPort: 6001,
+		// 	wssPort: 6001,
+		// 	broadcaster: 'pusher',
+		// 	// @ts-ignore
+		// 	key: import.meta.env.VITE_PUSHER_APP_KEY,
+		// 	// @ts-ignore
+		// 	cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+		// 	disableStats: true,
+		// 	forceTLS: false,
+		// })
+		// return echo
 	}
 
 
