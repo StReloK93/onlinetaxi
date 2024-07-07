@@ -1,39 +1,21 @@
 <template>
 	<v-row>
-
-		<v-col cols="12" class="py-0">
-			<v-label class="text-subtitle-1 mr-1">
-				Qaerdan?
-			</v-label>
-		</v-col>
-		<v-col sm="6" cols="12">
-			<v-autocomplete @update:model-value="(id) => regionChanged(id, 'start')" :items="pageData.regions"
-				v-model="formData.start_region" label="Viloyat" item-title="name" :item-value="(item) => item.id"
-				:rules="rules" />
-		</v-col>
-		<v-col sm="6" cols="12">
-			<v-autocomplete :disabled="formData.start_region == null" :items="pageData.start_districts"
-				v-model="formData.start_city" label="Shahar (Tuman)" item-title="name" :loading="pageData.start_loading"
-				:item-value="(item) => item.id" :rules="rules" />
-		</v-col>
-
-		<v-divider></v-divider>
-
-		<v-col cols="12" class="py-0">
-			<v-label class="text-subtitle-1 mr-1">
-				Qaerga?
-			</v-label>
-		</v-col>
-		<v-col sm="6" cols="12">
-			<v-autocomplete @update:model-value="(id) => regionChanged(id, 'end')" :items="pageData.regions"
-				v-model="formData.end_region" label="Viloyat" item-title="name" :item-value="(item) => item.id"
-				:rules="rules" />
-		</v-col>
-		<v-col sm="6" cols="12">
-			<v-autocomplete :disabled="formData.end_region == null" :items="pageData.end_districts"
-				v-model="formData.end_city" label="Shahar (Tuman)" item-title="name" :item-value="(item) => item.id"
-				:loading="pageData.end_loading" :rules="rules" />
-		</v-col>
+		<BaseSelectCity
+			:categories="pageData.regions"
+			:subCategories="pageData.districts"
+			:loading="pageData.start_loading"
+			v-model="formData.start_city"
+			startText="Qayerdan?"
+			class="mb-1"
+		/>
+		<BaseSelectCity
+			:categories="pageData.regions"
+			:subCategories="pageData.districts"
+			:loading="pageData.end_loading"
+			v-model="formData.end_city"
+			startText="Qayerga?"
+			class="mb-1"
+		/>
 
 		<v-col sm="6" cols="12">
 			<VDatePicker :trim-weeks="true" color="pink" :min-date="new Date()" v-model.string="formData.ride_time"
@@ -52,10 +34,11 @@
 </template>
 
 <script setup lang="ts">
+import BaseSelectCity from '@/components/BaseSelectCity.vue'
 import axios from '@/modules/AxiosClient'
 import { IPassenger } from '@/interfaces'
 import { rules } from '@/modules/constants'
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
 const emit = defineEmits(['onReady'])
 
 
@@ -78,6 +61,7 @@ const pageData = reactive({
 	start_loading: false,
 	end_loading: false,
 	regions: [],
+	districts: [],
 	start_districts: [],
 	end_districts: []
 })
@@ -92,9 +76,15 @@ async function regionChanged(id, way) {
 	})
 }
 
-axios.get('region').then(({ data: regions }) => {
-	pageData.regions = regions
-	emit('onReady')
-})
 defineExpose({ regionChanged, formData })
+
+onMounted(async () => {
+   const { data: regions } = await axios.get("region");
+   pageData.regions = regions;
+
+   const { data: districts } = await axios.get("district");
+   pageData.districts = districts;
+
+   emit("onReady");
+});
 </script>

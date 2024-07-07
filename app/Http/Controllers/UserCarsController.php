@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\UserCar;
 use App\Models\CarRide;
 use Auth;
+
 class UserCarsController extends Controller
 {
     public function index()
@@ -15,11 +16,8 @@ class UserCarsController extends Controller
 
     public function onlyAuthUser()
     {
-        if (Auth::user()->role_id == 2 || Auth::user()->role_id == 1) {
-            return $this->index();
-        } else {
-            return UserCar::with(['fuel', 'user'])->onlyMyCars()->get();
-        }
+
+        return UserCar::with(['fuel', 'user'])->onlyMyCars()->get();
     }
 
     public function store(Request $request)

@@ -1,6 +1,6 @@
 <template>
 	<div class="w-100">
-		<v-btn @click="pageData.dialog = true" variant="tonal" :loading="props.city?.loading" block>
+		<v-btn @click="pageData.dialog = true" variant="tonal" :loading="props.loading" block>
 			<span v-if="model == null">
 				{{ props.startText }}
 			</span>
@@ -11,14 +11,14 @@
 				</span>
 			</span>
 		</v-btn>
-		<v-dialog v-model="pageData.dialog" class="w-100" >
-			<v-card @vue:mounted="pageData.selectedRegion = null">
+		<v-dialog v-model="pageData.dialog" class="w-100 max-w-500" >
+			<v-card @vue:unmounted="pageData.selectedRegion = null">
 				<v-card-title>
 					<v-icon>mdi mdi-map-marker</v-icon>
 					{{ props.startText }}
 				</v-card-title>
 				<v-divider></v-divider>
-				<v-card-text class="pa-0 position-relative" style="height: 400px;">
+				<v-card-text class="pa-0 position-relative" style="height: 450px;">
 					<v-list density="comfortable" class="position-absolute top-0 left-0 w-100 h-100">
 						<v-list-item @click="pageData.selectedRegion = region" color="primary" :value="region" v-for="region in props.categories">
 							<v-list-item-title v-text="region.name"></v-list-item-title>
@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 import { reactive, computed } from 'vue';
-const props = defineProps(['startText', 'city', 'categories', 'subCategories'])
+const props = defineProps(['startText', 'loading', 'categories', 'subCategories'])
 const model = defineModel()
 const pageData = reactive({
 	dialog: false,
@@ -71,7 +71,4 @@ const selectedCity = computed(() => {
 const selectedRegion = computed(() => {
 	return props.categories?.find((category) => selectedCity.value?.region_id == category.id)
 })
-
-
-
 </script>

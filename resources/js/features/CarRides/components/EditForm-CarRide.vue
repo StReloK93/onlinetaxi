@@ -1,5 +1,5 @@
 <template>
-	<v-dialog :attach="false" v-model="pageData.dialog" scrollable width="600px">
+	<v-dialog :attach="false" v-model="pageData.dialog" scrollable width="400px">
 		<template v-slot:activator="{ props }">
 			<v-btn size="x-small" v-bind="props" variant="plain" color="secondary" icon="mdi-pencil" />
 		</template>

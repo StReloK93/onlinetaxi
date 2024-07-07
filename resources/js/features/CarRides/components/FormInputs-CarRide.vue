@@ -1,9 +1,8 @@
 <template>
    <v-row>
-
       <BaseSelectCity
          v-model="formData.ends[0].city"
-			:city="formData.ends[0]"
+			:loading="formData.ends[0].loading"
          :categories="pageData.regions"
          :subCategories="pageData.districts"
          :startText="formData.ends[0].text"
@@ -11,26 +10,28 @@
       />
       <BaseSelectCity
          v-model="formData.ends[1].city"
-			:city="formData.ends[0]"
+			:loading="formData.ends[1].loading"
          :categories="pageData.regions"
          :subCategories="pageData.districts"
          :startText="formData.ends[1].text"
          class="mb-1"
       />
-      <v-col sm="6" cols="12" class="pa-0">
-         <VDatePicker
+      <v-col  cols="12" class="pa-0">
+         {{formData.day}}
+         <BaseSelectTimeInput v-model:datetime="formData.day"/>
+         <!-- <VDatePicker
             :trim-weeks="true"
             color="pink"
             v-model.string="formData.day"
             :masks="{ modelValue: 'YYYY-MM-DD HH:mm' }"
-            mode="dateTime"
+            mode="date"
             is24hr
             transparent
             borderless
             expanded
             hide-time-header
             is-required
-         />
+         /> -->
          <v-text-field
             class="hidden tw-relative -tw-top-2 ml-3"
             hidden
@@ -39,11 +40,11 @@
             readonly
          />
       </v-col>
-      <v-col sm="6" cols="12">
+      <v-col cols="12">
          <v-autocomplete
+            v-if="transports.length > 1"
             class="mb-3"
-            @update:model-value="setPhone"
-            :items="pageData.cars"
+            :items="transports"
             v-model="formData.user_car_id"
             label="Transport"
             :item-title="(item) => `${item.car?.name} ( ${item.number} )`"
@@ -87,15 +88,21 @@
 
 <script setup lang="ts">
 import BaseSelectCity from "@/components/BaseSelectCity.vue";
+import BaseSelectTimeInput from "@/components/BaseSelectTimeInput.vue"
 import axios from "@/modules/AxiosClient";
 import { moneyConfig, rules } from "@/modules/constants";
 import { reactive, onMounted } from "vue";
-import { TransportRepository } from "@/features/Transports";
+import { useAuthStore } from "@/store/useAuthStore"
+import { ITransport } from "@/interfaces";
+
+const AuthStore = useAuthStore()
+const transports = AuthStore.user.cars as ITransport[]
+
 const emit = defineEmits(["onReady"]);
 
 const formData = reactive({
-   user_car_id: null,
-   phone: null,
+   user_car_id: transports.length == 1 ? transports[0].id : null,
+   phone: AuthStore.user.phone,
    strictly_on_time: false,
    address_to_address: false,
    ends: [
@@ -126,11 +133,6 @@ const pageData = reactive({
    districts: [],
 });
 
-function setPhone(id) {
-   const car = pageData.cars.find((car) => car.id == id);
-   formData.phone = car.user.phone;
-}
-
 async function regionChanged(id, index) {
    formData.ends[index].loading = true;
    formData.ends[index].city = null;
@@ -148,9 +150,6 @@ onMounted(async () => {
 
    const { data: districts } = await axios.get("district");
    pageData.districts = districts;
-
-   const transports = await TransportRepository.onlyAuthUser();
-   pageData.cars = transports;
 
    emit("onReady");
 });

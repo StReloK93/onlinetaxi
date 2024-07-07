@@ -1,5 +1,5 @@
 <template>
-	<v-dialog v-model="pageData.dialog" scrollable width="600px">
+	<v-dialog v-model="pageData.dialog" scrollable width="400px">
 		<template v-slot:activator="{ props }">
 			<v-btn color="primary" v-bind="props" class="mt-2 mb-n1" append-icon="mdi-taxi" block :class="parentProps.btnClass"  >
 				Elon kiritish

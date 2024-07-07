@@ -122,3 +122,8 @@
 .slide-up-leave-to {
   transform: translateX(100%);
 }
+
+
+.max-w-500{
+  max-width: 500px;
+}
