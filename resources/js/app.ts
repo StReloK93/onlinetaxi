@@ -23,7 +23,7 @@ async function init() {
 		.component('BaseForm', BaseForm)
 		.use(vuetify)
 		.use(pinia)
-		// .use(VCalendar, {})
+		.use(VCalendar, {})
 		.use(money)
 	
 		await initFirebase().catch(() => console.log('Aloqa yoq'))

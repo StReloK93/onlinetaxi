@@ -12,7 +12,7 @@ const defaultInputParams = { color: color, variant: variant, hideDetails: "auto"
 export default createVuetify({
 	components: {
 		...components,
-		// VDatePicker: false,
+		VDatePicker: false,
 	},
 	directives,
 

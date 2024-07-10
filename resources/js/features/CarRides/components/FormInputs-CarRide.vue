@@ -18,7 +18,8 @@
       />
       <v-col  cols="12" class="pa-0">
          {{formData.day}}
-         <BaseSelectTimeInput v-model:datetime="formData.day"/>
+         {{ formData.time }}
+         <BaseSelectTimeInput v-model:date="formData.day" v-model:time="formData.time"/>
          <!-- <VDatePicker
             :trim-weeks="true"
             color="pink"
@@ -122,6 +123,7 @@ const formData = reactive({
       },
    ],
    day: null,
+   time: null,
    price: "",
    free_seat: null,
 });

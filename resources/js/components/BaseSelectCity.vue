@@ -1,6 +1,6 @@
 <template>
 	<div class="w-100">
-		<v-btn @click="pageData.dialog = true" variant="tonal" :loading="props.loading" block>
+		<v-btn @click="pageData.dialog = true" color="dark" variant="tonal" :loading="props.loading" block>
 			<span v-if="model == null">
 				{{ props.startText }}
 			</span>
@@ -19,7 +19,7 @@
 				</v-card-title>
 				<v-divider></v-divider>
 				<v-card-text class="pa-0 position-relative" style="height: 450px;">
-					<v-list density="comfortable" class="position-absolute top-0 left-0 w-100 h-100">
+					<v-list density="comfortable" class="position-absolute top-0 left-0 w-100 h-100 py-0">
 						<v-list-item @click="pageData.selectedRegion = region" color="primary" :value="region" v-for="region in props.categories">
 							<v-list-item-title v-text="region.name"></v-list-item-title>
 							<template v-slot:append>
@@ -30,8 +30,8 @@
 						</v-list-item>
 					</v-list>
 					<Transition name="slide-up">
-						<v-list v-if="pageData.selectedRegion" density="comfortable" class="position-absolute top-0 left-0 w-100 h-100">
-							<v-btn @click="pageData.selectedRegion = null" variant="tonal" block prepend-icon="mdi-chevron-left">
+						<v-list v-if="pageData.selectedRegion" density="comfortable" class="position-absolute top-0 left-0 w-100 h-100 py-0">
+							<v-btn @click="pageData.selectedRegion = null" color="dark" variant="tonal" block prepend-icon="mdi-chevron-left">
 								Orqaga
 							</v-btn>
 							<v-list-item @click="selectCity(district)" color="primary" :value="district" v-for="district in districts">
