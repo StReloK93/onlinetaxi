@@ -16,7 +16,7 @@
     "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2"
   },
   "resources/js/app.css": {
-    "file": "assets/app-5c2f1d70.css",
+    "file": "assets/app-426bee59.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.ts": {
@@ -27,7 +27,7 @@
       "assets/materialdesignicons-webfont-be825c12.ttf"
     ],
     "css": [
-      "assets/app-5c2f1d70.css"
+      "assets/app-426bee59.css"
     ],
     "dynamicImports": [
       "resources/js/layouts/General.vue",
@@ -37,12 +37,12 @@
       "resources/js/pages/login/WelcomePage.vue",
       "resources/js/pages/login/InstallAppPage.vue"
     ],
-    "file": "assets/app-e22af7c5.js",
+    "file": "assets/app-121b15a2.js",
     "isEntry": true,
     "src": "resources/js/app.ts"
   },
   "resources/js/layouts/General.vue": {
-    "file": "assets/General-ee8337b8.js",
+    "file": "assets/General-1b1fbaa8.js",
     "imports": [
       "resources/js/app.ts"
     ],
@@ -50,7 +50,7 @@
     "src": "resources/js/layouts/General.vue"
   },
   "resources/js/layouts/Login.vue": {
-    "file": "assets/Login-6e9b7e9e.js",
+    "file": "assets/Login-0bbc91d6.js",
     "imports": [
       "resources/js/app.ts"
     ],
@@ -58,7 +58,7 @@
     "src": "resources/js/layouts/Login.vue"
   },
   "resources/js/pages/login/InstallAppPage.vue": {
-    "file": "assets/InstallAppPage-4b738506.js",
+    "file": "assets/InstallAppPage-b5d75ced.js",
     "imports": [
       "resources/js/app.ts"
     ],
@@ -66,7 +66,7 @@
     "src": "resources/js/pages/login/InstallAppPage.vue"
   },
   "resources/js/pages/login/LoginPhonePage.vue": {
-    "file": "assets/LoginPhonePage-714b2868.js",
+    "file": "assets/LoginPhonePage-112e4b8a.js",
     "imports": [
       "resources/js/app.ts"
     ],
@@ -74,7 +74,7 @@
     "src": "resources/js/pages/login/LoginPhonePage.vue"
   },
   "resources/js/pages/login/LoginSendSmsPage.vue": {
-    "file": "assets/LoginSendSmsPage-467dffa7.js",
+    "file": "assets/LoginSendSmsPage-37445c00.js",
     "imports": [
       "resources/js/app.ts"
     ],
@@ -82,7 +82,7 @@
     "src": "resources/js/pages/login/LoginSendSmsPage.vue"
   },
   "resources/js/pages/login/WelcomePage.vue": {
-    "file": "assets/WelcomePage-6801a174.js",
+    "file": "assets/WelcomePage-b1430a93.js",
     "imports": [
       "resources/js/app.ts"
     ],

@@ -1,9 +1,9 @@
 <template>
-   <section>
-      <v-btn @click="$emit('back')" color="dark" variant="tonal" block prepend-icon="mdi-chevron-left">
+   <section class="h-100 d-flex flex-column pa-1">
+      <v-btn @click="emit('back')" class="flex-grow-0" color="dark" variant="tonal" block prepend-icon="mdi-chevron-left">
          Orqaga
       </v-btn>
-      <main class="d-flex justify-center pa-2">
+      <main class="d-flex justify-center align-center flex-grow-1">
          <div class="d-flex flex-column mr-1">
             <v-btn variant="tonal" color="dark" size="small" @click="nextItem(hours, 'hour')">
                <v-icon>mdi-chevron-up</v-icon>
@@ -28,6 +28,9 @@
             </v-btn>
          </div>
       </main>
+      <v-btn @click="emit('success')" class="flex-grow-0" variant="tonal" block append-icon="mdi-check">
+         Tasdiqlash
+      </v-btn>
    </section>
 </template>
 
@@ -35,6 +38,10 @@
 import { reactive, ref, onMounted } from 'vue'
 const hours = reactive([])
 const model = defineModel()
+
+const emit = defineEmits(['back', 'success'])
+
+console.log(model.value);
 
 const pageData = reactive({
    hour: 12,

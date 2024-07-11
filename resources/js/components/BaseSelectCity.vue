@@ -14,12 +14,19 @@
 		<v-dialog v-model="pageData.dialog" class="w-100 max-w-500" >
 			<v-card @vue:unmounted="pageData.selectedRegion = null">
 				<v-card-title>
-					<v-icon>mdi mdi-map-marker</v-icon>
-					{{ props.startText }}
+					<div class="d-flex justify-space-between align-center">
+						<span>
+							<v-icon>mdi mdi-map-marker</v-icon>
+							{{ props.startText }}
+						</span>
+						<span v-if="addressModel != null">
+							<v-switch v-model="addressModel" label="Manzilgacha" />
+						</span>
+					</div>
 				</v-card-title>
 				<v-divider></v-divider>
 				<v-card-text class="pa-0 position-relative" style="height: 450px;">
-					<v-list density="comfortable" class="position-absolute top-0 left-0 w-100 h-100 py-0">
+					<v-list density="comfortable" class="position-absolute top-0 left-0 w-100 h-100 pa-1">
 						<v-list-item @click="pageData.selectedRegion = region" color="primary" :value="region" v-for="region in props.categories">
 							<v-list-item-title v-text="region.name"></v-list-item-title>
 							<template v-slot:append>
@@ -30,7 +37,7 @@
 						</v-list-item>
 					</v-list>
 					<Transition name="slide-up">
-						<v-list v-if="pageData.selectedRegion" density="comfortable" class="position-absolute top-0 left-0 w-100 h-100 py-0">
+						<v-list v-if="pageData.selectedRegion" density="comfortable" class="position-absolute top-0 left-0 w-100 h-100 pa-1">
 							<v-btn @click="pageData.selectedRegion = null" color="dark" variant="tonal" block prepend-icon="mdi-chevron-left">
 								Orqaga
 							</v-btn>
@@ -49,6 +56,7 @@
 import { reactive, computed } from 'vue';
 const props = defineProps(['startText', 'loading', 'categories', 'subCategories'])
 const model = defineModel()
+const addressModel = defineModel('address')
 const pageData = reactive({
 	dialog: false,
 	selectedRegion: null,

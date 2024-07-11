@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+import moment from 'moment'
 import { reactive, ref } from 'vue'
 import { moneyConfig } from '@/modules/constants'
 import { unformat } from 'v-money3'
@@ -26,6 +27,9 @@ const pageData = reactive({ dialog: false, overlay: true })
 async function submitFunction() {
 	const formData = inputComponent.value.formData
 	formData.price = unformat(formData.price, moneyConfig)
+	const day = moment(formData.day).format('YYYY-MM-DD')
+	
+	formData.day = moment(`${day} ${formData.time}`).format('YYYY-MM-DD HH:mm')
 	await parentProps.submit(formData)
 }
 </script>

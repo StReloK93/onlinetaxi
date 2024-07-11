@@ -10,6 +10,7 @@
       />
       <BaseSelectCity
          v-model="formData.ends[1].city"
+         v-model:address="formData.address_to_address"
 			:loading="formData.ends[1].loading"
          :categories="pageData.regions"
          :subCategories="pageData.districts"
@@ -17,22 +18,7 @@
          class="mb-1"
       />
       <v-col  cols="12" class="pa-0">
-         {{formData.day}}
-         {{ formData.time }}
          <BaseSelectTimeInput v-model:date="formData.day" v-model:time="formData.time"/>
-         <!-- <VDatePicker
-            :trim-weeks="true"
-            color="pink"
-            v-model.string="formData.day"
-            :masks="{ modelValue: 'YYYY-MM-DD HH:mm' }"
-            mode="date"
-            is24hr
-            transparent
-            borderless
-            expanded
-            hide-time-header
-            is-required
-         /> -->
          <v-text-field
             class="hidden tw-relative -tw-top-2 ml-3"
             hidden
@@ -52,7 +38,6 @@
             :item-value="(item) => item.id"
             :rules="rules"
          />
-
          <BaseUzPhoneInput v-model="formData.phone" />
          <v-text-field
             label="Narxi"
@@ -76,11 +61,6 @@
          <v-switch
             v-model="formData.strictly_on_time"
             label="Qat'iy shu vaqtda"
-            class="px-2"
-         ></v-switch>
-         <v-switch
-            v-model="formData.address_to_address"
-            label="Manzilgacha"
             class="px-2"
          ></v-switch>
       </v-col>
