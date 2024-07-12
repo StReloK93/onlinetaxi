@@ -19,7 +19,6 @@
       />
       <v-col  cols="12" class="pa-0">
          <BaseSelectTimeInput v-model:date="formData.day" v-model:time="formData.time"/>
-         <v-text-field class="hidden tw-relative -tw-top-2 ml-3" hidden v-model="formData.day" :rules="rules"/>
       </v-col>
       <v-col cols="12">
          <v-autocomplete
@@ -34,7 +33,7 @@
          />
          <BaseUzPhoneInput v-model="formData.phone" />
          <v-text-field
-            type="number"
+            inputmode="numeric"
             label="Narxi"
             :rules="rules"
             v-model.lazy="formData.price"

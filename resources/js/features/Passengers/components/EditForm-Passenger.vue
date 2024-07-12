@@ -13,6 +13,7 @@
 	</v-dialog>
 </template>
 <script setup lang="ts">
+import moment from 'moment'
 import { FormInputs, IPassenger, usePassengerStore, PassengerRepository } from '..'
 import { reactive, ref } from 'vue'
 
@@ -26,6 +27,8 @@ const pageData = reactive({
 
 async function submitFunction() {
 	const formData = inputComponent.value.formData
+	const day = moment(formData.day).format('YYYY-MM-DD')
+	formData.ride_time = moment(`${day} ${formData.time}`).format('YYYY-MM-DD HH:mm')
 	await passengerStore.update(parentProps.id, formData)
 }
 
@@ -45,11 +48,13 @@ async function getPassenger() {
 	formData.price = passenger.price
 	formData.count = passenger.count
 	formData.ride_time = passenger.ride_time
+	formData.day = moment(passenger.ride_time).format('YYYY-MM-DD')
+	formData.time = moment(passenger.ride_time).format('HH:mm')
 	formData.with_trunk = Boolean(passenger.with_trunk)
 
-	await inputComponent.value.regionChanged(formData.start_region, 'start')
+	inputComponent.value.regionChanged(formData.start_region, 'start')
 		.then(() => formData.start_city = passenger.start_city)
-	await inputComponent.value.regionChanged(formData.end_region, 'end')
+	inputComponent.value.regionChanged(formData.end_region, 'end')
 		.then(() => formData.end_city = passenger.end_city)
 
 	pageData.loading = false

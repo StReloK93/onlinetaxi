@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+import moment from 'moment'
 import { reactive, ref } from 'vue'
 import { FormInputs, IPassenger, usePassengerStore } from '..'
 
@@ -25,6 +26,9 @@ const pageData = reactive({
 
 async function submitFunction() {
 	const formData: IPassenger = inputComponent.value.formData
+	const day = moment(formData.day).format('YYYY-MM-DD')
+	formData.ride_time = moment(`${day} ${formData.time}`).format('YYYY-MM-DD HH:mm')
+
 	await passengerStore.create(formData)
 }
 </script>

@@ -35,13 +35,11 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, onMounted } from 'vue'
+import { reactive } from 'vue'
 const hours = reactive([])
 const model = defineModel()
 
 const emit = defineEmits(['back', 'success'])
-
-console.log(model.value);
 
 const pageData = reactive({
    hour: 12,
@@ -55,14 +53,20 @@ for (let index = 0; index < 24; index++) {
 
 
 function nextItem(array, current) {
-   if (array.length - 1 == pageData[current]) pageData[current] = 0
+   if (array.length - 1 == pageData[current]){
+      if(current == 'minute') pageData.hour++
+      pageData[current] = 0
+   }
    else pageData[current]++
 
    model.value = `${hours[pageData.hour]}:${minutes[pageData.minute]}`
 }
 
 function prevItem(array, current) {
-   if (pageData[current] == 0) pageData[current] = array.length - 1
+   if (pageData[current] == 0){
+      if(current == 'minute') pageData.hour--
+      pageData[current] = array.length - 1
+   }
    else pageData[current]--
    model.value = `${hours[pageData.hour]}:${minutes[pageData.minute]}`
 }

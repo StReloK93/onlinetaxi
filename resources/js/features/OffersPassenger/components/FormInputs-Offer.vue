@@ -24,7 +24,6 @@ const emit = defineEmits(['onReady'])
 
 const attrs = ref([
 	{
-		key: 'today',
 		dot: true,
 		dates: new Date(),
 	},

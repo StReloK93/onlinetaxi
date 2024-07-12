@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { moneyConfig, rules } from "@/modules/constants";
+import { rules } from "@/modules/constants";
 import { reactive, computed } from 'vue';
 const props = defineProps(['startText', 'loading', 'categories', 'subCategories'])
 const model = defineModel()

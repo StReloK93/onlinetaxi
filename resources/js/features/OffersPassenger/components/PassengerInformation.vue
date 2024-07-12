@@ -50,6 +50,7 @@
          </div>
          <div v-else style="height: 44px;"></div>
          <div class="d-flex">
+            <EditForm :id="props.passenger.id"></EditForm>
             <v-chip variant="tonal" color="primary" class="font-weight-medium rounded-e-0">
                {{ format(props.passenger?.price, moneyConfig) }} so'm
             </v-chip>
@@ -59,6 +60,7 @@
 </template>
 
 <script setup lang="ts">
+import { usePassengerStore, EditForm, IPassenger } from '@/features/Passengers';
 import { format } from 'v-money3'
 import { moneyConfig } from '@/modules/constants'
 import moment from '@/modules/moment'

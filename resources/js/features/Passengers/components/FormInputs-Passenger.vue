@@ -16,13 +16,7 @@
 			startText="Qayerga?"
 			class="mb-1"
 		/>
-
-		<v-col sm="6" cols="12">
-			<VDatePicker :trim-weeks="true" color="pink" :min-date="new Date()" v-model.string="formData.ride_time"
-				:masks="{ modelValue: 'YYYY-MM-DD HH:mm' }" mode="dateTime" is24hr transparent borderless expanded
-				hide-time-header is-required />
-		</v-col>
-
+		<BaseSelectTimeInput v-model:date="formData.day" v-model:time="formData.time"/>
 		<v-col sm="6" cols="12">
 			<BaseUzPhoneInput v-model="formData.phone" class="mb-4" />
 			<v-text-field v-model="formData.count" label="Necha kishi" :rules="rules" class="mb-4" />
@@ -34,6 +28,7 @@
 </template>
 
 <script setup lang="ts">
+import BaseSelectTimeInput from '@/components/BaseSelectTimeInput.vue'
 import BaseSelectCity from '@/components/BaseSelectCity.vue'
 import axios from '@/modules/AxiosClient'
 import { IPassenger } from '@/interfaces'
@@ -52,6 +47,8 @@ const formData: IPassenger = reactive({
 	end_region: null,
 	end_city: null,
 	with_trunk: false,
+	day: null,
+	time: null,
 	ride_time: null,
 	price: null,
 	count: 1,

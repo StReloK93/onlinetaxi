@@ -8,6 +8,7 @@
 				Qatnov vaqti
 			</span>
 		</v-btn>
+		<v-text-field class="hidden tw-relative -tw-top-2 ml-3" hidden v-model="date" :rules="rules"/>
 		<v-dialog v-model="pageData.dialog" width="400px">
 			<v-card @vue:unmounted="unMountedCard" @vue:mounted="mountedCard">
 				<v-card-title>
@@ -28,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import { rules } from "@/modules/constants";
 import moment from 'moment';
 import { reactive, ref } from 'vue'
 import BaseTimePicker from './BaseTimePicker.vue';
