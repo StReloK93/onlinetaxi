@@ -70,6 +70,7 @@ export interface ICarRide{
     cities: CarRideCity[],
     start_city: number,
     day: Date,
+    time: string,
     passengers: IPassenger[],
     strictly_on_time: boolean,
     price: number,

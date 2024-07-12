@@ -11,6 +11,7 @@
 				</span>
 			</span>
 		</v-btn>
+		<v-text-field class="hidden tw-relative -tw-top-2 ml-3" hidden v-model="model" :rules="rules"/>
 		<v-dialog v-model="pageData.dialog" class="w-100 max-w-500" >
 			<v-card @vue:unmounted="pageData.selectedRegion = null">
 				<v-card-title>
@@ -53,6 +54,7 @@
 </template>
 
 <script setup lang="ts">
+import { moneyConfig, rules } from "@/modules/constants";
 import { reactive, computed } from 'vue';
 const props = defineProps(['startText', 'loading', 'categories', 'subCategories'])
 const model = defineModel()

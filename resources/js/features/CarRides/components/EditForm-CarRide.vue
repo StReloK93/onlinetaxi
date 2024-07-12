@@ -10,6 +10,7 @@
 	</v-dialog>
 </template>
 <script setup lang="ts">
+import moment from 'moment'
 import { reactive, ref } from 'vue'
 import { unformat } from 'v-money3'
 import { moneyConfig } from '@/modules/constants'
@@ -27,6 +28,9 @@ const pageData = reactive({
 async function submitFunction() {
 	const formData = inputComponent.value.formData
 	formData.price = unformat(formData.price, moneyConfig)
+	const day = moment(formData.day).format('YYYY-MM-DD')
+	
+	formData.day = moment(`${day} ${formData.time}`).format('YYYY-MM-DD HH:mm')
 	await propsParent.submit(pageData.car_ride.id, formData)
 
 	pageData.dialog = false
@@ -37,13 +41,12 @@ async function getCarRide(id) {
 	pageData.overlay = true
 	const ride = await CarRideRepository.show(id)
 
-
 	pageData.car_ride = ride
-
 	const formData = inputComponent.value.formData
 	formData.user_car_id = ride.user_car_id
 	formData.phone = ride.phone
-	formData.day = ride.day
+	formData.day = moment(ride.day).format('YYYY-MM-DD')
+	formData.time = moment(ride.day).format('HH:mm')
 	formData.strictly_on_time = ride.strictly_on_time
 	formData.price = ride.price
 	formData.address_to_address = ride.address_to_address
