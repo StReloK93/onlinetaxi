@@ -106,11 +106,9 @@ export interface IPassenger{
     end_region?: number,
     with_trunk: boolean,
     ride_time: Date | null | string,
-    day: string,
-    time: string,
     state?: boolean,
     count: number,
-    price: number,
+    price: string | number,
     updated_at?: Date | null,
     created_at?: Date | null,
 }

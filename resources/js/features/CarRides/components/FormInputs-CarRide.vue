@@ -17,9 +17,7 @@
          :startText="formData.ends[1].text"
          class="mb-1"
       />
-      <v-col  cols="12" class="pa-0">
-         <BaseSelectTimeInput v-model:date="formData.day" v-model:time="formData.time"/>
-      </v-col>
+      <BaseSelectTimeInput v-model:datetime="formData.day"/>
       <v-col cols="12">
          <v-autocomplete
             v-if="transports.length > 1"
@@ -32,6 +30,7 @@
             :rules="rules"
          />
          <BaseUzPhoneInput v-model="formData.phone" />
+
          <v-text-field
             inputmode="numeric"
             label="Narxi"
@@ -39,19 +38,15 @@
             v-model.lazy="formData.price"
             class="mb-3"
          />
-         <v-text-field
-            v-model="formData.free_seat"
-            type="number"
-            label="Bosh o'rindiqlar"
-            class="mb-3"
-            :rules="rules"
-         />
-         <input
-            v-money3="moneyConfig"
-            v-model.lazy="formData.price"
-            type="text"
-            hidden
-         />
+         <input v-money3="moneyConfig" v-model.lazy="formData.price" type="text" hidden/>
+
+			<v-label class="v-label text-caption">
+				Bosh o'rindiqlar =  {{ formData.free_seat }}
+			</v-label>
+			<main class="w-100 overflow-hidden mt-n1">
+				<v-rating color="dark" empty-icon="mdi-account-outline"
+					full-icon="mdi-account" v-model="formData.free_seat" size="small" length="6" class="mx-n3"></v-rating>
+			</main>
          <v-switch
             v-model="formData.strictly_on_time"
             label="Qat'iy shu vaqtda"
@@ -66,9 +61,9 @@ import BaseSelectCity from "@/components/BaseSelectCity.vue";
 import BaseSelectTimeInput from "@/components/BaseSelectTimeInput.vue"
 import axios from "@/modules/AxiosClient";
 import { moneyConfig, rules } from "@/modules/constants";
-import { reactive, onMounted } from "vue";
-import { useAuthStore } from "@/store/useAuthStore"
+import { reactive, onMounted, watch } from "vue";
 import { ITransport } from "@/interfaces";
+import { useAuthStore } from "@/store/useAuthStore"
 
 const AuthStore = useAuthStore()
 const transports = AuthStore.user.cars as ITransport[]
@@ -97,9 +92,8 @@ const formData = reactive({
       },
    ],
    day: null,
-   time: null,
    price: "",
-   free_seat: null,
+   free_seat: 1,
 });
 
 const pageData = reactive({
@@ -118,6 +112,11 @@ async function regionChanged(id, index) {
       formData.ends[index].loading = false;
    });
 }
+
+watch(() => formData.free_seat, (currentValue) => {
+	if (currentValue < 1) return formData.free_seat = 1
+})
+
 
 defineExpose({ regionChanged, formData });
 onMounted(async () => {

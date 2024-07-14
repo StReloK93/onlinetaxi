@@ -28,9 +28,6 @@ const pageData = reactive({
 async function submitFunction() {
 	const formData = inputComponent.value.formData
 	formData.price = unformat(formData.price, moneyConfig)
-	const day = moment(formData.day).format('YYYY-MM-DD')
-	
-	formData.day = moment(`${day} ${formData.time}`).format('YYYY-MM-DD HH:mm')
 	await propsParent.submit(pageData.car_ride.id, formData)
 
 	pageData.dialog = false
@@ -45,8 +42,7 @@ async function getCarRide(id) {
 	const formData = inputComponent.value.formData
 	formData.user_car_id = ride.user_car_id
 	formData.phone = ride.phone
-	formData.day = moment(ride.day).format('YYYY-MM-DD')
-	formData.time = moment(ride.day).format('HH:mm')
+	formData.day = ride.day
 	formData.strictly_on_time = ride.strictly_on_time
 	formData.price = ride.price
 	formData.address_to_address = ride.address_to_address

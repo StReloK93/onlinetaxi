@@ -28,8 +28,8 @@
             </span>
          </div>
          <div>
-            <v-btn v-if="Auth.isDriverAdmins || Auth.user?.id == props.passenger.user_id" :to="{ name: 'passenger-offers', params: { id: props.passenger?.id } }" :size="40"
-               variant="plain"  stacked>
+            <v-btn v-if="Auth.isDriverAdmins || Auth.user?.id == props.passenger.user_id"
+               :to="{ name: 'passenger-offers', params: { id: props.passenger?.id } }" :size="40" variant="plain" stacked>
                <v-icon size="x-small">
                   mdi-message-badge
                </v-icon>
@@ -50,7 +50,12 @@
          </div>
          <div v-else style="height: 44px;"></div>
          <div class="d-flex">
-            <EditForm :id="props.passenger.id"></EditForm>
+            <div class="leading-none" v-if="crud && (Auth.isAnyAdmins || Auth.user?.id == props.passenger.user_id)">
+               <v-btn v-if="Auth.isAnyAdmins" tag="a" :href="`tel:+998${props.passenger.phone}`" size="x-small"
+                  variant="plain" color="teal" icon="mdi-phone" />
+               <EditForm :id="props.passenger?.id"></EditForm>
+               <v-btn size="x-small" @click="passengerDelete" variant="plain" icon="mdi-delete" />
+            </div>
             <v-chip variant="tonal" color="primary" class="font-weight-medium rounded-e-0">
                {{ format(props.passenger?.price, moneyConfig) }} so'm
             </v-chip>
@@ -60,15 +65,25 @@
 </template>
 
 <script setup lang="ts">
-import { usePassengerStore, EditForm, IPassenger } from '@/features/Passengers';
+import { EditForm, usePassengerStore } from '@/features/Passengers';
 import { format } from 'v-money3'
 import { moneyConfig } from '@/modules/constants'
 import moment from '@/modules/moment'
-const props = defineProps(['passenger'])
 import { useAuthStore } from '@/store/useAuthStore'
-
+import { useMainStore } from '@/store/useMainStore'
+const props = defineProps(['passenger', 'crud'])
 
 const Auth = useAuthStore()
+const store = useMainStore()
+const passengerStore = usePassengerStore()
+
+function passengerDelete() {
+	store.dialog.open(() => {
+		store.dialog.title = "Qatnovni o'chirmoqchimisiz ?"
+		store.dialog.subTitle = "O'chirilgan qatnovlarni qayta tiklashni imkoni yo'q"
+		store.dialog.submit = () => passengerStore.destroy(props.passenger.id)
+	})
+}
 
 </script>
 <style scoped>
@@ -77,15 +92,16 @@ const Auth = useAuthStore()
    flex-grow: 1;
 }
 
-.chevron-left-icon{
+.chevron-left-icon {
    right: -10px;
    top: -13px;
 }
 
-.passenger-card:last-child{
-	margin-bottom: 2px!important;
+.passenger-card:last-child {
+   margin-bottom: 2px !important;
 }
-.passenger-card:first-child{
-	margin-top: 2px!important;
+
+.passenger-card:first-child {
+   margin-top: 2px !important;
 }
 </style>

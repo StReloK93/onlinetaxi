@@ -1,5 +1,5 @@
 <template>
-	<v-dialog v-model="pageData.dialog" scrollable persistent width="600px">
+	<v-dialog v-model="pageData.dialog" scrollable persistent width="400px">
 
 		<template v-slot:activator="{ props }">
 			<v-btn size="x-small" v-bind="props" variant="plain" icon="mdi-pencil" />
@@ -13,8 +13,9 @@
 	</v-dialog>
 </template>
 <script setup lang="ts">
-import moment from 'moment'
 import { FormInputs, IPassenger, usePassengerStore, PassengerRepository } from '..'
+import { moneyConfig } from '@/modules/constants'
+import { unformat } from 'v-money3'
 import { reactive, ref } from 'vue'
 
 const parentProps = defineProps(['id'])
@@ -27,8 +28,7 @@ const pageData = reactive({
 
 async function submitFunction() {
 	const formData = inputComponent.value.formData
-	const day = moment(formData.day).format('YYYY-MM-DD')
-	formData.ride_time = moment(`${day} ${formData.time}`).format('YYYY-MM-DD HH:mm')
+	formData.price = unformat(formData.price, moneyConfig)
 	await passengerStore.update(parentProps.id, formData)
 }
 
@@ -48,8 +48,6 @@ async function getPassenger() {
 	formData.price = passenger.price
 	formData.count = passenger.count
 	formData.ride_time = passenger.ride_time
-	formData.day = moment(passenger.ride_time).format('YYYY-MM-DD')
-	formData.time = moment(passenger.ride_time).format('HH:mm')
 	formData.with_trunk = Boolean(passenger.with_trunk)
 
 	inputComponent.value.regionChanged(formData.start_region, 'start')

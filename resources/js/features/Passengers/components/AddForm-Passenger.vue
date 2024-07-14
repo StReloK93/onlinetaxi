@@ -1,5 +1,5 @@
 <template>
-	<v-dialog v-model="pageData.dialog" scrollable persistent width="600px">
+	<v-dialog v-model="pageData.dialog" scrollable persistent width="400px">
 		<template v-slot:activator="{ props }">
 			<v-btn color="primary" v-bind="props" class="mt-2 mb-n1" append-icon="mdi-hail">
 				Elon kiritish
@@ -12,9 +12,10 @@
 </template>
 
 <script setup lang="ts">
-import moment from 'moment'
 import { reactive, ref } from 'vue'
 import { FormInputs, IPassenger, usePassengerStore } from '..'
+import { moneyConfig } from '@/modules/constants'
+import { unformat } from 'v-money3'
 
 const passengerStore = usePassengerStore()
 const inputComponent = ref()
@@ -26,9 +27,7 @@ const pageData = reactive({
 
 async function submitFunction() {
 	const formData: IPassenger = inputComponent.value.formData
-	const day = moment(formData.day).format('YYYY-MM-DD')
-	formData.ride_time = moment(`${day} ${formData.time}`).format('YYYY-MM-DD HH:mm')
-
+	formData.price = unformat(formData.price as any, moneyConfig)
 	await passengerStore.create(formData)
 }
 </script>

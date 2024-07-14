@@ -1,6 +1,6 @@
 <template>
    <section>
-      <PassengerInformation :passenger="passenger" />
+      <PassengerInformation :crud="false" :passenger="passenger" />
       <div class="d-flex justify-space-between align-center">
          <h3 class="text-h6 my-3 text-grey-darken-4">Haydovchilar takliflari</h3>
          <AddForm />
