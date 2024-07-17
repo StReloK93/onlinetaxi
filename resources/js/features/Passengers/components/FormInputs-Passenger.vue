@@ -14,7 +14,7 @@
 				<v-rating color="dark" empty-icon="mdi-account-outline"
 					full-icon="mdi-account" v-model="formData.count" size="small" length="6" class="mx-n3"></v-rating>
 			</main>
-			<v-text-field v-model.lazy="formData.price" label="Yo'lkira narxi" inputmode="numeric" :rules="rules"
+			<v-text-field v-model.lazy="formData.price" label="Yo'lkira narxiga taklifingiz" inputmode="numeric" :rules="rules"
 				class="mb-4" />
 			<input v-money3="moneyConfig" v-model.lazy="formData.price" type="text" hidden />
 			<v-text-field v-model="formData.address" :step="900" label="Yo'lovchining manzili"

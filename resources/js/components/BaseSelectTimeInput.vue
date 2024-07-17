@@ -17,7 +17,7 @@
 				</v-card-title>
 				<v-card-text class="pa-0 position-relative" style="height: 270px;">
 					<VDatePicker @update:modelValue="onChangeHandler" :min-date="new Date()" transparent borderless expanded v-model="pageData.date"
-						color="pink" is-required />
+						color="pink"/>
 					<Transition name="slide-up">
 						<BaseTimePicker v-if="pageData.selected" v-model="pageData.time" @back="pageData.selected = false"
 							@success="onSuccessHandler" class="position-absolute top-0 left-0 w-100 h-100 bg-white z-50" />
@@ -41,7 +41,7 @@ const pageData = reactive({
 	dialog: false,
 	selected: false,
 	date: null,
-	time: null,
+	time: '12:00',
 })
 
 function onChangeHandler(event) {
@@ -55,6 +55,7 @@ function onSuccessHandler() {
 }
 
 function unMountedCard(){
+	pageData.time = '12:00'
 	pageData.selected = false
 }
 </script>

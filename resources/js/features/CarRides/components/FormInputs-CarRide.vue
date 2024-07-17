@@ -33,7 +33,7 @@
 
          <v-text-field
             inputmode="numeric"
-            label="Narxi"
+            label="Yo'lkira narxi"
             :rules="rules"
             v-model.lazy="formData.price"
             class="mb-3"
