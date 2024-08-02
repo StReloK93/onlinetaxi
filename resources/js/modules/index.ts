@@ -10,6 +10,7 @@ import '@/app.css'
 import 'v-calendar/style.css';
 // @ts-ignore
 window.echo = Echo
+// @ts-ignore
 window.moment = moment
 
 export { vuetify, Echo, App, BaseForm, VCalendar, money, moment, timer }

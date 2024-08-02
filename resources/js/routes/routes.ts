@@ -38,14 +38,6 @@ const routes: Array<RouteRecordRaw> = [
           method: 'auth-user'
         }
       },
-      // {
-      //   path: '/car-ride/inactive',
-      //   component: CarRidePage,
-      //   name: 'car-ride-inactive',
-      //   meta: {
-      //     method: 'getOnlyInactive'
-      //   }
-      // },
       {
         path: '/transports',
         component: TransportsPage,

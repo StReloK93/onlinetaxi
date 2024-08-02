@@ -1,7 +1,11 @@
 <template>
 	<v-navigation-drawer :temporary="name == 'sm'" v-model="main.menu">
 		<main class="d-flex align-center py-4 px-2 bg-grey-lighten-4">
-			<v-icon color="primary" size="40">mdi-vuetify</v-icon>
+			<!-- <v-icon color="primary" size="40">mdi-vuetify</v-icon> -->
+			<v-icon color="primary" size="40" v-if="Auth.isDriver">mdi-chess-knight</v-icon>
+            <v-icon color="primary" size="40" v-if="Auth.isPassenger">mdi-chess-pawn</v-icon>
+            <v-icon color="primary" size="40" v-if="Auth.isAdmin">mdi-chess-rook</v-icon>
+            <v-icon color="primary" size="40" v-if="Auth.isSuperAdmin">mdi-chess-king</v-icon>
 			<aside>
 				<div class="font-weight-bold text-h6 leading-none mt-2">
 					{{ Auth.user?.name }}
@@ -13,14 +17,6 @@
 		</main>
 		<v-divider></v-divider>
 		<div>
-			<!-- <v-list v-if="Auth.isAnyAdmins" density="compact">
-				<v-list-item prepend-icon="mdi-phone-classic" title="Operatorlarga"
-					:class="{ 'text-primary v-list-item--active': $route.name == 'operator' }" color="primary"
-					:to="{ name: 'operator', params: { id: 1 } }" />
-				<v-list-item prepend-icon="mdi-car-settings" title="Junatilgan transportlar" color="primary"
-					:to="{ name: 'car-ride-inactive' }" />
-			</v-list> -->
-
 			<div class="pa-2">
 				<v-btn v-if="deferredPrompt" @click="installApp" block append-icon="mdi-download" variant="tonal" class="mb-2">
 					Ilovani o'rnatish
@@ -38,7 +34,7 @@
 						</v-btn>
 					</v-col>
 				</v-row>
-				<v-divider></v-divider>
+				<v-divider v-if="Auth.isPassenger || Auth.isDriver"></v-divider>
 				<v-list density="compact">
 					<v-list-item prepend-icon="mdi-car-settings" :to="{ name: 'transports' }">
 						<template v-slot:title>
@@ -51,9 +47,7 @@
 						</template>
 					</v-list-item>
 				</v-list>
-
 			</div>
-
 		</div>
 
 		<template v-slot:append>

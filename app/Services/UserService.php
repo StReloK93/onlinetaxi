@@ -40,10 +40,25 @@ class UserService
 
     public static function sendSecretCode($request)
     {
+        if($request->phone == '111111111'){
+            // for Test
+            SMSList::create([
+                'type' => 1,
+                'phone' => $request->phone,
+                'message' => 'test',
+                'code' => 11111,
+            ]);
+            return response()->json(['message'=> 'success'], 200);
+        }
+
+
+
+
+        
         $number = random_int(10000, 99999);
         $message = "'Shaharlararo online taxi' Maxfiy kodni kiriting $number https://onlinetaxi.ruzzifer.uz";
         $data = EskizSmsService::sendSecretCode($request->phone, $message);
-        if ($data->status == "error") return response()->json(['message' => $data], 403);
+        if (($data->status ?? null) === 'error' ?? ($data->message ?? null) === 'Expired') return response()->json(['message' => $data], 403);
 
         SMSList::create([
             'type' => 1,

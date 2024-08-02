@@ -1,11 +1,10 @@
 <template>
-   <v-app-bar density="compact" :elevation="0" :border="1">
       <div class="text-right w-100 px-2">
-         <v-btn icon="mdi-close" v-if="AppStore.city" @click="clearTopic" size="x-small" :loading="pageData.clearButtonLoading" />
+         <v-btn icon="mdi-close" v-if="AppStore.city" @click="clearTopic" color="white" size="x-small" :loading="pageData.clearButtonLoading" />
 
-         <v-btn v-if="pageData.notification" @click="bottomSheet = true" :text="stringButton" append-icon="mdi-map-marker"
+         <v-btn v-if="pageData.notification" @click="bottomSheet = true" color="white" :text="stringButton" append-icon="mdi-map-marker"
             :loading="pageData.loading"></v-btn>
-         <v-btn v-else disabled>Habarnoma o'chirilgan</v-btn>
+         <v-btn v-else disabled color="white">Habarnoma o'chirilgan</v-btn>
       </div>
       <v-bottom-sheet v-model="bottomSheet" inset>
          <BaseForm :loading="pageData.overlay" :submit="updateTopic" title="Manzilni o'zgartirish"
@@ -26,7 +25,6 @@
             </v-col>
          </BaseForm>
       </v-bottom-sheet>
-   </v-app-bar>
 </template>
 
 <script setup lang="ts">

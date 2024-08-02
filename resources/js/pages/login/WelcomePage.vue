@@ -1,6 +1,6 @@
 <template>
-	<v-app class="tw-h-screen login-page">
-		<v-container class="tw-flex tw-h-full tw-justify-center tw-items-center">
+	<v-app class="h-screen login-page">
+		<v-container class="d-flex h-100 justify-center align-center">
 			<v-card width="500">
 				<div class="text-center py-4">
 					<img src="/favicon.ico" width="100" class="d-inline">

@@ -3,24 +3,15 @@
       <template v-slot:prepend>
          <v-app-bar-nav-icon color="white" @click="mainStore.menu = !mainStore.menu"></v-app-bar-nav-icon>
       </template>
-      <v-app-bar-title>
-         <div class="d-flex align-center">
-            <v-icon v-if="Auth.isDriver">mdi-chess-knight</v-icon>
-            <v-icon v-if="Auth.isPassenger">mdi-chess-pawn</v-icon>
-            <v-icon v-if="Auth.isAdmin">mdi-chess-rook</v-icon>
-            <v-icon v-if="Auth.isSuperAdmin">mdi-chess-king</v-icon>
-
-            <span>
-               {{ Auth.user?.role?.name }}
-            </span>
-         </div>
-      </v-app-bar-title>
+      <template v-slot:append>
+         <BaseSelectPosition v-if="$route.meta.clear != true && AuthStore.isPassenger == false" />
+      </template>
    </v-app-bar>
 </template>
-
 <script setup lang="ts">
 import { useAuthStore } from '@/store/useAuthStore'
 import { useMainStore } from '@/store/useMainStore'
+import BaseSelectPosition from './BaseSelectPosition.vue'
+const AuthStore = useAuthStore()
 const mainStore = useMainStore()
-const Auth = useAuthStore()
 </script>

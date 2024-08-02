@@ -1,7 +1,7 @@
 {
     "start_url": ".",
     "scope": "/",
-    "theme_color": "#f1c800",
+    "theme_color": "#d81b60",
     "background_color": "#f1c800",
     "display": "standalone",
     "name": "Shaharlararo Online taxi",
@@ -40,7 +40,5 @@
             "type": "image/png",
             "purpose": "maskable"
         }
-    ],
-    "targetSdkVersion": 34,
-    "minimum_sdk_version": 34
+    ]
 }

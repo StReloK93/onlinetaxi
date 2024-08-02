@@ -1,6 +1,6 @@
 <template>
    <v-form @submit.prevent="submit" class="text-center d-flex flex-column align-center">
-      <div class="d-flex tw-justify-start w-100">
+      <div class="d-flex w-100">
          <v-btn @click="$router.go(-1)" icon="mdi-arrow-left-thin" size="small" variant="tonal" />
       </div>
       <h3 class="text-h5 font-weight-bold">Telefon raqamni tasdiqlash</h3>

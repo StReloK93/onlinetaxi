@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-
 import TheHeader from '@/components/TheHeader.vue'
 import TheBottomNavigation from '@/components/TheBottomNavigation.vue'
 import TheAlert from '@/components/TheAlert.vue'
