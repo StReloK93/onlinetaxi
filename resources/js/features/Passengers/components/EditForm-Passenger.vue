@@ -2,7 +2,7 @@
 	<v-dialog v-model="pageData.dialog" scrollable persistent width="400px">
 
 		<template v-slot:activator="{ props }">
-			<v-btn size="x-small" v-bind="props" variant="plain" icon="mdi-pencil" />
+			<v-btn size="x-small" v-bind="props" variant="text" icon="mdi-pencil" />
 		</template>
 
 		<BaseForm :loading="pageData.loading" :submit="submitFunction" title="Yo'lovchini tahrirlash"

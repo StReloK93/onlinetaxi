@@ -102,8 +102,8 @@ const first = index => index == 0
 .car-ride-card {
 	height: 160px;
 	border-left-style: solid;
-	border-left-color: rgb(var(--v-theme-secondary))!important;
 	border-left-width: 2px!important;
+	border-left-color: rgb(var(--v-theme-secondary))!important;
 	overflow: hidden;
 }
 

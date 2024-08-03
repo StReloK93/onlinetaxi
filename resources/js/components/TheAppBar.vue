@@ -4,7 +4,7 @@
          <v-app-bar-nav-icon color="white" @click="mainStore.menu = !mainStore.menu"></v-app-bar-nav-icon>
       </template>
       <template v-slot:append>
-         <BaseSelectPosition v-if="$route.meta.clear != true && AuthStore.isPassenger == false" />
+         <BaseSelectPosition v-if="AuthStore.isPassenger == false" />
       </template>
    </v-app-bar>
 </template>
