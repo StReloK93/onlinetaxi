@@ -1,5 +1,5 @@
 <template>
-   <v-card class=" border-primary border-opacity-100 bg-white elevation-1 rounded-e passenger-card">
+   <v-card class="border-primary border-opacity-100 bg-white elevation-1 rounded-e passenger-card">
       <section @click="$emit('activate', props.passenger?.id)" class="pa-2 pb-0" v-ripple>
          <main class="d-flex align-end mb-3">
             <aside class="pr-2 leading-none">
@@ -43,14 +43,16 @@
       </section>
       <v-expand-transition>
          <div v-if="props.activeCard == props.passenger?.id" class="px-2">
-            <section class="bg-grey-lighten-4 elevation-1 mx-n2 d-flex">
-               <RouterLink :to="{ name: 'passenger-offers', params: { id: props.passenger?.id } }"
-                  v-if="(Auth.isAnyAdmins || isMyAdd(props.passenger))">
-                  <v-btn size="x-small" variant="text" icon="mdi-message-badge" />
-               </RouterLink>
-               <a :href="`tel:+998${props.passenger?.phone}`" v-if="Auth.isAnyAdmins">
-                  <v-btn size="x-small" variant="text" icon="mdi-phone" color="teal" />
-               </a>
+            <section class="bg-grey-lighten-4 elevation-1 mx-n2 d-flex justify-space-between">
+               <div>
+                  <RouterLink :to="{ name: 'passenger-offers', params: { id: props.passenger?.id } }"
+                     v-if="(Auth.isAnyAdmins || isMyAdd(props.passenger))">
+                     <v-btn size="x-small" variant="text" icon="mdi-message-badge" />
+                  </RouterLink>
+                  <a :href="`tel:+998${props.passenger?.phone}`" v-if="Auth.isAnyAdmins">
+                     <v-btn size="x-small" variant="text" icon="mdi-phone" color="teal" />
+                  </a>
+               </div>
                <div>
                   <EditForm :id="props.passenger?.id"></EditForm>
                   <v-btn size="x-small" variant="text" icon="mdi-delete" @click="passengerDelete" />

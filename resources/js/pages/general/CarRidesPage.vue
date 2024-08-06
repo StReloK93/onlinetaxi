@@ -1,12 +1,9 @@
 <template>
 	<main class="d-flex flex-column">
-
 		<v-spacer class="position-relative">
-			<main @scroll="onScroll"
-				class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
+			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
 				<TransitionGroup name="list">
-					<CardCarRide v-for="ride in rideStore.activeRides" :ride="ride" :key="ride.id">
-
+					<CardCarRide @activate="selectActive" :activeCard="activeCard" v-for="ride in rideStore.activeRides" :ride="ride" :key="ride.id">
 						<div class="leading-none" v-if="Auth.isAnyAdmins || Auth.user?.id == ride.user_id">
 							<v-btn v-if="Auth.isAnyAdmins" tag="a" :href="`tel:+998${ride.phone}`" size="x-small" variant="plain"
 								color="teal" icon="mdi-phone" />
@@ -24,9 +21,8 @@
 			</main>
 		</v-spacer>
 		<main class="d-flex align-center justify-space-between w-100">
-			<AddForm v-if="(Auth.isAnyAdmins || Auth.isDriver) && hideButton" :submit="rideStore.create" />
-			<!-- <Filters ref="filterComponent" />
-			<Sorting /> -->
+			<AddForm v-if="(Auth.isAnyAdmins || Auth.isDriver)" :submit="rideStore.create" />
+
 		</main>
 	</main>
 </template>
@@ -40,22 +36,12 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const store = useMainStore()
 const rideStore = useCarRide()
-const hideButton = ref(true)
+const activeCard = ref(null)
 
-function onScroll(event) {
-	// const element = event.target
-
-	// if (element.scrollTop + element.clientHeight >= element.scrollHeight) {
-	// 	// Element scrolled to bottom
-	// 	hideButton.value = false
-	// 	setTimeout(() => {
-	// 		hideButton.value = true
-	// 	}, 3000);
-	// }
+function selectActive(id){
+	if(activeCard.value == id) return activeCard.value = null 
+	else return activeCard.value = id
 }
-
-
-
 
 function carRideDelete(ride_id) {
 	store.dialog.open(() => {

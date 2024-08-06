@@ -3,7 +3,9 @@
 		<v-spacer class="position-relative">
 			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
 				<TransitionGroup name="list">
-					<Card @activate="selectActive" :activeCard="activeCard" :crud="true" v-for="passenger in filtered_passengers" :passenger="passenger" :key="passenger.id" class="mb-2"/>
+					<Card @activate="selectActive" :activeCard="activeCard" :crud="true"
+						v-for="passenger in filtered_passengers" :passenger="passenger" :key="passenger.id"
+						class="mb-2" />
 				</TransitionGroup>
 			</main>
 		</v-spacer>
@@ -22,8 +24,8 @@ const AppStore = useMainStore()
 const passengerStore = usePassengerStore()
 const activeCard = ref(null)
 
-function selectActive(id){
-	if(activeCard.value == id) return activeCard.value = null 
+function selectActive(id) {
+	if (activeCard.value == id) return activeCard.value = null
 	else return activeCard.value = id
 }
 const filtered_passengers = computed(() => {
@@ -32,7 +34,7 @@ const filtered_passengers = computed(() => {
 	else {
 		return passengerStore.passengers
 	}
-	
+
 })
 
 onMounted(async () => {
