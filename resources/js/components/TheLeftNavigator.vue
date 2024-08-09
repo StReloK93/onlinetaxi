@@ -3,9 +3,9 @@
 		<main class="d-flex align-center py-4 px-2 bg-grey-lighten-4">
 			<!-- <v-icon color="primary" size="40">mdi-vuetify</v-icon> -->
 			<v-icon color="primary" size="40" v-if="Auth.isDriver">mdi-chess-knight</v-icon>
-            <v-icon color="primary" size="40" v-if="Auth.isPassenger">mdi-chess-pawn</v-icon>
-            <v-icon color="primary" size="40" v-if="Auth.isAdmin">mdi-chess-rook</v-icon>
-            <v-icon color="primary" size="40" v-if="Auth.isSuperAdmin">mdi-chess-king</v-icon>
+			<v-icon color="primary" size="40" v-if="Auth.isPassenger">mdi-chess-pawn</v-icon>
+			<v-icon color="primary" size="40" v-if="Auth.isAdmin">mdi-chess-rook</v-icon>
+			<v-icon color="primary" size="40" v-if="Auth.isSuperAdmin">mdi-chess-king</v-icon>
 			<aside>
 				<div class="font-weight-bold text-h6 leading-none mt-2">
 					{{ Auth.user?.name }}
@@ -18,11 +18,13 @@
 		<v-divider></v-divider>
 		<div>
 			<div class="pa-2">
-				<v-btn v-if="deferredPrompt" @click="installApp" block append-icon="mdi-download" variant="tonal" class="mb-2">
+				<v-btn v-if="deferredPrompt" @click="installApp" block append-icon="mdi-download" variant="tonal"
+					class="mb-2">
 					Ilovani o'rnatish
 				</v-btn>
-				<v-divider></v-divider>
-				<v-row v-if="Auth.isPassenger || Auth.isDriver" class="mb-2 mt-2">
+				<v-divider v-if="deferredPrompt"></v-divider>
+
+				<v-row v-if="Auth.isPassenger || Auth.isDriver" class="my-2">
 					<v-col cols="6" class="py-0 pr-1">
 						<v-btn @click="changeRole(4)" :loading="loadingRoleButton" :color="color(4)" variant="flat" block>
 							Haydovchi
@@ -36,16 +38,11 @@
 				</v-row>
 				<v-divider v-if="Auth.isPassenger || Auth.isDriver"></v-divider>
 				<v-list density="compact">
-					<v-list-item prepend-icon="mdi-car-settings" :to="{ name: 'transports' }">
-						<template v-slot:title>
-							<span v-if="Auth.isDriverAdmins">
-								Transportlar
-							</span>
-							<span v-else>
-								Mening transportlarim
-							</span>
-						</template>
-					</v-list-item>
+					<v-list-item v-if="Auth.isDriverAdmins" title="Transportlarim" prepend-icon="mdi-car-settings"
+						:to="{ name: 'user-transports' }" class="mb-2" />
+					<v-list-item v-if="Auth.isAnyAdmins" prepend-icon="mdi-train-car" title="Barcha Transportlar"
+						:to="{ name: 'transports' }" />
+
 				</v-list>
 			</div>
 		</div>
@@ -61,6 +58,7 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/store/useAuthStore'
 import { useMainStore } from '@/store/useMainStore'
 import { useDisplay } from 'vuetify'
@@ -69,15 +67,21 @@ const { name } = useDisplay()
 const main = useMainStore()
 const Auth = useAuthStore()
 
+const router = useRouter()
+
 const loadingRoleButton = ref(false)
 async function changeRole(role_id) {
 	if (Auth.user.role_id == role_id) return
 
 	loadingRoleButton.value = true
 	await Auth.changeRole(role_id)
+	if (role_id == 3) router.push({ name: 'passengers' })
+	if (role_id == 4) router.push({ name: 'car-rides' })
 	loadingRoleButton.value = false
 }
-
+function fakeChangeRole(role_id) {
+	Auth.user.role_id = role_id
+}
 
 function color(role_id) {
 	return Auth.user.role_id == role_id ? 'primary' : 'grey-lighten-4'

@@ -4,29 +4,41 @@
 			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
 				<TransitionGroup name="list">
 					<CardCarRide @activate="selectActive" :activeCard="activeCard" v-for="ride in rideStore.activeRides" :ride="ride" :key="ride.id">
-						<div class="leading-none" v-if="Auth.isAnyAdmins || Auth.user?.id == ride.user_id">
-							<v-btn v-if="Auth.isAnyAdmins" tag="a" :href="`tel:+998${ride.phone}`" size="x-small" variant="plain"
-								color="teal" icon="mdi-phone" />
-							<v-btn size="x-small" color="secondary" v-if="ride.state == 1" @click="inactivate(ride.id)"
-								variant="plain" icon="mdi-eye" />
-							<v-btn size="x-small" color="secondary" v-if="ride.state == 2" @click="activate(ride.id)"
-								variant="plain" icon="mdi-eye-off" />
-							<EditForm :date="true" :id="ride.id" :submit="rideStore.update"></EditForm>
-							<v-btn size="x-small" color="secondary" @click="carRideDelete(ride.id)" variant="plain"
-								icon="mdi-delete" />
-						</div>
 
+						<div class="leading-none">
+							<aside class="pt-2 mb-2 d-flex justify-space-between">
+								<v-label class="text-caption">
+									<v-icon color="pink" class="mr-1">mdi-calendar-clock</v-icon>
+									{{ moment(ride.created_at).format('D-MMMM HH:mm') }} 
+								</v-label>
+								<a v-if="Auth.isAnyAdmins" :href="`tel:+998${ride.phone}`.replace(/\s/g, '')">
+									<v-btn size="x-small" variant="plain" color="teal" icon="mdi-phone" />
+								</a>
+							</aside>
+							<aside>
+									<span v-if="Auth.isDriverAdmins && isMyAdd(ride)">
+										<v-btn size="x-small" color="secondary" v-if="ride.state == 1" @click="inactivate(ride.id)"
+											variant="plain" icon="mdi-eye" />
+										<v-btn size="x-small" color="secondary" v-if="ride.state == 2" @click="activate(ride.id)"
+											variant="plain" icon="mdi-eye-off" />
+										<EditForm :date="true" :id="ride.id" :submit="rideStore.update"></EditForm>
+										<v-btn size="x-small" color="secondary" @click="carRideDelete(ride.id)" variant="plain"
+											icon="mdi-delete" />
+									</span>
+							</aside>
+						</div>
+						
 					</CardCarRide>
 				</TransitionGroup>
 			</main>
 		</v-spacer>
 		<main class="d-flex align-center justify-space-between w-100">
-			<AddForm v-if="(Auth.isAnyAdmins || Auth.isDriver)" :submit="rideStore.create" />
-
+			<AddForm v-if="(Auth.isDriverAdmins)" :submit="rideStore.create" />
 		</main>
 	</main>
 </template>
 <script setup lang="ts">
+import moment from 'moment'
 import { AddForm, Filters, useCarRide, CardCarRide, CarRideRepository, EditForm } from '@/features/CarRides'
 import { watch, onMounted, onUnmounted, ref } from 'vue'
 import { useMainStore } from '@/store/useMainStore'
@@ -37,6 +49,12 @@ const route = useRoute()
 const store = useMainStore()
 const rideStore = useCarRide()
 const activeCard = ref(null)
+
+
+function isMyAdd(ride) {
+   return Auth.user?.id == ride?.user_id
+}
+
 
 function selectActive(id){
 	if(activeCard.value == id) return activeCard.value = null 

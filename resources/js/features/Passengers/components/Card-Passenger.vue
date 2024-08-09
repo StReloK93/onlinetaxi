@@ -1,6 +1,7 @@
 <template>
    <v-card class="border-primary border-opacity-100 bg-white elevation-1 rounded-e passenger-card">
-      <section @click="$emit('activate', props.passenger?.id)" class="pa-2 pb-0" v-ripple>
+      <section @click="$emit('activate', props.passenger?.id)" class="pa-2 pb-0" v-ripple="$route.name != 'passenger-offers'">
+         <v-icon v-if="isMyAdd(props.passenger)" class="position-absolute" style="top: 83px; right: -5px;" color="primary">mdi-circle-medium</v-icon>
          <main class="d-flex align-end mb-3">
             <aside class="pr-2 leading-none">
                <v-label class="text-caption mr-1">
@@ -41,24 +42,36 @@
             </v-chip>
          </section>
       </section>
-      <v-expand-transition>
-         <div v-if="props.activeCard == props.passenger?.id" class="px-2">
-            <section class="bg-grey-lighten-4 elevation-1 mx-n2 d-flex justify-space-between">
+      <v-divider></v-divider>
+      <v-expand-transition v-if="$route.name != 'passenger-offers'">
+         <section v-if="props.activeCard == props.passenger?.id" class="bg-grey-lighten-4 px-2">
+            <aside :class="{'mb-2': isMyAdd(props.passenger)}" class="pt-2">
+               <v-label class="text-caption">
+                  <v-icon color="pink" class="mr-1">mdi-calendar-clock</v-icon>
+                  {{ moment(props.passenger.created_at).format('D-MMMM HH:mm') }} 
+               </v-label>
+            </aside>
+            <aside class="d-flex justify-space-between align-center pb-2">
                <div>
                   <RouterLink :to="{ name: 'passenger-offers', params: { id: props.passenger?.id } }"
-                     v-if="(Auth.isAnyAdmins || isMyAdd(props.passenger))">
-                     <v-btn size="x-small" variant="text" icon="mdi-message-badge" />
+                     v-if="Auth.isDriverAdmins || isMyAdd(props.passenger)">
+                     <v-btn variant="tonal" size="small" prepend-icon="mdi-message-badge">
+                        <span v-if="Auth.isDriverAdmins">
+                           Takliflar qoldirish
+                        </span>
+                        <span v-else>Takliflar</span>
+                     </v-btn>
                   </RouterLink>
                   <a :href="`tel:+998${props.passenger?.phone}`" v-if="Auth.isAnyAdmins">
                      <v-btn size="x-small" variant="text" icon="mdi-phone" color="teal" />
                   </a>
                </div>
-               <div>
+               <div v-if="isMyAdd(props.passenger)">
                   <EditForm :id="props.passenger?.id"></EditForm>
                   <v-btn size="x-small" variant="text" icon="mdi-delete" @click="passengerDelete" />
                </div>
-            </section>
-         </div>
+            </aside>
+         </section>
       </v-expand-transition>
    </v-card>
 </template>
@@ -70,13 +83,12 @@ import { moneyConfig } from '@/modules/constants'
 import moment from '@/modules/moment'
 import { useAuthStore } from '@/store/useAuthStore'
 import { useMainStore } from '@/store/useMainStore'
-import { ref } from 'vue';
 const props = defineProps(['passenger', 'crud', 'activeCard'])
 
 const Auth = useAuthStore()
 const store = useMainStore()
 const passengerStore = usePassengerStore()
-const expand = ref(false)
+
 function passengerDelete() {
    store.dialog.open(() => {
       store.dialog.title = "Qatnovni o'chirmoqchimisiz ?"

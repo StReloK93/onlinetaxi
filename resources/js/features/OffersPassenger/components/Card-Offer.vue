@@ -1,10 +1,10 @@
 <template>
    <v-card class="pa-2 mb-2">
       <main class="leading-none text-h6">
-         {{ props.offer.user_car.car.name }}
+         {{ props.offer.user_car?.car.name }}
       </main>
       <div class="text-caption d-inline-flex align-center">
-         {{ props.offer.user_car.fuel.name }}
+         {{ props.offer.user_car?.fuel.name }}
          <v-icon color="primary">mdi-water-opacity</v-icon>
       </div>
       <section class="d-flex justify-space-between align-center mx-n2">
@@ -36,6 +36,7 @@ const Auth = useAuthStore()
 const store = useMainStore()
 const props = defineProps(['offer'])
 
+console.log(props.offer);
 
 
 function passengerDelete() {

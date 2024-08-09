@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 import CarRidePage from '@/pages/general/CarRidesPage.vue'
+import UserTransportsPage from '@/pages/general/UserTransportsPage.vue'
 import TransportsPage from '@/pages/general/TransportsPage.vue'
 import PassengersPage from '@/pages/general/PassengersPage.vue'
 import OffersPassengerPage from '@/pages/general/OffersPassengerPage.vue'
@@ -37,6 +38,11 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           method: 'auth-user'
         }
+      },
+      {
+        path: '/user-transports',
+        component: UserTransportsPage,
+        name: 'user-transports',
       },
       {
         path: '/transports',

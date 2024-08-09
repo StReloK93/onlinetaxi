@@ -59,17 +59,23 @@ class PassengerController extends Controller
 
     public function update(Request $request, Passenger $passenger)
     {
-        $passenger->phone = $request->phone;
-        $passenger->count = $request->count;
-        $passenger->price = $request->price;
-        $passenger->address = $request->address;
-        $passenger->car_ride_id = $request->car_ride_id;
-        $passenger->start_city = $request->start_city;
-        $passenger->end_city = $request->end_city;
-        $passenger->with_trunk = $request->with_trunk;
-        $passenger->ride_time = $request->ride_time;
-        $passenger->save();
-        return $passenger->fresh();
+        if($passenger->user_id == Auth::user()->id){
+            $passenger->phone = $request->phone;
+            $passenger->count = $request->count;
+            $passenger->price = $request->price;
+            $passenger->address = $request->address;
+            $passenger->car_ride_id = $request->car_ride_id;
+            $passenger->start_city = $request->start_city;
+            $passenger->end_city = $request->end_city;
+            $passenger->with_trunk = $request->with_trunk;
+            $passenger->ride_time = $request->ride_time;
+            $passenger->save();
+            return $passenger->fresh();
+        }
+        else{
+            return response()->json("not our passenger",404);
+        }
+
     }
 
     public function destroy(Passenger $passenger)

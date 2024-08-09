@@ -30,7 +30,7 @@ function selectActive(id) {
 }
 const filtered_passengers = computed(() => {
 	if (AuthStore.user.role_id == 4)
-		return passengerStore.passengers?.filter((passenger) => passenger.start_city == AppStore.city.id)
+		return passengerStore.passengers?.filter((passenger) => passenger.start_city == AppStore.city?.id)
 	else {
 		return passengerStore.passengers
 	}

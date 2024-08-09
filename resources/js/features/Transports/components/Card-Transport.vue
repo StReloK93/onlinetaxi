@@ -50,7 +50,7 @@ function deleteTransport() {
 
 <style scoped>
 .transport-card {
-	height: 110px;
+	height: 90px;
 	border-left-style: solid;
 	border-left-color: rgb(var(--v-theme-primary)) !important;
 	border-left-width: 2px !important;

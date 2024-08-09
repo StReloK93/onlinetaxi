@@ -69,6 +69,7 @@
 				</section>
 			</main>
 		</aside>
+		<v-divider></v-divider>
 		<v-expand-transition>
 			<div v-if="props.activeCard == props.ride?.id" class="px-2 bg-grey-lighten-4">
 				<slot></slot>
@@ -104,6 +105,7 @@ const first = index => index == 0
 }
 
 .car-ride-card {
+	user-select: none;
 	border-left-style: solid;
 	border-left-width: 2px !important;
 	border-left-color: rgb(var(--v-theme-secondary)) !important;
