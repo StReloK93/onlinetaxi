@@ -12,7 +12,8 @@ class UserCar extends Model
     use HasFactory;
 
     protected $with = [
-        'car'
+        'car',
+        'fuel',
     ];
 
     protected $fillable = [

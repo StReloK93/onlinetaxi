@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PhoneRequest;
 use App\Services\UserService;
 use Illuminate\Http\Request;
-
+use Auth;
 class AuthController extends Controller
 {
     private UserService $service;
@@ -14,6 +14,10 @@ class AuthController extends Controller
 
         $this->service = $service;
 
+    }
+
+    public function cars(){
+        return Auth::user()->cars;
     }
 
     public function sendSecretCode(PhoneRequest $request)
@@ -26,7 +30,6 @@ class AuthController extends Controller
         return $this->service->login($request);
     
     }
-
 
 
     public function logout(Request $request)

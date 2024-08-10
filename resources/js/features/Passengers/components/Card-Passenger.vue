@@ -45,7 +45,7 @@
       <v-divider></v-divider>
       <v-expand-transition v-if="$route.name != 'passenger-offers'">
          <section v-if="props.activeCard == props.passenger?.id" class="bg-grey-lighten-4 px-2">
-            <aside :class="{'mb-2': isMyAdd(props.passenger)}" class="pt-2">
+            <aside :class="{'mb-2': isMyAdd(props.passenger) || Auth.isDriver}" class="pt-2">
                <v-label class="text-caption">
                   <v-icon color="pink" class="mr-1">mdi-calendar-clock</v-icon>
                   {{ moment(props.passenger.created_at).format('D-MMMM HH:mm') }} 
@@ -57,7 +57,7 @@
                      v-if="Auth.isDriverAdmins || isMyAdd(props.passenger)">
                      <v-btn variant="tonal" size="small" prepend-icon="mdi-message-badge">
                         <span v-if="Auth.isDriverAdmins">
-                           Takliflar qoldirish
+                           Taklif qoldirish
                         </span>
                         <span v-else>Takliflar</span>
                      </v-btn>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\UserCar;
 use App\Models\CarRide;
+use App\Models\OffersPassenger;
 use Auth;
 
 class UserCarsController extends Controller
@@ -64,6 +65,7 @@ class UserCarsController extends Controller
     public function destroy(UserCar $userCar)
     {
         CarRide::where('user_car_id', $userCar->id)->delete();
+        OffersPassenger::where('user_car_id', $userCar->id)->delete();
         return $userCar->delete();
     }
 }

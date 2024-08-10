@@ -20,6 +20,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/sendSecretCode', [AuthController::class, 'sendSecretCode']);
 
 
+
 Route::apiResource('passenger', PassengerController::class)->only(['index', 'show']);
 
 
@@ -52,6 +53,8 @@ Route::apiResource('firebase-token', FirebaseTokensController::class)->only(['st
 Route::apiResource('car-company', CarCompanyController::class)->only(['index']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/auth-user/cars', [AuthController::class, 'cars']);
+
 
     Route::apiResource('offers-passenger', OffersPassengerController::class)->except(['index']);
 
@@ -59,12 +62,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     Route::apiResource('user-car', UserCarsController::class);
-    Route::prefix('user-car')->group(function () {
-        Route::get('only/auth-user', [UserCarsController::class, 'onlyAuthUser']);
-    });
-    
 
-    
     Route::apiResource('car-ride', CarRideController::class)->except(['index', 'show']);
     Route::prefix('car-ride')->group(function () {
         Route::get('only/auth-user', [CarRideController::class, 'onlyAuthUser']);

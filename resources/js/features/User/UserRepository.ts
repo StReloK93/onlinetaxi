@@ -16,9 +16,15 @@ async function changeRole(role_id) {
    return data;
 }
 
+async function cars() {
+   const { data } = await Client.get(`${resource}/cars`);
+   return data;
+}
+
+
 async function setUserData(formData) {
    const { data } = await Client.post(`${resource}/set-user-data`, formData);
    return data;
 }
 
-export default { getUser, changeRole, setUserData };
+export default { getUser, changeRole, setUserData, cars };

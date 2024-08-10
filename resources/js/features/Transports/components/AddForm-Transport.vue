@@ -1,7 +1,9 @@
 <template>
     <v-dialog v-model="pageData.dialog" scrollable width="600px">
         <template v-slot:activator="{ props }">
-            <v-btn color="primary" v-bind="props" icon="mdi-plus" class="add-button" />
+            <v-btn color="primary" v-bind="props" class="mt-2 mb-n1" append-icon="mdi-taxi" block   >
+				Transport kiritish
+			</v-btn>
         </template>
         <BaseForm :loading="pageData.overlay" :submit="submitFunction" title="Transport kiritish" @close="pageData.dialog = false">
             <FormInputs 

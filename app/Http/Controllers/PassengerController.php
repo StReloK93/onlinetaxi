@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Passenger;
+use App\Models\OffersPassenger;
 use Auth;
 class PassengerController extends Controller
 {
@@ -88,6 +89,7 @@ class PassengerController extends Controller
 
     public function delete(Passenger $passenger)
     {
+        OffersPassenger::where("passenger_id", $passenger->id)->delete();
         return $passenger->delete();
     }
 }

@@ -20,9 +20,9 @@
       <BaseSelectTimeInput v-model:datetime="formData.day"/>
       <v-col cols="12">
          <v-autocomplete
-            v-if="transports.length > 1"
+            v-if="pageData.cars.length > 1"
             class="mb-3"
-            :items="transports"
+            :items="pageData.cars"
             v-model="formData.user_car_id"
             label="Transport"
             :item-title="(item) => `${item.car?.name} ( ${item.number} )`"
@@ -63,15 +63,24 @@ import axios from "@/modules/AxiosClient";
 import { moneyConfig, rules } from "@/modules/constants";
 import { reactive, onMounted, watch } from "vue";
 import { ITransport } from "@/interfaces";
+import UserRepository from "@/features/User/UserRepository";
 import { useAuthStore } from "@/store/useAuthStore"
 
 const AuthStore = useAuthStore()
-const transports = AuthStore.user.cars as ITransport[]
 
 const emit = defineEmits(["onReady"]);
 
+
+const pageData = reactive({
+   overlay: true,
+   cars: [],
+   regions: [],
+   districts: [],
+});
+
+
 const formData = reactive({
-   user_car_id: transports.length == 1 ? transports[0].id : null,
+   user_car_id: pageData.cars.length == 1 ? pageData.cars[0].id : null,
    phone: AuthStore.user.phone,
    strictly_on_time: false,
    address_to_address: false,
@@ -96,12 +105,6 @@ const formData = reactive({
    free_seat: 1,
 });
 
-const pageData = reactive({
-   overlay: true,
-   cars: [],
-   regions: [],
-   districts: [],
-});
 
 async function regionChanged(id, index) {
    formData.ends[index].loading = true;
@@ -120,12 +123,12 @@ watch(() => formData.free_seat, (currentValue) => {
 
 defineExpose({ regionChanged, formData });
 onMounted(async () => {
+   pageData.cars = await UserRepository.cars()
    const { data: regions } = await axios.get("region");
    pageData.regions = regions;
 
    const { data: districts } = await axios.get("district");
    pageData.districts = districts;
-
    emit("onReady");
 });
 </script>
