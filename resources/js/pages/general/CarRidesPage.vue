@@ -4,7 +4,6 @@
 			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
 				<TransitionGroup name="list">
 					<CardCarRide @activate="selectActive" :activeCard="activeCard" v-for="ride in rideStore.activeRides" :ride="ride" :key="ride.id">
-
 						<div class="leading-none">
 							<aside class="pt-2 mb-2 d-flex justify-space-between">
 								<v-label class="text-caption">
@@ -27,7 +26,6 @@
 									</span>
 							</aside>
 						</div>
-						
 					</CardCarRide>
 				</TransitionGroup>
 			</main>

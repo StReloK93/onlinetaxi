@@ -6,12 +6,12 @@
         </v-btn>
         <v-btn :to="{ name: 'car-rides' }">
             <v-icon>mdi-taxi</v-icon>
-            <span style="width: 88px;" class="tw-leading-none">Haydovchi elonlari</span>
+            <span style="width: 88px;" class="tw-leading-none">Haydovchilar</span>
         </v-btn>
 
         <v-btn :to="{ name: 'passengers' }" >
             <v-icon>mdi-human-greeting</v-icon>
-            <span style="width: 88px;" class="tw-leading-none">Yo'lovchi elonlari</span>
+            <span style="width: 88px;" class="tw-leading-none">Yo'lovchilar</span>
         </v-btn>
     </v-bottom-navigation>
 </template>
