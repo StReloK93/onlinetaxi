@@ -1,12 +1,9 @@
 <template>
 	<v-row>
+		<BaseSelectTimeInput v-model:datetime="formData.ride_time"/>
 		<v-col sm="6" cols="12">
-			<VDatePicker :attributes='attrs' :trim-weeks="true" color="pink" :min-date="new Date()" v-model.string="formData.ride_time"
-				:masks="{ modelValue: 'YYYY-MM-DD HH:mm' }" mode="datetime" is24hr transparent borderless expanded
-				hide-time-header is-required />
-		</v-col>
-		<v-col sm="6" cols="12">
-			<v-text-field v-model="formData.price" label="Yo'lkira narxi" type="number" :rules="rules" class="mb-4" />
+			<v-text-field v-model="formData.price" label="Yo'lkira narxi" :rules="rules" class="mb-4" />
+			<input v-money3="moneyConfig" v-model.lazy="formData.price" type="text" hidden/>
 			<v-autocomplete :items="transports" v-model="formData.user_car_id" label="Transport"
 				:item-title="(item: any) => `${item.car?.name} ( ${item.number} )`" :item-value="(item: any) => item.id"
 				:rules="rules" />
@@ -15,8 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import { rules } from '@/modules/constants'
+import { rules, moneyConfig } from '@/modules/constants'
 import { useRoute } from 'vue-router'
+import BaseSelectTimeInput from '@/components/BaseSelectTimeInput.vue';
 import TransportRepository from '@/features/Transports/TransportRepository'
 import { reactive, ref, onMounted } from 'vue'
 const emit = defineEmits(['onReady'])
