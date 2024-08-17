@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 export const useOffersPassenger = defineStore("useOffersPassenger", () => {
-   const offers = ref();
+   const offers = ref([]);
 
 
    function create(offer) {

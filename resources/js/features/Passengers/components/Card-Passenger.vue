@@ -46,8 +46,8 @@
       <v-expand-transition v-if="$route.name != 'passenger-offers'">
          <section v-if="props.activeCard == props.passenger?.id" class="bg-grey-lighten-4 px-2">
             <aside :class="{'mb-2': isMyAdd(props.passenger) || Auth.isDriver}" class="pt-2">
-               <v-label class="text-caption">
-                  <v-icon color="pink" class="mr-1">mdi-calendar-clock</v-icon>
+               <v-label class="text-caption text-uppercase">
+                  <v-icon  class="mr-1">mdi-calendar-clock</v-icon>
                   {{ moment(props.passenger.created_at).format('D-MMMM HH:mm') }} 
                </v-label>
             </aside>

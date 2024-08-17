@@ -12,6 +12,8 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import { unformat } from 'v-money3'
+import { moneyConfig } from '@/modules/constants'
 import { FormInputs, IOffersPassenger, OfferPassengerRepository } from '..'
 const emit = defineEmits(['create'])
 const props = defineProps(['id'])
@@ -23,7 +25,8 @@ const pageData = reactive({
 
 
 async function submitFunction() {
-	const formData: IOffersPassenger = inputComponent.value.formData
+	const formData = inputComponent.value.formData
+	formData.price = unformat(formData.price, moneyConfig)
 	await OfferPassengerRepository.update(props.id, formData)
 }
 

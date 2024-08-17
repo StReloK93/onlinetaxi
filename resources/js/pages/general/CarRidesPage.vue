@@ -3,30 +3,33 @@
 		<v-spacer class="position-relative">
 			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
 				<TransitionGroup name="list">
-					<CardCarRide @activate="selectActive" :activeCard="activeCard" v-for="ride in rideStore.activeRides" :ride="ride" :key="ride.id">
-						<div class="leading-none">
-							<aside class="pt-2 mb-2 d-flex justify-space-between">
-								<v-label class="text-caption">
-									<v-icon color="pink" class="mr-1">mdi-calendar-clock</v-icon>
-									{{ moment(ride.created_at).format('D-MMMM HH:mm') }} 
-								</v-label>
-								<a v-if="Auth.isAnyAdmins" :href="`tel:+998${ride.phone}`.replace(/\s/g, '')">
-									<v-btn size="x-small" variant="plain" color="teal" icon="mdi-phone" />
-								</a>
-							</aside>
-							<aside>
-									<span v-if="Auth.isDriverAdmins && isMyAdd(ride)">
-										<v-btn size="x-small" color="secondary" v-if="ride.state == 1" @click="inactivate(ride.id)"
-											variant="plain" icon="mdi-eye" />
-										<v-btn size="x-small" color="secondary" v-if="ride.state == 2" @click="activate(ride.id)"
-											variant="plain" icon="mdi-eye-off" />
-										<EditForm :date="true" :id="ride.id" :submit="rideStore.update"></EditForm>
-										<v-btn size="x-small" color="secondary" @click="carRideDelete(ride.id)" variant="plain"
-											icon="mdi-delete" />
-									</span>
-							</aside>
-						</div>
-					</CardCarRide>
+					<template v-if="rideStore.activeRides?.length">
+						<CardCarRide @activate="selectActive" :activeCard="activeCard" v-for="ride in rideStore.activeRides" :ride="ride" :key="ride.id">
+							<div class="leading-none">
+								<aside class="pt-2 mb-2 d-flex justify-space-between">
+									<v-label class="text-caption">
+										<v-icon color="pink" class="mr-1">mdi-calendar-clock</v-icon>
+										{{ moment(ride.created_at).format('D-MMMM HH:mm') }} 
+									</v-label>
+									<a v-if="Auth.isAnyAdmins" :href="`tel:+998${ride.phone}`.replace(/\s/g, '')">
+										<v-btn size="x-small" variant="plain" color="teal" icon="mdi-phone" />
+									</a>
+								</aside>
+								<aside>
+										<span v-if="Auth.isDriverAdmins && isMyAdd(ride)">
+											<v-btn size="x-small" color="secondary" v-if="ride.state == 1" @click="inactivate(ride.id)"
+												variant="plain" icon="mdi-eye" />
+											<v-btn size="x-small" color="secondary" v-if="ride.state == 2" @click="activate(ride.id)"
+												variant="plain" icon="mdi-eye-off" />
+											<EditForm :date="true" :id="ride.id" :submit="rideStore.update"></EditForm>
+											<v-btn size="x-small" color="secondary" @click="carRideDelete(ride.id)" variant="plain"
+												icon="mdi-delete" />
+										</span>
+								</aside>
+							</div>
+						</CardCarRide>
+					</template>
+					<!-- <v-alert v-else text="Haydovchilar topilmadi"></v-alert> -->
 				</TransitionGroup>
 			</main>
 		</v-spacer>

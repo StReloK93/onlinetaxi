@@ -1,16 +1,21 @@
 <template>
-   <v-card class="pa-2 mb-2">
-      <main class="leading-none text-h6">
-         {{ props.offer.user_car?.car.name }}
+   <v-card class="pa-2 pb-0 mb-2">
+      <main class="d-flex mb-2 align-end">
+         <span class="leading-none text-h6">
+            {{ props.offer.user_car?.car.name }} 
+         </span>
+         <span  class="text-caption d-inline-flex align-center ml-2">
+            <v-icon color="primary">mdi-water-opacity</v-icon>
+            {{ props.offer.user_car?.fuel.name }}
+         </span>
       </main>
-      <div class="text-caption d-inline-flex align-center">
-         {{ props.offer.user_car?.fuel.name }}
-         <v-icon color="primary">mdi-water-opacity</v-icon>
-      </div>
       <section class="d-flex justify-space-between align-center mx-n2">
-         <div class="leading-none pl-2">
+         <div class="leading-none pl-2 d-flex flex-column">
+            <span class="text-grey-darken-1 mb-n2 text-caption">
+               {{ moment(props.offer.ride_time).format('HH:mm') }}
+            </span>
             <span class="text-uppercase text-h6 font-weight-bold text-grey-darken-3">
-               {{ moment(props.offer.ride_time).format('D-MMMM HH:mm') }}
+               {{ moment(props.offer.ride_time).format('D-MMMM') }}
             </span>
          </div>
          <div class="d-flex">

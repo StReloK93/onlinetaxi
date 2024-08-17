@@ -13,7 +13,7 @@ async function show(passenger_id) {
 }
 
 async function getOffers(passenger_id) {
-   const { data } = await Client.get<IPassenger>(`${resource}/${passenger_id}/offers`);
+   const { data } = await Client.get<IPassenger[]>(`${resource}/${passenger_id}/offers`);
    return data;
 }
 
