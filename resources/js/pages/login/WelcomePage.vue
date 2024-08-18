@@ -71,6 +71,6 @@ async function submit(event) {
 
 
 
-	authStore.sendUserData(formData)
+	authStore.setUserNameRole(formData)
 }
 </script>

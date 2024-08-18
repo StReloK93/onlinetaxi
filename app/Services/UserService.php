@@ -9,7 +9,7 @@ use Carbon\Carbon;
 class UserService
 {
 
-    public function login($request)
+    public function signIn($request)
     {
 
         $sms = SMSList::where([
@@ -85,7 +85,7 @@ class UserService
     }
 
 
-    public function setUserData($request){
+    public function setUserNameRole($request){
         $user = $request->user();
         $user->name = $request->name;
         $user->role_id = $request->role;
@@ -94,7 +94,7 @@ class UserService
         return $user->fresh();
     }
 
-    public function getUser($request)
+    public function getAuthUser($request)
     {
         return $request->user();
     }

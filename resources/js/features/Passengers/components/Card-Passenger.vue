@@ -91,8 +91,8 @@ const passengerStore = usePassengerStore()
 
 function passengerDelete() {
    store.dialog.open(() => {
-      store.dialog.title = "Qatnovni o'chirmoqchimisiz ?"
-      store.dialog.subTitle = "O'chirilgan qatnovlarni qayta tiklashni imkoni yo'q"
+      store.dialog.title = "Eloningizni o'chirmoqchimisiz ?"
+      store.dialog.subTitle = "O'chirilgan elonni qayta tiklashni imkoni yo'q"
       store.dialog.submit = () => passengerStore.destroy(props.passenger.id)
    })
 }

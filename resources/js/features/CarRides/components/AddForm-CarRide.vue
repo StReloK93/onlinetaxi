@@ -5,9 +5,29 @@
 				Elon kiritish
 			</v-btn>
 		</template>
-		<BaseForm :loading="pageData.overlay" :submit="submitFunction" title="Qatnov kiritish" @close="pageData.dialog = false">
-			<FormInputs @vue:mounted="pageData.overlay = true" @onReady="pageData.overlay = false" ref="inputComponent"  />
-		</BaseForm>
+		<section>
+			<main @vue:mounted="formMounted">
+				<Transition name="list">
+					<BaseForm v-if="pageData.issetCars" :loading="pageData.overlay" :submit="submitFunction" title="Qatnov kiritish" @close="pageData.dialog = false">
+						<FormInputs @onReady="pageData.overlay = false" @on-car-empty="pageData.issetCars = false" ref="inputComponent"/>
+					</BaseForm>
+					<v-card v-else>
+						<v-card-title>
+							<v-icon color="red">mdi-alert</v-icon>
+							Transport kiritilmagan
+						</v-card-title>
+						<v-card-text>
+							<p class="my-4 font-weight-medium">
+								Iltimos qatnov kiritishdan oldin transportizni kiriting
+							</p>
+							<v-btn block variant="tonal" append-icon="mdi-chevron-right" @click="$router.push('user-transports')">
+								Transportlar sahifasiga o'tish
+							</v-btn>
+						</v-card-text>
+					</v-card>
+				</Transition>
+			</main>
+		</section>
 	</v-dialog>
 </template>
 
@@ -20,12 +40,18 @@ import { FormInputs } from '..'
 
 const parentProps = defineProps(['btnClass', 'submit'])
 const inputComponent = ref()
-const pageData = reactive({ dialog: false, overlay: true })
+const pageData = reactive({ dialog: false, overlay: true, issetCars: true, })
 
 
 async function submitFunction() {
 	const formData = inputComponent.value.formData
 	formData.price = unformat(formData.price, moneyConfig)
 	await parentProps.submit(formData)
+}
+
+
+function formMounted(){
+	pageData.overlay = true
+	pageData.issetCars = true
 }
 </script>

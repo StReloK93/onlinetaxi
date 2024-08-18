@@ -51,17 +51,17 @@ export const useAuthStore = defineStore("Auth", () => {
 
    // Actions
 
-   async function login(data) {
+   async function signIn(data) {
       try {
-         const result = await AxiosClient.post("login", data);
+         const result = await AxiosClient.post("sign-in", data);
          localStorage.setItem("token",`${result.data.type} ${result.data.token}`)
          await getUser();
          router.push({ name: "main" });
       } catch (error) { return error }
    }
 
-   async function sendUserData(formData) {
-      user.value = await UserRepository.setUserData(formData);
+   async function setUserNameRole(formData) {
+      user.value = await UserRepository.setUserNameRole(formData);
       router.push({ name: "main" })
    }
 
@@ -106,10 +106,10 @@ export const useAuthStore = defineStore("Auth", () => {
       token,
       changeRole,
       getUser,
-      login,
+      signIn,
       sendSecretCode,
       logout,
-		sendUserData,
+		setUserNameRole,
       isAnyAdmins,
       isAdmin,
       isSuperAdmin,

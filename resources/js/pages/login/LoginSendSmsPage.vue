@@ -49,7 +49,7 @@ const loading = ref(false)
 
 async function submit() {
    loading.value = true
-   await authStore.login({ code: +secredCode.value, phone: statePhone }).then((error) => {
+   await authStore.signIn({ code: +secredCode.value, phone: statePhone }).then((error) => {
       if (error) {
          errors.value = error.response?.data?.message
          setTimeout(() => errors.value = null, 5000)

@@ -2,9 +2,9 @@
    <v-card class="pa-2 pb-0 mb-2">
       <main class="d-flex mb-2 align-end">
          <span class="leading-none text-h6">
-            {{ props.offer.user_car?.car.name }} 
+            {{ props.offer.user_car?.car.name }}
          </span>
-         <span  class="text-caption d-inline-flex align-center ml-2">
+         <span class="text-caption d-inline-flex align-center ml-2">
             <v-icon color="primary">mdi-water-opacity</v-icon>
             {{ props.offer.user_car?.fuel.name }}
          </span>
@@ -19,8 +19,10 @@
             </span>
          </div>
          <div class="d-flex">
-            <EditForm :id="props.offer.id" />
-            <v-btn icon="mdi-delete" size="x-small" @click="passengerDelete" variant="plain"></v-btn>
+            <span v-if="Auth.user.id == props.offer.user_id">
+               <EditForm :id="props.offer.id" />
+               <v-btn icon="mdi-delete" size="x-small" @click="passengerDelete" variant="plain"></v-btn>
+            </span>
             <v-chip variant="tonal" color="primary" class="font-weight-medium rounded-e-0">
                {{ format(props.offer.price, moneyConfig) }} so'm
             </v-chip>
@@ -41,14 +43,10 @@ const Auth = useAuthStore()
 const store = useMainStore()
 const props = defineProps(['offer'])
 
-console.log(props.offer);
-
-
 function passengerDelete() {
-	store.dialog.open(() => {
-		store.dialog.title = "Qatnovni o'chirmoqchimisiz ?"
-		store.dialog.subTitle = "O'chirilgan qatnovlarni qayta tiklashni imkoni yo'q"
-		store.dialog.submit = () => OfferPassengerRepository.destroy(props.offer.id)
-	})
+   store.dialog.open(() => {
+      store.dialog.title = "Taklifni o'chirmoqchimisiz ?"
+      store.dialog.submit = () => OfferPassengerRepository.destroy(props.offer.id)
+   })
 }
 </script>

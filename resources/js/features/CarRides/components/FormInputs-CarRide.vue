@@ -19,7 +19,7 @@
       />
       <BaseSelectTimeInput v-model:datetime="formData.day"/>
       <v-col cols="12">
-         <v-autocomplete
+         <v-select
             v-if="pageData.cars.length > 1"
             class="mb-3"
             :items="pageData.cars"
@@ -67,7 +67,7 @@ import { useAuthStore } from "@/store/useAuthStore"
 
 const AuthStore = useAuthStore()
 
-const emit = defineEmits(["onReady"]);
+const emit = defineEmits(["onReady", "onCarEmpty"]);
 
 
 const pageData = reactive({
@@ -77,9 +77,8 @@ const pageData = reactive({
    districts: [],
 });
 
-
 const formData = reactive({
-   user_car_id: pageData.cars.length == 1 ? pageData.cars[0].id : null,
+   user_car_id: null,
    phone: AuthStore.user.phone,
    strictly_on_time: false,
    address_to_address: false,
@@ -123,6 +122,13 @@ watch(() => formData.free_seat, (currentValue) => {
 defineExpose({ regionChanged, formData });
 onMounted(async () => {
    pageData.cars = await UserRepository.cars()
+   if(pageData.cars.length == 0) {
+      emit('onCarEmpty')
+      return emit("onReady");
+   }
+
+
+   formData.user_car_id = pageData.cars.length == 1 ? pageData.cars[0].id : null
    const { data: regions } = await axios.get("region");
    pageData.regions = regions;
 

@@ -16,18 +16,14 @@ class AuthController extends Controller
 
     }
 
-    public function cars(){
-        return Auth::user()->cars;
-    }
-
     public function sendSecretCode(PhoneRequest $request)
     {
         return $this->service->sendSecretCode($request);
     }
-    public function Login(PhoneRequest $request)
+    public function signIn(PhoneRequest $request)
     {
 
-        return $this->service->login($request);
+        return $this->service->signIn($request);
     
     }
 
@@ -40,9 +36,43 @@ class AuthController extends Controller
     }
 
 
+    public function getAuthUser(Request $request){
+        return $this->service->getAuthUser($request);
+    }
 
-    public function logoutUser(Request $request){
-        return $this->service->logout($request);
+    public function setUserNameRole(Request $request)
+    {
+        return $this->service->setUserNameRole($request);
+    }
+
+
+
+
+
+// Auth user Actions
+
+
+
+
+    public function changeRole(Request $request)
+    {
+        $user = $request->user();
+        $user->role_id = $request->role_id;
+        $user->save();
+        return $user->fresh();
+    }
+    
+    public function cars(){
+        return Auth::user()->cars;
+    }
+
+
+    public function rides(){
+        return Auth::user()->rides;
+    }
+
+    public function passengers(){
+        return Auth::user()->passengers;
     }
 
 }

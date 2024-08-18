@@ -16,22 +16,6 @@ class NotificationController extends Controller
    {
       $this->firebase = new Firebase();
    }
-   public function sendToTopic()
-   {
-      // $tokens = FirebaseTokens::all()->pluck('token');
-      return $this->firebase->sendToTopic(
-         'city_81',
-         [
-            'Uchquduq shahridan Navoiga 2 kishi bor',
-            "Iltimos ketadigan bo'lsalaring qanchaga va qachon olib ketishingizni yozib yuboring.",
-         ],
-         url('/passengers')
-      );
-      
-   }
-
-
-
    
 }
  

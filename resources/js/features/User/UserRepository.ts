@@ -3,7 +3,7 @@ const resource = "auth-user";
 
 async function getUser() {
    try {
-      const { data } = await Client.get(`${resource}/user`);
+      const { data } = await Client.get(`${resource}/get-auth-user`);
       return data;
    }
    catch (error) {
@@ -21,10 +21,20 @@ async function cars() {
    return data;
 }
 
-
-async function setUserData(formData) {
-   const { data } = await Client.post(`${resource}/set-user-data`, formData);
+async function rides() {
+   const { data } = await Client.get(`${resource}/rides`);
    return data;
 }
 
-export default { getUser, changeRole, setUserData, cars };
+async function passengers() {
+   const { data } = await Client.get(`${resource}/passengers`);
+   return data;
+}
+
+
+async function setUserNameRole(formData) {
+   const { data } = await Client.post(`${resource}/set-user-name-role`, formData);
+   return data;
+}
+
+export default { getUser, changeRole, setUserNameRole, cars, rides, passengers };

@@ -49,7 +49,8 @@ class FirebaseTokensController extends Controller
     }
 
 
-    public function getCityIdInArray($inputArray){
+
+    private function getCityIdInArray($inputArray){
         $output = null;
         foreach ($inputArray as $element) {
             if (strpos($element, 'city') !== false) {

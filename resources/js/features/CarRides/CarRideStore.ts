@@ -41,21 +41,6 @@ export const useCarRide = defineStore("useCarRide", () => {
 
       rides.value = rides.value.filter((car_ride) => car_ride.id != ride_id);
    }
-   
-
-   async function inactivate(ride_id) {
-      await CarRideRepository.inactivate(ride_id)
-
-      const index = rides.value.findIndex((car_ride) => car_ride.id == ride_id);
-      rides.value[index].state = 2
-   }
-
-   async function activate(ride_id) {
-      await CarRideRepository.activate(ride_id)
-
-      const index = rides.value.findIndex((car_ride) => car_ride.id == ride_id);
-      rides.value[index].state = 1;
-   }
 
    //  -------------
 
@@ -131,13 +116,10 @@ export const useCarRide = defineStore("useCarRide", () => {
       filters,
       districts,
       groupRides,
-      activate,
-      inactivate,
       create,
       update,
       destroy,
       getOnlyActive,
-      // getOnlyInactive,
       getRidesByRegion,
       createPassenger,
       updatePassenger,

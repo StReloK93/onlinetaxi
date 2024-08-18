@@ -7,7 +7,6 @@ use App\Models\CarRide;
 use App\Models\CarRideCity;
 use Illuminate\Http\Request;
 use App\Events\CarRideCreateEvent;
-use App\Models\District;
 class CarRideController extends Controller
 {
     public function index()
@@ -22,26 +21,6 @@ class CarRideController extends Controller
     public function onlyPassive()
     {
         return CarRide::whereState(2)->get();
-    }
-
-    public function onlyAuthUser()
-    {
-        return CarRide::whereUserId(Auth::user()->id)->whereState(1)->get();
-    }
-
-    public function onlyByRegion($region)
-    {
-        $dist = District::where('region_id', $region)->with('region')->get();
-        $districts = $dist->pluck('id');
-        $rides = CarRide::whereState(1)->whereHas('cities', function ($query) use($districts) {
-            $query->whereIn('district_id', $districts->all());
-        })->get();
-
-        $car_rides = $rides->filter(function ($rides) use ($districts) {
-            $firstComment = $rides->cities()->first();
-            return in_array($firstComment->district_id, $districts->all());
-        });
-        return ['districts' => $dist, 'car_rides' => array_values($car_rides->all())];
     }
 
     public function store(Request $request)
@@ -96,30 +75,11 @@ class CarRideController extends Controller
         return $carRide->fresh();
     }
 
-
-
-
-
-
     public function destroy(CarRide $carRide)
     {
         $carRide->state = 0;
         $carRide->save();
 
-        return $carRide->fresh();
-    }
-
-    public function activate(CarRide $carRide)
-    {
-        $carRide->state = 1;
-        $carRide->save();
-        return $carRide->fresh();
-    }
-
-    public function inactivate(CarRide $carRide)
-    {
-        $carRide->state = 2;
-        $carRide->save();
         return $carRide->fresh();
     }
 }
