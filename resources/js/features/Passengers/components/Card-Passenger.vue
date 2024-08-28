@@ -45,26 +45,26 @@
       <v-divider></v-divider>
       <v-expand-transition v-if="$route.name != 'passenger-offers'">
          <section v-if="props.activeCard == props.passenger?.id" class="bg-grey-lighten-4 px-2">
-            <aside :class="{'mb-2': isMyAdd(props.passenger) || Auth.isDriver}" class="pt-2">
+            <aside class="pt-2 mb-2 d-flex justify-space-between align-center">
                <v-label class="text-caption text-uppercase">
                   <v-icon  class="mr-1">mdi-calendar-clock</v-icon>
                   {{ moment(props.passenger.created_at).format('D-MMMM HH:mm') }} 
                </v-label>
+               <a :href="`tel:+998${props.passenger?.phone}`">
+                     <v-btn size="x-small" variant="text" icon="mdi-phone" color="teal" />
+                  </a>
             </aside>
             <aside class="d-flex justify-space-between align-center pb-2">
                <div>
-                  <RouterLink :to="{ name: 'passenger-offers', params: { id: props.passenger?.id } }"
-                     v-if="Auth.isDriverAdmins || isMyAdd(props.passenger)">
+                  <RouterLink :to="{ name: 'passenger-offers', params: { id: props.passenger?.id } }">
                      <v-btn variant="tonal" size="small" prepend-icon="mdi-message-badge">
-                        <span v-if="Auth.isDriverAdmins">
-                           Taklif qoldirish
+                        <span v-if="isMyAdd(props.passenger)">
+                           Takliflar
                         </span>
-                        <span v-else>Takliflar</span>
+                        <span v-else>Taklif qoldirish</span>
                      </v-btn>
                   </RouterLink>
-                  <a :href="`tel:+998${props.passenger?.phone}`" v-if="Auth.isAnyAdmins">
-                     <v-btn size="x-small" variant="text" icon="mdi-phone" color="teal" />
-                  </a>
+
                </div>
                <div v-if="isMyAdd(props.passenger)">
                   <EditForm :id="props.passenger?.id"></EditForm>

@@ -3,7 +3,7 @@
       <WhatIsOffer />
       <PassengerInformation :crud="false" :passenger="passenger" />
       <div class="d-flex justify-space-between align-center">
-         <AddForm v-if="AuthStore.isDriverAdmins" />
+         <AddForm v-if="AuthStore.user?.id != passenger?.user_id" />
       </div>
       <section>
          <p class="my-1 text-grey-darken-4">Takliflar</p>

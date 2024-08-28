@@ -11,6 +11,7 @@
 			</v-card-text>
 			<v-divider></v-divider>
 			<v-card-actions>
+				<slot name="action"></slot>
 				<v-spacer></v-spacer>
 				<v-btn color="primary" variant="text" @click="$emit('close')">
 					Yopish

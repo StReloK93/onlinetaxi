@@ -9,7 +9,7 @@ class OffersPassenger extends Model
 {
     use HasFactory;
 
-    protected $with = ['user_car'];
+    protected $with = ['user_car', 'user'];
     protected $table = 'passenger_offers';
 
     protected $fillable = [
@@ -23,6 +23,10 @@ class OffersPassenger extends Model
     public function user_car()
     {
         return $this->belongsTo(UserCar::class)->with('fuel');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

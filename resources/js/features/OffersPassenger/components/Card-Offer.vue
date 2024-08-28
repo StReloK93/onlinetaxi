@@ -1,13 +1,20 @@
 <template>
    <v-card class="pa-2 pb-0 mb-2">
-      <main class="d-flex mb-2 align-end">
-         <span class="leading-none text-h6">
-            {{ props.offer.user_car?.car.name }}
-         </span>
-         <span class="text-caption d-inline-flex align-center ml-2">
-            <v-icon color="primary">mdi-water-opacity</v-icon>
-            {{ props.offer.user_car?.fuel.name }}
-         </span>
+      <main class="d-flex mb-2 justify-space-between">
+         <div>
+            <span class="leading-none text-h6">
+               {{ props.offer.user_car?.car.name }}
+            </span>
+            <span class="text-caption d-inline-flex align-center ml-2">
+               <v-icon color="primary">mdi-water-opacity</v-icon>
+               {{ props.offer.user_car?.fuel.name }}
+            </span>
+         </div>
+         <div>
+            <a :href="`tel:+998${props.offer?.user.phone}`.replace(/\s/g, '')">
+               <v-btn size="x-small" variant="plain" color="teal" icon="mdi-phone" />
+            </a>
+         </div>
       </main>
       <section class="d-flex justify-space-between align-center mx-n2">
          <div class="leading-none pl-2 d-flex flex-column">

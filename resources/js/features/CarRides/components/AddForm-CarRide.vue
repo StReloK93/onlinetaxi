@@ -18,7 +18,7 @@
 						</v-card-title>
 						<v-card-text>
 							<p class="my-4 font-weight-medium">
-								Iltimos qatnov kiritishdan oldin transportizni kiriting
+								Iltimos qatnov kiritishdan oldin transport kiriting
 							</p>
 							<v-btn block variant="tonal" append-icon="mdi-chevron-right" @click="$router.push('user-transports')">
 								Transportlar sahifasiga o'tish

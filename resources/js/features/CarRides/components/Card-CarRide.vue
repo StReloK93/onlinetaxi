@@ -2,6 +2,7 @@
 	<section class="car-ride-card w-100 d-flex flex-column bg-white elevation-1 mb-2 rounded-e">
 		<aside @click="$emit('activate', props.ride?.id)" class="d-flex flex-column h-100" v-ripple>
 			<main class="pa-2 d-flex flex-column justify-space-between position-relative">
+				<v-icon v-if="isMyAdd(props.ride)" class="position-absolute" style="top: 109px; right: -5px;" color="primary">mdi-circle-medium</v-icon>
 				<v-icon class="position-absolute city-direction" color="secondary">mdi-chevron-down</v-icon>
 				<div class="position-absolute city-line">
 				</div>
@@ -83,6 +84,14 @@ import { format } from 'v-money3'
 import { moneyConfig } from '@/modules/constants'
 import moment from '@/modules/moment'
 import { computed } from 'vue'
+import { useAuthStore } from '@/store/useAuthStore'
+const Auth = useAuthStore()
+
+function isMyAdd(ride) {
+	return Auth.user?.id == ride?.user_id
+}
+
+
 
 const props = defineProps(['ride', 'activeCard'])
 const aviablePassengersCount = computed(() => props.ride.passengers.reduce((acc, pass) => acc += pass.count, 0))

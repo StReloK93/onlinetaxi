@@ -1,11 +1,7 @@
 <template>
 	<v-navigation-drawer :temporary="name == 'sm'" v-model="main.menu">
 		<main class="d-flex align-center py-4 px-2 bg-grey-lighten-4">
-			<!-- <v-icon color="primary" size="40">mdi-vuetify</v-icon> -->
-			<v-icon color="primary" size="40" v-if="Auth.isDriver">mdi-chess-knight</v-icon>
-			<v-icon color="primary" size="40" v-if="Auth.isPassenger">mdi-chess-pawn</v-icon>
-			<v-icon color="primary" size="40" v-if="Auth.isAdmin">mdi-chess-rook</v-icon>
-			<v-icon color="primary" size="40" v-if="Auth.isSuperAdmin">mdi-chess-king</v-icon>
+			<v-icon color="primary" size="40">mdi-vuetify</v-icon>
 			<aside>
 				<div class="font-weight-bold text-h6 leading-none mt-2">
 					{{ Auth.user?.name }}
@@ -23,26 +19,10 @@
 					Ilovani o'rnatish
 				</v-btn>
 				<v-divider v-if="deferredPrompt"></v-divider>
-
-				<v-row v-if="Auth.isPassenger || Auth.isDriver" class="my-2">
-					<v-col cols="6" class="py-0 pr-1">
-						<v-btn @click="changeRole(4)" :loading="loadingRoleButton" :color="color(4)" variant="flat" block>
-							Haydovchi
-						</v-btn>
-					</v-col>
-					<v-col cols="6" class="py-0 pl-1">
-						<v-btn @click="changeRole(3)" :loading="loadingRoleButton" :color="color(3)" variant="flat" block>
-							Yo'lovchi
-						</v-btn>
-					</v-col>
-				</v-row>
-				<v-divider v-if="Auth.isPassenger || Auth.isDriver"></v-divider>
+				<BaseSelectPosition />
 				<v-list density="compact">
-					<v-list-item v-if="Auth.isDriverAdmins" title="Transportlarim" prepend-icon="mdi-car-settings"
+					<v-list-item title="Transportlarim" prepend-icon="mdi-car-settings"
 						:to="{ name: 'user-transports' }" class="mb-2" />
-					<v-list-item v-if="Auth.isAnyAdmins" prepend-icon="mdi-train-car" title="Barcha Transportlar"
-						:to="{ name: 'transports' }" />
-
 				</v-list>
 			</div>
 		</div>
@@ -61,6 +41,7 @@
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/store/useAuthStore'
 import { useMainStore } from '@/store/useMainStore'
+import BaseSelectPosition from './BaseSelectPosition.vue'
 import { useDisplay } from 'vuetify'
 import { inject, ref } from 'vue'
 const { name } = useDisplay()

@@ -12,12 +12,12 @@
 										<v-icon color="pink" class="mr-1">mdi-calendar-clock</v-icon>
 										{{ moment(ride.created_at).format('D-MMMM HH:mm') }}
 									</v-label>
-									<a v-if="Auth.isAnyAdmins" :href="`tel:+998${ride.phone}`.replace(/\s/g, '')">
+									<a :href="`tel:+998${ride.phone}`.replace(/\s/g, '')">
 										<v-btn size="x-small" variant="plain" color="teal" icon="mdi-phone" />
 									</a>
 								</aside>
-								<aside>
-									<span v-if="Auth.isDriverAdmins && isMyAdd(ride)">
+								<aside v-if="isMyAdd(ride)">
+									<span>
 										<EditForm :date="true" :id="ride.id" :submit="rideStore.update"></EditForm>
 										<v-btn size="x-small" color="secondary" @click="carRideDelete(ride.id)" variant="plain"
 											icon="mdi-delete" />
@@ -31,7 +31,7 @@
 			</main>
 		</v-spacer>
 		<main class="d-flex align-center justify-space-between w-100">
-			<AddForm v-if="(Auth.isDriverAdmins)" :submit="rideStore.create" />
+			<AddForm :submit="rideStore.create" />
 		</main>
 	</main>
 </template>

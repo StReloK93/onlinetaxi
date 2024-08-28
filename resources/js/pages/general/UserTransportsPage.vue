@@ -11,7 +11,7 @@
 			</main>
 		</v-spacer>
 		<main class="d-flex align-center justify-space-between w-100">
-			<AddForm v-if="Auth.isDriverAdmins"/>
+			<AddForm/>
 		</main>
 	</main>
 </template>
@@ -19,9 +19,7 @@
 <script setup lang="ts">
 import { AddForm, Card, useTransport } from '@/features/Transports'
 import UserRepository from '@/features/User/UserRepository';
-import { useAuthStore } from '@/store/useAuthStore'
 import { onMounted, onUnmounted } from 'vue';
-const Auth = useAuthStore()
 const transportStore = useTransport()
 
 onMounted(async () => {
