@@ -1,5 +1,8 @@
 <template>
 	<main class="d-flex flex-column">
+		<main>
+			<Filters  />
+		</main>
 		<v-spacer class="position-relative">
 			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
 				<TransitionGroup name="list">
@@ -30,7 +33,7 @@
 				</TransitionGroup>
 			</main>
 		</v-spacer>
-		<main class="d-flex align-center justify-space-between w-100">
+		<main>
 			<AddForm :submit="rideStore.create" />
 		</main>
 	</main>

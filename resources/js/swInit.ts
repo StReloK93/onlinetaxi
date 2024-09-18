@@ -50,11 +50,3 @@ export default async function () {
       });
    }
 }
-
-// Получаем список подписок на push-уведомления
-// navigator.serviceWorker.ready.then(function (registration) {
-//     registration.pushManager.getSubscription().then(function (subscrip) {
-//         if (subscrip) console.log("Push notification subscrip:", subscrip);
-//         else console.log("don't have a subscrip to push notifications.");
-//     });
-// });
