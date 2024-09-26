@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Models\CarRide;
-use App\Models\CarRideCity;
 use Illuminate\Http\Request;
-use App\Events\CarRideCreateEvent;
 class CarRideController extends Controller
 {
     public function index()
@@ -33,19 +31,12 @@ class CarRideController extends Controller
             'strictly_on_time' => $request->strictly_on_time,
             'price' => $request->price,
             'free_seat' => $request->free_seat,
+            'start_city' => $request->start_city,
+            'end_city' => $request->end_city,
             'address_to_address' => $request->address_to_address,
             'state' => true,
         ]);
 
-        foreach ($request->ends as $item) {
-            CarRideCity::create([
-                'car_ride_id' => $carRide->id,
-                'district_id' => $item['city']
-            ]);
-        }
-
-        $carRide = $carRide->fresh();
-        // broadcast(new CarRideCreateEvent($carRide))->toOthers();
         return $carRide;
     }
 
@@ -62,16 +53,13 @@ class CarRideController extends Controller
         $carRide->strictly_on_time = $request->strictly_on_time;
         $carRide->price = $request->price;
         $carRide->free_seat = $request->free_seat;
+        $carRide->start_city = $request->start_city;
+        $carRide->end_city = $request->end_city;
+        
         $carRide->address_to_address = $request->address_to_address;
         $carRide->save();
-        CarRideCity::where('car_ride_id', $carRide->id)->delete();
 
-        foreach ($request->ends as $carRideCity) {
-            CarRideCity::create([
-                'car_ride_id' => $carRide->id,
-                'district_id' => $carRideCity['city']
-            ]);
-        }
+
         return $carRide->fresh();
     }
 

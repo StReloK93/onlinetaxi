@@ -1,20 +1,20 @@
 <template>
    <v-row>
       <BaseSelectCity
-         v-model="formData.ends[0].city"
-			:loading="formData.ends[0].loading"
+         v-model="formData.start_city"
+			:loading="pageData.start_loading"
          :categories="pageData.regions"
          :subCategories="pageData.districts"
-         :startText="formData.ends[0].text"
+         startText="Qayerdan?"
          class="mb-1"
       />
       <BaseSelectCity
-         v-model="formData.ends[1].city"
+         v-model="formData.end_city"
          v-model:address="formData.address_to_address"
-			:loading="formData.ends[1].loading"
+			:loading="pageData.end_loading"
          :categories="pageData.regions"
          :subCategories="pageData.districts"
-         :startText="formData.ends[1].text"
+         startText="Qayerga?"
          class="mb-1"
       />
       <BaseSelectTimeInput v-model:datetime="formData.day"/>
@@ -75,6 +75,9 @@ const pageData = reactive({
    cars: [],
    regions: [],
    districts: [],
+   start_loading: false,
+   end_loading: false,
+
 });
 
 const formData = reactive({
@@ -82,16 +85,16 @@ const formData = reactive({
    phone: AuthStore.user.phone,
    strictly_on_time: false,
    address_to_address: false,
+   start_city: null,
+   end_city: null,
    ends: [
       {
-         region: null,
          city: null,
          loading: false,
          districts: [],
          text: "Qayerdan?",
       },
       {
-         region: null,
          city: null,
          loading: false,
          districts: [],

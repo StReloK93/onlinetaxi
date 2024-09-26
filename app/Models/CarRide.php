@@ -32,7 +32,8 @@ class CarRide extends Model
 
     protected $with = [
         'user_car',
-        'cities',
+        'start',
+        'end',
         'passengers'
     ];
 
@@ -41,13 +42,20 @@ class CarRide extends Model
         return $this->belongsTo(UserCar::class)->with('fuel');
     }
 
-    public function cities()
-    {
-        return $this->hasMany(CarRideCity::class)->with('district');
-    }
 
     public function passengers()
     {
         return $this->hasMany(Passenger::class);
+    }
+
+
+    public function start()
+    {
+        return $this->belongsTo(District::class, 'start_city', 'id')->with('region');
+    }
+
+    public function end()
+    {
+        return $this->belongsTo(District::class, 'start_city', 'id')->with('region');
     }
 }

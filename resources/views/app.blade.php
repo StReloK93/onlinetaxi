@@ -11,7 +11,7 @@
             Bizning dastur orqali boshqa shaharga yo'lga chiqayotgan transportlarni tezda topsangiz bo'ladi">
     <meta name="keywords" content="Online taxi, shaharlararo taxi, Shaxarlararo taxi, Yo'l yo'lakay taxi xizmat">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#f1c800">
+    <meta name="theme-color" content="#d81b60">
 
     <meta property="og:title" content="Shaharlararo online taxi">
     <meta property="og:description" content="Shaharlararo online taxi dasturini yuklab oling">

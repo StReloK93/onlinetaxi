@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('user_car_id');
             $table->string('phone');
             $table->dateTime('day')->nullable();
+            $table->integer('start_city')->nullable();
+            $table->integer('end_city')->nullable();
             $table->boolean('strictly_on_time');
             $table->integer('price');
             $table->boolean('address_to_address');

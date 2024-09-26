@@ -1,7 +1,7 @@
 <template>
 	<main class="d-flex flex-column">
-		<main>
-			<Filters  />
+		<main class="mt-n2 mb-2">
+			<Filters />
 		</main>
 		<v-spacer class="position-relative">
 			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
