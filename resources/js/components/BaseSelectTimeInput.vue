@@ -2,13 +2,16 @@
 	<div class="w-100">
 		<v-btn @click="pageData.dialog = true" color="dark" variant="tonal" :loading="props.loading" block>
 			<span v-if="datetime">
-				{{ moment(datetime).format('D-MMMM') }} {{ moment(datetime).format('HH:mm') }}
+				{{ moment(datetime, 'YYYY-MM-DD').format('D-MMMM') }}
+				<template v-if="props.onlyDate">
+					{{ moment(datetime).format('HH:mm') }}
+				</template>
 			</span>
 			<span v-else>
 				Qatnov vaqti
 			</span>
 		</v-btn>
-		<v-text-field class="hidden tw-relative -tw-top-2 ml-3" hidden v-model="datetime" :rules="rules"/>
+		<v-text-field class="hidden tw-relative -tw-top-2 ml-3" hidden v-model="datetime" :rules="rules" />
 		<v-dialog v-model="pageData.dialog" width="400px">
 			<v-card @vue:unmounted="unMountedCard">
 				<v-card-title>
@@ -16,11 +19,11 @@
 					Qatnov vaqti
 				</v-card-title>
 				<v-card-text class="pa-0 position-relative" style="height: 270px;">
-					<VDatePicker @update:modelValue="onChangeHandler" :min-date="new Date()" transparent borderless expanded v-model="pageData.date"
-						color="pink"/>
+					<VDatePicker @update:modelValue="onChangeHandler" :min-date="new Date()" transparent borderless expanded
+						v-model="pageData.date" color="pink" />
 					<Transition name="slide-up">
 						<BaseTimePicker v-if="pageData.selected" v-model="pageData.time" @back="pageData.selected = false"
-							@success="onSuccessHandler" class="position-absolute top-0 left-0 w-100 h-100 bg-white z-50" />
+							@success="onSuccessHandler(pageData.date)" class="position-absolute top-0 left-0 w-100 h-100 bg-white z-50" />
 					</Transition>
 				</v-card-text>
 			</v-card>
@@ -33,7 +36,10 @@ import { rules } from "@/modules/constants";
 import moment from 'moment';
 import { reactive } from 'vue'
 import BaseTimePicker from './BaseTimePicker.vue';
-const props = defineProps(['loading'])
+const props = defineProps({
+	loading: { default: false },
+	onlyDate: { default: true }
+})
 
 const datetime = defineModel('datetime')
 
@@ -45,16 +51,22 @@ const pageData = reactive({
 })
 
 function onChangeHandler(event) {
-	if (event != null) pageData.selected = true
+	if (event != null && props.onlyDate == true) pageData.selected = true
+	else if(event == null && props.onlyDate == false){
+		datetime.value = null
+	}
+	else {
+		onSuccessHandler(event)
+	}
 }
 
-function onSuccessHandler() {
-	const formatedDate = moment(pageData.date).format('YYYY-MM-DD')
-	datetime.value = `${formatedDate} ${pageData.time}`
+function onSuccessHandler(event) {
+	const formatedDate = moment(event).format('YYYY-MM-DD')
+	datetime.value = `${formatedDate} ${props.onlyDate == true ? pageData.time : ''}`
 	pageData.dialog = false
 }
 
-function unMountedCard(){
+function unMountedCard() {
 	pageData.time = '12:00'
 	pageData.selected = false
 }

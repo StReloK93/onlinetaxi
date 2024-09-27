@@ -17,11 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, computed } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { Card, AddForm, PassengerRepository, usePassengerStore } from '@/features/Passengers';
-import { useAuthStore } from '@/store/useAuthStore'
 import { ref } from 'vue';
-const AuthStore = useAuthStore()
 const passengerStore = usePassengerStore()
 const activeCard = ref(null)
 
