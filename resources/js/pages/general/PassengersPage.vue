@@ -12,7 +12,7 @@
 				</TransitionGroup>
 			</main>
 		</v-spacer>
-		<AddForm v-if="AuthStore.isAnyAdmins || AuthStore.isPassenger" />
+		<AddForm/>
 	</main>
 </template>
 

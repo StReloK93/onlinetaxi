@@ -7,7 +7,7 @@
 
 		<BaseForm :loading="pageData.loading" :submit="submitFunction" title="Yo'lovchini tahrirlash"
 			@close="pageData.dialog = false" @vue:mounted="getPassenger()">
-			<FormInputs ref="inputComponent" />
+			<FormInputs ref="inputComponent" :loading="pageData.loading" />
 		</BaseForm>
 
 	</v-dialog>
@@ -48,13 +48,10 @@ async function getPassenger() {
 	formData.price = passenger.price
 	formData.count = passenger.count
 	formData.ride_time = passenger.ride_time
+	formData.start_city = passenger.start_city
+	formData.end_city = passenger.end_city
+	
 	formData.with_trunk = Boolean(passenger.with_trunk)
-
-	inputComponent.value.regionChanged(formData.start_region, 'start')
-		.then(() => formData.start_city = passenger.start_city)
-	inputComponent.value.regionChanged(formData.end_region, 'end')
-		.then(() => formData.end_city = passenger.end_city)
-
 	pageData.loading = false
 }
 </script>

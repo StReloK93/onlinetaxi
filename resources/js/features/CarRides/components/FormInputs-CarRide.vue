@@ -87,42 +87,19 @@ const formData = reactive({
    address_to_address: false,
    start_city: null,
    end_city: null,
-   ends: [
-      {
-         city: null,
-         loading: false,
-         districts: [],
-         text: "Qayerdan?",
-      },
-      {
-         city: null,
-         loading: false,
-         districts: [],
-         text: "Qayerga?",
-      },
-   ],
    day: null,
    price: "",
    free_seat: 1,
 });
 
 
-async function regionChanged(id, index) {
-   formData.ends[index].loading = true;
-   formData.ends[index].city = null;
-   formData.ends[index].districts = [];
-   await axios.get(`district/${id}`).then(({ data }) => {
-      formData.ends[index].districts = data;
-      formData.ends[index].loading = false;
-   });
-}
 
 watch(() => formData.free_seat, (currentValue) => {
 	if (currentValue < 1) return formData.free_seat = 1
 })
 
 
-defineExpose({ regionChanged, formData });
+defineExpose({ formData });
 onMounted(async () => {
    pageData.cars = await UserRepository.cars()
    if(pageData.cars.length == 0) {

@@ -37,7 +37,7 @@ class CarRideController extends Controller
             'state' => true,
         ]);
 
-        return $carRide;
+        return $carRide->fresh();
     }
 
     public function show(CarRide $carRide)

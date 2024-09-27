@@ -15,6 +15,8 @@ class CarRide extends Model
         'user_car_id',
         'phone',
         'day',
+        'start_city',
+        'end_city',
         'strictly_on_time',
         'price',
         'address_to_address',
@@ -56,6 +58,6 @@ class CarRide extends Model
 
     public function end()
     {
-        return $this->belongsTo(District::class, 'start_city', 'id')->with('region');
+        return $this->belongsTo(District::class, 'end_city', 'id')->with('region');
     }
 }

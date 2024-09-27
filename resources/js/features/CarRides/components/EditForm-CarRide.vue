@@ -10,7 +10,6 @@
 	</v-dialog>
 </template>
 <script setup lang="ts">
-import moment from 'moment'
 import { reactive, ref } from 'vue'
 import { unformat } from 'v-money3'
 import { moneyConfig } from '@/modules/constants'
@@ -45,17 +44,12 @@ async function getCarRide(id) {
 	formData.day = ride.day
 	formData.strictly_on_time = ride.strictly_on_time
 	formData.price = ride.price
+	formData.start_city = ride.start_city
+	formData.end_city = ride.end_city
 	formData.address_to_address = ride.address_to_address
 	formData.free_seat = ride.free_seat
 	formData.ends = []
-
-	await Promise.all(ride.cities.map(async (city, index) => {
-		formData.ends.push({ region: null, city: null, loading: false, districts: [], text: index == 0 ? "Qayerdan?" : "Qayerga?" })
-		await inputComponent.value.regionChanged(city.district.region_id, index)
-		formData.ends[index].region = city.district.region_id
-		formData.ends[index].city = city.district_id
-		pageData.overlay = false
-	}));
-
+	
+	pageData.overlay = false
 }
 </script>

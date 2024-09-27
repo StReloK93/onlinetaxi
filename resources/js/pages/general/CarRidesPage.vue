@@ -1,8 +1,8 @@
 <template>
 	<main class="d-flex flex-column">
-		<main class="mt-n2 mb-2">
+		<!-- <main class="mt-n2 mb-2">
 			<Filters />
-		</main>
+		</main> -->
 		<v-spacer class="position-relative">
 			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
 				<TransitionGroup name="list">

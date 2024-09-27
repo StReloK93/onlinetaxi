@@ -1,8 +1,8 @@
 <template>
 	<v-row>
-		<BaseSelectCity :categories="pageData.regions" :subCategories="pageData.districts" :loading="pageData.start_loading"
+		<BaseSelectCity :categories="pageData.regions" :subCategories="pageData.districts" :loading="props.loading"
 			v-model="formData.start_city" startText="Qayerdan?" class="mb-1" />
-		<BaseSelectCity :categories="pageData.regions" :subCategories="pageData.districts" :loading="pageData.end_loading"
+		<BaseSelectCity :categories="pageData.regions" :subCategories="pageData.districts" :loading="props.loading"
 			v-model="formData.end_city" startText="Qayerga?" class="mb-1" />
 		<BaseSelectTimeInput v-model:datetime="formData.ride_time" />
 		<v-col cols="12">
@@ -33,7 +33,7 @@ import { moneyConfig, rules } from "@/modules/constants";
 import { reactive, onMounted, watch } from 'vue'
 import { useAuthStore } from "@/store/useAuthStore"
 const AuthStore = useAuthStore()
-
+const props = defineProps(['loading'])
 const emit = defineEmits(['onReady'])
 
 const formData: IPassenger = reactive({
@@ -60,20 +60,11 @@ const pageData = reactive({
 	end_districts: []
 })
 
-async function regionChanged(id, way) {
-	pageData[`${way}_loading`] = true
-	pageData[`${way}_districts`] = []
-	formData[`${way}_city`] = null
-	await axios.get(`district/${id}`).then(({ data }) => {
-		pageData[`${way}_districts`] = data
-		pageData[`${way}_loading`] = false
-	})
-}
 watch(() => formData.count, (currentValue) => {
 	if (currentValue < 1) return formData.count = 1
 })
 
-defineExpose({ regionChanged, formData })
+defineExpose({ formData })
 
 onMounted(async () => {
 	const { data: regions } = await axios.get("region");

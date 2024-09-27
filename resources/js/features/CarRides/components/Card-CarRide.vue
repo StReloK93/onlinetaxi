@@ -2,24 +2,32 @@
 	<section class="car-ride-card w-100 d-flex flex-column bg-white elevation-1 mb-2 rounded-e">
 		<aside @click="$emit('activate', props.ride?.id)" class="d-flex flex-column h-100" v-ripple>
 			<main class="pa-2 d-flex flex-column justify-space-between position-relative">
-				<v-icon v-if="isMyAdd(props.ride)" class="position-absolute" style="top: 109px; right: -5px;" color="primary">mdi-circle-medium</v-icon>
 				<v-icon class="position-absolute city-direction" color="secondary">mdi-chevron-down</v-icon>
-				<div class="position-absolute city-line">
-				</div>
-				<template v-for="(item, index) in props.ride.cities">
-					<aside v-if="latest(index) || first(index)" :class="[{ 'mb-2': first(index) }]"
-						class="leading-none d-flex align-center">
-						<v-icon class="mr-1 text-caption" :class="[{ 'opacity-0': latest(index) }]" color="secondary">
-							mdi-circle-medium
-						</v-icon>
-						<span class="font-weight-medium">
-							{{ item.district.name }}
-						</span>
-						<span class="text-caption ml-1 text-grey-lighten-1">
-							{{ item.district.region.name.replace('viloyati', 'V.') }}
-						</span>
-					</aside>
-				</template>
+				<div class="position-absolute city-line"></div>
+				<aside
+					class="leading-none d-flex align-center mb-2">
+					<v-icon class="mr-1 text-caption" color="secondary">
+						mdi-circle-medium
+					</v-icon>
+					<span class="font-weight-medium">
+						{{ props.ride.start?.name }}
+					</span>
+					<span class="text-caption ml-1 text-grey-lighten-1">
+						{{ props.ride.start?.region.name.replace('viloyati', 'V.') }}
+					</span>
+				</aside>
+				<aside
+					class="leading-none d-flex align-center">
+					<v-icon class="mr-1 text-caption opacity-0" color="secondary">
+						mdi-circle-medium
+					</v-icon>
+					<span class="font-weight-medium">
+						{{ props.ride.end?.name }}
+					</span>
+					<span class="text-caption ml-1 text-grey-lighten-1">
+						{{ props.ride.end?.region.name.replace('viloyati', 'V.') }}
+					</span>
+				</aside>
 			</main>
 
 			<main class="pl-2 pt-1 d-flex flex-column justify-space-between flex-grow-1">
@@ -61,9 +69,10 @@
 							</v-btn>
 						</span>
 					</div>
-					<div class="d-flex align-center">
+					<div class="d-flex align-center position-relative">
+						<v-icon v-if="isMyAdd(props.ride)" class="position-absolute" style="top: -11px; right: -4px;" color="primary">mdi-circle-medium</v-icon>
 						<v-chip variant="tonal" color="secondary" size="small"
-							class="font-weight-medium rounded-e-0 pr-1">
+							class="font-weight-medium rounded-e-0 pr-1 ">
 							{{ format(props.ride.price, moneyConfig) }} so'm
 						</v-chip>
 					</div>
@@ -91,12 +100,8 @@ function isMyAdd(ride) {
 	return Auth.user?.id == ride?.user_id
 }
 
-
-
 const props = defineProps(['ride', 'activeCard'])
 const aviablePassengersCount = computed(() => props.ride.passengers.reduce((acc, pass) => acc += pass.count, 0))
-const latest = index => props.ride.cities.length - 1 == index
-const first = index => index == 0
 </script>
 <style scoped>
 .city-direction {
