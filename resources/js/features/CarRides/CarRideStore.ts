@@ -1,23 +1,24 @@
 import { defineStore } from "pinia";
-import { ref, Ref, computed } from "vue";
+import { ref, Ref, computed, reactive } from "vue";
 import { ICarRide } from "@/interfaces";
-import { hasDuplicates } from "@/modules/constants";
+import { useAuthStore } from "@/store/useAuthStore";
+import moment from "moment"
 import { CarRideRepository } from "@/features/CarRides/index";
-import { useAuthStore } from "@/store/useAuthStore"
 export const useCarRide = defineStore("useCarRide", () => {
+   const rides: Ref<ICarRide[]> = ref([]);
 
-   const rides = ref([]);
-   const districts = ref([]);
-   const filters = ref(null)
+   let filterDefault = { day: null, start_city: null, end_city: null, price: null, passengers_count: null, onlyMy: false }
+
+   const filters = reactive({ ...filterDefault })
    const AuthStore = useAuthStore()
-   async function getOnlyActive() {
-      rides.value = await CarRideRepository.getOnlyActive();
+   function onClearFilter() {
+      for (const key in filters) {
+         filters[key] = filterDefault[key]
+      }
    }
 
-   async function getRidesByRegion(region_id) {
-      const result = await CarRideRepository.getRidesByRegion(region_id);
-      rides.value = result.rides;
-      districts.value = result.districts;
+   async function getOnlyActive() {
+      rides.value = await CarRideRepository.getOnlyActive();
    }
 
 
@@ -47,37 +48,19 @@ export const useCarRide = defineStore("useCarRide", () => {
 
    const activeRides = computed(() => {
       return rides.value?.filter((ride) => {
-         if (filters.value == 'actives') return ride.state == 1
-         else if (filters.value == 'auth-user') return [1, 2].includes(ride.state) && ride.user_id == AuthStore.user.id
-         return true
+         let day = true
+         let start_city = true
+         let end_city = true
+         let onlyMy = true
+
+         if (filters.day) day = filters.day == moment(ride.day).format('YYYY-MM-DD')
+         if (filters.start_city) start_city = filters.start_city == ride.start_city
+         if (filters.end_city) end_city = filters.end_city == ride.end_city
+         if (filters.onlyMy) onlyMy = AuthStore.user.id == ride.user_id
+
+         return day && start_city && end_city && onlyMy
       })
-   }
-   )
-
-   const groupRides: any = computed(() => {
-      const dists = {};
-      districts.value?.forEach((district) => {
-         rides.value.forEach((ride) => {
-            if (district.id == ride.cities[0].district_id) {
-               let group = `${ride.cities.at(-1).district.region.name} ${ride.cities.at(-1).district.name
-                  }`;
-               const array = group.split(" ");
-               if (hasDuplicates(array))
-                  group = ride.cities.at(-1).district.name;
-
-               if (dists[district.name]) {
-                  if (dists[district.name][group])
-                     dists[district.name][group].push(ride);
-                  else dists[district.name][group] = [ride];
-               } else {
-                  dists[district.name] = {};
-                  dists[district.name][group] = [ride];
-               }
-            }
-         });
-      });
-      return dists;
-   });
+   })
 
    function createPassenger(passenger) {
       const car_ride = rides.value.find(
@@ -105,25 +88,19 @@ export const useCarRide = defineStore("useCarRide", () => {
       );
    }
 
-   function clear() {
-      rides.value = [];
-      districts.value = [];
-   }
+
 
    return {
       activeRides,
       rides,
       filters,
-      districts,
-      groupRides,
       create,
       update,
       destroy,
       getOnlyActive,
-      getRidesByRegion,
       createPassenger,
       updatePassenger,
       deletedPassenger,
-      clear,
+      onClearFilter
    };
 });

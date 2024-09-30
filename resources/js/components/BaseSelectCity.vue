@@ -1,10 +1,10 @@
 <template>
 	<div class="w-100">
-		<v-btn @click="pageData.dialog = true" color="dark" variant="tonal" :loading="props.loading" block>
+		<v-btn @click="pageData.dialog = true" color="#666" variant="tonal" :loading="props.loading" block>
 			<span v-if="model == null">
 				{{ props.startText }}
 			</span>
-			<span v-else class="font-weight-bold">
+			<span v-else class="font-weight-bold text-primary">
 				{{ selectedCity?.name }}
 				<span class="text-caption">
 					- {{ selectedRegion?.name }}

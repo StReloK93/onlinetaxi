@@ -1,5 +1,8 @@
 <template>
 	<main class="d-flex flex-column">
+		<main class="mt-n2 mb-2">
+			<FilterPassenger />
+		</main>
 		<v-spacer class="position-relative">
 			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
 				<TransitionGroup name="list">
@@ -18,7 +21,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
-import { Card, AddForm, PassengerRepository, usePassengerStore } from '@/features/Passengers';
+import { Card, AddForm, PassengerRepository, usePassengerStore, FilterPassenger } from '@/features/Passengers';
 import { ref } from 'vue';
 const passengerStore = usePassengerStore()
 const activeCard = ref(null)

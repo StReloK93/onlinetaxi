@@ -21,9 +21,7 @@
 </template>
 <script setup lang="ts">
 import { AddForm, Filters, useCarRide, CardCarRide, CarRideRepository } from '@/features/CarRides'
-import { watch, onMounted, onUnmounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
-const route = useRoute()
+import { onMounted, onUnmounted, ref } from 'vue'
 const rideStore = useCarRide()
 const activeCard = ref(null)
 
@@ -32,16 +30,12 @@ function selectActive(id) {
 	else return activeCard.value = id
 }
 
-watch(() => route.meta.method, async (current: any) => {
-	rideStore.rides = await CarRideRepository.getOnlyActive()
-	rideStore.filters = route.meta.method
-})
 onMounted(async () => {
 	rideStore.rides = await CarRideRepository.getOnlyActive()
-	rideStore.filters = route.meta.method
 })
 
 onUnmounted(() => {
 	rideStore.rides = null
+	rideStore.onClearFilter()
 })
 </script>

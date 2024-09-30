@@ -8,11 +8,6 @@ class CarRide{
       return data;
    }
    
-   async getRidesByRegion(region_id) {
-      const { data } = await Client.get(`${resource}/start-region/${region_id}`);
-      return { rides: data.car_rides, districts: data.districts };
-   }
-   
    async index() {
       const { data } = await Client.get<ICarRide[]>(`${resource}`);
       return data

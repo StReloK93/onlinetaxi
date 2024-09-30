@@ -1,7 +1,7 @@
 <template>
 	<div class="w-100">
-		<v-btn @click="pageData.dialog = true" color="dark" variant="tonal" :loading="props.loading" block>
-			<span v-if="datetime">
+		<v-btn @click="pageData.dialog = true" color="#666" variant="tonal" :loading="props.loading" block>
+			<span v-if="datetime" class="text-primary">
 				{{ moment(datetime, 'YYYY-MM-DD').format('D-MMMM') }}
 				<template v-if="props.onlyDate">
 					{{ moment(datetime).format('HH:mm') }}
@@ -19,7 +19,7 @@
 					Qatnov vaqti
 				</v-card-title>
 				<v-card-text class="pa-0 position-relative" style="height: 270px;">
-					<VDatePicker @update:modelValue="onChangeHandler" :min-date="new Date()" transparent borderless expanded
+					<VDatePicker @update:modelValue="onChangeHandler" transparent borderless expanded
 						v-model="pageData.date" color="pink" />
 					<Transition name="slide-up">
 						<BaseTimePicker v-if="pageData.selected" v-model="pageData.time" @back="pageData.selected = false"
@@ -62,7 +62,7 @@ function onChangeHandler(event) {
 
 function onSuccessHandler(event) {
 	const formatedDate = moment(event).format('YYYY-MM-DD')
-	datetime.value = `${formatedDate} ${props.onlyDate == true ? pageData.time : ''}`
+	datetime.value = `${formatedDate} ${props.onlyDate == true ? pageData.time : ''}`.trim()
 	pageData.dialog = false
 }
 

@@ -14,8 +14,15 @@
 					:subCategories="pageData.districts" startText="Qayerga?" class="mb-1" />
 				<BaseSelectTimeInput v-model:datetime="filters.day" :only-date="false" />
 				<main class="w-100 overflow-hidden px-2 d-flex">
-					<v-rating color="dark" empty-icon="mdi-account-outline" full-icon="mdi-account"
-						v-model="filters.passengers_count" size="small" length="6" class="mx-n3"></v-rating>
+					<v-rating
+						color="dark"
+						empty-icon="mdi-account-outline"
+						full-icon="mdi-account"
+						v-model="filters.passengers_count"
+						size="small"
+						length="6"
+						class="mx-n3"
+					/>
 				</main>
 				<main class="px-2">
 					<v-switch label="Mening e'lonlarim" v-model="filters.onlyMy"></v-switch>
@@ -30,10 +37,10 @@
 import BaseSelectCity from "@/components/BaseSelectCity.vue"
 import BaseSelectTimeInput from "@/components/BaseSelectTimeInput.vue"
 import { computed, reactive, ref } from 'vue'
-import { useCarRide } from "../CarRideStore";
+import { usePassengerStore } from "../PassengerStore";
 import AxiosClient from '@/modules/AxiosClient';
 const bottomSheet = ref(false)
-const carRideStore = useCarRide()
+const store = usePassengerStore()
 
 
 const pageData = reactive({
@@ -42,10 +49,10 @@ const pageData = reactive({
 })
 
 function onSubmitFilters() {
-	carRideStore.filters.start_city = filters.start_city
-	carRideStore.filters.end_city = filters.end_city
-	carRideStore.filters.day = filters.day
-	carRideStore.filters.onlyMy = filters.onlyMy
+	store.filters.start_city = filters.start_city
+	store.filters.end_city = filters.end_city
+	store.filters.day = filters.day
+	store.filters.onlyMy = filters.onlyMy
 
 	bottomSheet.value = false
 }
@@ -61,17 +68,17 @@ const filters = reactive({
 
 const issetFilter = computed(() => {
 	const array = []
-	for (const key in carRideStore.filters) {
-		array.push(carRideStore.filters[key])
+	for (const key in store.filters) {
+		array.push(store.filters[key])
 	}
 	return !array.every((item) => [null, false].includes(item))
 })
 
 
 function clearFilter(){
-	carRideStore.onClearFilter()
+	store.onClearFilter()
 	for (const key in filters) {
-		filters[key] = carRideStore.filters[key]
+		filters[key] = store.filters[key]
 	}
 }
 
@@ -86,7 +93,7 @@ async function Mounted() {
 	pageData.districts = districts;
 
 	for (const key in filters) {
-		filters[key] = carRideStore.filters[key]
+		filters[key] = store.filters[key]
 	}
 }
 </script>
