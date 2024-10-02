@@ -53,6 +53,7 @@ function onSubmitFilters() {
 	store.filters.end_city = filters.end_city
 	store.filters.day = filters.day
 	store.filters.onlyMy = filters.onlyMy
+	store.filters.passengers_count = filters.passengers_count
 
 	bottomSheet.value = false
 }

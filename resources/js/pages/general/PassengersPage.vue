@@ -6,9 +6,9 @@
 		<v-spacer class="position-relative">
 			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
 				<TransitionGroup name="list">
-					<template v-if="passengerStore.passengers?.length">
+					<template v-if="passengerStore.filteredPassengers?.length">
 						<Card @activate="selectActive" :activeCard="activeCard" :crud="true"
-							v-for="passenger in passengerStore.passengers" :passenger="passenger" :key="passenger.id"
+							v-for="passenger in passengerStore.filteredPassengers" :passenger="passenger" :key="passenger.id"
 							class="mb-2" />
 					</template>
 					<!-- <v-alert v-else text="Yo'lovchilar topilmadi"></v-alert> -->

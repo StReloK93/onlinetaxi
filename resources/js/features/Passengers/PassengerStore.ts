@@ -24,13 +24,15 @@ export const usePassengerStore = defineStore("usePassenger", () => {
          let start_city = true
          let end_city = true
          let onlyMy = true
+         let passengers_count = true
 
          if (filters.day) day = filters.day == moment(ride.ride_time).format('YYYY-MM-DD')
          if (filters.start_city) start_city = filters.start_city == ride.start_city
          if (filters.end_city) end_city = filters.end_city == ride.end_city
+         if (filters.passengers_count) passengers_count = filters.passengers_count == ride.count
          if (filters.onlyMy) onlyMy = AuthStore.user.id == ride.user_id
 
-         return day && start_city && end_city && onlyMy
+         return day && start_city && end_city && onlyMy && passengers_count
       })
    })
 

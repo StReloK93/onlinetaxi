@@ -46,6 +46,7 @@ function onSubmitFilters() {
 	carRideStore.filters.end_city = filters.end_city
 	carRideStore.filters.day = filters.day
 	carRideStore.filters.onlyMy = filters.onlyMy
+	carRideStore.filters.passengers_count = filters.passengers_count
 
 	bottomSheet.value = false
 }
