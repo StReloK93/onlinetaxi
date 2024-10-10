@@ -21,7 +21,7 @@
 import { rules, moneyConfig } from '@/modules/constants'
 import { useRoute } from 'vue-router'
 import BaseSelectTimeInput from '@/components/BaseSelectTimeInput.vue';
-import UserRepository from '@/features/User/UserRepository';
+import UserRepository from '@/features/AuthUser/UserRepository';
 import { reactive, ref, onMounted } from 'vue'
 const emit = defineEmits(['onReady', 'onCarEmpty'])
 

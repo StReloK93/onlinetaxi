@@ -17,8 +17,8 @@
 			<v-text-field v-model.lazy="formData.price" label="Yo'lkira narxiga taklifingiz" inputmode="numeric" :rules="rules"
 				class="mb-4" />
 			<input v-money3="moneyConfig" v-model.lazy="formData.price" type="text" hidden />
-			<v-text-field v-model="formData.address" :step="900" label="Yo'lovchining manzili"
-				hint="Ushbu manzilga qarab haydovchi sizni olib ketadi" :rules="rules" class="mb-4" />
+			<!-- <v-text-field v-model="formData.address" :step="900" label="Yo'lovchining manzili"
+				hint="Ushbu manzilga qarab haydovchi sizni olib ketadi" :rules="rules" class="mb-4" /> -->
 			<v-switch v-model="formData.with_trunk" label="Ustki bagaj"></v-switch>
 		</v-col>
 	</v-row>
@@ -40,7 +40,7 @@ const formData: IPassenger = reactive({
 	car_ride_id: null,
 	loading: null,
 	phone: AuthStore.user.phone,
-	address: null,
+	address: 'home',
 	start_region: null,
 	start_city: null,
 	end_region: null,

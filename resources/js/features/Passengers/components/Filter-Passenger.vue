@@ -2,7 +2,7 @@
 	<div class="text-right w-100 px-1">
 		<v-btn v-if="issetFilter" @click="clearFilter" variant="text" icon="mdi-close" density="compact"
 			size="small" class="mr-2" />
-		<v-btn @click="bottomSheet = true" variant="text" append-icon="mdi-filter">Filterlash</v-btn>
+		<v-btn @click="bottomSheet = true" variant="text" append-icon="mdi-filter">Mos yo'nalishdagilarni saralash</v-btn>
 	</div>
 	<v-bottom-sheet v-model="bottomSheet" inset>
 		<v-card class="bg-white" @vue:mounted="Mounted">
@@ -13,20 +13,6 @@
 				<BaseSelectCity v-model="filters.end_city" :categories="pageData.regions"
 					:subCategories="pageData.districts" startText="Qayerga?" class="mb-1" />
 				<BaseSelectTimeInput v-model:datetime="filters.day" :only-date="false" />
-				<main class="w-100 overflow-hidden px-2 d-flex">
-					<v-rating
-						color="dark"
-						empty-icon="mdi-account-outline"
-						full-icon="mdi-account"
-						v-model="filters.passengers_count"
-						size="small"
-						length="6"
-						class="mx-n3"
-					/>
-				</main>
-				<main class="px-2">
-					<v-switch label="Mening e'lonlarim" v-model="filters.onlyMy"></v-switch>
-				</main>
 				<v-btn class="mt-2" @click="onSubmitFilters" block>Filterni qo'llash</v-btn>
 			</v-card-text>
 		</v-card>
@@ -52,8 +38,6 @@ function onSubmitFilters() {
 	store.filters.start_city = filters.start_city
 	store.filters.end_city = filters.end_city
 	store.filters.day = filters.day
-	store.filters.onlyMy = filters.onlyMy
-	store.filters.passengers_count = filters.passengers_count
 
 	bottomSheet.value = false
 }

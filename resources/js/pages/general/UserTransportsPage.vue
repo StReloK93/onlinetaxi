@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { AddForm, Card, useTransport } from '@/features/Transports'
-import UserRepository from '@/features/User/UserRepository';
+import UserRepository from '@/features/AuthUser/UserRepository';
 import { onMounted, onUnmounted } from 'vue';
 const transportStore = useTransport()
 

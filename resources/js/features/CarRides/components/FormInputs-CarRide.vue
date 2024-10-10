@@ -62,7 +62,7 @@ import BaseSelectTimeInput from "@/components/BaseSelectTimeInput.vue"
 import axios from "@/modules/AxiosClient";
 import { moneyConfig, rules } from "@/modules/constants";
 import { reactive, onMounted, watch } from "vue";
-import UserRepository from "@/features/User/UserRepository";
+import UserRepository from "@/features/AuthUser/UserRepository";
 import { useAuthStore } from "@/store/useAuthStore"
 
 const AuthStore = useAuthStore()
