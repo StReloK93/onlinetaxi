@@ -2,7 +2,7 @@
 	<div class="text-right w-100 px-1">
 		<v-btn v-if="issetFilter" @click="clearFilter" variant="text" icon="mdi-close" density="compact"
 			size="small" class="mr-2" />
-		<v-btn @click="bottomSheet = true" variant="text" append-icon="mdi-filter">Mos yo'nalishdagilarni saralash</v-btn>
+		<v-btn @click="bottomSheet = true" variant="text" append-icon="mdi-filter">Mos yo'nalishdagilarni topish</v-btn>
 	</div>
 	<v-bottom-sheet v-model="bottomSheet" inset>
 		<v-card class="bg-white" @vue:mounted="Mounted">

@@ -19,7 +19,7 @@
 					Qatnov vaqti
 				</v-card-title>
 				<v-card-text class="pa-0 position-relative" style="height: 270px;">
-					<VDatePicker @update:modelValue="onChangeHandler" transparent borderless expanded
+					<VDatePicker @update:modelValue="onChangeHandler" :min-date="new Date()" transparent borderless expanded
 						v-model="pageData.date" color="pink" />
 					<Transition name="slide-up">
 						<BaseTimePicker v-if="pageData.selected" v-model="pageData.time" @back="pageData.selected = false"

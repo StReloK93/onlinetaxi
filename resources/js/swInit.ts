@@ -42,11 +42,11 @@ export default async function () {
          };
 
 
-         axios.post("firebase-token", {
-            user_id: store.user?.id,
-            token: store.token,
-            device: null,
-         });
+         // axios.post("firebase-token", {
+         //    user_id: store.user?.id,
+         //    token: store.token,
+         //    device: null,
+         // });
       });
    }
 }
