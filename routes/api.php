@@ -9,15 +9,9 @@ use App\Http\Controllers\CarRideController;
 use App\Http\Controllers\FuelTypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PassengerController;
-use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\FirebaseTokensController;
 use App\Http\Controllers\CarCompanyController;
 use App\Http\Controllers\OffersPassengerController;
-
-
-
-
-
 
 
 

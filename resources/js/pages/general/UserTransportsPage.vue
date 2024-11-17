@@ -1,7 +1,7 @@
 <template>
-	<main class="d-flex flex-column">
+	<main class="d-flex flex-column pa-2">
 		<v-spacer class="position-relative">
-			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden px-1">
+			<main class="position-absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden">
 				<TransitionGroup name="list">
 					<template v-if="transportStore.transports?.length">
 						<Card v-for="transport in transportStore.transports" :transport="transport" :key="transport.id" />

@@ -1,7 +1,7 @@
 <template>
 	<v-dialog v-model="pageData.dialog" scrollable persistent width="400px">
 		<template v-slot:activator="{ props }">
-			<v-btn color="primary" v-bind="props" class="mt-2 mb-n1" append-icon="mdi-hail">
+			<v-btn color="primary" v-bind="props" class="mt-2" append-icon="mdi-hail">
 				Elon kiritish
 			</v-btn>
 		</template>

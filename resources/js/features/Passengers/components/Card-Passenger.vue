@@ -2,6 +2,7 @@
    <v-card class="border-primary border-opacity-100 bg-white elevation-1 rounded-e passenger-card">
       <section @click="$emit('activate', props.passenger?.id)" class="pa-2 pb-0" v-ripple="$route.name != 'passenger-offers'">
          <v-icon v-if="isMyAdd(props.passenger)" class="position-absolute" style="top: 83px; right: -5px;" color="primary">mdi-circle-medium</v-icon>
+         <p class="d-block text-caption text-primary">Yo'lovchi</p>
          <main class="d-flex align-end mb-3">
             <aside class="pr-2 leading-none">
                <v-label class="text-caption mr-1">

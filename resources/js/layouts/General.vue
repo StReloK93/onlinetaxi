@@ -3,9 +3,7 @@
 		<TheAlert />
 		<v-main>
 			<TheHeader />
-			<v-container class="h-100 pb-3">
-				<router-view class="h-100 position-relative mx-n2"></router-view>
-			</v-container>
+			<router-view class="h-100 position-relative"></router-view>
 		</v-main>
 		<TheBottomNavigation />
 	</v-app>

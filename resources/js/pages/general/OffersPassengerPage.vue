@@ -1,5 +1,5 @@
 <template>
-   <section class="mt-n2">
+   <section class="pa-2">
       <WhatIsOffer />
       <PassengerInformation :crud="false" :passenger="passenger" />
       <div class="d-flex justify-space-between align-center">

@@ -21,14 +21,21 @@
 				<v-divider v-if="deferredPrompt"></v-divider>
 				<BaseSelectPosition />
 				<v-list density="compact">
-					<v-list-item title="Transportlarim" prepend-icon="mdi-car-settings"
-						:to="{ name: 'user-transports' }" class="mb-2" />
+					<v-list-item title="Transportlarim" prepend-icon="mdi-car-settings" :to="{ name: 'user-transports' }"
+						class="mb-2" />
 				</v-list>
 			</div>
 		</div>
 
 		<template v-slot:append>
 			<div class="pa-2">
+				<div class="mb-2 text-right">
+					<v-label class="text-caption mr-1">
+						Savol va takliflar uchun
+					</v-label>
+					<a href="tel:+99893 660 09 60" class="d-block text-decoration-none text-subtitle-2 text-primary">+99893 660 09 60</a>
+					<a href="tel:+99893 660 09 60" class="d-block text-decoration-none text-subtitle-2 text-primary">+99894 677 11 34</a>
+				</div>
 				<v-btn @click="alertLogout" block append-icon="mdi-logout">
 					Chiqish
 				</v-btn>
@@ -38,35 +45,17 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/store/useAuthStore'
 import { useMainStore } from '@/store/useMainStore'
 import BaseSelectPosition from './BaseSelectPosition.vue'
 import { useDisplay } from 'vuetify'
-import { inject, ref } from 'vue'
+import { inject } from 'vue'
 const { name } = useDisplay()
 const main = useMainStore()
 const Auth = useAuthStore()
 
-const router = useRouter()
 
-const loadingRoleButton = ref(false)
-async function changeRole(role_id) {
-	if (Auth.user.role_id == role_id) return
 
-	loadingRoleButton.value = true
-	await Auth.changeRole(role_id)
-	if (role_id == 3) router.push({ name: 'passengers' })
-	if (role_id == 4) router.push({ name: 'car-rides' })
-	loadingRoleButton.value = false
-}
-function fakeChangeRole(role_id) {
-	Auth.user.role_id = role_id
-}
-
-function color(role_id) {
-	return Auth.user.role_id == role_id ? 'primary' : 'grey-lighten-4'
-}
 
 const deferredPrompt: any = inject('deferredPrompt')
 

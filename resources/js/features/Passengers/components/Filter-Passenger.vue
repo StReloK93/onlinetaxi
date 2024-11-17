@@ -1,12 +1,12 @@
 <template>
-	<div class="text-right w-100 px-1">
+	<div class="text-right">
 		<v-btn v-if="issetFilter" @click="clearFilter" variant="text" icon="mdi-close" density="compact"
 			size="small" class="mr-2" />
-		<v-btn @click="bottomSheet = true" variant="text" append-icon="mdi-filter">Mos yo'nalishdagilarni topish</v-btn>
+		<v-btn @click="bottomSheet = true" variant="text" append-icon="mdi-filter">Mos yo'nalishni izlash</v-btn>
 	</div>
 	<v-bottom-sheet v-model="bottomSheet" inset>
 		<v-card class="bg-white" @vue:mounted="Mounted">
-			<v-card-title>Filterlar</v-card-title>
+			<v-card-title>Mos yo'nalishni tanlang</v-card-title>
 			<v-card-text style="max-height: 700px;" class="pa-2 tw-relative">
 				<BaseSelectCity v-model="filters.start_city" :categories="pageData.regions"
 					:subCategories="pageData.districts" startText="Qayerdan?" class="mb-1" />

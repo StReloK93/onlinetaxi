@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="pageData.dialog" scrollable width="600px">
         <template v-slot:activator="{ props }">
-            <v-btn color="primary" v-bind="props" class="mt-2 mb-n1" append-icon="mdi-taxi" block   >
+            <v-btn color="primary" v-bind="props" class="mt-2" append-icon="mdi-taxi" block   >
 				Transport kiritish
 			</v-btn>
         </template>

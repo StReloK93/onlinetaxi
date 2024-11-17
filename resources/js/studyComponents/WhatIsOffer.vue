@@ -1,5 +1,5 @@
 <template>
-   <div class="text-right w-100 px-2 mb-2">
+   <div class="text-right w-100 mb-2">
       <v-btn @click="bottomSheet = true" variant="text" append-icon="mdi-alert-circle" block>Taklif qanday ishlaydi?</v-btn>
    </div>
    <v-bottom-sheet v-model="bottomSheet" inset>

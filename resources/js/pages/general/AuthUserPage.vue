@@ -1,41 +1,31 @@
 <template>
-   <section>
-      <v-card>
-    <v-tabs
-      v-model="tab"
-      align-tabs="center"
-      color="deep-purple-accent-4"
-    >
-      <v-tab :value="1">Landscape</v-tab>
-      <v-tab :value="2">City</v-tab>
-      <v-tab :value="3">Abstract</v-tab>
-    </v-tabs>
+  <section class="d-flex flex-column">
+    <main>
+      <v-tabs v-model="tabs" color="primary" grow>
+        <v-tab :value="1">
+          <v-icon icon="mdi-taxi"></v-icon>
+        </v-tab>
 
-    <v-tabs-window v-model="tab">
-      <v-tabs-window-item
-        v-for="n in 3"
-        :key="n"
-        :value="n"
-      >
-        <v-container fluid>
-          <v-row>
-            <v-col
-              v-for="i in 6"
-              :key="i"
-              cols="12"
-              md="4"
-            >
-            
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-tabs-window-item>
-    </v-tabs-window>
-  </v-card>
-   </section>
+        <v-tab :value="2">
+          <v-icon icon="mdi-human-greeting"></v-icon>
+        </v-tab>
+      </v-tabs>
+    </main>
+
+    <main class="flex-grow-1 d-flex pa-2" transition="fab-transition">
+      <TransitionGroup name="v-tab-transition">
+        <UserRidesTab v-if="tabs == 1" />
+        <UserPassengersTab v-if="tabs == 2" />
+      </TransitionGroup>
+    </main>
+
+  </section>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-const tab = ref(0)
+import UserRidesTab from '@/features/AuthUser/UserRidesTab.vue';
+import UserPassengersTab from '@/features/AuthUser/UserPassengersTab.vue';
+const tabs = ref(1)
+
 </script>
