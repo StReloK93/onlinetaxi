@@ -68,11 +68,11 @@ class AuthController extends Controller
 
 
     public function rides(){
-        return Auth::user()->rides;
+        return Auth::user()->rides()->whereState(1)->get();
     }
 
     public function passengers(){
-        return Auth::user()->passengers;
+        return Auth::user()->passengers()->whereState(1)->get();
     }
 
 }
