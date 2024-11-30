@@ -39,7 +39,7 @@ class Kernel extends ConsoleKernel
                 ['ride_time', '<' , $forPassenges]
             ])->update(['state' => 0]);
 
-        })->hourly();
+        })->everyMinute();
 
 
     }

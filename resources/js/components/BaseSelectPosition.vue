@@ -1,5 +1,5 @@
 <template>
-   <div class="text-right w-100 mt-2">
+   <div class="text-right w-100">
       <v-btn v-if="pageData.notification" variant="tonal" @click="bottomSheetToggle = true" :text="stringButton"
          append-icon="mdi-map-marker" :loading="pageData.loading" block></v-btn>
       <v-btn v-else disabled color="white" block>Habarnoma o'chirilgan</v-btn>

@@ -18,7 +18,7 @@
 					class="mb-2">
 					Ilovani o'rnatish
 				</v-btn>
-				<v-divider v-if="deferredPrompt"></v-divider>
+				<v-divider v-if="deferredPrompt" class="mb-2"></v-divider>
 				<BaseSelectPosition />
 				<v-list density="compact">
 					<v-list-item title="Transportlarim" prepend-icon="mdi-car-settings" :to="{ name: 'user-transports' }"
@@ -33,8 +33,8 @@
 					<v-label class="text-caption mr-1">
 						Savol va takliflar uchun
 					</v-label>
-					<a href="tel:+99893 660 09 60" class="d-block text-decoration-none text-subtitle-2 text-primary">+99893 660 09 60</a>
-					<a href="tel:+99893 660 09 60" class="d-block text-decoration-none text-subtitle-2 text-primary">+99894 677 11 34</a>
+					<a href="tel:+99893 660 09 60" class="d-block text-decoration-none text-caption text-primary">+99893 660 09 60</a>
+					<a href="tel:+99893 660 09 60" class="d-block text-decoration-none text-caption text-primary">+99894 677 11 34</a>
 				</div>
 				<v-btn @click="alertLogout" block append-icon="mdi-logout">
 					Chiqish
