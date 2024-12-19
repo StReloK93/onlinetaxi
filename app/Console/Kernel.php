@@ -23,7 +23,6 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
             $limitDate = Carbon::now()->addHours(-3);
-            $forPassenges = Carbon::now()->addHours(-12);
             
             CarRide::where([
                 ['state', 1],
@@ -36,7 +35,7 @@ class Kernel extends ConsoleKernel
 
             Passenger::where([
                 ['state', 1],
-                ['ride_time', '<' , $forPassenges]
+                ['ride_time', '<' , $limitDate]
             ])->update(['state' => 0]);
 
         })->everyMinute();
