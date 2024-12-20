@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Passenger;
 use App\Models\OffersPassenger;
-use Auth;
 class PassengerController extends Controller
 {
 
@@ -21,7 +20,7 @@ class PassengerController extends Controller
     public function store(Request $request)
     {
         $passenger = new Passenger();
-        $passenger->user_id = Auth::user()->id;
+        $passenger->user_id = $request->user()->id;
         $passenger->phone = $request->phone;
         $passenger->count = $request->count;
         $passenger->price = $request->price;
@@ -40,7 +39,7 @@ class PassengerController extends Controller
     public function storeOperator(Request $request)
     {
         $passenger = new Passenger();
-        $passenger->user_id = Auth::user()->id;
+        $passenger->user_id = $request->user()->id;
         $passenger->phone = $request->phone;
         $passenger->count = $request->count;
         $passenger->address = $request->address;
@@ -60,7 +59,7 @@ class PassengerController extends Controller
 
     public function update(Request $request, Passenger $passenger)
     {
-        if($passenger->user_id == Auth::user()->id){
+        if($passenger->user_id == $request->user()->id){
             $passenger->phone = $request->phone;
             $passenger->count = $request->count;
             $passenger->price = $request->price;

@@ -3,8 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Carbon\Carbon;
-
+use App\Models\OffersPassenger;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -20,6 +19,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        dd(Carbon::today());
     }
 }

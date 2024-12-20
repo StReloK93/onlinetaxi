@@ -3,15 +3,12 @@
 namespace App\Observers;
 
 use App\Models\Passenger;
-use App\Services\Firebase;
 use App\Jobs\SendNotificationForDrivers;
 class PassengerObserver
 {
 
-    protected $firebase;
     public function __construct()
     {
-        $this->firebase = new Firebase();
     }
     /**
      * Handle the Passenger "created" event.
