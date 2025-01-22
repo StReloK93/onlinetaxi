@@ -10,7 +10,8 @@ class PassengerController extends Controller
 
     public function index()
     {
-        return Passenger::where('ride_time', '>' , now()->addHour(-3))->get();
+        return Passenger::whereState(1)
+        ->where('ride_time', '>' , now()->addHour(-3))->get();
     }
 
     public function getOffers(Passenger $passenger){

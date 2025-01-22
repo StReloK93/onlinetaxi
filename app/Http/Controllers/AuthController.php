@@ -68,11 +68,11 @@ class AuthController extends Controller
 
 
     public function rides(){
-        return Auth::user()->rides()->where('day', '>' , now()->addHour(-3))->get();
+        return Auth::user()->rides()->whereState(1)->where('day', '>' , now()->addHour(-3))->get();
     }
 
     public function passengers(){
-        return Auth::user()->passengers()->where('ride_time', '>' , now()->addHour(-3))->get();
+        return Auth::user()->passengers()->whereState(1)->where('ride_time', '>' , now()->addHour(-3))->get();
     }
 
 }
