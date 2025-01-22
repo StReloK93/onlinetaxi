@@ -13,7 +13,7 @@ class CarRideController extends Controller
     }
 
     public function actives(){
-        return CarRide::whereNot('state', 0)->get();
+        return CarRide::where('day', '>' , now()->addHour(-3))->get();
     }
 
     public function onlyPassive()

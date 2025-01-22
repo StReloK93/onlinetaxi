@@ -3,6 +3,7 @@ import CarRidePage from "@/pages/general/CarRidesPage.vue";
 import UserTransportsPage from "@/pages/general/UserTransportsPage.vue";
 import TransportsPage from "@/pages/general/TransportsPage.vue";
 import PassengersPage from "@/pages/general/PassengersPage.vue";
+import NotificationPage from "@/pages/general/NotificationPage.vue";
 import OffersPassengerPage from "@/pages/general/OffersPassengerPage.vue";
 import AuthUserPage from "@/pages/general/AuthUserPage.vue";
 const routes: Array<RouteRecordRaw> = [
@@ -17,6 +18,11 @@ const routes: Array<RouteRecordRaw> = [
          guard: "auth",
       },
       children: [
+         {
+            path: "/notifications",
+            component: NotificationPage,
+            name: "notifications",
+         },
          {
             path: "/passengers",
             component: PassengersPage,
