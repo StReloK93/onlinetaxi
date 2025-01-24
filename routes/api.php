@@ -40,12 +40,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('auth-user')->group(function () {
         Route::post('set-user-name-role', [AuthController::class, 'setUserNameRole']);
         Route::post('change-role', [AuthController::class, 'changeRole']);
+        Route::get('logout', [AuthController::class, 'logout']);
 
         Route::get('get-auth-user', [AuthController::class, 'getAuthUser']);
         Route::get('cars', [AuthController::class, 'cars']);
         Route::get('rides', [AuthController::class, 'rides']);
         Route::get('passengers', [AuthController::class, 'passengers']);
-        Route::get('logout', [AuthController::class, 'logout']);
+        
+        Route::get('notifications', [AuthController::class, 'notifications']);
+        Route::get('active-notifications', [AuthController::class, 'activeNotifications']);
+        Route::get('update-notifications', [AuthController::class, 'updateNotifications']);
     });
 
     Route::apiResource('car-company', CarCompanyController::class)->only(['index']);

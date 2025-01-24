@@ -9,8 +9,9 @@ use Auth;
 class AuthController extends Controller
 {
     private UserService $service;
-    
-    public function __construct (UserService $service) {
+
+    public function __construct(UserService $service)
+    {
 
         $this->service = $service;
 
@@ -24,19 +25,20 @@ class AuthController extends Controller
     {
 
         return $this->service->signIn($request);
-    
+
     }
 
 
     public function logout(Request $request)
     {
-        
+
         return $this->service->logout($request);
 
     }
 
 
-    public function getAuthUser(Request $request){
+    public function getAuthUser(Request $request)
+    {
         return $this->service->getAuthUser($request);
     }
 
@@ -49,7 +51,7 @@ class AuthController extends Controller
 
 
 
-// Auth user Actions
+    // Auth user Actions
 
 
 
@@ -61,18 +63,52 @@ class AuthController extends Controller
         $user->save();
         return $user->fresh();
     }
-    
-    public function cars(){
+
+    public function cars()
+    {
         return Auth::user()->cars;
     }
 
 
-    public function rides(){
-        return Auth::user()->rides()->whereState(1)->where('day', '>' , now()->addHour(-3))->get();
+    public function rides()
+    {
+        return Auth::user()->rides()->whereState(1)->where('day', '>', now()->addHours(-3))->get();
     }
 
-    public function passengers(){
-        return Auth::user()->passengers()->whereState(1)->where('ride_time', '>' , now()->addHour(-3))->get();
+    public function passengers()
+    {
+        return Auth::user()->passengers()->whereState(1)->where('ride_time', '>', now()->addHours(-3))->get();
     }
 
+    public function notifications()
+    {
+        return Auth::user()
+            ->notifications()
+            ->where('created_at', '>', now()->addDays(-3))
+            ->orderBy('id', 'desc')
+            ->get();
+    }
+
+    public function activeNotifications()
+    {
+        return Auth::user()
+            ->notifications()
+            ->where([
+                ['created_at', '>', now()->addDays(-2)],
+                ['readed', false],
+            ])
+            ->get();
+    }
+
+    public function updateNotifications()
+    {
+        return Auth::user()
+            ->notifications()
+            ->where([
+                ['readed', false],
+            ])
+            ->update([
+                'readed' => 1
+            ]);
+    }
 }

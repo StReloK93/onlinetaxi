@@ -30,19 +30,26 @@ class FirebaseTokensController extends Controller
     public function getCityTopic(Request $request){
         $tokenInformation = $this->firebase->tokenInformation($request->token);
         $allTopics = $tokenInformation['rel']['topics'] ?? null;
-        FirebaseTokens::updateOrCreate([
-            'token' => $request->token
-        ], [
-            'user_id' => $request->user()->id
-        ]);
-
         
         if ($allTopics !== null){
             $topics = array_keys($allTopics);
             $city_id = $this->getCityIdInArray($topics);
+
+            FirebaseTokens::updateOrCreate([
+                'token' => $request->token
+            ], [
+                'user_id' => $request->user()->id,
+                'device' => $city_id,
+            ]);
+    
             return District::find($city_id);
         }
-    
+        FirebaseTokens::updateOrCreate([
+            'token' => $request->token
+        ], [
+            'user_id' => $request->user()->id,
+        ]);
+
         return null;
     }
 

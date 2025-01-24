@@ -31,10 +31,24 @@ async function passengers() {
    return data;
 }
 
+async function notifications() {
+   const { data } = await Client.get(`${resource}/notifications`);
+   return data;
+}
+
+async function activeNotifications() {
+   const { data } = await Client.get(`${resource}/active-notifications`);
+   return data;
+}
+
+async function updateNotifications() {
+   const { data } = await Client.get(`${resource}/update-notifications`);
+   return data;
+}
 
 async function setUserNameRole(formData) {
    const { data } = await Client.post(`${resource}/set-user-name-role`, formData);
    return data;
 }
 
-export default { getUser, changeRole, setUserNameRole, cars, rides, passengers };
+export default { getUser, changeRole, setUserNameRole, cars, rides, passengers, notifications, activeNotifications, updateNotifications };
