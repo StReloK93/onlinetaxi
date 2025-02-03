@@ -74,7 +74,11 @@ class NotificationService
    public function sendDriverNotification($passengerId){
       $passenger = Passenger::find($passengerId);
       $message = $this->messagePassengerFormatter($passenger);
-      $listenerUserIds = FirebaseTokens::where('device', $passenger->start_city)->get()->pluck('user_id')->all();
+      $listenerUserIds = FirebaseTokens::where('device', $passenger->start_city)
+      ->get()
+      ->pluck('user_id')
+      ->unique()
+      ->all();
 
       foreach ($listenerUserIds as $key => $user_id) {
          Notification::create([
