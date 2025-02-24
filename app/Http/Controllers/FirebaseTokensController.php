@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\FirebaseTokens;
 use App\Services\Firebase;
 use App\Models\District;
-use DB;
+
+
 class FirebaseTokensController extends Controller
 {
     protected $firebase;
@@ -14,20 +15,13 @@ class FirebaseTokensController extends Controller
         $this->firebase = new Firebase();
     }
 
-
-    public function store(Request $request)
-    {
-        DB::table('firebase_tokens')->updateOrInsert([
-            'token' => $request->token
-        ], [
-            'device' => 'online',
-            'user_id' => $request->user_id
-        ]);
-
-        return response()->json(null, 200);
-    }
-
     public function getCityTopic(Request $request){
+        if($request->token === null) return response()->json([
+            'error' => 'error',
+            'message' => 'token not found'
+        ], 500);
+        ;
+
         $tokenInformation = $this->firebase->tokenInformation($request->token);
         $allTopics = $tokenInformation['rel']['topics'] ?? null;
         
@@ -54,6 +48,7 @@ class FirebaseTokensController extends Controller
     }
 
     public function setCityTopic(Request $request){
+        if($request->token === null) return null;
 
         $this->firebase->clearAllTopics($request->token);
         $this->firebase->subscribeToTopic("city_$request->city_id", $request->token);

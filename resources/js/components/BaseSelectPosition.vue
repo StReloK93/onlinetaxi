@@ -81,7 +81,7 @@ async function updateTopic() {
 
 onMounted(async () => {
    axios.post('firebase/get-city-topic', { token: Auth.token }).then(({ data: current_city }) => {
-      AppStore.city = current_city
+      AppStore.city = current_city || null
       pageData.loading = false
    }).catch(() => {
       console.clear()

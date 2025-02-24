@@ -15,14 +15,13 @@ window.addEventListener('beforeinstallprompt', event => {
 })
 
 async function init() {
-	const pinia = createPinia()
 	const app = createApp(App)
 		.provide('deferredPrompt', deferredPrompt)
 		.directive('Maska', vMaska)
 		.component('BaseUzPhoneInput', BaseUzPhoneInput)
 		.component('BaseForm', BaseForm)
 		.use(vuetify)
-		.use(pinia)
+		.use(createPinia())
 		.use(VCalendar, {})
 		.use(money)
 	
@@ -30,6 +29,5 @@ async function init() {
 		await useAuthStore().getUser()
 		app.use(router)
 		app.mount("#app")
-	// axios.defaults.headers.common['X-Socket-Id'] = echo.socketId();
 }
 init()

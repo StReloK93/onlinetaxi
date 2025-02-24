@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+
+    'eskiz' => [
+        'email' => env('ESKIZ_EMAIL', 'strelok0493@gmail.com'),
+        'password' => env('ESKIZ_PASSWORD', 'ExCXlP1uvq5SagqkiEYccDySbuBKosqOl1tVoZge'),
+        'api_url' => 'https://notify.eskiz.uz/api',
+        'sender' => '4546'
+    ],
 ];

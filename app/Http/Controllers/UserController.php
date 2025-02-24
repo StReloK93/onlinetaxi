@@ -2,28 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\UserService;
 use Illuminate\Http\Request;
-use App\Models\User;
+
 class UserController extends Controller
 {
-    
-    public function __construct () {
+   private UserService $userService;
 
-    }
+   public function __construct(UserService $userService)
+   {
+      $this->userService = $userService;
+   }
 
-    public function index()
-    {
-        return User::all();
-    }
+   public function updateUserName(Request $request)
+   {
+      return $this->userService->updateUserName($request->user(), $request->name);
+   }
 
+   public function getCars(Request $request)
+   {
+      return response()->json($request->user()->cars);
+   }
 
-    public function show(string $id)
-    {
-        //
-    }
+   public function getRides(Request $request)
+   {
+      return response()->json(
+         $request->user()->rides()
+            ->whereState(1)
+            ->where('day', '>', now()->subHours(3))
+            ->get()
+      );
+   }
 
-    public function destroy(string $id)
-    {
-        //
-    }
+   public function getPassengers(Request $request)
+   {
+      return response()->json(
+         $request->user()->passengers()
+            ->whereState(1)
+            ->where('ride_time', '>', now()->subHours(3))
+            ->get()
+      );
+   }
 }

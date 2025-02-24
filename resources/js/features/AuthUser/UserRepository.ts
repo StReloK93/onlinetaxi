@@ -47,7 +47,7 @@ async function updateNotifications() {
 }
 
 async function setUserNameRole(formData) {
-   const { data } = await Client.post(`${resource}/set-user-name-role`, formData);
+   const { data } = await Client.post(`${resource}/update-user-name`, formData);
    return data;
 }
 

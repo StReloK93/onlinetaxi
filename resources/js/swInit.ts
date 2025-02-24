@@ -1,7 +1,6 @@
 // import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
-import axios from "@/modules/AxiosClient";
 import { useAuthStore } from '@/store/useAuthStore'
 const firebaseConfig = {
    apiKey: "AIzaSyACb7ABfs-jY6GdnwxKaGv2wObCdh0h-K8",
@@ -40,13 +39,6 @@ export default async function () {
                window.location.href = event.data.url
             }
          };
-
-
-         // axios.post("firebase-token", {
-         //    user_id: store.user?.id,
-         //    token: store.token,
-         //    device: null,
-         // });
       });
    }
 }

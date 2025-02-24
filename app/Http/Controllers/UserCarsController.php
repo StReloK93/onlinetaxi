@@ -15,12 +15,6 @@ class UserCarsController extends Controller
         return UserCar::with(['fuel', 'user'])->get();
     }
 
-    public function onlyAuthUser()
-    {
-
-        return UserCar::with(['fuel', 'user'])->onlyMyCars()->get();
-    }
-
     public function store(Request $request)
     {
         $userCar = UserCar::create([
