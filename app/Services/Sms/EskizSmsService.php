@@ -20,8 +20,7 @@ class EskizSmsService implements SmsServiceInterface
 	public function sendSms(string $phone, string $message): array
 	{
 		$token = $this->tokenRepository->getToken();
-		if (!$token)
-			$token = $this->tokenRepository->refreshToken();
+		if (!$token) $token = $this->tokenRepository->refreshToken();
 
 
 		$response = Http::withToken($token)->post("$this->apiUrl/message/sms/send", [
@@ -46,7 +45,6 @@ class EskizSmsService implements SmsServiceInterface
 
 			if ($errorMessage === "Expired") {
 				$this->tokenRepository->refreshToken();
-				$this->sendSms($phone, $message);
 			}
 
 
@@ -56,9 +54,6 @@ class EskizSmsService implements SmsServiceInterface
 				'code' => $statusCode,
 			];
 		}
-
-		$this->sendSms($phone, $message);
-
 
 		return $data;
 	}
