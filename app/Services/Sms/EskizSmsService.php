@@ -44,6 +44,12 @@ class EskizSmsService implements SmsServiceInterface
 				'response' => $data,
 			]);
 
+			if ($errorMessage === "Expired") {
+				$this->tokenRepository->refreshToken();
+				$this->sendSms($phone, $message);
+			}
+
+
 			return [
 				'status' => 'error',
 				'message' => $errorMessage,
@@ -51,11 +57,8 @@ class EskizSmsService implements SmsServiceInterface
 			];
 		}
 
+		$this->sendSms($phone, $message);
 
-		if ($data['message'] === "Expired") {
-			$this->tokenRepository->refreshToken();
-			$this->sendSms($phone, $message);
-		}
 
 		return $data;
 	}
