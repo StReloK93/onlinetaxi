@@ -42,7 +42,7 @@ const errors = ref(null)
 const timer = new Timer(300)
 
 const statePhone = history.state.props.phone
-const options = { mask: '## ###-##-##' }
+const options: any = { mask: '## ###-##-##' }
 
 const secredCode = ref('')
 const loading = ref(false)

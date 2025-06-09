@@ -3,6 +3,7 @@ import routes from "./routes"
 import { useAuthStore } from '@/store/useAuthStore'
 const router = createRouter({ history: createWebHistory(), routes })
 
+
 router.beforeEach((to, from, next) => {
 	const store = useAuthStore()
 	if (store.user) {
@@ -11,7 +12,7 @@ router.beforeEach((to, from, next) => {
 		else return next()
 	}
 	else {
-		if (to.meta.guard === 'auth') next({ name: 'login' })
+		if (to.meta.guard === 'auth') return next({ name: 'login' })
 		else return next()
 	}
 })

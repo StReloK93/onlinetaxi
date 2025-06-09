@@ -52,7 +52,7 @@ class AuthService
       if (($response['status'] ?? null) === 'error' || ($response['message'] ?? null) === 'Expired') {
          return response()->json(['message' => $response], 403);
       }
-      
+
 
       SMSList::create(['type' => 1, 'phone' => $phone, 'message' => $message, 'code' => $number]);
 
@@ -68,4 +68,26 @@ class AuthService
    {
       $request->user()->currentAccessToken()->delete();
    }
+
+
+
+   public function telegramAuth($request)
+   {
+      $telegram_user = $request->telegram_user;
+      $first_name = $telegram_user['first_name'];
+      $last_name = $telegram_user['last_name'];
+
+      $user = User::updateOrCreate(
+         ['telegram_user_id' => $telegram_user['id']],
+         ['name' => "$first_name $last_name"],
+      );
+
+      if (Auth::loginUsingId($user->id)) {
+         $token = $this->createToken($user);
+         return response()->json(['token' => $token, 'type' => 'Bearer'], 200);
+      }
+
+      return response()->json(['message' => 'Login failed'], 500);
+   }
+
 }

@@ -4,19 +4,15 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Services\EskizSmsService;
+use App\Services\Sms\EskizSmsService;
 class Kernel extends ConsoleKernel
 {
-    /**
-     * Define the application's command schedule.
-     */
+    protected $commands = [
+        \App\Console\Commands\SetTelegramWebhook::class,
+    ];
+
     protected function schedule(Schedule $schedule): void
     {
-
-        $schedule->call(function () {
-            $eskizService = new EskizSmsService();
-            $eskizService->generateToken();
-        })->twiceMonthly(1,15);
 
     }
 
@@ -25,7 +21,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

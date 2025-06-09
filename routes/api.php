@@ -13,9 +13,12 @@ use App\Http\Controllers\CarCompanyController;
 use App\Http\Controllers\OffersPassengerController;
 use App\Http\Controllers\UserNotificationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TelegramController;
 
 Route::post('/sign-in', [AuthController::class, 'signIn']);
+Route::post('/telegram/sign-in', [AuthController::class, 'telegramSignIn'])->middleware('telegram.auth');
 Route::post('/sendSecretCode', [AuthController::class, 'sendSecretCode']);
+Route::post('/webhook', [TelegramController::class, 'handle']);
 
 
 Route::middleware('auth:sanctum')->group(function () {

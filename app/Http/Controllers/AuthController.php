@@ -20,6 +20,12 @@ class AuthController extends Controller
         return $this->authService->sendSecretCode($request->phone);
     }
 
+    public function telegramSignIn(Request $request)
+    {
+        return $this->authService->telegramAuth($request);
+    }
+    
+
     public function signIn(PhoneRequest $request)
     {
         return $this->authService->signIn($request->phone, $request->code);

@@ -16,6 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'phone',
         'active_car_id',
+        'telegram_user_id',
         'role_id',
     ];
 

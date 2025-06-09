@@ -22,7 +22,6 @@
     <meta itemprop="description" content="Shaharlararo online taxi dasturini yuklab oling">
     <meta itemprop="image" content="https://onlinetaxi.ruzzifer.uz/pwa/maskable_icon_x384.png">
     <meta itemprop="url" content="https://onlinetaxi.ruzzifer.uz/install-app">
-
     <title>Shaharlararo online taxi</title>
     <link rel="manifest" href="/manifest.json?v=2" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -31,7 +30,7 @@
 </head>
 
 <body>
+    <section id="may"></section>
     <section id="app" class="h-screen overflow-hidden"></section>
 </body>
-
 </html>

@@ -7,7 +7,12 @@
 					{{ Auth.user?.name }}
 				</div>
 				<div class="text-caption text-blue-grey-lighten-1">
-					{{ Auth.user?.phone }}
+					<span v-if="Auth.user?.phone">
+						{{ Auth.user?.phone }}
+					</span>
+					<span v-if="Auth.user?.telegram_user_id">
+						{{ Auth.user?.telegram_user_id }}
+					</span>
 				</div>
 			</aside>
 		</main>
@@ -33,8 +38,10 @@
 					<v-label class="text-caption mr-1">
 						Savol va takliflar uchun
 					</v-label>
-					<a href="tel:+99893 660 09 60" class="d-block text-decoration-none text-caption text-primary">+99893 660 09 60</a>
-					<a href="tel:+99893 660 09 60" class="d-block text-decoration-none text-caption text-primary">+99894 677 11 34</a>
+					<a href="tel:+99893 660 09 60" class="d-block text-decoration-none text-caption text-primary">+99893 660
+						09 60</a>
+					<a href="tel:+99893 660 09 60" class="d-block text-decoration-none text-caption text-primary">+99894 677
+						11 34</a>
 				</div>
 				<v-btn @click="alertLogout" block append-icon="mdi-logout">
 					Chiqish

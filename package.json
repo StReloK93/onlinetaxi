@@ -17,6 +17,8 @@
     "dependencies": {
         "@mdi/font": "^7.3.67",
         "@popperjs/core": "^2.11.8",
+        "@telegram-apps/bridge": "^2.4.0",
+        "@telegram-apps/sdk": "^3.5.3",
         "@vueuse/core": "^10.11.0",
         "firebase": "^10.11.1",
         "maska": "^2.1.11",

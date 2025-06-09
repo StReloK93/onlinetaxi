@@ -37,7 +37,7 @@ import { vMaska, MaskaDetail } from "maska"
 import { useAuthStore } from '@/store/useAuthStore'
 import { rules } from '@/modules/constants'
 const authStore = useAuthStore()
-const options = {
+const options: any = {
 	mask: '## ### ## ##',
 	onMaska: (detail: MaskaDetail) => {
 		pageData.success = detail.completed

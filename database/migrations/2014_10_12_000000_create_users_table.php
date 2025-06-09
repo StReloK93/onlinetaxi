@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('telegram_user_id')->nullable();
             $table->string('name')->nullable();
-            $table->string('phone')->unique();
+            $table->string('phone')->unique()->nullable();
             $table->integer('role_id')->nullable();
             $table->integer('active_car_id')->nullable();
             $table->rememberToken();
